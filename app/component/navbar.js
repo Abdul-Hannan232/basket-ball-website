@@ -2,7 +2,7 @@ import React from 'react'
 import { IoCartOutline } from "react-icons/io5";
 const Navbar = () => {
     return (
-        <div className='bg-[#FFA500] fixed top-0 left-0 right-0 p-4 flex  items-center justify-between'>
+        <div className='bg-[#FFA500] fixed top-0 left-0 right-0 p-4 flex z-40 items-center justify-between'>
             <div className=''>
                 <h1 className=''>Logo</h1>
             </div>

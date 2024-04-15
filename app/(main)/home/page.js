@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <div className='mt-12 banner shadow h-[100vh]'  >
+      <div className='mt-12 banner  h-[100vh]'  >
         <div className='relative  flex flex-col justify-center items-center h-[90vh] '>
           <div className='bg-white absolute w-[55%] mx-auto h-80 flex flex-col justify-center it-center  bg-opacity-60 rounded-xl  right-0 left-0'>
             <div className='relative mx-10 border bg-white text-black flex items-center p-7 rounded-full '>

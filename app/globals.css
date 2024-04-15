@@ -21,7 +21,9 @@ body {
   background-repeat: no-repeat;
 
 }
-
+.slick-slide {
+  margin-left:45px; /* Adjust the value as needed */
+}
 .bounceball {
   position: relative;
   display: inline-block;
