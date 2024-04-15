@@ -53,7 +53,7 @@ const Testimonial = () => {
             </div>
             <Slider ref={sliderRef} {...settings}>
                 {testimonaldata.map((item, index) => (
-                  <div key={index}className=''> 
+                  <div key={}className=''> 
                    <div className='bg-[#D9D9D9] shadow text-black rounded-md 2xl:w-[450px] w-[330px]'>
                         <Image src="/basketBALL.png" alt="image" width={343} height={228} className='rounded-t-xl 2xl:w-[450px] ' />
                         <div className='m-5'>
