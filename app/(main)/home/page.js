@@ -36,7 +36,7 @@ const Home = () => {
         </div>
       </div>
       <BasketBall />
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   )
 }
