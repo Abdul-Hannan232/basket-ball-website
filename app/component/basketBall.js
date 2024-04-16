@@ -46,7 +46,7 @@ const Testimonial = () => {
     };
 
     return (
-        <div className="  2xl:ml-32 md:ml-20 md:pt-10 pt-10 2xl:mb-40 mb-0" id="Testimonials" style={{ position: 'relative' }} >
+        <div className="  2xl:ml-32 md:ml-20 md:pt-10 pt-10 2xl:mb-40 mb-20" id="Testimonials" style={{ position: 'relative' }} >
             <div className='2xl:text-6xl md:text-4xl text-xl font-bold md:mb-20 mb-10 flex justify-center items-center gap-2 '>
                 <h1 className='text-[#FFA500]'>Best Rated </h1>
                 <h1>Basketball Court</h1>
