@@ -46,7 +46,7 @@ const Testimonial = () => {
     };
 
     return (
-        <div className="  2xl:ml-32 md:ml-20 md:pt-10 pt-2 2xl:mb-40 mb-0" id="Testimonials" style={{ position: 'relative' }} >
+        <div className="  2xl:ml-32 md:ml-20 md:pt-10 pt-10 2xl:mb-40 mb-0" id="Testimonials" style={{ position: 'relative' }} >
             <div className='2xl:text-6xl md:text-4xl text-xl font-bold md:mb-20 mb-10 flex justify-center items-center gap-2 '>
                 <h1 className='text-[#FFA500]'>Best Rated </h1>
                 <h1>Basketball Court</h1>
@@ -54,7 +54,7 @@ const Testimonial = () => {
             <Slider ref={sliderRef} {...settings}>
                 {testimonaldata.map((item, index) => (
                   <div key={index}className=''> 
-                   <div className='bg-[#D9D9D9] shadow text-black rounded-md 2xl:w-[450px] w-[330px]'>
+                   <div className='bg-[#D9D9D9] shadow text-black rounded-md 2xl:w-[450px] md:w-[330px] w-[250px]'>
                         <Image src="/basketBALL.png" alt="image" width={343} height={228} className='rounded-t-xl 2xl:w-[450px] ' />
                         <div className='m-5'>
 
@@ -71,7 +71,7 @@ const Testimonial = () => {
                 ))}
 
             </Slider>
-            <div style={{ position: 'absolute', top: '35%', transform: 'translateY(-50%)', zIndex: '1' }} className='md:w-[100%] flex justify-between w-[100%] mx-auto'>
+            <div style={{ position: 'absolute', transform: 'translateY(-50%)', zIndex: '1' }} className='2xl:top-[45%] lg:top-[65%] top-[35%] md:w-[100%] flex justify-between w-[100%] mx-auto'>
                 <div className=' slick- slick-arrow md:-ml-14 '>
                     <div onClick={goToPrev} className='bg-[#000000A6] text-white text-7xl md:p-[10px] flex items-center justify-center cursor-pointer md:w-14 md:h-14 w-10 h-10 text-center font-bold  rounded-full'>
                         <RiArrowLeftSLine />

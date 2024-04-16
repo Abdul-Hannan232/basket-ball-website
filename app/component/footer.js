@@ -53,7 +53,7 @@ const Footer = () => {
                     <Image src="/facebook.png" alt="insta" width={56} height={56} className='md:w-10 w-8 md:h-10 h-8' />
                 </div>
                 <div >
-                    <p className='text-[#FFA500] md:block hidden text-xs'>Made by Mayonity</p>
+                    <p className='text-[#FFA500] md:block hidden text-sm'>Made by Mayonity</p>
                 </div>
 
             </div>
