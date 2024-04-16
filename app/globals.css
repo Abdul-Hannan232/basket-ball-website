@@ -19,7 +19,12 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
+}
+.mobilebanner {
+  background-image: url('/mobildbanner.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .slick-slide {
   margin-left:45px; /* Adjust the value as needed */
