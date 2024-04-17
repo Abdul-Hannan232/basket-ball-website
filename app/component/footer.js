@@ -5,7 +5,7 @@ import Image from "next/image"
 const Footer = () => {
     return (
         <div className='shadow md:p-10 mt-10'>
-            <div className='md:flex p-5  justify-between md:mx-20'>
+            <div className='md:flex p-5  xl:justify-between 2xl:justify-evenly  md:mx-20'>
                 <div>
                     <h1 className='2xl:text-4xl md:text-3xl text-xl font-bold text-[#FFA500]'>Logo</h1>
                     <p className='font-light 2xl:text-lg md:text-sm text-xs md:w-72 text-[#F8F8F8] mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>

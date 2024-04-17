@@ -3,36 +3,51 @@
         "id":0,
         "name":"Skyline Hoops Haven ",
         "Location":"Location",
-        "address":"123 Elm Street Cityville, State 56789 United States     "
+        "address":"123 Elm Street Cityville, State 56789 United States     ",
+        "door":"Outdoor",
+        "image":"/Basketball Court.png"
     },
     {
         "id":1,
         "name":"Skyline Hoops Haven ",
         "Location":"Location",
-        "address":"123 Elm Street Cityville, State 56789 United States     "
+        "address":"123 Elm Street Cityville, State 56789 United States     ",
+        "door":"Sheltered",
+        "image":"/Roofing.png"
     },
     {
         "id":2,
         "name":"Skyline Hoops Haven ",
         "Location":"Location",
-        "address":"123 Elm Street Cityville, State 56789 United States     "
+        "address":"123 Elm Street Cityville, State 56789 United States     ",
+        "door":"Indoor",
+        "image":"/Basketball Court.png"
+
     },
     {
         "id":3,
         "name":"Skyline Hoops Haven ",
         "Location":"Location",
-        "address":"123 Elm Street Cityville, State 56789 United States     "
+        "address":"123 Elm Street Cityville, State 56789 United States     ",
+        "door":"Sheltered",
+        "image":"/Roofing.png"
+
     },
     {
         "id":4,
         "name":"Skyline Hoops Haven ",
         "Location":"Location",
-        "address":"123 Elm Street Cityville, State 56789 United States     "
+        "address":"123 Elm Street Cityville, State 56789 United States     ",
+        "door":"Outdoor",
+        "image":"/Roofing.png"
     },
     {
         "id":5,
         "name":"Skyline Hoops Haven ",
         "Location":"Location",
-        "address":"123 Elm Street Cityville, State 56789 United States     "
+        "address":"123 Elm Street Cityville, State 56789 United States     ",
+        "door":"Indoor",
+        "image":"/Basketball Court.png"
+
     }
 ]

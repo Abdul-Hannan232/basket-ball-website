@@ -26,7 +26,7 @@ const settings = {
         {
             breakpoint: 320, // Adjust the breakpoint as needed
             settings: {
-              slidesToShow: 1,
+              slidesToShow: 1.1,
               slidesToScroll: 1,
             },
           },
@@ -46,7 +46,7 @@ const Testimonial = () => {
     };
 
     return (
-        <div className="  2xl:ml-32 md:ml-20 md:pt-10 pt-10 2xl:mb-40 mb-20" id="Testimonials" style={{ position: 'relative' }} >
+        <div className="  2xl:ml-32 md:ml-20 md:pt-10 pt-10 2xl:mb-40 md:mb-20" id="Testimonials" style={{ position: 'relative' }} >
             <div className='2xl:text-6xl md:text-4xl text-xl font-bold md:mb-20 mb-10 flex justify-center items-center gap-2 '>
                 <h1 className='text-[#FFA500]'>Best Rated </h1>
                 <h1>Basketball Court</h1>
@@ -54,13 +54,16 @@ const Testimonial = () => {
             <Slider ref={sliderRef} {...settings}>
                 {testimonaldata.map((item, index) => (
                   <div key={index}className=''> 
-                   <div className='bg-[#D9D9D9] shadow text-black rounded-md 2xl:w-[450px] md:w-[330px] w-[250px]'>
+                   <div className='bg-[#D9D9D9] relative shadow text-black rounded-md 2xl:w-[450px] md:w-[330px] w-[250px]'>
                         <Image src="/basketBALL.png" alt="image" width={343} height={228} className='rounded-t-xl 2xl:w-[450px] ' />
+                       <div className='flex items-center justify-center float-right -mt-5 shadow z-10 absolute right-0 p-3 w-32 gap-2 rounded-l-xl bg-white text-black' >
+                        <Image src={item.image} alt="shelter" width={24} height={24}/>
+                       <p>{item.door}</p></div>
                         <div className='m-5'>
 
                             <Image src="/star.png" alt="image" width={112} height={20} />
                             <p className='text-[10px] mt-1 font-bold'>64 reviews</p>
-                            <h1 className='text-xl font-bold my-5'>{item.name}</h1>
+                            <h1 className='text-xl font-bold mb-5'>{item.name}</h1>
                             <p className='w-32 text-xs font-medium mt-1'>{item.address}</p>
                             <button className='bg-[#FFA500] p-2 mb-5 mt-10  text-black font-bold text-sm w-full shadow'>View Court</button>
 

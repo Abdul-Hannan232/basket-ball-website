@@ -38,7 +38,7 @@ const Navbar = () => {
             {open && (
                 <>
                     <div className='absolute top-0 bg-gray-600 w-full h-screen left-0 right-0 '>
-                        <div className='flex justify-between bg-[#FFA500] items-center p-3'>
+                        <div className='flex justify-between bg-[#FFA500] items-center p-5'>
                             <h1 className=''>Logo</h1>
                             <div className='flex items-center gap-3'>
                                 <IoCartOutline className=' text-2xl text-black font-light ' />
