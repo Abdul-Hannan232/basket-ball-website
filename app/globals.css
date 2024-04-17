@@ -20,6 +20,10 @@ body {
   width: 100%;
   background-repeat: no-repeat;
 }
+.backColor{
+  background: linear-gradient(90.35deg, #FFA500 0.24%, #FF7D05 99.7%);
+
+}
 .mobilebanner {
   background-image: url('/mobildbanner.png');
   background-position: center;
