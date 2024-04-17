@@ -26,7 +26,7 @@ const page = () => {
 
             <div className='text-center mt-20 w-[90%] mx-auto shadow p-10 '>
                 <p className='text-2xl text-[#FFA500] font-bold'>Who We Are: Passionate Hoop Enthusiasts</p>
-                <p className='lg:w-[900px] mt-10 text-xl font-light  mx-auto '>Behind the scenes, we are a team of dedicated basketball enthusiasts. From the founders to our customer service team, each of us shares a common love for the game. We have been on the courts, dribbled through challenges, and know the exhilaration of a perfect shot. Now, we are here to share that passion with you.</p>
+                <p className='lg:w-[900px] mt-10 text-xl font-light  mx-auto '>Behind the scenes, we are a team of dedicated basketball enthusiasts. From the founders to our customer service team, each of us shares a common love for the game. We've been on the courts, dribbled through challenges, and know the exhilaration of a perfect shot. Now, we are here to share that passion with you.</p>
             </div>
             <div className='text-center mt-20 w-[90%] mx-auto shadow p-10 '>
                 <p className='text-2xl text-[#FFA500] font-bold'>Why Us</p>

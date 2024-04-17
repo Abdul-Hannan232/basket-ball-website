@@ -36,8 +36,8 @@ const page = () => {
                             <li className='font-bold'> Do you have indoor and outdoor courts?</li>
                             <p className='font-light'>Yes, we have both indoor and outdoor courts. You can filter your search based on your preference for indoor or outdoor play.</p>
                             <br /><br />
-                            <li className='font-bold'> How can I leave a review for a court I have rented?</li>
-                            <p className='font-light'> We encourage feedback! After your booking, you will receive an email with a link to leave a review. You can also find a review section on our website</p>
+                            <li className='font-bold'> How can I leave a review for a court I've rented?</li>
+                            <p className='font-light'> We encourage feedback! After your booking, you'll receive an email with a link to leave a review. You can also find a review section on our website</p>
                         </ul>
                     </p>
                 </div>

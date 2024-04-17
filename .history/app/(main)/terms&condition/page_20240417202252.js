@@ -13,7 +13,7 @@ const page = () => {
 
                         Last Updated: [Date]
                         <br /><br />
-                        Welcome to Basketball! Please carefully read these Terms of Use (Terms) before using our website, products, or services. By accessing or using any part of the site, you agree to be bound by these Terms. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services.
+                        Welcome to Basketball! Please carefully read these Terms of Use ("Terms") before using our website, products, or services. By accessing or using any part of the site, you agree to be bound by these Terms. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services.
                         <br /><br />        <ul className='list-disc'>
                             <li>Acceptance of Terms</li>
 

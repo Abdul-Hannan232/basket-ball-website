@@ -21,12 +21,12 @@ const page = () => {
 
             <div className='text-center mt-20 w-[90%] mx-auto shadow p-10 '>
                 <p className='text-2xl text-[#FFA500] font-bold'>Our Mission: Hoops for Everyone</p>
-                <p className='lg:w-[900px] mt-10 text-xl font-light  mx-auto '>Our mission is simple: to make the joy of basketball accessible to everyone. We believe in the power of the game to bring people together, inspire healthy competition, and create lasting memories. Thats why we have curated a top-notch selection of basketball equipment, ensuring that the love of the sport is just a rental away..</p>
+                <p className='lg:w-[900px] mt-10 text-xl font-light  mx-auto '>Our mission is simple: to make the joy of basketball accessible to everyone. We believe in the power of the game to bring people together, inspire healthy competition, and create lasting memories. That's why we have curated a top-notch selection of basketball equipment, ensuring that the love of the sport is just a rental away..</p>
             </div>
 
             <div className='text-center mt-20 w-[90%] mx-auto shadow p-10 '>
                 <p className='text-2xl text-[#FFA500] font-bold'>Who We Are: Passionate Hoop Enthusiasts</p>
-                <p className='lg:w-[900px] mt-10 text-xl font-light  mx-auto '>Behind the scenes, we are a team of dedicated basketball enthusiasts. From the founders to our customer service team, each of us shares a common love for the game. We have been on the courts, dribbled through challenges, and know the exhilaration of a perfect shot. Now, we are here to share that passion with you.</p>
+                <p className='lg:w-[900px] mt-10 text-xl font-light  mx-auto '>Behind the scenes, we are a team of dedicated basketball enthusiasts. From the founders to our customer service team, each of us shares a common love for the game. We've been on the courts, dribbled through challenges, and know the exhilaration of a perfect shot. Now, we are here to share that passion with you.</p>
             </div>
             <div className='text-center mt-20 w-[90%] mx-auto shadow p-10 '>
                 <p className='text-2xl text-[#FFA500] font-bold'>Why Us</p>
