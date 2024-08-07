@@ -1,13 +1,14 @@
 "use client"
 import React, { Suspense } from 'react';
-import ResetPasswordComponent from "../../component/resetPassword.js";
+import { useSearchParams } from 'next/navigation';
+import { ResetPasswordComponent} from "../../component/resetPassword.js";
 
 
-const Password =() =>{
+const Page=() =>{
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <ResetPasswordComponent />
     </Suspense>
   );
 }
-export default Password
+export default Page

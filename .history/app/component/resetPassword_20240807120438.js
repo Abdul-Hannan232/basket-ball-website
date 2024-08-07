@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {  useSearchParams } from 'next/navigation';
 import { ResetPasswordApi } from '../services/authServices';
-import Loader from "../component/loader"
+import Loader from "../"
 const ResetPassword = () => {
     const searchParams = useSearchParams();
     // hello
