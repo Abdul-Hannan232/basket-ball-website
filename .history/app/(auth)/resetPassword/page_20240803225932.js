@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { ResetPasswordComponent} from "../../component/resetPassword.js";
+import 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   return <div>Reset Password Component</div>;
@@ -9,7 +9,7 @@ const ResetPassword = () => {
 export default function Page() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ResetPasswordComponent />
+      <ResetPassword />
     </Suspense>
   );
 }
