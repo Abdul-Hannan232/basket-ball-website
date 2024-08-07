@@ -68,9 +68,9 @@ const Signup = () => {
                         </div>
 
                     </div>
-                    {/* <Link href="/resetPassword"> */}
+                    <Link href="/resetPassword">
                     <button type="submit" className='border-[#FFA500] w-full text-xl mt-4 border text-white rounded-lg bg-[#FFA500] p-3 shadow cursor-pointer'>Signup</button>
-                    {/* </Link> */}
+                    </Link>
                     <div className='flex  items-center 2xl:my-5 my-2'>
                         <hr className='text-[#DCDCDC]  border-1 w-[259px]' />
                         <h1 className='2xl:text-[20px] text-[16px] px-5'>OR</h1>

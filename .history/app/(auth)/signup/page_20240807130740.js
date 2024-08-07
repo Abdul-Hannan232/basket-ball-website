@@ -26,6 +26,7 @@ const Signup = () => {
         try {
             const responce = await SignupUser(body)
             if (responce.status === 201) {
+                console.log(re)
                 toast.success(responce.data.message)
                 router.push('/home')
             } else {
