@@ -17,7 +17,7 @@ const Testimonial = () => {
         <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-20 w-[80%] md:mt-20 mt-5 md:mx-auto mx-5'>
 
             {testimonaldata.map((item, index) => (
-            <div className='relative shadow text-black rounded-md 2xl:w-[300px] xl:w-[250px] md:w-[250px] w-[280px] group'>
+            <div key={index} className='relative shadow text-black rounded-md 2xl:w-[300px] xl:w-[250px] md:w-[250px] w-[280px] group'>
             <div className='bg-[#D9D9D9] relative rounded-md overflow-hidden'>
               {/* Overlay */}
               <div className='absolute inset-0 bg-black opacity-0 z-20 group-hover:opacity-70 transition-opacity'></div>
