@@ -10,7 +10,6 @@ const ForgetPassword = () => {
     const [loader, setLoader] = useState(false)
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         setLoader(true)
         const body = {
             email: email
@@ -19,6 +18,7 @@ const ForgetPassword = () => {
             const responce = await ForgetPasswordUser(body)
             if (responce.status === 200) {
                 toast.success(responce.data.message)
+                console.log(responce, "hgduijh")
             } else {
                 toast.error(responce.data.message)
             }
@@ -35,7 +35,8 @@ const ForgetPassword = () => {
             <div className='flex  justify-between md:mx-0 mx-5 items-center min-h-screen'>
                 <form className=' md:w-[550px] w-full mx-auto space-y-4' onSubmit={handleSubmit}>
                     <h1 className='text-center font-bold md:text-4xl text-2xl text-white'>
-                        Forgot Password                </h1>
+                        Forgot Password
+                    </h1>
                     <p className='text-center md:text-[18px] text-xs font-[400px]'>Enter an email address to receive the recovery email. </p>
                     <div className='flex flex-col md:w-[400px] mx-auto'>
                         <input type='email' placeholder='Enter new email ' value={email} onChange={((e) => setEmail(e.target.value))} className='mt-1  cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />

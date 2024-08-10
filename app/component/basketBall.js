@@ -12,32 +12,32 @@ import Image from 'next/image';
 const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow:3.5,
+    slidesToShow: 3.5,
     slidesToScroll: 1,
     responsive: [
         {
-          breakpoint: 1267, // Adjust the breakpoint as needed
-          settings: {
-            slidesToShow: 2.5,
-            slidesToScroll: 2,
-          },
+            breakpoint: 1267, // Adjust the breakpoint as needed
+            settings: {
+                slidesToShow: 2.5,
+                slidesToScroll: 2,
+            },
         },
         {
             breakpoint: 959, // Adjust the breakpoint as needed
             settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
+                slidesToShow: 2,
+                slidesToScroll: 2,
             },
-          },
-  
+        },
+
         {
             breakpoint: 320, // Adjust the breakpoint as needed
             settings: {
-              slidesToShow: 1.1,
-              slidesToScroll: 1,
+                slidesToShow: 1.1,
+                slidesToScroll: 1,
             },
-          },
-      ],
+        },
+    ],
     prevArrow: <></>, // Hides the previous arrow
     nextArrow: <></>,
 };
@@ -60,23 +60,36 @@ const Testimonial = () => {
             </div>
             <Slider ref={sliderRef} {...settings}>
                 {testimonaldata.map((item, index) => (
-                  <div key={index}className=''> 
-                   <div className='bg-[#D9D9D9] relative shadow text-black rounded-md 2xl:w-[450px] md:w-[330px] w-[250px]'>
-                        <Image src="/basketBALL.png" alt="image" width={343} height={228} className='rounded-t-xl 2xl:w-[450px] ' />
-                       <div className='flex items-center justify-center float-right -mt-5 shadow z-10 absolute right-0 p-3 w-32 gap-2 rounded-l-xl bg-white text-black' >
-                        <Image src={item.image} alt="shelter" width={24} height={24}/>
-                       <p>{item.door}</p></div>
-                        <div className='m-5'>
+                    <div key={index} className=''>
+                        <div className='relative shadow cursor-pointer text-black rounded-md 2xl:w-[450px] md:w-[330px] w-[250px] group'>
+                        <div className='absolute inset-0 bg-black opacity-0 z-20 group-hover:opacity-70 transition-opacity'></div>
 
-                            <Image src="/star.png" alt="image" width={112} height={20} />
-                            <p className='text-[10px] mt-1 font-bold'>64 reviews</p>
-                            <h1 className='text-xl font-bold mb-5'>{item.name}</h1>
-                            <p className='w-32 text-xs font-medium mt-1'>{item.address}</p>
-                            <button className='bg-[#FFA500] p-2 mb-5 mt-10  text-black font-bold text-sm w-full shadow'>View Court</button>
+                            <div className='bg-[#D9D9D9] relative rounded-md overflow-hidden'>
+                                {/* Image and content */}
+                                <Image src="/basketBALL.png" alt="image" width={343} height={228} className='rounded-t-xl 2xl:w-[450px]' />
+                                <div className='flex items-center justify-center float-right -mt-5 shadow z-10 absolute right-0 p-3 w-32 gap-2 rounded-l-xl bg-white text-black'>
+                                    <Image src={item.image} alt="shelter" width={24} height={24} />
+                                    <p>{item.door}</p>
+                                </div>
+                                <div className='m-5'>
+                                    <Image src="/star.png" alt="image" width={112} height={20} />
+                                    <p className='text-[10px] mt-1 font-bold'>64 reviews</p>
+                                    <h1 className='text-xl font-bold mb-5'>{item.name}</h1>
+                                    <p className='w-32 text-xs font-medium mt-1'>{item.address}</p>
+                                    <button className='bg-[#FFA500] p-2 mb-5 mt-10 text-black font-bold text-sm w-full shadow'>
+                                        View Court
+                                    </button>
+                                </div>
 
+                                {/* Overlay with Maintenance Button */}
+                                <div className='flex flex-col items-center h-96 justify-center z-40 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity'>
+                                    <button className='bg-[#232323] py-2 px-4 rounded-full text-white'>
+                                        Maintenance
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
+
                     </div>
                 ))}
 
