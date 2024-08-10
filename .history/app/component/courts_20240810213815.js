@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import testimonaldata from '../data/testimonaldata.json';
 import Image from 'next/image';
-import { motion } from "framer-motion"
+// import { motion } from "framer-motion"
 
 const Testimonial = () => {
 
