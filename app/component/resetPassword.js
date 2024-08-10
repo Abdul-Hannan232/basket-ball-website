@@ -26,6 +26,7 @@ const ResetPassword = () => {
             const responce = await ResetPasswordApi(body)
             if (responce.status === 200) {
                 toast.success(responce.data.message)
+                console.log(responce.data.message,"responce.data.message")
             } else {
                 toast.error(responce.data.message)
             }

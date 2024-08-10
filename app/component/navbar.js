@@ -16,7 +16,7 @@ const Navbar = () => {
         setOpen(false)
     }
     return (
-        <div className='bg-[#FFA500] fixed top-0 left-0 right-0 p-4 flex z-40 items-center justify-between'>
+        <div className='bg-[#FFA500] sticky top-0 left-0 right-0 p-4 flex z-40 items-center justify-between'>
             <div className='flex items-center gap-1'>
                 <IoIosMenu className='text-black text-xl cursor-pointer md:hidden block' onClick={toOpen}/>
               <Image src="/LOGO.png" width={60} height={60} alt='image'/>

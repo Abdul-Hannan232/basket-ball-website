@@ -49,5 +49,22 @@
         "door":"Indoor",
         "image":"/Basketball Court.png"
 
+    },
+    {
+        "id":6,
+        "name":"Skyline Hoops Haven ",
+        "Location":"Location",
+        "address":"123 Elm Street Cityville, State 56789 United States     ",
+        "door":"Outdoor",
+        "image":"/Roofing.png"
+    },
+    {
+        "id":7,
+        "name":"Skyline Hoops Haven ",
+        "Location":"Location",
+        "address":"123 Elm Street Cityville, State 56789 United States     ",
+        "door":"Indoor",
+        "image":"/Basketball Court.png"
+
     }
 ]
