@@ -12,7 +12,7 @@ const Home = () => {
         <div className='relative  flex flex-col md:justify-center md:mt-0 pt-14 items-center md:h-[90vh] '>
           <div className='bg-white absolute lg:w-[55%] w-[90%] mx-auto md:h-80 h-36 flex flex-col justify-center it-center  bg-opacity-60 rounded-xl  right-0 left-0'>
             <div className='relative lg:mx-10 mx-5 border bg-white text-black flex items-center   rounded-full'>
-              <input type='text' placeholder='Search Here' className='text-black md:text-lg text-xs border-transparent outline-none hover:border-[#FFA500] border-2 md:p-6 p-3 w-full rounded-full ' />
+              <input type='text' placeholder='Search Here' className='text-black md:text-lg text-xs border-transparent outline-none hover:border-[#FFA500] border-2 md:p-5 p-3 w-full rounded-full ' />
               <CiSearch className="absolute text-black md:w-20 w-8 px-1 my-2 md:h-10 h-6 right-0 text-4xl border-2 border-[#AFAFAF] border-t-transparent border-r-transparent border-b-transparent  md:top- " />
             </div>
             <div className='flex justify-center gap-3 mt-7 '>

@@ -16,13 +16,20 @@ const settings = {
     slidesToScroll: 1,
     responsive: [
         {
-          breakpoint: 1024, // Adjust the breakpoint as needed
+          breakpoint: 1267, // Adjust the breakpoint as needed
           settings: {
-            slidesToShow: 1,
+            slidesToShow: 2.5,
             slidesToScroll: 2,
           },
         },
-
+        {
+            breakpoint: 959, // Adjust the breakpoint as needed
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+            },
+          },
+  
         {
             breakpoint: 320, // Adjust the breakpoint as needed
             settings: {

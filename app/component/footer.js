@@ -5,17 +5,17 @@ import Image from "next/image"
 const Footer = () => {
     return (
         <div className='shadow md:p-10 mt-10'>
-            <div className='md:flex p-5  xl:justify-between 2xl:justify-evenly  md:mx-20'>
+            <div className='md:flex p-5 flex-wrap xl:justify-between 2xl:justify-evenly  md:mx-20'>
                 <div>
-                    <h1 className='2xl:text-4xl md:text-3xl text-xl font-bold text-[#FFA500]'>Logo</h1>
-                    <p className='font-light 2xl:text-lg md:text-sm text-xs md:w-72 text-[#F8F8F8] mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+                <Image src="/LOGO.png" width={60} height={60} alt='image'/>
+                <p className='font-light 2xl:text-lg md:text-sm text-xs md:w-72 text-[#F8F8F8] mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
                     <div className='relative w-72 border  md:block hidden text-black shadow flex items-center p-3 rounded-full 2xl:mt-10 mt-7 '>
                         <input type='text' placeholder='Send email' className='text-black bg-[#333333]' />
                         <FaArrowRight className="absolute text-black w-11 h-11 rounded-full right-0 text-4xl border-2 2xl:p-2 p-3 font-light  bg-[#ABABAB]   top-[2px]" />
                     </div>
                 </div>
                 <hr className='my-10 block md:hidden' />
-                <div className='flex justify-between md:gap-40 md:mt-0 mt-10 gap-8'>
+                <div className='flex flex-wrap justify-between md:gap-40 md:mt-0 mt-10 gap-8'>
                     <div>
                         <ul className='2xl:space-y-3 md:space-y-2 md:w-44 w-28 '>
                             <li className='text-[#FFA500] 2xl:text-xl md:text-lg text-sm font-bold '> Company</li>

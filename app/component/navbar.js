@@ -6,6 +6,7 @@ import Link from "next/link"
 import { IoCartOutline } from "react-icons/io5";
 import { IoIosMenu } from "react-icons/io";
 import { useState } from 'react';
+import Image from 'next/image';
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const toOpen = () => {
@@ -18,20 +19,20 @@ const Navbar = () => {
         <div className='bg-[#FFA500] fixed top-0 left-0 right-0 p-4 flex z-40 items-center justify-between'>
             <div className='flex items-center gap-1'>
                 <IoIosMenu className='text-black text-xl cursor-pointer md:hidden block' onClick={toOpen}/>
-                <h1 className=''>Logo</h1>
+              <Image src="/LOGO.png" width={60} height={60} alt='image'/>
             </div>
             <div className='md:block hidden  '>
                 <ul className='flex  items-center   space-x-10'>
-                    <li><a className='font-medium text-lg  cursor-pointer   text-black' href='/home'>Home </a></li>
-                    <li><a className='font-medium text-lg cursor-pointer  text-black' href='#'>Court</a></li>
-                    <li><a className='font-medium text-lg  cursor-pointer  text-black' href='#'>Shop</a></li>
-                    <li><a className='font-medium text-lg  cursor-pointer text-black' href='#'>Donate</a></li>
+                    <li><a className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent   text-black' href='/home'>Home </a></li>
+                    <li><a className='font-medium text-lg cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='#'>Court</a></li>
+                    <li><a className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='#'>Shop</a></li>
+                    <li><a className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='#'>Donate</a></li>
                 </ul>
             </div>
             <div className='flex gap-2   items-center'>
 
                 <IoCartOutline className=' text-3xl text-black font-medium ' />
-                <CgProfile className=' text-2xl text-black font-medium ' />
+                {/* <CgProfile className=' text-2xl text-black font-medium ' /> */}
                 <button className='md:block hidden  py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm  rounded-md'>Sign Up</button>
                 <button className='md:block hidden  py-2 px-6 border border-black text-black text-sm  ml-1 rounded-md'>Login</button>
             </div>
