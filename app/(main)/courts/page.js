@@ -33,7 +33,7 @@ const Page = () => {
                     referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
             </div>
-<Footer/>
+            <Footer />
         </>
     )
 }

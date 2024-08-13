@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "userName": "Sophia Johnson",
+        "review": "Had a wonderful experience at Sunshine Honda Dealership! The staff was extremely helpful and knowledgeable. They guided me through the entire process and helped me find the perfect Honda Civic. I'm very satisfied with my purchase and would highly recommend this dealership to others.",
+        "rating": 4
+    },
+    {
+        "id": 2,
+        "userName": "Michael Smith",
+        "review": "My experience at Sunshine Honda was excellent! The staff was professional and friendly, making the car-buying process stress-free. I found exactly what I was looking for, and the dealership provided great service. Highly recommended!",
+        "rating": 5
+    },
+    {
+        "id": 3,
+        "userName": "Emily Brown",
+        "review": "Sunshine Honda exceeded my expectations! The staff was attentive and went above and beyond to help me find the right car. The buying process was smooth, and I'm thrilled with my new Honda Civic. I would definitely return for future purchases.",
+        "rating": 4
+    },
+    {
+        "id": 4,
+        "userName": "David Martinez",
+        "review": "I had a fantastic experience at Sunshine Honda! The staff was friendly, and the dealership had a great selection of vehicles. They helped me find the perfect Honda Civic, and the buying process was straightforward. I highly recommend this dealership!",
+        "rating": 5
+    },
+    {
+        "id": 5,
+        "userName": "Emma Wilson",
+        "review": "Visited Sunshine Honda last week, and I was impressed by their service! The staff was knowledgeable and assisted me in finding a reliable Honda Civic. The dealership atmosphere was welcoming, and I left feeling confident about my purchase.",
+        "rating": 3
+    },
+    {
+        "id": 6,
+        "userName": "Daniel Brown",
+        "review": "Had a pleasant experience at Sunshine Honda Dealership. The staff was helpful, and they patiently answered all my questions. I found the perfect Honda Civic within my budget. Overall, a positive buying experience.",
+        "rating": 4
+    }
+]
