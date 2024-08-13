@@ -1,11 +1,13 @@
+"use client"
 import React from 'react'
 import { CiFilter } from "react-icons/ci";
 import Navbar from '../../component/navbar';
 import Courts from "../../component/courts"
 import Footer from '../../component/footer';
+import withAuth from '../../component/withAuth'
 const Page = () => {
     return (
-        <>
+        <> 
             <Navbar />
             <div className='md:w-[80%] md:mx-auto mx-5 mt-10 flex items-center justify-between'>
 
@@ -36,4 +38,4 @@ const Page = () => {
     )
 }
 
-export default Page
+export default withAuth(Page)
