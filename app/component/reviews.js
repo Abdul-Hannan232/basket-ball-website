@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { RxCross2 } from "react-icons/rx";
 import { ImStarEmpty } from "react-icons/im";
 
-const reviews = ({ grid, column }) => {
+const Reviews = ({ grid, column }) => {
   const [showAll, setShowAll] = useState(false);
   const [popup, setPopup] = useState(false)
   console.log(renderStars(3), "renderStars")
@@ -105,4 +105,4 @@ const reviews = ({ grid, column }) => {
   )
 }
 
-export default reviews
+export default Reviews
