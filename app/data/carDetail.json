@@ -1,0 +1,22 @@
+[
+    {
+        "key":"Make",
+        "value":"Honda"
+    },
+    {
+        "key":"Model",
+        "value":"Civic"
+    },  {
+        "key":"Price",
+        "value":"$20,000"
+    },  {
+        "key":"Year",
+        "value":"2019"
+    },  {
+        "key":"Mileage",
+        "value":"25,000 miles"
+    },  {
+        "key":"Make",
+        "value":"Honda"
+    }
+]
