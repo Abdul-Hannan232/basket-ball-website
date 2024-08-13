@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { FcGoogle } from "react-icons/fc";
@@ -13,6 +13,19 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loader, setLoader] = useState(false)
+    useEffect(() => {
+        // Check if the user is already logged in
+        const token = localStorage.getItem("authToken");
+        if (token) {
+            // Redirect to the home page if logged in
+            toast.success("You are already logged in. Redirecting now...");
+            router.replace("/home");
+        }
+        if(!token)
+        {
+            toast.success("Please log in to proceed.");
+        }
+    }, [router]);
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoader(true)
@@ -21,12 +34,13 @@ const Login = () => {
             password: password
         }
         try {
-            const responce = await loginUser(body)
-            if (responce.status === 200) {
-                toast.success(responce.data.message)
+            const response = await loginUser(body)
+            if (response.status === 200) {
+                toast.success(response.data.message)
+                localStorage.setItem("authToken", response.data.data.token || "loggedIn");
                 router.push('/home')
             } else {
-                toast.error(responce.data.message)
+                toast.error(response.data.message)
             }
             // console.log("from try of contoller")
 

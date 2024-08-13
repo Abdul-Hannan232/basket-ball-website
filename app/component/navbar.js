@@ -7,7 +7,10 @@ import { IoCartOutline } from "react-icons/io5";
 import { IoIosMenu } from "react-icons/io";
 import { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'
+
 const Navbar = () => {
+    const router = useRouter("");
     const [open, setOpen] = useState(false)
     const toOpen = () => {
         setOpen(true)
@@ -15,6 +18,11 @@ const Navbar = () => {
     const toClose = () => {
         setOpen(false)
     }
+
+    const handleLogout = () => {
+        localStorage.removeItem("authToken");
+        router.push("/");
+    };
     return (
         <div className='bg-[#FFA500] sticky top-0 left-0 right-0 p-4 flex z-40 items-center justify-between'>
             <div className='flex items-center gap-1'>
@@ -34,7 +42,7 @@ const Navbar = () => {
                 <IoCartOutline className=' text-3xl text-black font-medium ' />
                 {/* <CgProfile className=' text-2xl text-black font-medium ' /> */}
                 <button className='md:block hidden  py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm  rounded-md'>Sign Up</button>
-                <button className='md:block hidden  py-2 px-6 border border-black text-black text-sm  ml-1 rounded-md'>Login</button>
+                <button className='md:block hidden  py-2 px-6 border border-black text-black text-sm  ml-1 rounded-md' onClick={handleLogout}>Login</button>
             </div>
             {open && (
                 <>
