@@ -8,6 +8,7 @@ import renderStars from '../utils/rating';
 import Image from 'next/image';
 import { RxCross2 } from "react-icons/rx";
 import { ImStarEmpty } from "react-icons/im";
+// hello
 
 const Review = ({ grid, column }) => {
   const [showAll, setShowAll] = useState(false);
