@@ -2,6 +2,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Styling for the pagination container */
+.custom-paginator .p-paginator {
+  @apply  rounded-lg p-4 mt-2 flex flex-row gap-10 fixed  right-0;
+}
+
+/* Styling for individual page numbers */
+.custom-paginator .p-paginator .p-paginator-page {
+  @apply bg-white text-black rounded-md w-10 h-10 inline items-center text-center justify-center mx-1;
+}
+
+/* Highlighted page number styling */
+.custom-paginator .p-paginator .p-paginator-page.p-highlight {
+  @apply bg-[#FFA500] text-white inline text-center flex-row;
+}
+
+/* Styling for previous and next buttons */
+.custom-paginator .p-paginator .p-paginator-prev,
+.custom-paginator .p-paginator .p-paginator-next {
+  @apply bg-[#CACACA] p-1 text-black flex flex-row rounded-md;
+}
 
 body {
   background-color: rgba(51, 51, 51, 1);
