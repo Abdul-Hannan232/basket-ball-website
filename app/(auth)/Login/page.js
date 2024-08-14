@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { FcGoogle } from "react-icons/fc";
-import { loginUser } from "../../services/authServices"
+import { loginUser, validateToken } from "../../services/authServices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../component/loader"
@@ -13,19 +13,30 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loader, setLoader] = useState(false)
+
+     
     useEffect(() => {
-        // Check if the user is already logged in
         const token = localStorage.getItem("authToken");
+    
+        const verifyToken = async () => {
+            const response = await validateToken();
+            if (response.status === 200) {
+                toast.success("You are already logged in. Redirecting now...");
+                router.replace("/home");
+            } else {
+                localStorage.removeItem("authToken");
+                toast.error(response.message || "Invalid session. Please log in again.");
+            }
+        };
+    
         if (token) {
-            // Redirect to the home page if logged in
-            toast.success("You are already logged in. Redirecting now...");
-            router.replace("/home");
-        }
-        if(!token)
-        {
-            toast.success("Please log in to proceed.");
+            verifyToken();
+        } else {
+            toast.warn("Please log in to proceed.");
         }
     }, [router]);
+
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoader(true)
@@ -36,8 +47,9 @@ const Login = () => {
         try {
             const response = await loginUser(body)
             if (response.status === 200) {
-                toast.success(response.data.message)
+              
                 localStorage.setItem("authToken", response.data.data.token || "loggedIn");
+                toast.success(response.data.message)
                 router.push('/home')
             } else {
                 toast.error(response.data.message)
@@ -54,6 +66,8 @@ const Login = () => {
         
 
     }
+
+ 
     return (
         <>
             <ToastContainer />

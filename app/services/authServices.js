@@ -46,3 +46,23 @@ export const ResetPasswordApi = async (body) => {
         return error.response
     }
 }
+
+export const validateToken = async () => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+        
+        return { status: 401, message: "Token is required." };
+    }
+
+    try {
+        const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/validate-token`,
+            { token }  // directly pass the token
+        );
+        
+        return response;
+    } catch (error) {
+         
+        return error.response; // or throw the error if you want to handle it outside
+    }
+}
