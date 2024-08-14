@@ -1,5 +1,5 @@
 "use client"
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { FcGoogle } from "react-icons/fc";
@@ -13,22 +13,23 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loader, setLoader] = useState(false)
+    const [rememberMe, setRememberMe] = useState(false);
 
-     
     useEffect(() => {
-        const token = localStorage.getItem("authToken");
-    
+        const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
         const verifyToken = async () => {
+           
             const response = await validateToken();
             if (response.status === 200) {
                 toast.success("You are already logged in. Redirecting now...");
                 router.replace("/home");
             } else {
-                localStorage.removeItem("authToken");
+                localStorage.removeItem('authToken');
+                sessionStorage.removeItem('authToken');
                 toast.error(response.message || "Invalid session. Please log in again.");
             }
         };
-    
+
         if (token) {
             verifyToken();
         } else {
@@ -47,27 +48,31 @@ const Login = () => {
         try {
             const response = await loginUser(body)
             if (response.status === 200) {
-              
-                localStorage.setItem("authToken", response.data.data.token || "loggedIn");
+
+                const token = response.data.data.token;
+                if (rememberMe) {
+                    localStorage.setItem('authToken', token);
+                } else {
+                    sessionStorage.setItem('authToken', token);
+                }
                 toast.success(response.data.message)
                 router.push('/home')
+                
             } else {
                 toast.error(response.data.message)
             }
-            // console.log("from try of contoller")
 
         }
         catch (error) {
-            console.log(error, "error")
-        // toast.error("Network Error")
+            toast.error("Network Error")
         } finally {
             setLoader(false)
         }
-        
+
 
     }
 
- 
+
     return (
         <>
             <ToastContainer />
@@ -86,7 +91,8 @@ const Login = () => {
                     </div>
                     <div className='text-sm flex items-center justify-between '>
                         <div className='flex items-center gap-2'>
-                            <input type='checkbox' className='w-7 h-7 cursor-pointer bg-[#808080]' />
+                            <input type='checkbox' className='w-7 h-7 cursor-pointer bg-[#808080]' checked={rememberMe}
+                                onChange={() => setRememberMe(!rememberMe)} />
                             <a href="#" >Remember me</a>
                         </div>
 

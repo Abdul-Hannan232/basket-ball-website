@@ -48,7 +48,7 @@ export const ResetPasswordApi = async (body) => {
 }
 
 export const validateToken = async () => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
     if (!token) {
         
         return { status: 401, message: "Token is required." };

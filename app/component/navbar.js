@@ -21,6 +21,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("authToken");
+        sessionStorage.removeItem('authToken')
         router.push("/");
     };
     return (

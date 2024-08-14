@@ -11,7 +11,7 @@ function withAuth(WrappedComponent) {
 
         useEffect(() => {
             const verifyToken = async () => {
-                const token = localStorage.getItem("authToken");
+                const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
 
                 if (!token) {
                     toast.error("Please log in to proceed.");
@@ -19,18 +19,15 @@ function withAuth(WrappedComponent) {
                     return;
                 }
                 const response = await validateToken();
-
-                console.log("Token verification response:", response);
-
                 if (response.status === 200) {
                     setIsAuthenticated(true); // Token is valid, proceed
                 } else {
                     localStorage.removeItem("authToken");
+                    sessionStorage.removeItem("authToken")
                     toast.error("Invalid session. Please log in again.");
                     router.replace("/"); // Redirect to login if the token is invalid
                 }
             };
-
             verifyToken();
         }, [router]);
 
