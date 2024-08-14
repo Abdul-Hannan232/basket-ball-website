@@ -8,70 +8,65 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../component/loader"
 import { useRouter } from 'next/navigation';
+import clearAuthToken from "../../utils/clearAuthToken"
 const Login = () => {
     const router = useRouter("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loader, setLoader] = useState(false)
     const [rememberMe, setRememberMe] = useState(false);
-
     useEffect(() => {
         const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+        if (!token) {
+            toast.warn("Please log in to proceed.");
+            return;
+        }
+
         const verifyToken = async () => {
-           
-            const response = await validateToken();
-            if (response.status === 200) {
-                toast.success("You are already logged in. Redirecting now...");
-                router.replace("/home");
-            } else {
-                localStorage.removeItem('authToken');
-                sessionStorage.removeItem('authToken');
-                toast.error(response.message || "Invalid session. Please log in again.");
+            try {
+                const response = await validateToken();
+                if (response.status === 200) {
+                    toast.success("Already logged In, Redirecting");
+                    router.replace("/home");
+                } else {
+                    clearAuthToken();
+                }
+            } catch (error) {
+                clearAuthToken();
             }
         };
 
-        if (token) {
-            verifyToken();
-        } else {
-            toast.warn("Please log in to proceed.");
-        }
+        verifyToken();
     }, [router]);
 
+   
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setLoader(true)
-        const body = {
-            email: email,
-            password: password
-        }
-        try {
-            const response = await loginUser(body)
-            if (response.status === 200) {
+        e.preventDefault();
+        setLoader(true);
 
+        const body = { email, password };
+
+        try {
+            const response = await loginUser(body);
+            if (response.status === 200) {
                 const token = response.data.data.token;
                 if (rememberMe) {
                     localStorage.setItem('authToken', token);
                 } else {
                     sessionStorage.setItem('authToken', token);
                 }
-                toast.success(response.data.message)
-                router.push('/home')
-                
+                toast.success(response.data.message);
+                router.push('/home');
             } else {
-                toast.error(response.data.message)
+                toast.error(response.data.message);
             }
-
-        }
-        catch (error) {
-            toast.error("Network Error")
+        } catch (error) {
+            toast.error("Network Error");
         } finally {
-            setLoader(false)
+            setLoader(false);
         }
-
-
-    }
-
+    };
 
     return (
         <>
