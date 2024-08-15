@@ -24,6 +24,7 @@ const Login = () => {
         }
 
         const verifyToken = async () => {
+            setLoader(true)
             try {
                 const response = await validateToken();
                 if (response.status === 200) {
@@ -34,6 +35,8 @@ const Login = () => {
                 }
             } catch (error) {
                 Cookies.remove('authToken');
+            } finally{
+                setLoader(false)
             }
         };
 
