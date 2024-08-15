@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from 'js-cookie';
 export const loginUser = async (body) => {
     try {
         const response = await axios.post(
@@ -48,9 +49,9 @@ export const ResetPasswordApi = async (body) => {
 }
 
 export const validateToken = async () => {
-    const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+    const token = Cookies.get('authToken')
     if (!token) {
-        
+
         return { status: 401, message: "Token is required." };
     }
 
@@ -59,10 +60,10 @@ export const validateToken = async () => {
             `${process.env.NEXT_PUBLIC_API_URL}/auth/validate-token`,
             { token }  // directly pass the token
         );
-        
+
         return response;
     } catch (error) {
-         
+
         return error.response; // or throw the error if you want to handle it outside
     }
 }

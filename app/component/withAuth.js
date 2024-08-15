@@ -1,37 +1,46 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { validateToken } from "../services/authServices";
-
+import clearAuthToken from "../utils/clearAuthToken";
+import {jwtDecode} from "jwt-decode";
 function withAuth(WrappedComponent) {
     const AuthenticatedComponent = (props) => {
         const router = useRouter();
-        const [isAuthenticated, setIsAuthenticated] = useState(false);
+        const [isAuthenticated, setIsAuthenticated] = useState(null); // Use null to handle loading state
 
         useEffect(() => {
             const verifyToken = async () => {
-                const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+                const token = localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
 
                 if (!token) {
-                    toast.error("Please log in to proceed.");
                     router.replace("/"); // Redirect to login if no token
                     return;
                 }
-                const response = await validateToken();
-                if (response.status === 200) {
-                    setIsAuthenticated(true); // Token is valid, proceed
-                } else {
-                    localStorage.removeItem("authToken");
-                    sessionStorage.removeItem("authToken")
-                    toast.error("Invalid session. Please log in again.");
+
+                try {
+                    const response = await validateToken();
+                    if (response.status === 200) { 
+                        const decodedToken = jwtDecode(token);
+                        const userRole = decodedToken.role;
+                        if (router.pathname.startsWith("/admin") && userRole !== "admin") {
+                            toast.error("Access denied. Admins only.");
+                            router.replace("/"); // Redirect non-admin users trying to access admin routes
+                            return;
+                        }
+                        setIsAuthenticated(true) 
+                    } else { router.replace("/") }
+                } catch (error) {
+                    clearAuthToken()
                     router.replace("/"); // Redirect to login if the token is invalid
                 }
             };
+
             verifyToken();
         }, [router]);
 
-        if (!isAuthenticated) {
+        if (isAuthenticated === null) {
             return null; // or a loading spinner, to prevent the component from rendering until authentication is confirmed
         }
 
