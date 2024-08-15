@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { validateToken } from "../services/authServices";
 import clearAuthToken from "../utils/clearAuthToken";
+import {jwtDecode} from "jwt-decode";
 function withAuth(WrappedComponent) {
     const AuthenticatedComponent = (props) => {
         const router = useRouter();
@@ -20,7 +21,16 @@ function withAuth(WrappedComponent) {
 
                 try {
                     const response = await validateToken();
-                    response.status === 200 ? setIsAuthenticated(true) : router.replace("/");
+                    if (response.status === 200) { 
+                        const decodedToken = jwtDecode(token);
+                        const userRole = decodedToken.role;
+                        if (router.pathname.startsWith("/admin") && userRole !== "admin") {
+                            toast.error("Access denied. Admins only.");
+                            router.replace("/"); // Redirect non-admin users trying to access admin routes
+                            return;
+                        }
+                        setIsAuthenticated(true) 
+                    } else { router.replace("/") }
                 } catch (error) {
                     clearAuthToken()
                     router.replace("/"); // Redirect to login if the token is invalid

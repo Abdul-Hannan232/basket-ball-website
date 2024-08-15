@@ -8,8 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../component/loader"
 import { useRouter } from 'next/navigation';
-import clearAuthToken from "../../utils/clearAuthToken"
 import roleBased from "../../utils/roleBased"
+import Cookies from 'js-cookie';
 const Login = () => {
     const router = useRouter("")
     const [email, setEmail] = useState("")
@@ -17,7 +17,7 @@ const Login = () => {
     const [loader, setLoader] = useState(false)
     const [rememberMe, setRememberMe] = useState(false);
     useEffect(() => {
-        const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+        const token = Cookies.get('authToken')
         if (!token) {
             toast.warn("Please log in to proceed.");
             return;
@@ -30,10 +30,10 @@ const Login = () => {
                     toast.success("Already logged In, Redirecting");
                     roleBased(token, router)
                 } else {
-                    clearAuthToken();
+                    Cookies.remove('authToken');
                 }
             } catch (error) {
-                clearAuthToken();
+                Cookies.remove('authToken');
             }
         };
 
@@ -45,23 +45,25 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);
-
+    
         const body = { email, password };
-
+    
         try {
             const response = await loginUser(body);
             if (response.status === 200) {
                 const token = response.data.data.token;
-                rememberMe ? localStorage.setItem('authToken', token) : sessionStorage.setItem('authToken', token);
+                const options = { secure: true, sameSite: 'strict' };
+                if (rememberMe) {
+                    options.expires = 7; // Set for 7 days if "Remember Me" is checked
+                }
+                Cookies.set('authToken', token, options);
                 toast.success(response.data.message);
                 roleBased(token, router);
-
             } else {
                 toast.error(response.data.message);
             }
         } catch (error) {
             toast.error("Network Error");
-
         } finally {
             setLoader(false);
         }

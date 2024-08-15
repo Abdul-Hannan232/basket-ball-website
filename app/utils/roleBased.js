@@ -1,13 +1,20 @@
-// "use client"
-import { jwtDecode } from 'jwt-decode'; // 1. Import jwt-decode
+import {jwtDecode} from 'jwt-decode'; // Correct import
+
 const roleBased = (token, router) => {
     try {
         const decodedToken = jwtDecode(token);
         const userRole = decodedToken.role;
-        userRole === 'admin' ? router.replace("/admin") : router.replace("/home");
+        if (userRole === 'admin') {
+            router.replace('/admin'); // Redirect admin to /admin
+        } else if (userRole === 'user') {
+            router.replace('/home'); // Redirect user to /home
+        } else {
+            throw new Error('Unknown role');
+        }
     } catch (error) {
-        router.replace("/"); // Redirect to login if there's an issue with decoding or role
+        console.error('Role-based redirection failed:', error);
+        router.replace('/'); // Redirect to login if there's an issue with decoding or role
     }
 }
 
-export default roleBased
+export default roleBased;

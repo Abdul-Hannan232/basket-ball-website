@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { CiSearch } from "react-icons/ci"
 import Footer from "../../component/footer"
 import BasketBall from "../../component/basketBall"
-import withAuth from '../../component/withAuth'
+// import withAuth from '../../component/withAuth'
 const Home = () => {
   return (
     <div>
@@ -44,4 +44,4 @@ const Home = () => {
   )
 }
 
-export default withAuth(Home)
+export default Home
