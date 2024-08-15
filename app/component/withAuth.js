@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { validateToken } from "../services/authServices";
 import clearAuthToken from "../utils/clearAuthToken";
-
 function withAuth(WrappedComponent) {
     const AuthenticatedComponent = (props) => {
         const router = useRouter();
@@ -21,14 +20,9 @@ function withAuth(WrappedComponent) {
 
                 try {
                     const response = await validateToken();
-                    if (response.status === 200) {
-                        setIsAuthenticated(true); // Token is valid, proceed
-                    } else {
-                        throw new Error("Invalid token");
-                    }
+                    response.status === 200 ? setIsAuthenticated(true) : router.replace("/");
                 } catch (error) {
                     clearAuthToken()
-                    toast.error("Invalid session. Please log in again.");
                     router.replace("/"); // Redirect to login if the token is invalid
                 }
             };

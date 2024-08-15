@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../component/loader"
 import { useRouter } from 'next/navigation';
 import clearAuthToken from "../../utils/clearAuthToken"
+import roleBased from "../../utils/roleBased"
 const Login = () => {
     const router = useRouter("")
     const [email, setEmail] = useState("")
@@ -27,7 +28,7 @@ const Login = () => {
                 const response = await validateToken();
                 if (response.status === 200) {
                     toast.success("Already logged In, Redirecting");
-                    router.replace("/home");
+                    roleBased(token, router)
                 } else {
                     clearAuthToken();
                 }
@@ -39,7 +40,7 @@ const Login = () => {
         verifyToken();
     }, [router]);
 
-   
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,18 +52,16 @@ const Login = () => {
             const response = await loginUser(body);
             if (response.status === 200) {
                 const token = response.data.data.token;
-                if (rememberMe) {
-                    localStorage.setItem('authToken', token);
-                } else {
-                    sessionStorage.setItem('authToken', token);
-                }
+                rememberMe ? localStorage.setItem('authToken', token) : sessionStorage.setItem('authToken', token);
                 toast.success(response.data.message);
-                router.push('/home');
+                roleBased(token, router);
+
             } else {
                 toast.error(response.data.message);
             }
         } catch (error) {
             toast.error("Network Error");
+
         } finally {
             setLoader(false);
         }
