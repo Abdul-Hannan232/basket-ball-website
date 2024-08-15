@@ -1,11 +1,9 @@
-"use client"
 import React from 'react'
 import Navbar from '../../component/navbar'
 import Image from 'next/image'
-import { CiSearch } from "react-icons/ci"
+import { CiSearch } from "react-icons/ci" 
 import Footer from "../../component/footer"
 import BasketBall from "../../component/basketBall"
-// import withAuth from '../../component/withAuth'
 const Home = () => {
   return (
     <div>
