@@ -6,14 +6,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import {  useSearchParams } from 'next/navigation';
 import { ResetPasswordApi } from '../services/authServices';
 import Loader from "../component/loader"
+import { useRouter } from 'next/navigation';
 const ResetPassword = () => {
     const searchParams = useSearchParams();
-    // hello
     const user_id = searchParams.get('user_id')
     const token = searchParams.get('token')
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [loader, setLoader] = useState(false)
+    const router = useRouter("")
     const handleSubmit = async (e) => {
         e.preventDefault()
         const body = {
@@ -26,7 +27,7 @@ const ResetPassword = () => {
             const responce = await ResetPasswordApi(body)
             if (responce.status === 200) {
                 toast.success(responce.data.message)
-                console.log(responce.data.message,"responce.data.message")
+                router.replace('/');
             } else {
                 toast.error(responce.data.message)
             }
@@ -53,7 +54,7 @@ const ResetPassword = () => {
                     </div>
                     <br />
                     {/* <Link href="/Login"> */}
-                    <button type='submit' className='border-[#FFA500] w-full text-xl border text-white rounded-lg bg-[#FFA500] p-4 shadow cursor-pointer'>Login</button>
+                    <button type='submit' className='border-[#FFA500] w-full text-xl border text-white rounded-lg bg-[#FFA500] p-4 shadow cursor-pointer'>Change</button>
                     {/* </Link> */}
                 </form>
 

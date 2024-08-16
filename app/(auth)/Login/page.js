@@ -28,7 +28,7 @@ const Login = () => {
             try {
                 const response = await validateToken();
                 if (response.status === 200) {
-                    toast.success("Already logged In, Redirecting");
+                    toast.success("Redirecting . . .");
                     roleBased(token, router)
                 } else {
                     Cookies.remove('authToken');
