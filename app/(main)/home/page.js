@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <div className='mt-12 md:banner mobilebanner   md:h-[100vh] h-[250px]'  >
+      <div className=' md:banner mobilebanner   md:h-[100vh] h-[250px]'  >
         <div className='relative  flex flex-col md:justify-center md:mt-0 pt-14 items-center md:h-[90vh] '>
           <div className='bg-white absolute lg:w-[55%] w-[90%] mx-auto md:h-80 h-36 flex flex-col justify-center it-center  bg-opacity-60 rounded-xl  right-0 left-0'>
             <div className='relative lg:mx-10 mx-5 border bg-white text-black flex items-center   rounded-full'>
@@ -36,7 +36,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <BasketBall />
+      <BasketBall slide={"carousel"} />
       <Footer/>
     </div>
   )
