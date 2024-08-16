@@ -10,7 +10,7 @@ export const allCourts = async () =>{
                 },
             }
         );
-        console.log("all courts",response)
+         
         return response;
     }
     catch (error) {
