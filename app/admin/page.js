@@ -1,4 +1,5 @@
 import React from 'react'
+// import withAuth from '../component/withAuth'
 
 const Page = () => {
   return (

@@ -8,6 +8,7 @@ import { IoIosMenu } from "react-icons/io";
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
     const router = useRouter("");
@@ -20,8 +21,7 @@ const Navbar = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem("authToken");
-        sessionStorage.removeItem('authToken')
+        Cookies.remove('authToken');
         router.push("/");
     };
     return (

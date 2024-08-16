@@ -1,10 +1,8 @@
-"use client"
 import React from 'react'
 import { CiFilter } from "react-icons/ci";
 import Navbar from '../../component/navbar';
 import Courts from "../../component/basketBall"
 import Footer from '../../component/footer';
-import withAuth from '../../component/withAuth'
 const Page = () => {
     return (
         <> 
@@ -38,4 +36,4 @@ const Page = () => {
     )
 }
 
-export default withAuth(Page)
+export default Page
