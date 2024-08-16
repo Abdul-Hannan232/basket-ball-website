@@ -2,7 +2,7 @@
 import React from 'react'
 import { CiFilter } from "react-icons/ci";
 import Navbar from '../../component/navbar';
-import Courts from "../../component/courts"
+import Courts from "../../component/basketBall"
 import Footer from '../../component/footer';
 import withAuth from '../../component/withAuth'
 const Page = () => {
@@ -17,7 +17,7 @@ const Page = () => {
                 </div>
                 <button className='bg-[#FFA500]   rounded-md md:text-xl text-sm text-black md:px-16 px-3 py-2 shadow '>Add Court</button>
             </div>
-            <Courts />
+            <Courts slide={"box"}/>
             <div className='w-[80%] mx-auto mt-40 flex items-center gap-2'>
                 <h1 className='text-[#FFA500] text-2xl font-bold'>Map</h1>
                 <h1 className='text-white text-2xl font-bold'>View</h1>
