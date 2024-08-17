@@ -66,9 +66,7 @@ export default function TemplateDemo() {
             : user // No change for non-matching users
         );
         toast[rowData.isactive ? 'success' : 'error'](message);
-
         setUsers(updatedUsers);
-        // setAllUsers(updatedUsers);
       }
 
     } catch (error) {
