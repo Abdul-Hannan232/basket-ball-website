@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect,useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from "../../component/adminsidebar";
 import Link from 'next/link';
-import { allUsers as fetchAllUsers } from "../../services/userServices"
+import { allUsers as fetchAllUsers, updateUser } from "../../services/userServices"
 import formatDate from '../../utils/formatData';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function TemplateDemo() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
@@ -22,7 +24,7 @@ export default function TemplateDemo() {
         setAllUsers(response.data.users);
       } catch (error) {
         console.error("Failed to fetch users data:", error);
-        // Display an error message to the user
+        toast.error("Network Error")
       } finally {
         setSpinner(false);
       }
@@ -36,20 +38,53 @@ export default function TemplateDemo() {
     setAllUsers(
       searchQuery !== ""
         ? users.filter(user =>
-            user.name.toLowerCase().includes(searchQuery) ||
-            user.email.toLowerCase().includes(searchQuery)
-          )
+          user.name.toLowerCase().includes(searchQuery) ||
+          user.email.toLowerCase().includes(searchQuery)
+        )
         : users
     );
   }, [users]);
 
 
+
+  const blockUser = async (rowData) => {
+
+
+    // Determine the toast message
+
+    const message = rowData.isactive ? "User Blocked Successfully" : "User Unblocked Successfully";
+    
+      // Call the updateUser function
+      const data = { id: rowData.id, isactive: !rowData.isactive }
+      try {
+      const response = await updateUser(data);
+      if (response.status === 200) {
+        // Toggle the specific user's isactive status
+        const updatedUsers = users.map(user =>
+          user.id === rowData.id
+            ? { ...user, isactive: !user.isactive }
+            : user // No change for non-matching users
+        );
+        toast[rowData.isactive ? 'success' : 'error'](message);
+        setUsers(updatedUsers);
+      }
+
+    } catch (error) {
+      console.error('Error updating user:', error);
+      toast.error("Network Error");
+    }
+  };
+ 
+
+
   return (
     <>
+      <ToastContainer />
       <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex items-center text-white'>
         <h1 className='text-3xl font-bold'>Basketball</h1>
         <div className='border-2 border-y-transparent border-r-transparent mx-20 pl-5 border-white'>
           <h1 className='text-lg'> User {allUsers.length}</h1>
+
         </div>
       </div>
       <div className='flex bg-white mt-16 w-[81.5%] h-screen float-right text-black'>
@@ -68,11 +103,11 @@ export default function TemplateDemo() {
               <Link href="/admin/usersDetail">              Add User
               </Link>            </button>
           </div>
-
+          <div className="flex justify-center">
+            {spinner ? <span className="loader"></span> : null}
+          </div>
           <div className="card">
-            <div className="flex justify-center">
-              {spinner ? <span className="loader"></span> : null}
-            </div>
+
             <DataTable
               value={allUsers}
               tableStyle={{ width: '95%', margin: 'auto', marginTop: '20px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
@@ -112,8 +147,8 @@ export default function TemplateDemo() {
                 header="Created on"
                 headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                 style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-                body={(rowData) => formatDate(rowData.created_at)} 
-            />
+                body={(rowData) => formatDate(rowData.created_at)}
+              />
               <Column
                 field="remarks"
                 header="Remarks"
@@ -130,9 +165,13 @@ export default function TemplateDemo() {
               <Column
                 headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                 body={(rowData) => (
-                  <div style={{ display: 'flex', color: "#D60000", justifyContent: 'space-around' }}>
-                    <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => editProduct(rowData)} />
-                  </div>
+                  rowData.isactive ?
+                    <div style={{ display: 'flex', color: "#D60000", justifyContent: 'space-around' }}>
+                      <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => blockUser(rowData)} />
+                    </div>
+                    : <div style={{ display: 'flex', color: "#0f6e28", justifyContent: 'space-around' }}>
+                      <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => blockUser(rowData)} />
+                    </div>
                 )}
                 style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
               />
@@ -140,7 +179,7 @@ export default function TemplateDemo() {
                 headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                 body={(rowData) => (
                   <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                    <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-xl" onClick={() => editProduct(rowData)} />
+                    <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-xl" onClick={() => deleteUser(rowData)} />
                   </div>
                 )}
                 style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
