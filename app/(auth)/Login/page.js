@@ -75,6 +75,7 @@ const Login = () => {
     return (
         <>
             <ToastContainer />
+            <title>HoopSquad - Login </title>
             <div className='flex  justify-between md:mx-0 mx-5 items-center min-h-screen'>
                 <form className=' md:w-[450px] w-full mx-auto space-y-4' onSubmit={handleSubmit}>
                     <h1 className='text-center font-bold text-2xl text-white'>
