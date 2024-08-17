@@ -22,23 +22,74 @@ export default function TemplateDemo() {
                     <h1 className='text-lg'> User (25)</h1>
                 </div>
             </div>
-            <div className='flex bg-white mt-16 w-[81.5%] h-screen float-right text-black'>
+            <div className='flex bg-white  mt-16 w-[81.5%] float-right text-black'>
                 <Sidebar />
                 <div className='w-screen '>
                     <div className='pl-10 text-xl m-5 rounded-t-xl border-2 h-24 bg-[#F4F4F4] text-black font-bold  border-[#CACACA] gap-10 flex items-center'>
                         <h1>User  Details (Personal)</h1>
 
                     </div>
-                    <div className='border-2 border-[#CACACA] w-[80%] mx-a rounded-xl'>
-                        <div>
-                            <Image src="" alt="image" />
+                    <div className='border-2 border-[#CACACA] mx-auto w-[80%]  rounded-3xl'>
+                        <div className='flex items-center justify-between gap-10 px-3'>
+                           <div className='flex items-center  gap-10 p-5'>
+                           <Image src="/usericon.png" alt="image" width={140} height={140}/>
                             <div>
-                                <h1 className='text-2xl'>John Doe</h1>
+                                <h1 className='text-xl  text-black font-bold'>John Doe</h1>
                                 <p className='text-sm text-[#636161]'>example123@gmail.com</p>
                             </div>
-                        </div>
-                    </div>
+                            </div>
+                            <div className='p-3 rounded-xl flex items-center gap-2 border border-[#CACACA]'>
+                                <h1 className='text-xs  '>Edit profile picture</h1>
+                                <Image src="/edit.png" alt="image" width={20} height={20}/>
 
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div className='w-[80%] mx-auto grid grid-cols-2 space-y-3 mt-10'>
+                           
+                            <div > 
+                                <label className='text-black font-bold text-md'>Display Name*</label><br/>
+                                <input type='text' placeholder='John Doe'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>First Name  *</label><br/>
+                                <input type='text' placeholder='John'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>Email  *</label><br/>
+                                <input type='text' placeholder='info@centralparknyc.com'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>Last Name*</label><br/>
+                                <input type='text' placeholder='Doe'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>Height*</label><br/>
+                                <input type='text' placeholder='190 cm'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>Weight*</label><br/>
+                                <input type='text' placeholder='110 KG'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>Phone (optional)*</label><br/>
+                                <input type='text' placeholder='555-123-4567'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>Joined Since*</label><br/>
+                                <input type='text' placeholder='01/02/17'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>Country*</label><br/>
+                                <input type='text' placeholder='USA'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+                            <div > 
+                                <label className='text-black font-bold text-md'>Role*</label><br/>
+                                <input type='text' placeholder='Admin'  className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl'/>
+                            </div>
+
+                        </div>
                 </div>
             </div>
         </>
