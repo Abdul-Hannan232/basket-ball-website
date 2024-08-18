@@ -11,6 +11,8 @@ import { allUsers as fetchAllUsers, updateUser } from "../../services/userServic
 import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DeletePopup from "../../component/admin/deleteuserPopup"
+import BlockUserPopup from "../../component/admin/blockuserPopup"
 export default function TemplateDemo() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
@@ -53,10 +55,10 @@ export default function TemplateDemo() {
     // Determine the toast message
 
     const message = rowData.isactive ? "User Blocked Successfully" : "User Unblocked Successfully";
-    
-      // Call the updateUser function
-      const data = { id: rowData.id, isactive: !rowData.isactive }
-      try {
+
+    // Call the updateUser function
+    const data = { id: rowData.id, isactive: !rowData.isactive }
+    try {
       const response = await updateUser(data);
       if (response.status === 200) {
         // Toggle the specific user's isactive status
@@ -74,9 +76,21 @@ export default function TemplateDemo() {
       toast.error("Network Error");
     }
   };
- 
 
-
+  const [deleteUsers, setDeleteUsers] = useState(false)
+  const deleteOpen = () => {
+    setDeleteUsers(true)
+  }
+  const deleteClose = () => {
+    setDeleteUsers(false)
+  }
+  const [blockuser, setBlockuser] = useState(false)
+  const blockOpen = () => {
+    setBlockuser(true)
+  }
+  const blockClose = () => {
+    setBlockuser(false)
+  }
   return (
     <>
       <ToastContainer />
@@ -166,7 +180,7 @@ export default function TemplateDemo() {
                 headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                 body={(rowData) => (
                   rowData.isactive ?
-                    <div style={{ display: 'flex', color: "#D60000", justifyContent: 'space-around' }}>
+                    <div style={{ display: 'flex', color: "#D60000", justifyContent: 'space-around' }} onClick={blockOpen}>
                       <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => blockUser(rowData)} />
                     </div>
                     : <div style={{ display: 'flex', color: "#0f6e28", justifyContent: 'space-around' }}>
@@ -178,7 +192,7 @@ export default function TemplateDemo() {
               <Column
                 headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                 body={(rowData) => (
-                  <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                  <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }} onClick={deleteOpen}>
                     <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-xl" onClick={() => deleteUser(rowData)} />
                   </div>
                 )}
@@ -190,6 +204,13 @@ export default function TemplateDemo() {
 
         </div>
       </div>
+      {deleteUsers && (
+        <DeletePopup functions={deleteClose} />
+      )}
+      {blockuser && (
+       <BlockUserPopup popup={blockClose}/>
+      )}
+
     </>
   );
 }

@@ -6,7 +6,6 @@ export default function TemplateDemo() {
     return (
         <>
             <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex  items-center text-white'>
-
                 <h1 className='text-3xl font-bold'>Basketball</h1>
                 <div className='border-2 border-y-transparent border-r-transparent mx-20 pl-5 border-white'>
                     <h1 className='text-lg'> User (25)</h1>
@@ -18,7 +17,6 @@ export default function TemplateDemo() {
                     <div className='border border-[#CACACA] m-5 rounded-xl m-5'>
                         <div className='pl-10 text-xl  rounded-t-xl border-2 h-24 bg-[#F4F4F4] text-black font-bold  border-[#CACACA] gap-10 flex items-center'>
                             <h1>User  Details (Personal)</h1>
-
                         </div>
                         <div className='border-2 border-[#CACACA] mx-auto mt-20 w-[80%]  rounded-3xl'>
                             <div className='flex items-center justify-between gap-10 px-3'>
@@ -32,10 +30,8 @@ export default function TemplateDemo() {
                                 <div className='p-3 rounded-xl flex items-center gap-2 border border-[#CACACA]'>
                                     <h1 className='text-xs  '>Edit profile picture</h1>
                                     <Image src="/edit.png" alt="image" width={20} height={20} />
-
                                 </div>
                             </div>
-
                         </div>
                         <div className='w-[80%] mx-auto grid grid-cols-2 gap-5 my-20'>
                             <div >
