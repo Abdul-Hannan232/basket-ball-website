@@ -101,7 +101,6 @@ export default function TemplateDemo() {
         </div>
       </div>
       <div className='flex bg-white mt-16 w-[81.5%] h-screen float-right text-black'>
-        <Sidebar />
         <div className='w-screen'>
           <div className='p-5 m-5 rounded-xl border-2 h-24 border-[#CACACA] gap-10 flex items-center'>
             <div className='w-full'>

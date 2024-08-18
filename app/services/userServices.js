@@ -20,9 +20,30 @@ export const allUsers = async () => {
 
 }
 
+export const addUser = async (body) => {
+     try {
+        const token = Cookies.get('authToken');
+        const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/user/add`,
+            body,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+       
+        return response;
+    } catch (error) {
+        
+        return error.response
+    }
+};
+
+
 export const updateUser = async (body) => {
     try {
-       
+
         const token = Cookies.get('authToken');
 
         const response = await axios.put(
