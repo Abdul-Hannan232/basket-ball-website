@@ -12,6 +12,8 @@ import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../component/loader'
+import DeletePopup from "../../component/admin/deleteuserPopup"
+import BlockUserPopup from "../../component/admin/blockuserPopup"
 export default function TemplateDemo() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
@@ -52,6 +54,7 @@ export default function TemplateDemo() {
   const blockUser = async (rowData) => {
     // Determine the toast message
     const message = rowData.isactive ? `${rowData.name} blocked successfully` : `${rowData.name} unblocked successfully`;
+ 
     // Call the updateUser function
     const data = { id: rowData.id, isactive: !rowData.isactive }
     try {
@@ -73,8 +76,20 @@ export default function TemplateDemo() {
     }  
   };
 
-
-
+  const [deleteUsers, setDeleteUsers] = useState(false)
+  const deleteOpen = () => {
+    setDeleteUsers(true)
+  }
+  const deleteClose = () => {
+    setDeleteUsers(false)
+  }
+  const [blockuser, setBlockuser] = useState(false)
+  const blockOpen = () => {
+    setBlockuser(true)
+  }
+  const blockClose = () => {
+    setBlockuser(false)
+  }
   return (
     <>
       <ToastContainer />
@@ -192,7 +207,13 @@ export default function TemplateDemo() {
 
         </div>
       </div>
-      {/* {spinner ? <Loader /> : ''} */}
+      {deleteUsers && (
+        <DeletePopup functions={deleteClose} />
+      )}
+      {blockuser && (
+       <BlockUserPopup popup={blockClose}/>
+      )}
+
     </>
   );
 }
