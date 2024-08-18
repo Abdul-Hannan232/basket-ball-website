@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'primereact/button';
-import Sidebar from "../../component/adminsidebar"
 import Image from 'next/image';
 export default function TemplateDemo() {
     return (
@@ -12,14 +11,13 @@ export default function TemplateDemo() {
                 </div>
             </div>
             <div className='flex bg-white  mt-16 w-[81.5%] float-right text-black'>
-                <Sidebar />
                 <div className='w-screen '>
                     <div className='border border-[#CACACA] m-5 rounded-xl m-5'>
-                        <div className='pl-10 text-xl  rounded-t-xl border-2 h-24 bg-[#F4F4F4] text-black font-bold  border-[#CACACA] gap-10 flex items-center'>
+                        <div className='pl-10 md:text-xl text-md rounded-t-xl border-2 h-24 bg-[#F4F4F4] text-black font-bold  border-[#CACACA] gap-10 flex items-center'>
                             <h1>User  Details (Personal)</h1>
                         </div>
                         <div className='border-2 border-[#CACACA] mx-auto mt-20 w-[80%]  rounded-3xl'>
-                            <div className='flex items-center justify-between gap-10 px-3'>
+                            <div className='md:flex items-center justify-between gap-10 px-3'>
                                 <div className='flex items-center  gap-10 p-5'>
                                     <Image src="/usericon.png" alt="image" width={140} height={140} />
                                     <div>
