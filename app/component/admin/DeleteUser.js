@@ -2,7 +2,7 @@ import React from 'react'
 import { RxCross2 } from "react-icons/rx";
 import Image from 'next/image';
 
-const DeleteuserPopup = ({ functions }) => {
+const DeleteUser = ({ functions }) => {
     return (
         <div>
             <div className='flex flex-col justify-center bg-gray-700 bg-opacity-40 items-center h-screen absolute top-0 left-0 right-0 '>
@@ -22,4 +22,4 @@ const DeleteuserPopup = ({ functions }) => {
     )
 }
 
-export default DeleteuserPopup
+export default DeleteUser

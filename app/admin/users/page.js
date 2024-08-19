@@ -5,19 +5,20 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faTrash } from '@fortawesome/free-solid-svg-icons';
-import Sidebar from "../../component/adminsidebar";
 import Link from 'next/link';
 import { allUsers as fetchAllUsers, updateUser } from "../../services/userServices"
 import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DeletePopup from "../../component/admin/deleteuserPopup"
-import BlockUserPopup from "../../component/admin/blockuserPopup"
+import Loader from '../../component/loader'
+import DeleteUserPopup from "../../component/admin/DeleteUser"
+import BlockUserPopup from "../../component/admin/BlockUser"
 export default function TemplateDemo() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
   const [users, setUsers] = useState([])
   useEffect(() => {
+
     setSpinner(true);
     const getUsers = async () => {
       try {
@@ -49,26 +50,46 @@ export default function TemplateDemo() {
 
 
 
+
+  const [deleteUsers, setDeleteUsers] = useState(false)
+  const deleteOpen = () => {
+    setDeleteUsers(true)
+  }
+
+  const deleteClose = () => {
+    setDeleteUsers(false)
+  }
+
+  const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [remarks, setRemarks] = useState('');
+
+  const openBlockUserPopup = (user) => {
+    setSelectedUser(user);
+    setBlockUserPopupVisible(true);
+  };
+  const closeBlockUserPopup = () => {
+    setBlockUserPopupVisible(false);
+    setRemarks(''); // Reset remarks when closing the popup
+  };
+
   const blockUser = async (rowData) => {
-
-
     // Determine the toast message
-
-    const message = rowData.isactive ? "User Blocked Successfully" : "User Unblocked Successfully";
-
+    const message = rowData.isactive ? `${rowData.name} blocked successfully` : `${rowData.name} unblocked successfully`;
     // Call the updateUser function
-    const data = { id: rowData.id, isactive: !rowData.isactive }
+    const data = { id: rowData.id, isactive: !rowData.isactive,remarks:remarks }
     try {
       const response = await updateUser(data);
       if (response.status === 200) {
         // Toggle the specific user's isactive status
-        const updatedUsers = users.map(user =>
+        const updatedUsers = allUsers.map(user =>
           user.id === rowData.id
-            ? { ...user, isactive: !user.isactive }
+            ? { ...user, isactive: !user.isactive,remarks:remarks }
             : user // No change for non-matching users
         );
-        toast[rowData.isactive ? 'success' : 'error'](message);
-        setUsers(updatedUsers);
+        closeBlockUserPopup()
+        toast.success(message)
+        setAllUsers(updatedUsers);
       }
 
     } catch (error) {
@@ -76,21 +97,6 @@ export default function TemplateDemo() {
       toast.error("Network Error");
     }
   };
-
-  const [deleteUsers, setDeleteUsers] = useState(false)
-  const deleteOpen = () => {
-    setDeleteUsers(true)
-  }
-  const deleteClose = () => {
-    setDeleteUsers(false)
-  }
-  const [blockuser, setBlockuser] = useState(false)
-  const blockOpen = () => {
-    setBlockuser(true)
-  }
-  const blockClose = () => {
-    setBlockuser(false)
-  }
   return (
     <>
       <ToastContainer />
@@ -116,99 +122,109 @@ export default function TemplateDemo() {
               <Link href="/admin/usersDetail">              Add User
               </Link>            </button>
           </div>
-          <div className="flex justify-center">
-            {spinner ? <span className="loader"></span> : null}
-          </div>
+
           <div className="card">
+            {spinner ? (
+              <div className="flex justify-center bg-red-[#FFA500]">
+                <span className="loader"></span>
+              </div>) : (
 
-            <DataTable
-              value={allUsers}
-              tableStyle={{ width: '95%', margin: 'auto', marginTop: '20px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
-              className="custom-data-table custom-paginator"
-              paginator
-              rows={4}
-              showGridlines
-              paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-              paginatorClassName="custom-paginator"
-            >
-              <Column
-                field="id"
-                header="ID"
-                headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                style={{ width: '5%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-              />
-              <Column
-                field="name"
-                header="Display Name"
-                headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-              />
-              <Column
-                field="email"
-                header="Email"
-                headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px' }}
-                style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-              />
-              <Column
-                field="phone_number"
-                header="Phone number"
-                headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-              />
-              <Column
-                field="created_at"
-                header="Created on"
-                headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-                body={(rowData) => formatDate(rowData.created_at)}
-              />
-              <Column
-                field="remarks"
-                header="Remarks"
-                headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-              />
-              <Column
-                field="role"
-                header="Role"
-                headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                style={{ width: '6%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-              />
+              <DataTable
+                value={allUsers}
+                tableStyle={{ width: '95%', margin: 'auto', marginTop: '20px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
+                className="custom-data-table custom-paginator"
+                paginator
+                rows={4}
+                showGridlines
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                paginatorClassName="custom-paginator"
+              >
+                <Column
+                  field="id"
+                  header="ID"
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  style={{ width: '5%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
+                <Column
+                  field="name"
+                  header="Display Name"
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
+                <Column
+                  field="email"
+                  header="Email"
+                  headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px' }}
+                  style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
+                <Column
+                  field="phone_number"
+                  header="Phone number"
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
+                <Column
+                  field="created_at"
+                  header="Created on"
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                  body={(rowData) => formatDate(rowData.created_at)}
+                />
+                <Column
+                  field="remarks"
+                  header="Remarks"
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
+                <Column
+                  field="role"
+                  header="Role"
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  style={{ width: '6%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
 
-              <Column
-                headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                body={(rowData) => (
-                  rowData.isactive ?
-                    <div style={{ display: 'flex', color: "#D60000", justifyContent: 'space-around' }} onClick={blockOpen}>
-                      <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => blockUser(rowData)} />
+                <Column
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  body={(rowData) => (
+                    rowData.isactive ?
+                      <div style={{ display: 'flex', color: "#D60000", justifyContent: 'space-around' }}>
+                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => openBlockUserPopup(rowData)} />
+                      </div>
+                      : <div style={{ display: 'flex', color: "#0f6e28", justifyContent: 'space-around' }}>
+                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => blockUser(rowData)} />
+                      </div>
+                  )}
+                  style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
+                <Column
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  body={(rowData) => (
+                    <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-xl" onClick={() => deleteOpen()} />
                     </div>
-                    : <div style={{ display: 'flex', color: "#0f6e28", justifyContent: 'space-around' }}>
-                      <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => blockUser(rowData)} />
-                    </div>
-                )}
-                style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-              />
-              <Column
-                headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                body={(rowData) => (
-                  <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }} onClick={deleteOpen}>
-                    <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-xl" onClick={() => deleteUser(rowData)} />
-                  </div>
-                )}
-                style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-              />
+                  )}
+                  style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
 
-            </DataTable>
+              </DataTable>
+            )}
+
           </div>
 
         </div>
       </div>
       {deleteUsers && (
-        <DeletePopup functions={deleteClose} />
+        <DeleteUserPopup functions={deleteClose} />
       )}
-      {blockuser && (
-       <BlockUserPopup popup={blockClose}/>
-      )}
+    {blockUserPopupVisible && (
+    <BlockUserPopup
+        onClose={closeBlockUserPopup}
+        onBlockUser={blockUser}
+        user={selectedUser}
+        onSetRemarks={setRemarks}
+        remarks={remarks}
+    />
+)}
 
     </>
   );
