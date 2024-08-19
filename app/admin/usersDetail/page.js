@@ -1,7 +1,5 @@
 import React from 'react';
-import AddUser from '../../component/admin/addUser'
-import { Button } from 'primereact/button';
-import Image from 'next/image';
+import AddNewUser from '../../component/admin/AddNewUser'
 export default function TemplateDemo() {
     return (
         <>
@@ -106,7 +104,7 @@ export default function TemplateDemo() {
 
             </div> */}
 
-            <AddUser />
+            <AddNewUser />
         </>
     );
 }

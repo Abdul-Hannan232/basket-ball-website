@@ -2,11 +2,11 @@
 import React, { useState } from 'react'
 import { Button } from 'primereact/button';
 import Image from 'next/image';
-import Loader from "../../component/loader"
+import Loader from "../loader"
 import { addUser as addNewUser } from "../../services/userServices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const addUser = () => {
+const AddNewUser = () => {
     const [loader, setLoader] = useState(false)
     const [formData, setFormData] = useState({
         name: '',
@@ -155,4 +155,4 @@ const addUser = () => {
     )
 }
 
-export default addUser
+export default AddNewUser
