@@ -1,9 +1,9 @@
 "use client"
+import React, { useState } from 'react'
 import { Button } from 'primereact/button';
 import Image from 'next/image';
 import Loader from "../../component/loader"
 import { addUser as addNewUser } from "../../services/userServices"
-import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const addUser = () => {
