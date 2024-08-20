@@ -1,11 +1,11 @@
 "use client"
 import React, { useState } from 'react'
 import Image from 'next/image'
-import Navbar from "../../component/navbar"
+import Navbar from './Navbar.js'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import Footer from "../../component/footer"
+import Footer from "./footer.js"
 
-const UserProfile = () => {
+const UserTab = () => {
     const [activeTab, setActiveTab] = useState('tab1');
 
     const handleTabClick = (tab) => {
@@ -172,4 +172,4 @@ const UserProfile = () => {
     )
 }
 
-export default UserProfile
+export default UserTab

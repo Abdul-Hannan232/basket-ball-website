@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { SignupUser } from '../../services/authServices';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from "../../component/loader.js"
+import LoadingBall from "../LoadingBall"
 import { useRouter } from 'next/navigation';
 const Signup = () => {
     const [name, setName] = useState("")
@@ -84,7 +84,7 @@ const Signup = () => {
                 </div>
 
             </div>
-            {loader ? <Loader /> : null}
+            {loader ? <LoadingBall /> : null}
             <div className='p-3 text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
                 <p>Developed By</p><a href="#">Mayonity</a>
             </div>
