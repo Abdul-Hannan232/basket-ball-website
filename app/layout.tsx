@@ -1,11 +1,7 @@
-// app/layout.js (or app/page.tsx)
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./component/navbar";
-import Sidebar from "./component/adminsidebar";
-import ClientWrapper from "./component/ClientWrapper";
-
+import Navbar from "./component/navbar"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,10 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientWrapper>
-          {children}
-        </ClientWrapper>
-      </body>
+        {children}</body>
     </html>
   );
 }
