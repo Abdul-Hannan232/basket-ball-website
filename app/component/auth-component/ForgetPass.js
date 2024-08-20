@@ -4,7 +4,7 @@ import React from 'react'
 import { ForgetPasswordUser } from '../../services/authServices'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from "../../component/loader"
+import Loader from "../LoadingBall"
 const ForgetPass = () => {
     const [email, setEmail] = useState(" ")
     const [loader, setLoader] = useState(false)

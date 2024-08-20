@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-const Adminsidebar = () => {
+const AdminSidebar = () => {
   return (
     <div className='bg-[#FFF8B3] w-64 flex flex-col fixed left-0 right-0 top-[68px]   pt-5 items- h-[89vh]'>
       <div className=' text-black text-sm  font-semibold '>
@@ -68,4 +68,4 @@ const Adminsidebar = () => {
   )
 }
 
-export default Adminsidebar
+export default AdminSidebar

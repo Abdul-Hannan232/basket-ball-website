@@ -10,7 +10,6 @@ import { allUsers as fetchAllUsers, updateUser } from "../../services/userServic
 import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from '../../component/loader.js'
 import DeleteUserPopup from "../../component/admin/DeleteUser"
 import BlockUserPopup from "../../component/admin/BlockUser"
 export default function TemplateDemo() {
@@ -77,14 +76,14 @@ export default function TemplateDemo() {
     // Determine the toast message
     const message = rowData.isactive ? `${rowData.name} blocked successfully` : `${rowData.name} unblocked successfully`;
     // Call the updateUser function
-    const data = { id: rowData.id, isactive: !rowData.isactive,remarks:remarks }
+    const data = { id: rowData.id, isactive: !rowData.isactive, remarks: remarks }
     try {
       const response = await updateUser(data);
       if (response.status === 200) {
         // Toggle the specific user's isactive status
         const updatedUsers = allUsers.map(user =>
           user.id === rowData.id
-            ? { ...user, isactive: !user.isactive,remarks:remarks }
+            ? { ...user, isactive: !user.isactive, remarks: remarks }
             : user // No change for non-matching users
         );
         closeBlockUserPopup()
@@ -216,15 +215,15 @@ export default function TemplateDemo() {
       {deleteUsers && (
         <DeleteUserPopup functions={deleteClose} />
       )}
-    {blockUserPopupVisible && (
-    <BlockUserPopup
-        onClose={closeBlockUserPopup}
-        onBlockUser={blockUser}
-        user={selectedUser}
-        onSetRemarks={setRemarks}
-        remarks={remarks}
-    />
-)}
+      {blockUserPopupVisible && (
+        <BlockUserPopup
+          onClose={closeBlockUserPopup}
+          onBlockUser={blockUser}
+          user={selectedUser}
+          onSetRemarks={setRemarks}
+          remarks={remarks}
+        />
+      )}
 
     </>
   );

@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from '../../component/navbar.js'
-import Footer from '../../component/footer.js'
+import Navbar from '../../component/Navbar.js'
+import Footer from '../../component/Footer.js'
 const Aboutus = () => {
     return (
         <div>

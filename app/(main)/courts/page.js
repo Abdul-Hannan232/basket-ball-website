@@ -1,8 +1,8 @@
 import React from 'react'
 import { CiFilter } from "react-icons/ci";
-import Navbar from '../../component/navbar';
-import Court from "../../component/basketBall"
-import Footer from '../../component/footer';
+import Navbar from '../../component/Navbar';
+import Court from "../../component/CourtsSlider"
+import Footer from '../../component/Footer';
 const CourtsPage = () => {
     return (
         <> 

@@ -19,14 +19,14 @@ const Footer = () => {
                     <div>
                         <ul className='2xl:space-y-3 md:space-y-2 md:w-44 w-28 '>
                             <li className='text-[#FFA500] 2xl:text-xl md:text-lg text-sm font-bold '> Company</li>
-                            <li><Link href="/Courts" className='md:!text-sm text-xs'>Court</Link></li>
+                            <li><Link href="/courts" className='md:!text-sm text-xs'>Court</Link></li>
                             <li><Link href="/" className='md:!text-sm text-xs'>Shop</Link></li>
-                            <li><Link href="/Faq" className='md:!text-sm text-xs'>FAQs</Link></li>
-                            <li><Link href="/ContactUs" className='md:!text-sm text-xs'>Contact Us</Link></li>
+                            <li><Link href="/faq" className='md:!text-sm text-xs'>FAQs</Link></li>
+                            <li><Link href="/contact-us" className='md:!text-sm text-xs'>Contact Us</Link></li>
 
-                            <li><Link href="/AboutUs" className='md:!text-sm text-xs'>About Us</Link></li>
-                            <li><Link href="/PrivacyPolicy" className='md:!text-sm text-xs'>Privacy Policy</Link></li>
-                            <li><Link href="/Terms&Condition" className='md:!text-sm text-xs'>Terms & Conditions</Link></li>
+                            <li><Link href="/about-us" className='md:!text-sm text-xs'>About Us</Link></li>
+                            <li><Link href="/privacy-policy" className='md:!text-sm text-xs'>Privacy Policy</Link></li>
+                            <li><Link href="/terms-condition" className='md:!text-sm text-xs'>Terms & Conditions</Link></li>
                         </ul>
 
                     </div>
@@ -35,7 +35,7 @@ const Footer = () => {
                         <p className='font-light 2xl:text-lg md:text-sm text-xs md:w-72 text-[#F8F8F8] mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
 
                         </p>
-                        <Link href="/SignUp">
+                        <Link href="/signup">
                             <div className='relative 2xl:w-52 md:w-40 w-28 border md:mt-10 mt-5 text-black shadow text-center border-[#FFA500] 2xl:p-3 p-2 cursor-pointer rounded-full '>
                                 <h1 className='text-[#FFA500] 2xl:text-2xl md:text-lg text-xs  text-center'> Sign Up</h1>
                             </div>

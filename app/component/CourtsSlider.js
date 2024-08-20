@@ -41,7 +41,7 @@ const settings = {
     prevArrow: <></>, // Hides the previous arrow
     nextArrow: <></>,
 };
-const Testimonial = ({ slide }) => {
+const CourtsSlider = ({ slide }) => {
     const sliderRef = useRef(null);
     const [spinner, setSpinner] = useState(false)
 
@@ -202,6 +202,6 @@ const Testimonial = ({ slide }) => {
     );
 };
 
-export default Testimonial;
+export default CourtsSlider;
 
 

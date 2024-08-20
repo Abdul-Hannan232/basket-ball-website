@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { loginUser, validateToken } from "../../services/authServices"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from "../../component/loader"
+import Loader from "../LoadingBall"
 import { useRouter } from 'next/navigation';
 import roleBased from "../../utils/roleBased"
 import Cookies from 'js-cookie';

@@ -19,7 +19,6 @@ const Navbar = () => {
     const toClose = () => {
         setOpen(false)
     }
-
     const handleLogout = () => {
         Cookies.remove('authToken');
         router.push("/");
@@ -32,8 +31,8 @@ const Navbar = () => {
             </div>
             <div className='md:block hidden  '>
                 <ul className='flex  items-center   space-x-10'>
-                    <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent   text-black' href='/Home'>Home </Link></li>
-                    <li><Link className='font-medium text-lg cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='/Courts'>Court</Link></li>
+                    <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent   text-black' href='/home'>Home </Link></li>
+                    <li><Link className='font-medium text-lg cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='/courts'>Court</Link></li>
                     <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='#'>Shop</Link></li>
                     <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='#'>Donate</Link></li>
                 </ul>
@@ -43,7 +42,7 @@ const Navbar = () => {
                 <IoCartOutline className=' text-3xl text-black font-medium ' />
                 {/* <CgProfile className=' text-2xl text-black font-medium ' /> */}
                 <button className='md:block hidden  py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm  rounded-md'>Sign Up</button>
-                <Link href="/Login">
+                <Link href="/login">
                     <button className='md:block hidden  py-2 px-6 border border-black text-black text-sm  ml-1 rounded-md' onClick={handleLogout}>Login</button>
                 </Link>
 
@@ -59,8 +58,8 @@ const Navbar = () => {
                             </div>
                         </div>
                         <ul className='space-y-3 text-sm mt-10 p-3 font-bold'>
-                            <li><Link href="/Home" className='focus:text-[#FFA500]'>Home</Link></li>
-                            <li><Link href="/Courts" className='focus:text-[#FFA500]'>Court</Link></li>
+                            <li><Link href="/home" className='focus:text-[#FFA500]'>Home</Link></li>
+                            <li><Link href="/courts" className='focus:text-[#FFA500]'>Court</Link></li>
                             <li><Link href="/" className='focus:text-[#FFA500]'>Shop</Link></li>
                             <li><Link href="/" className='focus:text-[#FFA500]'>Donate</Link></li>
                             <li><Link href="/" className='focus:text-[#FFA500]'>Login/Signup</Link></li>
