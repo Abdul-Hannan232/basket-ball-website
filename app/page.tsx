@@ -1,8 +1,8 @@
-import Page from "./(main)/Home/page.js"
+import HomePage from "./component/home"
 export default function Home() {
   return (
     <>
-      <Page />
+      <HomePage />
     </>
   );
 }
