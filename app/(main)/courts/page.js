@@ -1,8 +1,8 @@
 import React from 'react'
 import { CiFilter } from "react-icons/ci";
-import Navbar from '../../component/Navbar';
-import Courts from "../../component/BasketBall"
-import Footer from '../../component/Footer';
+import Navbar from '../../component/navbar';
+import Court from "../../component/BasketBall"
+import Footer from '../../component/footer';
 const Courts = () => {
     return (
         <> 
@@ -15,7 +15,7 @@ const Courts = () => {
                 </div>
                 <button className='bg-[#FFA500]   rounded-md md:text-xl text-sm text-black md:px-16 px-3 py-2 shadow '>Add Court</button>
             </div>
-            <Courts slide={"box"}/>
+            <Court slide={"box"}/>
             <div className='w-[80%] mx-auto mt-40 flex items-center gap-2'>
                 <h1 className='text-[#FFA500] text-2xl font-bold'>Map</h1>
                 <h1 className='text-white text-2xl font-bold'>View</h1>

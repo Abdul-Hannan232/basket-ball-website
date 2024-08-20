@@ -10,7 +10,7 @@ import { allUsers as fetchAllUsers, updateUser } from "../../services/userServic
 import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from '../../component/loader'
+import Loader from '../../component/loader.js'
 import DeleteUserPopup from "../../component/admin/DeleteUser"
 import BlockUserPopup from "../../component/admin/BlockUser"
 export default function TemplateDemo() {

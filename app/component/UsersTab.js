@@ -1,9 +1,9 @@
 "use client"
 import React, { useState } from 'react'
 import Image from 'next/image'
-import Navbar from '../component/Navbar.js'
+import Navbar from '../component/navbar.js'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import Footer from "../component/Footer.js"
+import Footer from "./footer.js"
 
 const UserProfile = () => {
     const [activeTab, setActiveTab] = useState('tab1');

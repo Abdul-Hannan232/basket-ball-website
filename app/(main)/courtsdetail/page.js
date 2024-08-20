@@ -1,4 +1,4 @@
-import Carousel from '../../component/Carousel.js';
+import Carousel from '../../component/carousel.js';
 import Image from "next/image"
 import { IoMdStar } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
