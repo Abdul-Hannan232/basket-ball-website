@@ -7,8 +7,8 @@ const Footer = () => {
         <div className='shadow md:p-10 mt-10'>
             <div className='md:flex p-5 flex-wrap xl:justify-between 2xl:justify-evenly  md:mx-20'>
                 <div>
-                <Image src="/LOGO.png" width={60} height={60} alt='image'/>
-                <p className='font-light 2xl:text-lg md:text-sm text-xs md:w-72 text-[#F8F8F8] mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+                    <Image src="/LOGO.png" width={60} height={60} alt='image' />
+                    <p className='font-light 2xl:text-lg md:text-sm text-xs md:w-72 text-[#F8F8F8] mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
                     <div className='relative w-72 border  md:block hidden text-black shadow flex items-center p-3 rounded-full 2xl:mt-10 mt-7 '>
                         <input type='text' placeholder='Send email' className='text-black bg-[#333333]' />
                         <FaArrowRight className="absolute text-black w-11 h-11 rounded-full right-0 text-4xl border-2 2xl:p-2 p-3 font-light  bg-[#ABABAB]   top-[2px]" />
@@ -19,14 +19,14 @@ const Footer = () => {
                     <div>
                         <ul className='2xl:space-y-3 md:space-y-2 md:w-44 w-28 '>
                             <li className='text-[#FFA500] 2xl:text-xl md:text-lg text-sm font-bold '> Company</li>
-                            <li><Link href="#" className='md:!text-sm text-xs'>Court</Link></li>
-                            <li><Link href="#" className='md:!text-sm text-xs'>Shop</Link></li>
-                            <li><Link href="#" className='md:!text-sm text-xs'>FAQs</Link></li>
-                            <li><Link href="#" className='md:!text-sm text-xs'>Contact Us</Link></li>
+                            <li><Link href="/Courts" className='md:!text-sm text-xs'>Court</Link></li>
+                            <li><Link href="/" className='md:!text-sm text-xs'>Shop</Link></li>
+                            <li><Link href="/Faq" className='md:!text-sm text-xs'>FAQs</Link></li>
+                            <li><Link href="/ContactUs" className='md:!text-sm text-xs'>Contact Us</Link></li>
 
-                            <li><Link href="#" className='md:!text-sm text-xs'>About Us</Link></li>
-                            <li><Link href="#" className='md:!text-sm text-xs'>Privacy Policy</Link></li>
-                            <li><Link href="#" className='md:!text-sm text-xs'>Terms & Conditions</Link></li>
+                            <li><Link href="/AboutUs" className='md:!text-sm text-xs'>About Us</Link></li>
+                            <li><Link href="/PrivacyPolicy" className='md:!text-sm text-xs'>Privacy Policy</Link></li>
+                            <li><Link href="/Terms&Condition" className='md:!text-sm text-xs'>Terms & Conditions</Link></li>
                         </ul>
 
                     </div>
@@ -35,9 +35,12 @@ const Footer = () => {
                         <p className='font-light 2xl:text-lg md:text-sm text-xs md:w-72 text-[#F8F8F8] mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
 
                         </p>
-                        <div className='relative 2xl:w-52 md:w-40 w-28 border md:mt-10 mt-5 text-black shadow text-center border-[#FFA500] 2xl:p-3 p-2 cursor-pointer rounded-full '>
-                            <h1 className='text-[#FFA500] 2xl:text-2xl md:text-lg text-xs  text-center'> Sign Up</h1>
-                        </div>
+                        <Link href="/SignUp">
+                            <div className='relative 2xl:w-52 md:w-40 w-28 border md:mt-10 mt-5 text-black shadow text-center border-[#FFA500] 2xl:p-3 p-2 cursor-pointer rounded-full '>
+                                <h1 className='text-[#FFA500] 2xl:text-2xl md:text-lg text-xs  text-center'> Sign Up</h1>
+                            </div>
+                        </Link>
+
                     </div>
                 </div>
             </div>

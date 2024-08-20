@@ -1,8 +1,8 @@
-import Login from "./(auth)/Login/page"
+import HomePage from "./(main)/Home/page"
 export default function Home() {
   return (
     <>
-      <Login />
+      <HomePage />
     </>
   );
 }
