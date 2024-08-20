@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { SignupUser } from '../../services/authServices';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from "../../component/loader"
+import Loader from "../../component/loader.js"
 import { useRouter } from 'next/navigation';
 const Signup = () => {
     const [name, setName] = useState("")

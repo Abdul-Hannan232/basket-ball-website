@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from '../../component/Navbar'
+import Navbar from '../../component/navbar'
 import Image from 'next/image'
 import { CiSearch } from "react-icons/ci" 
-import Footer from "../../component/Footer"
+import Footer from "../../component/footer"
 import BasketBall from "../../component/BasketBall"
 const Home = () => {
   return (
