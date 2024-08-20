@@ -1,9 +1,9 @@
 import React from 'react'
-import Navbar from '../../component/navbar'
+import Navbar from '../component/navbar'
 import Image from 'next/image'
 import { CiSearch } from "react-icons/ci" 
-import Footer from "../../component/footer"
-import BasketBall from "../../component/basketBall"
+import Footer from "../component/footer"
+import BasketBall from "../component/basketBall"
 const Page = () => {
   return (
     <div>
