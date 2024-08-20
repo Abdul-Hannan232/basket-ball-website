@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { CiSearch } from "react-icons/ci" 
 import Footer from "../../component/footer"
 import BasketBall from "../../component/basketBall"
-const Home = () => {
+const Page = () => {
   return (
     <div>
       <Navbar />
@@ -42,4 +42,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Page

@@ -1,9 +1,9 @@
 import React from 'react'
-import Tabs from "../../component/usersTab.js"
+import UsersTab from "../../component/usersTab.js"
 const UsersProfile = () => {
   return (
     <div>
-      <Tabs/>
+      <UsersTab/>
     </div>
   )
 }
