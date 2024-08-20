@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from "../../component/navbar"
-import Footer from "../../component/footer"
-const page = () => {
+import Navbar from "../../component/Navbar"
+import Footer from "../../component/Footer"
+const PrivacyPolicy = () => {
     return (
         <div>
             <Navbar />
@@ -51,4 +51,4 @@ const page = () => {
     )
 }
 
-export default page
+export default PrivacyPolicy

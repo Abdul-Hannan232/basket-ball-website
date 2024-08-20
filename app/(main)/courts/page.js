@@ -1,9 +1,9 @@
 import React from 'react'
 import { CiFilter } from "react-icons/ci";
-import Navbar from '../../component/navbar';
-import Courts from "../../component/basketBall"
-import Footer from '../../component/footer';
-const Page = () => {
+import Navbar from '../../component/Navbar';
+import Courts from "../../component/BasketBall"
+import Footer from '../../component/Footer';
+const Courts = () => {
     return (
         <> 
             <Navbar />
@@ -36,4 +36,4 @@ const Page = () => {
     )
 }
 
-export default Page
+export default Courts
