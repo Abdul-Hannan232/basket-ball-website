@@ -1,5 +1,5 @@
 import React from 'react'
-import Tabs from "../../component/usersTab"
+import Tabs from "../../component/usersTab.js"
 const UsersProfile = () => {
   return (
     <div>
