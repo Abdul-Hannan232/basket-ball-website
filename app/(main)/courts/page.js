@@ -1,7 +1,7 @@
 import React from 'react'
 import { CiFilter } from "react-icons/ci";
 import Navbar from '../../component/navbar';
-import Court from "../../component/BasketBall"
+import Court from "../../component/basketBall"
 import Footer from '../../component/footer';
 const Courts = () => {
     return (

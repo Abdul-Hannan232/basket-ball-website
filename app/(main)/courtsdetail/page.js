@@ -6,7 +6,7 @@ import { PiMedalFill } from "react-icons/pi";
 import { IoIosCall } from "react-icons/io";
 import { RxExternalLink } from "react-icons/rx";
 import CarDetail from "../../data/carDetail.json"
-import Reviews from "../../component/Reviews.js"
+import Reviews from "../../component/reviews.js"
 import renderStars from '../../utils/rating.js';
 import Link from "next/link"
 export default function CourtsDetail() {
