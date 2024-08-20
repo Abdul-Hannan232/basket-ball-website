@@ -3,7 +3,7 @@ import Navbar from '../../component/navbar'
 import Image from 'next/image'
 import { CiSearch } from "react-icons/ci" 
 import Footer from "../../component/footer"
-import BasketBall from "../../component/BasketBall"
+import BasketBall from "../../component/basketBall"
 const Home = () => {
   return (
     <div>
