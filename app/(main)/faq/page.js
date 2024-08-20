@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "../../component/navbar"
 import Footer from "../../component/footer"
-const Faq = () => {
+const FaqPage = () => {
     return (
         <div>
             <Navbar />
@@ -47,4 +47,4 @@ const Faq = () => {
     )
 }
 
-export default Faq
+export default FaqPage
