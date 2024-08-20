@@ -3,7 +3,7 @@ import { CiFilter } from "react-icons/ci";
 import Navbar from '../../component/navbar';
 import Court from "../../component/basketBall"
 import Footer from '../../component/footer';
-const Courts = () => {
+const CourtsPage = () => {
     return (
         <> 
             <Navbar />
@@ -36,4 +36,4 @@ const Courts = () => {
     )
 }
 
-export default Courts
+export default CourtsPage
