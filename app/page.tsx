@@ -1,4 +1,4 @@
-import HomePage from "./(main)/Home/page"
+import HomePage from "./(main)/Home/page.js"
 export default function Home() {
   return (
     <>
