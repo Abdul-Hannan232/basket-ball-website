@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Navbar from "../../component/Navbar"
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import Footer from "../../component/Footer"
-
 const UserProfile = () => {
     const [activeTab, setActiveTab] = useState('tab1');
 
@@ -18,11 +17,11 @@ const UserProfile = () => {
     const togglePasswordVisibility1 = () => {
         setOldPassword(!oldPassword);
     };
-    
+
     const togglePasswordVisibility2 = () => {
         setNewPassword(!newPassword);
     };
-    
+
     const togglePasswordVisibility3 = () => {
         setConfirmPassword(!confirmPassword);
     };
