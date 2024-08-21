@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "next/image"
-import Navbar from '../../component/Navbar'
+import Navbar from '../../component/NavBarComponent'
 import Footer from '../../component/Footer'
 const Donate = () => {
     return (

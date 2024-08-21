@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../../component/Navbar.js'
+import Navbar from '../../component/NavBarComponent.js'
 import Footer from '../../component/Footer.js'
 const Aboutus = () => {
     return (

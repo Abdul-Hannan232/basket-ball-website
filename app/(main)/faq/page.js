@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from "../../component/Navbar"
+import Navbar from "../../component/NavBarComponent"
 import Footer from "../../component/Footer"
 const FaqPage = () => {
     return (

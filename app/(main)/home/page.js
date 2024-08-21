@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../../component/Navbar'
+import Navbar from '../../component/NavBarComponent'
 import Image from 'next/image'
 import { CiSearch } from "react-icons/ci" 
 import Footer from "../../component/Footer"
