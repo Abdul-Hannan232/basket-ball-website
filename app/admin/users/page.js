@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DeleteUserPopup from "../../component/admin/DeleteUser"
 import BlockUserPopup from "../../component/admin/BlockUser"
-export default function TemplateDemo() {
+export default function Users() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
   const [users, setUsers] = useState([])

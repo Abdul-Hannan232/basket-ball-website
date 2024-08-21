@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from "../../component/Navbar"
-import Footer from "../../component/Footer"
-const FaqPage = () => {
+import Navbar from "../../component/NavBarComponent"
+import Footer from "../../component/FooterComponent"
+export default function Faq ()  {
     return (
         <div>
             <Navbar />
@@ -46,5 +46,3 @@ const FaqPage = () => {
         </div>
     )
 }
-
-export default FaqPage

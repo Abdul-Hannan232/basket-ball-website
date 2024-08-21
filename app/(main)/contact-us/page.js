@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from "../../component/Navbar"
-import Footer from "../../component/Footer"
+import Navbar from "../../component/NavBarComponent"
+import Footer from "../../component/FooterComponent"
 import Image from "next/image"
 import { IoIosCall } from "react-icons/io";
 import { AiTwotoneMessage } from "react-icons/ai";
 
-const Contactus = () => {
+export default function Contact()  {
     return (
         <div>
             <Navbar />
@@ -51,4 +51,3 @@ const Contactus = () => {
     )
 }
 
-export default Contactus

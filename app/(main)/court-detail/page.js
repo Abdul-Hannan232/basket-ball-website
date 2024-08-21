@@ -1,4 +1,4 @@
-import Carousel from '../../component/Carousel.js';
+import Carousel from '../../component/CourtCarousel.js';
 import Image from "next/image"
 import { IoMdStar } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
@@ -6,10 +6,10 @@ import { PiMedalFill } from "react-icons/pi";
 import { IoIosCall } from "react-icons/io";
 import { RxExternalLink } from "react-icons/rx";
 import CarDetail from "../../data/carDetail.json"
-import Reviews from "../../component/Reviews.js"
+import Reviews from "../../component/StarReviews.js"
 import renderStars from '../../utils/rating.js';
 import Link from "next/link"
-export default function CourtsDetail() {
+export default function CourtDetail() {
     const style = [
         {
             key: "Body Style",

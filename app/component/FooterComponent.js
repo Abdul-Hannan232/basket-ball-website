@@ -2,7 +2,7 @@ import React from 'react'
 import { FaArrowRight } from "react-icons/fa"
 import Link from 'next/link'
 import Image from "next/image"
-const Footer = () => {
+const FooterComponent = () => {
     return (
         <div className='shadow md:p-10 mt-10'>
             <div className='md:flex p-5 flex-wrap xl:justify-between 2xl:justify-evenly  md:mx-20'>
@@ -26,7 +26,7 @@ const Footer = () => {
 
                             <li><Link href="/about-us" className='md:!text-sm text-xs'>About Us</Link></li>
                             <li><Link href="/privacy-policy" className='md:!text-sm text-xs'>Privacy Policy</Link></li>
-                            <li><Link href="/terms-condition" className='md:!text-sm text-xs'>Terms & Conditions</Link></li>
+                            <li><Link href="/terms-conditions" className='md:!text-sm text-xs'>Terms & Conditions</Link></li>
                         </ul>
 
                     </div>
@@ -68,4 +68,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
+export default FooterComponent

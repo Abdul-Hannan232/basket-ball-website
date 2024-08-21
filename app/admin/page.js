@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 
 
-const Page = () => {
+export default function AdminDashboard  () {
   const [username, setUsername] = useState('');
   const router = useRouter("")
 
@@ -32,5 +32,3 @@ const Page = () => {
     </div>
   );
 }
-
-export default Page;

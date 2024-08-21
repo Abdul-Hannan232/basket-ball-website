@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../../component/Navbar'
+import Navbar from '../../component/NavBarComponent'
 import Image from 'next/image'
 import { CiSearch } from "react-icons/ci" 
-import Footer from "../../component/Footer"
+import Footer from "../../component/FooterComponent"
 import BasketBall from "../../component/CourtsSlider"
-const Page = () => {
+export default function Home  () {
   return (
     <div>
       <Navbar />
@@ -41,5 +41,3 @@ const Page = () => {
     </div>
   )
 }
-
-export default Page

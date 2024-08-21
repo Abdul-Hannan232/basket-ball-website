@@ -1,7 +1,6 @@
 import React from 'react';
 import ForgetPassComponent from "../../component/auth-component/ForgetPass"
-const ForgetPassword = () => {
-
+export default function ForgetPassword ()  {
     return (
         <>
             <ForgetPassComponent />
@@ -9,4 +8,3 @@ const ForgetPassword = () => {
     )
 }
 
-export default ForgetPassword

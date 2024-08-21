@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from '../../component/Navbar.js'
-import Footer from '../../component/Footer.js'
-const Aboutus = () => {
+import Navbar from '../../component/NavBarComponent.js'
+import Footer from '../../component/FooterComponent.js'
+export default function About  () {
     return (
         <div>
             <Navbar />
-            <div className='banner w-[100vh] md:h-[90vh] h-[600px]  md:mt-12 mt-7 md:pl-20 pl-5'>
+            <div className='banner w-[100vh] md:h-[90vh] h-[600px] md:pl-20 pl-5'>
                 <h1 className='text-5xl pt-32 font-bold'>Invest in a Better Court Experience</h1>
                 <p className='font-light lg:w-[900px] text-xl my-5'>Your contribution can make a significant difference in maintaining and enhancing our basketball courts. By donating, you are investing in a better experience for the entire community. Help us keep the courts in top shape and ensure that everyone can enjoy a high-quality playing environment.</p>
                 <button className='backColor text-black text-center p-3 w-44 rounded-full font-bold'>Donate Now</button>
@@ -40,4 +40,3 @@ const Aboutus = () => {
     )
 }
 
-export default Aboutus
