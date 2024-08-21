@@ -34,7 +34,7 @@ const NavBarComponent = () => {
                     <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent   text-black' href='/home'>Home </Link></li>
                     <li><Link className='font-medium text-lg cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='/courts'>Court</Link></li>
                     <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='#'>Shop</Link></li>
-                    <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='#'>Donate</Link></li>
+                    <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent text-black' href='/donate'>Donate</Link></li>
                 </ul>
             </div>
             <div className='flex gap-2   items-center'>
@@ -61,7 +61,7 @@ const NavBarComponent = () => {
                             <li><Link href="/home" className='focus:text-[#FFA500]'>Home</Link></li>
                             <li><Link href="/courts" className='focus:text-[#FFA500]'>Court</Link></li>
                             <li><Link href="/" className='focus:text-[#FFA500]'>Shop</Link></li>
-                            <li><Link href="/" className='focus:text-[#FFA500]'>Donate</Link></li>
+                            <li><Link href="/donate" className='focus:text-[#FFA500]'>Donate</Link></li>
                             <li><Link href="/" className='focus:text-[#FFA500]'>Login/Signup</Link></li>
                         </ul>
                     </div>

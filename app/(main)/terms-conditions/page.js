@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "../../component/NavBarComponent"
 import Footer from "../../component/FooterComponent"
-const Terms = () => {
+export default function TermsConditions () {
     return (
         <div>
             <Navbar />
@@ -64,4 +64,3 @@ const Terms = () => {
     )
 }
 
-export default Terms

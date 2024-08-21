@@ -2,7 +2,7 @@ import React from 'react'
 import Image from "next/image"
 import Navbar from '../../component/NavBarComponent'
 import Footer from '../../component/FooterComponent'
-const Donate = () => {
+export default function Donate  () {
     return (
         <div>
             <Navbar />
@@ -16,12 +16,10 @@ const Donate = () => {
                 </div>
                 <input placeholder='Enter other amount ' className='rounded-md h-10 w-full md:p-10 p-7 mt-5 bg-[#333333] text-sm shadow border border-[#808080]' />
                 <div className='bg-[#FFA500] w-full p-4 md:h-20 h-14 mt-5'>
-<Image src="/paypal.png" alt="paypal" width={179.64} height={52} className='mx-auto'/>
+                    <Image src="/paypal.png" alt="paypal" width={179.64} height={52} className='mx-auto' />
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }
-
-export default Donate

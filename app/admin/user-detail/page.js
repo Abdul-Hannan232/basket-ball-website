@@ -1,6 +1,6 @@
 import React from 'react';
 import AddNewUser from '../../component/admin/AddNewUser'
-export default function TemplateDemo() {
+export default function UserDetail() {
     return (
         <>
             {/* <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex  items-center text-white'>

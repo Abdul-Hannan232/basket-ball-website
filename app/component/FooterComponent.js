@@ -26,7 +26,7 @@ const FooterComponent = () => {
 
                             <li><Link href="/about-us" className='md:!text-sm text-xs'>About Us</Link></li>
                             <li><Link href="/privacy-policy" className='md:!text-sm text-xs'>Privacy Policy</Link></li>
-                            <li><Link href="/terms-condition" className='md:!text-sm text-xs'>Terms & Conditions</Link></li>
+                            <li><Link href="/terms-conditions" className='md:!text-sm text-xs'>Terms & Conditions</Link></li>
                         </ul>
 
                     </div>

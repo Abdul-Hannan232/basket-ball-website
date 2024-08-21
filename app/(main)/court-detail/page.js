@@ -9,7 +9,7 @@ import CarDetail from "../../data/carDetail.json"
 import Reviews from "../../component/StarReviews.js"
 import renderStars from '../../utils/rating.js';
 import Link from "next/link"
-export default function CourtsDetail() {
+export default function CourtDetail() {
     const style = [
         {
             key: "Body Style",

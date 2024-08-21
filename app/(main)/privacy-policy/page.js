@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "../../component/NavBarComponent.js"
 import Footer from "../../component/FooterComponent.js"
-const PrivacyPolicy = () => {
+export default function PrivacyPolicy ()  {
     return (
         <div>
             <Navbar />
@@ -50,5 +50,3 @@ const PrivacyPolicy = () => {
         </div>
     )
 }
-
-export default PrivacyPolicy

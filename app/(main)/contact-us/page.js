@@ -5,7 +5,7 @@ import Image from "next/image"
 import { IoIosCall } from "react-icons/io";
 import { AiTwotoneMessage } from "react-icons/ai";
 
-const Contactus = () => {
+export default function Contact()  {
     return (
         <div>
             <Navbar />
@@ -51,4 +51,3 @@ const Contactus = () => {
     )
 }
 
-export default Contactus
