@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "../../component/NavBarComponent"
-import Footer from "../../component/Footer"
+import Footer from "../../component/FooterComponent"
 const Terms = () => {
     return (
         <div>

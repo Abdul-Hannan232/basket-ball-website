@@ -9,7 +9,7 @@ const images = [
     '/basketBALL.png',
 ];
 
-const Carousel = () => {
+const CourtCarousel = () => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [transitioning, setTransitioning] = useState(false);
     const [prevSelectedImageIndex, setPrevSelectedImageIndex] = useState(0);
@@ -67,4 +67,4 @@ const Carousel = () => {
     );
 };
 
-export default Carousel;
+export default CourtCarousel;

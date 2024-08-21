@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie';
 
-const Navbar = () => {
+const NavBarComponent = () => {
     const router = useRouter("");
     const [open, setOpen] = useState(false)
     const toOpen = () => {
@@ -71,4 +71,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default NavBarComponent

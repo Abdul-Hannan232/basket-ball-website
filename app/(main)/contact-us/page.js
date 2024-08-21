@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "../../component/NavBarComponent"
-import Footer from "../../component/Footer"
+import Footer from "../../component/FooterComponent"
 import Image from "next/image"
 import { IoIosCall } from "react-icons/io";
 import { AiTwotoneMessage } from "react-icons/ai";

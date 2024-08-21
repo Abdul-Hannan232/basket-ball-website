@@ -2,7 +2,7 @@ import React from 'react'
 import { CiFilter } from "react-icons/ci";
 import Navbar from '../../component/NavBarComponent';
 import Court from "../../component/CourtsSlider"
-import Footer from '../../component/Footer';
+import Footer from '../../component/FooterComponent';
 const CourtsPage = () => {
     return (
         <> 

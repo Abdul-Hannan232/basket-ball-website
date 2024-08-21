@@ -10,7 +10,7 @@ import { RxCross2 } from "react-icons/rx";
 import { ImStarEmpty } from "react-icons/im";
 // hello
 
-const Review = ({ grid, column }) => {
+const StarReview = ({ grid, column }) => {
   const [showAll, setShowAll] = useState(false);
   const [popup, setPopup] = useState(false)
   console.log(renderStars(3), "renderStars")
@@ -106,4 +106,4 @@ const Review = ({ grid, column }) => {
   )
 }
 
-export default Review
+export default StarReview

@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "../../component/NavBarComponent.js"
-import Footer from "../../component/Footer.js"
+import Footer from "../../component/FooterComponent.js"
 const PrivacyPolicy = () => {
     return (
         <div>
