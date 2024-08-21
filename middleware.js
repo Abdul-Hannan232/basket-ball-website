@@ -14,7 +14,7 @@ export function middleware(req) {
 
   // Define protected routes for admin and user roles
   const adminRoutes = ['/admin'];
-  const userRoutes = ['/home', '/courts'];
+  const userRoutes = ['/admin', '/admin'];
 
   if (!token) {
     // Redirect to login if there is no token and the route is protected

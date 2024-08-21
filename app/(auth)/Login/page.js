@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginComponent from "../../component/auth-component/Login"
-const Login = () => {
+
+const Page = () => {
   return (
     <div>
       <LoginComponent/>
@@ -8,4 +9,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Page
