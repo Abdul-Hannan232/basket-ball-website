@@ -34,7 +34,7 @@ const ForgetPass = () => {
         <ToastContainer />
         <div className='flex  justify-between md:mx-0 mx-5 items-center min-h-screen'>
             <form className=' md:w-[550px] w-full mx-auto space-y-4' onSubmit={handleSubmit}>
-                <h1 className='text-center font-bold md:text-4xl text-2xl text-white'>
+                <h1 className='text-center font-bold md:text-4xl text-3xl text-white'>
                     Forgot Password
                 </h1>
                 <p className='text-center md:text-[18px] text-xs font-[400px]'>Enter an email address to receive the recovery email. </p>
@@ -50,7 +50,7 @@ const ForgetPass = () => {
 
         </div>
         {loader ? <Loader /> : null}
-        <div className='p-3 text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
+        <div className='p-3 text-center lg:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
             <p>Developed By</p><a href="#">Mayonity</a>
         </div>
     </>
