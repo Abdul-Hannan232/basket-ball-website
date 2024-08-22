@@ -96,7 +96,7 @@ const Login = () => {
                             <a href="#" >Remember me</a>
                         </div>
 
-                        <Link href="/forgetPassword" className='text-[#FFA500] underline undeline-offset-2'>forgot password?</Link>
+                        <Link href="/forget-password" className='text-[#FFA500] underline undeline-offset-2'>forgot password?</Link>
                     </div>
                     <button type='submit' className='border-[#FFA500] w-full text-xl border text-white rounded-lg bg-[#FFA500] md:p-4 p-3 shadow cursor-pointer'>Login</button>
                     <Link href="/signup">
