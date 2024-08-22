@@ -43,7 +43,7 @@ const NavBarComponent = () => {
                 {/* <CgProfile className=' text-2xl text-black font-medium ' /> */}
                 <button className='md:block hidden  py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm  rounded-md'>Sign Up</button>
                 <Link href="/login">
-                    <button className='md:block hidden  py-2 px-6 border border-black text-black text-sm  ml-1 rounded-md' >Login</button>
+                    <button className='md:block hidden  py-2 px-6 border border-black text-black text-sm  ml-1 rounded-md' onClick={handleLogout}>Login</button>
                 </Link>
 
             </div>
