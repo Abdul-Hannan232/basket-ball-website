@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 import { jwtDecode } from 'jwt-decode';
+import { getToken } from "next-auth/jwt"
 
-export function middleware(req) {
-  let token = req.cookies.get('authToken');
+export async function middleware(req) {
+  const secret = process.env.NEXTAUTH_SECRET;
+  let token = req.cookies.get('authToken') || await getToken({ req, secret });
   if (token) {
-    token = token.value
+    token = token.value || token.authToken
   }
-
   const url = req.nextUrl.clone();
 
   // Get the pathname of the requested URL
@@ -15,26 +16,44 @@ export function middleware(req) {
   // Define protected routes for admin and user roles
   const adminRoutes = ['/admin'];
   const userRoutes = ['/admin', '/admin'];
+  const authenticatedRoutes=['/login','/signup','/reset-password','/forget-password']
 
   if (!token) {
     // Redirect to login if there is no token and the route is protected
     if (adminRoutes.some(route => pathname.startsWith(route)) || userRoutes.some(route => pathname.startsWith(route))) {
-      url.pathname = '/';
+      url.pathname = '/home';
       return NextResponse.redirect(url);
     }
     return NextResponse.next();
   }
 
+
+
+  // if (token) {
+  //    // Redirect to login if there is no token and the route is protected
+  //    if (authenticatedRoutes.some(route => pathname.startsWith(route))) {
+  //     url.pathname = '/home';
+  //     return NextResponse.redirect(url);
+  //   }
+  //   return NextResponse.next();
+  // }
+
+ 
+
   try {
     const decodedToken = jwtDecode(token);
     const userRole = decodedToken.role;
-
+ 
+    if (authenticatedRoutes.some(route => pathname.startsWith(route))) {
+          url.pathname = '/home';
+          return NextResponse.redirect(url);
+        }
     // Admin specific route handling
     if (userRole === 'admin') {
       if (pathname.startsWith('/admin')) {
         return NextResponse.next(); // Allow access
       } else {
-        url.pathname = '/'; // Redirect to login or any other page
+        url.pathname = '/home'; // Redirect to login or any other page
         return NextResponse.redirect(url);
       }
     }
@@ -42,7 +61,7 @@ export function middleware(req) {
     // User specific route handling
     if (userRole === 'user') {
       if (pathname.startsWith('/admin')) {
-        url.pathname = '/'; // Redirect to login or any other page
+        url.pathname = '/home'; // Redirect to login or any other page
         return NextResponse.redirect(url);
       }
       return NextResponse.next(); // Allow access
@@ -53,12 +72,12 @@ export function middleware(req) {
   } catch (error) {
     console.error('Error handling middleware:', error);
     req.cookies.delete('authToken');
-    url.pathname = '/';
+    url.pathname = '/home';
     return NextResponse.redirect(url);
   }
 }
 
 
 export const config = {
-  matcher: ['/admin/:path*', '/home', '/courts']
+  matcher: ['/admin/:path*', '/home', '/courts','/login','/signup','/reset-password','/forget-password']
 };

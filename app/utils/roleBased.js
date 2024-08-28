@@ -1,5 +1,5 @@
+"use client"
 import {jwtDecode} from 'jwt-decode'; // Correct import
-
 const roleBased = (token, router) => {
     try {
         const decodedToken = jwtDecode(token);
