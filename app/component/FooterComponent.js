@@ -61,7 +61,7 @@ const FooterComponent = () => {
 
             </div>
             <div>
-                <p className='bg-[#FFA500] md:hidden block text-sm text-center p-3 font-bold w-full text-black'>Made by Mayonity</p>
+                <p className='bg-[#FFA500] md:hidden block text-sm text-center p-3 font-bold w-full text-black'>Madee by Mayonity</p>
 
             </div>
         </div>
