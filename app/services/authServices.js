@@ -1,11 +1,13 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { useSession } from 'next-auth/react';
 export const loginUser = async (body) => {
     try {
         const response = await axios.post(
             `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
             body
         );
+
         return response; // Assuming you want to return the response
     }
     catch (error) {
@@ -48,22 +50,43 @@ export const ResetPasswordApi = async (body) => {
     }
 }
 
-export const validateToken = async () => {
-    const token = Cookies.get('authToken')
+export const validateToken = async (token) => {
+    
     if (!token) {
-
         return { status: 401, message: "Token is required." };
     }
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/validate-token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token }), // directly pass the token
+        });
+    
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        const data = await response.json(); // Get the response data
+        return data; // Return the response data
+    } catch (error) {
+        return { error: error.message }; // Return the error message or handle it accordingly
+    }
+    
+}
 
+
+export const socialMediaLogin = async (body) => {
     try {
         const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_API_URL}/auth/validate-token`,
-            { token }  // directly pass the token
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/social-media-login`,
+            body
         );
 
-        return response;
-    } catch (error) {
-
-        return error.response; // or throw the error if you want to handle it outside
+        return response; // Assuming you want to return the response
     }
-}
+    catch (error) {
+        return error.response
+    }
+};
