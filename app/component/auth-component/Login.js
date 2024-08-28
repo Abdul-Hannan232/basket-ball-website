@@ -17,8 +17,15 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [loader, setLoader] = useState(false)
     const [rememberMe, setRememberMe] = useState(false);
-     const { data: session, status } = useSession();
+    const { data: session, status } = useSession();
     let token = session?.authToken || Cookies.get('authToken')
+
+    useEffect(() => {
+        if (!token) {
+            toast.warn("Login to Proceed")
+        }
+    }, [])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);

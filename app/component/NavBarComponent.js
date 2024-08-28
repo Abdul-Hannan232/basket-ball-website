@@ -73,9 +73,12 @@ const NavBarComponent = () => {
             ) : (
                 <div className='flex gap-2 items-center'>
                     {/* <CgProfile className='text-2xl text-black font-medium' /> */}
-                    <button className='md:block hidden py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm rounded-md' onClick={handleLogout}>
-                        Sign Up
-                    </button>
+                    <Link href="/signup">
+                        <button className='md:block hidden py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm rounded-md'>
+                            Sign Up
+                        </button>
+                    </Link>
+
                     <Link href="/login">
                         <button className='md:block hidden py-2 px-6 border border-black text-black text-sm ml-1 rounded-md'>
                             Login

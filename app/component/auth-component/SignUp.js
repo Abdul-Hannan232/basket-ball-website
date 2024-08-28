@@ -29,11 +29,11 @@ const Signup = () => {
         try {
             const responce = await SignupUser(body)
             if (responce.status === 201) {
-                toast.success(responce.data.message)
-                router.push('/login')
+                console.log("response",responce)
+                toast.success("Account Created")
+                router.replace('/login')
             } else {
                 toast.error(responce.data.message)
-                // console.log(responce.data.message, "status")
             }
         }
         catch (error) {
