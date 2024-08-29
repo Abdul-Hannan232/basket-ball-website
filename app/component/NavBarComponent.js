@@ -79,7 +79,7 @@ const NavBarComponent = () => {
                         </button>
                     </Link>
 
-                    <Link href="/login">
+                    <Link href="/signin">
                         <button className='md:block hidden py-2 px-6 border border-black text-black text-sm ml-1 rounded-md'>
                             Login
                         </button>
