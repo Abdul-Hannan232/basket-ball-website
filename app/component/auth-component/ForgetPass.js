@@ -37,12 +37,12 @@ const ForgetPass = () => {
                 <h1 className='text-center font-bold md:text-4xl text-2xl text-white'>
                     Forgot Password
                 </h1>
-                <p className='text-center md:text-[18px] text-xs font-[400px]'>Enter an email address to receive the recovery email. </p>
+                <p className='text-center md:text-[18px] text-xs font-light font-[400px]'>Enter an email address to receive the recovery email. </p>
                 <div className='flex flex-col md:w-[400px] mx-auto'>
-                    <input type='email' placeholder='Enter new email ' value={email} onChange={((e) => setEmail(e.target.value))} className='mt-1  cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />
+                    <input type='email' placeholder='Enter new email ' value={email} onChange={((e) => setEmail(e.target.value))} className='mt-1  cursor-pointer shadow-xl outline-none border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />
                     <br />
                     {/* <Link href="/resetPassword"> */}
-                    <button type='submit' className='border-[#FFA500] w-full md:text-xl text-lg border text-white rounded-lg bg-[#FFA500] p-4 shadow cursor-pointer'>Reset Password</button>
+                    <button type='submit' className='border-[#FFA500] w-full md:text-xl text-lg border text-white outline-none rounded-lg bg-[#FFA500] p-4 shadow-xl cursor-pointer'>Reset Password</button>
                     {/* </Link> */}
                 </div>
 

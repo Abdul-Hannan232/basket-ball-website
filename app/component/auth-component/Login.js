@@ -65,22 +65,22 @@ const Login = () => {
                         <label className='text-sm'>Email</label>
                         <input type='text' placeholder='Enter your email ' value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className='mt-1  cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />
+                            className='mt-1  cursor-pointer shadow-xl outline-none border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />
                         <br /> <label className='text-sm'>Password</label>
-                        <input type='password' placeholder='Enter your Password ' required onChange={(e) => setPassword(e.target.value)} value={password} className='mt-1 cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />
+                        <input type='password' placeholder='Enter your Password ' required onChange={(e) => setPassword(e.target.value)} value={password} className='mt-1 cursor-pointer shadow-xl ouline-none border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />
                     </div>
                     <div className='text-sm flex items-center justify-between '>
                         <div className='flex items-center gap-2'>
-                            <input type='checkbox' className='w-7 h-7 cursor-pointer bg-[#808080]' checked={rememberMe}
+                            <input type='checkbox' className='w-5 h-5 cursor-pointer bg-[#808080]' checked={rememberMe}
                                 onChange={() => setRememberMe(!rememberMe)} />
                             <a href="#" >Remember me</a>
                         </div>
 
                         <Link href="/forget-password" className='text-[#FFA500] underline undeline-offset-2'>forgot password?</Link>
                     </div>
-                    <button type='submit' className='border-[#FFA500] w-full text-xl border text-white rounded-lg bg-[#FFA500] p-4 shadow cursor-pointer'>Login</button>
+                    <button type='submit' className='border-[#FFA500] w-full text-xl border text-white rounded-lg bg-[#FFA500] p-4 shadow-xl cursor-pointer'>Login</button>
                     <Link href="/signup">
-                        <button className='border bg-[#333333] w-full text-xl border text-white rounded-lg mt-4 p-4 cursor-pointer'>Sign Up</button>
+                        <button className='border bg-[#333333] w-full text-xl border shadow-xl text-white rounded-lg mt-4 p-4 cursor-pointer'>Sign Up</button>
                     </Link>
 
                     <div className='flex  items-center 2xl:my-5 my-2'>
@@ -88,15 +88,15 @@ const Login = () => {
                         <h1 className='2xl:text-[20px] text-[16px] px-5'>OR</h1>
                         <hr className='text-[#DCDCDC]  border-1 w-[259px]' />
                     </div>
-                    <div className='border bg-[#333333] w-full text-xl border text-white rounded-lg cursor-pointer p-4  flex items-center justify-center gap-2' onClick={() => signIn("google")}><FcGoogle className='text-3xl ' />Login with Google</div>
+                    <div className='border bg-[#333333] w-full text-xl border text-white rounded-lg cursor-pointer p-4  flex items-center justify-center shadow-xl gap-2' onClick={() => signIn("google")}><FcGoogle className='text-3xl ' />Login with Google</div>
 
                 </form>
                 <div>
-                    <Image src="/loginImage.png" priority alt="image" width={511} height={366} className='h-screen w-auto md:block hidden' />
+                    <Image src="/loginImage.png" priority alt="image" width={511} height={366} className='h-screen w-auto lg:block hidden' />
                 </div>
             </div>
             {loader ? <Loader /> : null}
-            <div className='p-3 text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
+            <div className='p-3 text-center lg:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
                 <p>Developed By</p><a href="#">Mayonity</a>
             </div>
         </>
