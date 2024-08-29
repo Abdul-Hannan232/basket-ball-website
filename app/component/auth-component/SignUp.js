@@ -80,7 +80,7 @@ const Signup = () => {
                         <hr className='text-[#DCDCDC]  border-1 w-[259px]' />
                     </div>
                     <div className='border bg-[#333333] w-full shadow-xl md:text-xl text-md border text-white rounded-lg cursor-pointer p-3  flex items-center justify-center gap-2' onClick={() => signIn("google")} ><FcGoogle className='md:text-3xl text-xl ' />Login with Google</div>
-                    <p className='flex item-center justify-center gap-2 font-medium text-sm'>Already have an account? <Link href="/login" className='text-[#FFA500]'>Login?</Link></p>
+                    <p className='flex item-center justify-center gap-2 font-medium text-sm'>Already have an account? <Link href="/signin" className='text-[#FFA500]'>Login?</Link></p>
                 </form>
                 <div>
                     <Image src="/signup.png" priority alt="image" width={511} height={366} className='h-screen w-auto lg:block hidden' />
