@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginComponent from "../../component/auth-component/Login"
-export default function login  () {
+export default function Login  () {
   return (
     <div>
       <LoginComponent/>
