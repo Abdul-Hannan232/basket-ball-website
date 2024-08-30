@@ -46,7 +46,7 @@ const Signup = () => {
         }
     }
     return (
-        <div className='h-screen'>
+        <div className='min-h-screen overflow-hidden'>
             <ToastContainer />
             <div className='flex  justify-between md:mx-0 mx-5 items-center min-h-screen'>
                 <form className=' md:w-[450px] w-full mx-auto md:space-y-4 space-y-2' onSubmit={handleSubmit}>
@@ -89,7 +89,7 @@ const Signup = () => {
             </div>
             {loader ? <LoadingBall /> : null}
             <div className='p-2 md:text-xl text-sm text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
-                <p>Developed By</p><a href="#">Mayonity</a>
+                <p>Developed By</p><a href="#" className='font-bold'>Mayonity</a>
             </div>
         </div>
     )

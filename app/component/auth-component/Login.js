@@ -53,7 +53,7 @@ const Login = () => {
     };
 
     return (
-        <div className=' h-screen'>
+        <div className=' min-h-screen overflow-hiden'>
             <ToastContainer />
             <title>HoopSquad - Login </title>
             <div className='flex  justify-between md:mx-0 mx-5 items-center h-screen'>
