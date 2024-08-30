@@ -24,7 +24,7 @@ const NavBarComponent = () => {
     }
     const handleLogout = () => {
         Cookies.remove('authToken');
-        router.push("/login");
+        router.push("/home");
         signOut()
 
     };

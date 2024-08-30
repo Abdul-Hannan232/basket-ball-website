@@ -5,8 +5,10 @@ import { getToken } from "next-auth/jwt"
 export async function middleware(req) {
   const secret = process.env.NEXTAUTH_SECRET;
   let token = req.cookies.get('authToken') || await getToken({ req, secret });
+  
   if (token) {
     token = token.value || token.authToken
+    
   }
   const url = req.nextUrl.clone();
 
@@ -16,7 +18,7 @@ export async function middleware(req) {
   // Define protected routes for admin and user roles
   const adminRoutes = ['/admin'];
   const userRoutes = ['/admin', '/admin'];
-  const authenticatedRoutes=['/login','/signup','/reset-password','/forget-password']
+  const authenticatedRoutes=['/signin','/signup','/reset-password','/forget-password']
 
   if (!token) {
     // Redirect to login if there is no token and the route is protected
@@ -26,18 +28,6 @@ export async function middleware(req) {
     }
     return NextResponse.next();
   }
-
-
-
-  // if (token) {
-  //    // Redirect to login if there is no token and the route is protected
-  //    if (authenticatedRoutes.some(route => pathname.startsWith(route))) {
-  //     url.pathname = '/home';
-  //     return NextResponse.redirect(url);
-  //   }
-  //   return NextResponse.next();
-  // }
-
  
 
   try {
@@ -48,6 +38,7 @@ export async function middleware(req) {
           url.pathname = '/home';
           return NextResponse.redirect(url);
         }
+
     // Admin specific route handling
     if (userRole === 'admin') {
       if (pathname.startsWith('/admin')) {
@@ -79,5 +70,5 @@ export async function middleware(req) {
 
 
 export const config = {
-  matcher: ['/admin/:path*', '/home', '/courts','/login','/signup','/reset-password','/forget-password']
+  matcher: ['/admin/:path*', '/home', '/courts','/signin','/signup','/reset-password','/forget-password']
 };

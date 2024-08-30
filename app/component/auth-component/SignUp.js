@@ -31,7 +31,7 @@ const Signup = () => {
             if (responce.status === 201) {
                 console.log("response",responce)
                 toast.success("Account Created")
-                router.replace('/login')
+                router.replace('/signin')
             } else {
                 toast.error(responce.data.message)
             }
