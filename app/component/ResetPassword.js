@@ -48,20 +48,20 @@ const ResetPassword = () => {
                     </h1>
                     <div className='flex flex-col'>
                         <label className='text-sm'>New Password</label>
-                        <input type='password' placeholder='Enter new Password ' value={password} onChange={((e) => setPassword(e.target.value))} className='mt-1  cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />
+                        <input type='password' placeholder='Enter new Password ' value={password} onChange={((e) => setPassword(e.target.value))} className='mt-1  cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-3' />
                         <br /> <label className='text-sm'>Confirm Password</label>
-                        <input type='password' placeholder=' Confirm new Password ' value={confirmPassword} onChange={((e) => setConfirmPassword(e.target.value))} className='mt-1 cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] p-4' />
+                        <input type='password' placeholder=' Confirm new Password ' value={confirmPassword} onChange={((e) => setConfirmPassword(e.target.value))} className='mt-1 cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-3' />
                     </div>
-                    <br />
+                    <br/>
                     {/* <Link href="/Login"> */}
-                    <button type='submit' className='border-[#FFA500] w-full text-xl border text-white rounded-lg bg-[#FFA500] p-4 shadow cursor-pointer'>Change</button>
+                    <button type='submit' className='border-[#FFA500]  w-full md:text-xl text-lg border text-white rounded-lg bg-[#FFA500] md:p-4 p-3 shadow cursor-pointer'>Change</button>
                     {/* </Link> */}
                 </form>
 
             </div>
             {loader?<Loader/>:null}
-            <div className='p-3 text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
-                <p>Developed By</p><a href="#">Mayonity</a>
+            <div className='p-2 text-center md:hidden block flex justify-center items-center md:text-xl text-sm gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
+                <p>Developed By</p><a href="#" className='font-bold'>Mayonity</a>
             </div>
         </>
     )
