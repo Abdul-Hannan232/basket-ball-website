@@ -50,9 +50,11 @@ const ForgetPass = () => {
 
         </div>
         {loader ? <Loader /> : null}
-        <div className='p-2 md:text-xl text-sm text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] absolute bottom-0 w-full'>
-            <p>Developed By</p><a href="#" className='font-bold'>Mayonity</a>
-        </div>
+        <div className='p-2 md:text-xl text-sm text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] fixed bottom-0 w-full'>
+    <p>Developed By</p>
+    <a href="#" className='font-bold'>Mayonity</a>
+</div>
+
     </>
     )
 }
