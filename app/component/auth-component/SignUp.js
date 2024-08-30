@@ -49,7 +49,7 @@ const Signup = () => {
         <div className='h-screen'>
             <ToastContainer />
             <div className='flex  justify-between md:mx-0 mx-5 items-center min-h-screen'>
-                <form className=' md:w-[450px] w-full mx-auto space-y-4' onSubmit={handleSubmit}>
+                <form className=' md:w-[450px] w-full mx-auto md:space-y-4 space-y-2' onSubmit={handleSubmit}>
                     <h1 className='text-center font-bold text-2xl text-white'>
                         Signup                </h1>
 
@@ -76,11 +76,11 @@ const Signup = () => {
                     {/* </Link> */}
                     <div className='flex  items-center 2xl:my-5 md:my-2 my-1'>
                         <hr className='text-[#DCDCDC]  border-1 w-[259px]' />
-                        <h1 className='2xl:text-[20px] text-[16px] px-5'>OR</h1>
+                        <h1 className='2xl:text-[20px] md:text-[16px] text-[12px] px-5'>OR</h1>
                         <hr className='text-[#DCDCDC]  border-1 w-[259px]' />
                     </div>
                     <div className='border bg-[#333333] w-full md:text-xl text-md border text-white rounded-lg cursor-pointer md:p-3 p-2  flex items-center justify-center gap-2' onClick={() => signIn("google")} ><FcGoogle className='md:text-3xl text-xl ' />Login with Google</div>
-                    <p className='flex item-center justify-center gap-2 font-medium text-sm'>Already have an account? <Link href="/signin" className='text-[#FFA500]'>Login?</Link></p>
+                    <p className='flex item-center justify-center gap-2 font-medium md:text-sm text-[10px]'>Already have an account? <Link href="/signin" className='text-[#FFA500]'>Login?</Link></p>
                 </form>
                 <div>
                     <Image src="/signup.png" priority alt="image" width={511} height={366} className='h-screen w-auto md:block hidden' />
