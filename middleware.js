@@ -8,7 +8,6 @@ export async function middleware(req) {
 
   if (token) {
     token = token.value || token.authToken
-    console.log("token in middleware", token);
   }
   const url = req.nextUrl.clone();
 
@@ -17,13 +16,13 @@ export async function middleware(req) {
 
   // Define protected routes for admin and user roles
   const adminRoutes = ['/admin'];
-  const userRoutes = ['/admin', '/admin'];
+  const protectedRoutes = ['/admin'];// routes where user can not go without login
   const authenticatedRoutes = ['/signin', '/signup', '/reset-password', '/forget-password']
 
   if (!token) {
     // Redirect to login if there is no token and the route is protected
-    if (adminRoutes.some(route => pathname.startsWith(route)) || userRoutes.some(route => pathname.startsWith(route))) {
-      url.pathname = '/home';
+    if (adminRoutes.some(route => pathname.startsWith(route)) || protectedRoutes.some(route => pathname.startsWith(route))) {
+      url.pathname = '/signin';
       return NextResponse.redirect(url);
     }
     return NextResponse.next();
@@ -32,33 +31,35 @@ export async function middleware(req) {
   try {
     const decodedToken = jwtDecode(token);
     const userRole = decodedToken.role;
-    console.log("user role", userRole)
+
     if (authenticatedRoutes.some(route => pathname.startsWith(route))) {
       url.pathname = '/home';
       return NextResponse.redirect(url);
     }
 
-    // Admin specific route handling
+    // Check if the current pathname is an admin route
+    const isAdminRoute = adminRoutes.some(route => pathname.startsWith(route));
+
+    // Admin-specific route handling
     if (userRole === 'admin') {
-      if (pathname.startsWith('/admin')) {
-        return NextResponse.next(); // Allow access
+      if (isAdminRoute) {
+        return NextResponse.next(); // Allow admin access to admin routes
       } else {
-        url.pathname = '/home'; // Redirect to login or any other page
+        url.pathname = '/admin'; // Redirect admin to the admin home/dashboard
         return NextResponse.redirect(url);
       }
     }
 
-    // User specific route handling
+    // User-specific route handling
     if (userRole === 'user') {
-      if (pathname.startsWith('/admin')) {
-        url.pathname = '/home'; // Redirect to login or any other page
+      if (isAdminRoute) {
+        url.pathname = '/home'; // Redirect user away from admin routes to user home
         return NextResponse.redirect(url);
+      } else {
+        return NextResponse.next(); // Allow user access to non-admin routes
       }
-      return NextResponse.next(); // Allow access
     }
 
-    // Handle unknown roles or token issues
-    throw new Error('Unknown role');
   } catch (error) {
     console.error('Error handling middleware:', error);
     req.cookies.delete('authToken');
