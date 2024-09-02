@@ -1,8 +1,26 @@
-import React from 'react'
+"use client"
+import React, { useState,useEffect } from 'react'
 import { FaArrowRight } from "react-icons/fa"
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { signOut, useSession } from 'next-auth/react';
 import Image from "next/image"
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+
 const FooterComponent = () => {
+    const [loggedInUser, setloggedInUser] = useState()
+    const router = useRouter("");
+    const { data: session, status } = useSession();
+
+    useEffect(() => {
+        const token = session?.authToken || Cookies.get('authToken');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setloggedInUser(decodedToken)
+        }
+
+    }, [router, session])
     return (
         <div className='shadow md:p-10 mt-10'>
             <div className='md:flex p-5 flex-wrap xl:justify-between 2xl:justify-evenly  md:mx-20'>
@@ -35,11 +53,16 @@ const FooterComponent = () => {
                         <p className='font-light 2xl:text-lg md:text-sm text-xs md:w-72 text-[#F8F8F8] mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
 
                         </p>
-                        <Link href="/signup">
-                            <div className='relative 2xl:w-52 md:w-40 w-28 border md:mt-10 mt-5 text-black shadow text-center border-[#FFA500] 2xl:p-3 p-2 cursor-pointer rounded-full '>
-                                <h1 className='text-[#FFA500] 2xl:text-2xl md:text-lg text-xs  text-center'> Sign Up</h1>
-                            </div>
-                        </Link>
+                        {loggedInUser ? (
+                            <></>
+                        ) : (<>
+                            <Link href="/signup">
+                                <div className='relative 2xl:w-52 md:w-40 w-28 border md:mt-10 mt-5 text-black shadow text-center border-[#FFA500] 2xl:p-3 p-2 cursor-pointer rounded-full '>
+                                    <h1 className='text-[#FFA500] 2xl:text-2xl md:text-lg text-xs  text-center'> Sign Up</h1>
+                                </div>
+                            </Link>
+                        </>)}
+
 
                     </div>
                 </div>
