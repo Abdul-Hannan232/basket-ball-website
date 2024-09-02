@@ -19,7 +19,7 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const { data: session, status } = useSession();
     let token = session?.authToken || Cookies.get('authToken')
-
+// login functionality
     useEffect(() => {
         if (!token) {
             toast.warn("Login to Proceed")
