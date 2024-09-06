@@ -1,13 +1,18 @@
-"use client"
-import React, { useState } from 'react'
+"use client";
+import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import Image from 'next/image';
-import Loader from "../LoadingBall"
-import { addUser as addNewUser } from "../../services/userServices"
+import Loader from "../LoadingBall";
+import { addUser as addNewUser } from "../../services/userServices";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import FileUpload from "../FileUpload";
+
 const AddNewUser = () => {
-    const [loader, setLoader] = useState(false)
+    const [loader, setLoader] = useState(false);
+    const [previewUrl, setPreviewUrl] = useState("/edit.png");
+    const [file, setFile] = useState(null);
+
     const [formData, setFormData] = useState({
         name: '',
         first_name: '',
@@ -22,7 +27,8 @@ const AddNewUser = () => {
         team: '',
         jersey_number: '',
         position: '',
-        password: '12345678'
+        password: '12345678',
+        image: ''
     });
 
     const handleChange = (e) => {
@@ -37,10 +43,23 @@ const AddNewUser = () => {
         e.preventDefault();
         setLoader(true);
 
+        // Create a FormData instance
+        const updatedFormData = new FormData();
+
+        // Append form fields to FormData
+        for (const key in formData) {
+            if (formData[key]) {
+                updatedFormData.append(key, formData[key]);
+            }
+        }
+        if (file) {
+            updatedFormData.append('image', file);
+        }
         try {
-            const response = await addNewUser(formData);
+            const response = await addNewUser(updatedFormData);
+            console.log("response",response)
             if (response.status === 201) {
-                toast.success(response.data.message);  // Fixed by accessing response.data.message
+                toast.success(response.data.message);
             } else {
                 toast.error(response.data.message);
             }
@@ -50,32 +69,31 @@ const AddNewUser = () => {
             setLoader(false);
         }
     };
+
     return (
         <>
             <ToastContainer />
-            <div className='w-screen '>
+            <div className='w-screen'>
                 <form onSubmit={handleSubmit}>
                     <div className='border border-[#CACACA] m-5 rounded-xl m-5'>
-                        <div className='pl-10 text-xl  rounded-t-xl border-2 h-24 bg-[#F4F4F4] text-black font-bold  border-[#CACACA] gap-10 flex items-center'>
-                            <h1>User  Details (Personal)</h1>
-
+                        <div className='pl-10 text-xl rounded-t-xl border-2 h-24 bg-[#F4F4F4] text-black font-bold border-[#CACACA] gap-10 flex items-center'>
+                            <h1>User Details (Personal)</h1>
                         </div>
-                        <div className='border-2 border-[#CACACA] mx-auto mt-20 w-[80%]  rounded-3xl'>
+                        <div className='border-2 border-[#CACACA] mx-auto mt-20 w-[80%] rounded-3xl'>
                             <div className='flex items-center justify-between gap-10 px-3'>
-                                <div className='flex items-center  gap-10 p-5'>
-                                    <Image src="/usericon.png" alt="image" width={140} height={140} />
+                                <div className='flex items-center gap-10 p-5'>
+                                    <Image src={previewUrl} alt="image" width={140} height={140} />
                                     <div>
-                                        <h1 className='text-xl  text-black font-bold'>John Doe</h1>
+                                        <h1 className='text-xl text-black font-bold'>John Doe</h1>
                                         <p className='text-sm text-[#636161]'>example123@gmail.com</p>
                                     </div>
                                 </div>
-                                <div className='p-3 rounded-xl flex items-center gap-2 border border-[#CACACA]'>
-                                    <h1 className='text-xs  '>Edit profile picture</h1>
-                                    <Image src="/edit.png" alt="image" width={20} height={20} />
 
+                                <div className='p-3 rounded-xl flex items-center gap-2 border border-[#CACACA]'>
+                                    <FileUpload setFile={setFile} setPreviewUrl={setPreviewUrl} />
+                                    <Image src="/edit.png" alt="image" width={20} height={20} />
                                 </div>
                             </div>
-
                         </div>
                         <div className='w-[80%] mx-auto grid grid-cols-2 gap-5 my-20'>
                             <div >
@@ -88,7 +106,7 @@ const AddNewUser = () => {
                             </div>
                             <div >
                                 <label className='text-black font-bold text-md'>Email  *</label><br />
-                                <input type='text' name="email"  required value={formData.email} onChange={handleChange} placeholder='info@centralparknyc.com' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
+                                <input type='text' name="email" required value={formData.email} onChange={handleChange} placeholder='info@centralparknyc.com' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                             </div>
                             <div >
                                 <label className='text-black font-bold text-md'>Last Name*</label><br />
@@ -118,13 +136,11 @@ const AddNewUser = () => {
                                 <label className='text-black font-bold text-md'>Role*</label><br />
                                 <input type='text' name="role" required value={formData.role} onChange={handleChange} placeholder='Admin' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                             </div>
-
                         </div>
                     </div>
                     <div className='border border-[#CACACA] m-5 rounded-xl mt-20'>
-                        <div className='pl-10 text-xl  rounded-t-xl border-2 h-24 bg-[#F4F4F4] text-black font-bold  border-[#CACACA] gap-10 flex items-center'>
-                            <h1>User  Details (Team Info)</h1>
-
+                        <div className='pl-10 text-xl rounded-t-xl border-2 h-24 bg-[#F4F4F4] text-black font-bold border-[#CACACA] gap-10 flex items-center'>
+                            <h1>User Details (Team Info)</h1>
                         </div>
                         <div className='w-[80%] mx-auto grid grid-cols-2 justify-between gap-10 mt-10'>
                             <div >
@@ -140,19 +156,18 @@ const AddNewUser = () => {
                                 <input type='text' name="position" value={formData.position} onChange={handleChange} placeholder='Point Guard' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                             </div>
                         </div>
-                        <div className='flex justify-end mb-10 w-[75%] mx-auto '>
-                            <div className='flex items-center  gap-5 w-[370px]  '>
+                        <div className='flex justify-end mb-10 w-[75%] mx-auto'>
+                            <div className='flex items-center gap-5 w-[370px]'>
                                 <Button label='Cancel' className='mt-10 text-white p-4 w-20 border-2 border-[#9A9A9A] text-[#9A9A9A] bg-white rounded-xl w-full' />
                                 <Button label='Save' type="submit" className='mt-10 text-white p-4 w-20 border-none text-white bg-[#269C55] rounded-xl w-full' />
                             </div>
                         </div>
                     </div>
                 </form>
-               
             </div>
             {loader ? <Loader /> : null}
         </>
-    )
-}
+    );
+};
 
-export default AddNewUser
+export default AddNewUser;
