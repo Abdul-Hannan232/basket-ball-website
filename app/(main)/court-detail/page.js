@@ -63,7 +63,7 @@ export default function CourtDetail() {
         <>
             <div className='lg:flex  mt-32 gap-10 lg:w-[80%] mx-auto '>
                 <main className="container mx-auto lg:w-[60%] ">
-                    <Carousel />
+                    <Carousel status={"carousel"}/>
                     {/* <div className='lg:flex items-end gap-5 mt-5 lg:mx-0 mx-5 '>
                         <div className='w-full '>
                             <h1 className='lg:text-2xl text-lg font-bold text-[#313131] '>Honda Civic</h1>
