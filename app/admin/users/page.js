@@ -12,6 +12,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DeleteUserPopup from "../../component/admin/DeleteUser"
 import BlockUserPopup from "../../component/admin/BlockUser"
+
+// import AdminLayout from "../../component/AdminLayout"
 export default function Users() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)

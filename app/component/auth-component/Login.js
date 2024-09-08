@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation';
 import roleBased from "../../utils/roleBased"
 import Cookies from 'js-cookie';
 import { signIn, useSession } from 'next-auth/react';
+
+
 const Login = () => {
     const router = useRouter("")
     const [email, setEmail] = useState("")
@@ -19,13 +21,12 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const { data: session, status } = useSession();
     let token = session?.authToken || Cookies.get('authToken')
-// login functionality
+    // login functionality
     useEffect(() => {
         if (!token) {
             toast.warn("Login to Proceed")
         }
     }, [])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);
@@ -66,7 +67,7 @@ const Login = () => {
                         <input type='text' placeholder='Enter your email ' value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className='mt-1  cursor-pointer shadow-xl outline-none border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-2' />
-                         <label className='text-sm md:mt-5 mt-3'>Password</label>
+                        <label className='text-sm md:mt-5 mt-3'>Password</label>
                         <input type='password' placeholder='Enter your Password ' required onChange={(e) => setPassword(e.target.value)} value={password} className='mt-1 cursor-pointer shadow-xl ouline-none border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-2' />
                     </div>
                     <div className='text-sm flex items-center justify-between '>
@@ -82,7 +83,6 @@ const Login = () => {
                     <Link href="/signup">
                         <button className='border bg-[#333333] w-full md:text-xl text-md border shadow-xl text-white rounded-lg mt-4 md:p-4 p-2 cursor-pointer'>Sign Up</button>
                     </Link>
-
                     <div className='flex  items-center 2xl:my-5 md:my-2 my-1'>
                         <hr className='text-[#DCDCDC]  border-1 w-[259px]' />
                         <h1 className='2xl:text-[20px] md:text-[16px] text-[12px] px-5'>OR</h1>
@@ -97,10 +97,9 @@ const Login = () => {
             </div>
             {loader ? <Loader /> : null}
             <div className='p-2 md:text-xl text-sm text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] fixed bottom-0 w-full'>
-    <p>Developed By</p>
-    <a href="#" className='font-bold'>Mayonity</a>
-</div>
-
+                <p>Developed By</p>
+                <a href="#" className='font-bold'>Mayonity</a>
+            </div>
         </div>
     )
 }

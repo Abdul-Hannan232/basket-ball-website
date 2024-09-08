@@ -14,7 +14,6 @@ export default function Courts() {
 
     return (
         <div className='relative'>
-            <Navbar />
             <div className='md:w-[80%] md:mx-auto mx-5 mt-10 flex items-center justify-between'>
                 <div className='flex items-center md:gap-4 gap-1'>
                     <h1 className='md:text-3xl text-md'>Basketball Courts</h1>
@@ -122,7 +121,6 @@ export default function Courts() {
             </div>
             )}
 
-            <Footer />
         </div>
     )
 }

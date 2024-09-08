@@ -4,7 +4,6 @@ import Footer from "../../component/FooterComponent"
 export default function TermsConditions () {
     return (
         <div>
-            <Navbar />
             <div className='md:my-40 my-28  md:mx-20 mx-5  rounded-2xl shadow md:p-20 p-8 '>
                 <h1 className='2xl:text-7xl md:text-6xl text-xl font-bold text-center'>Terms & Conditions</h1>
                 <hr className='2xl:my-20 md:my-14 my-5  2xl:mx-40 md:mx-20 ' />
@@ -59,7 +58,6 @@ export default function TermsConditions () {
                     </p>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

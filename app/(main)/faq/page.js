@@ -4,7 +4,6 @@ import Footer from "../../component/FooterComponent"
 export default function Faq ()  {
     return (
         <div>
-            <Navbar />
             <div className='md:my-40 my-28  md:mx-20 mx-5  rounded-2xl shadow md:p-20 p-8 '>
                 <h1 className='2xl:text-7xl md:text-5xl text-xl font-bold text-center'>Frequently Asked Questions  </h1>
                 <h1 className='text-[#FFA500] 2xl:text-7xl md:text-5xl text-xl font-bold text-center mt-4'>(FAQ)</h1>
@@ -42,7 +41,6 @@ export default function Faq ()  {
                     </p>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }
