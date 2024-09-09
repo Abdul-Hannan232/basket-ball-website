@@ -8,12 +8,96 @@ import Footer from '../../component/FooterComponent';
 import { RxCrossCircled } from "react-icons/rx";
 import { CiLocationOn } from "react-icons/ci";
 import Carousel from '../../component/CourtCarousel.js';
+import { addCourt } from '../../services/courtsServices';
+import Loader from "../../component/LoadingBall";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAuthToken } from '../../customHook/useAuthToken';
+import FileUpload from '../../component/FileUpload'
+import Image from 'next/image';
+
+const MAX_FILES = 5; 
 
 export default function Courts() {
+    const { token, decodedToken } = useAuthToken();
     const [showPopup, setShowPopup] = useState(false);
+    const [loader, setLoader] = useState(false)
+    const [updateContent, setUpdateContent] = useState(false)
+    const [previewUrls, setPreviewUrls] = useState(Array(MAX_FILES).fill(null));
+    const [files, setFiles] = useState(Array(MAX_FILES).fill(null));
+
+    const [formData, setFormData] = useState({
+        user_id: decodedToken?.id,
+        name: '',
+        location: '',
+        size: '',
+        availability: '',
+        cost: '',
+        type: '',
+        image: []
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoader(true);
+
+
+        // Create a FormData instance
+        const updatedFormData = new FormData();
+        for (const key in formData) {
+            if (formData.hasOwnProperty(key)) {
+
+                updatedFormData.append(key, formData[key]);
+
+            }
+        }
+        if (files && files.length > 0) {
+            Array.from(files).forEach(file => updatedFormData.append('image', file));
+        }
+ 
+        try {
+            const response = await addCourt(updatedFormData, token);
+            console.log("response", response)
+            if (response.status === 201) {
+                toast.success(response.data.message);
+                setFormData({
+                    user_id: decodedToken?.id,
+                    name: '',
+                    location: '',
+                    size: '',
+                    availability: '',
+                    cost: '',
+                    type: '',
+                    image: []
+                })
+                setFiles(Array(MAX_FILES).fill(null))
+                setPreviewUrls(Array(MAX_FILES).fill(null))
+                setShowPopup(false)
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            console.log(error.message)
+            toast.error("Network error: ");
+        } finally {
+            setLoader(false);
+            setUpdateContent(prev => !prev)
+        }
+
+    }
+
 
     return (
         <div className='relative'>
+            <ToastContainer />
             <Navbar />
             <div className='md:w-[80%] md:mx-auto mx-5 mt-10 flex items-center justify-between'>
                 <div className='flex items-center md:gap-4 gap-1'>
@@ -27,7 +111,7 @@ export default function Courts() {
                     Add Court
                 </button>
             </div>
-            <CourtsSlider slide={"box"} />
+            <CourtsSlider slide={"box"} key={updateContent} />
             <div className='w-[80%] mx-auto mt-40 flex items-center gap-2'>
                 <h1 className='text-[#FFA500] text-2xl font-bold'>Map</h1>
                 <h1 className='text-white text-2xl font-bold'>View</h1>
@@ -46,80 +130,135 @@ export default function Courts() {
 
             {/* Courts popup */}
             {showPopup && (
-            <div className="fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-75 transition-all duration-300 ease-in-out">
-                <div className='lg:w-[40%] w-[80%] relative h-[90vh] rounded-lg transform overflow-auto transition-transform duration-500 ease-in-out translate-y-0 bg-[#333333] shadow-xl'>
-                    <div className='flex justify-center relative items-center p-5'>
-                        <h1 className='text-white md:text-3xl text-lg poppins-bold '>Add Court</h1>
-                        <RxCrossCircled
-                            className='text-white cursor-pointer float-right absolute right-5 md:text-3xl text-lg '
+                <div className="fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-75 transition-all duration-300 ease-in-out">
+                    <div className='lg:w-[40%] w-[80%] relative h-[90vh] rounded-lg transform overflow-auto transition-transform duration-500 ease-in-out translate-y-0 bg-[#333333] shadow-xl'>
+                        <div className='flex justify-center relative items-center p-5'>
+                            <h1 className='text-white md:text-3xl text-lg poppins-bold '>Add Court</h1>
+                            <RxCrossCircled
+                                className='text-white cursor-pointer float-right absolute right-5 md:text-3xl text-lg '
 
-                            onClick={() => setShowPopup(false)}
-                        />
-                    </div>
-                    <div className='w-[80%] mx-auto'>
-                        <label className='text-sm text-white '>
-                            Court Name
-                        </label>
-                        <br />
-                        <input type='text' placeholder='Main Court' className='rounded-md mb-5 text-sm w-full mt-1 md:p-4 p-3 shadow-xl bg-[#808080] text-white' />
-                        <label className='text-sm text-white  '>
-                            Location
-                        </label>
-                        <br />
-                        <div className='w-full mb-5 relative  mt-1 md:p-4 p-3 shadow-xl bg-[#808080] rounded-md text-white'>
-                            <input type='text' placeholder='123 Main Street, Anytown, USA' className='rounded-md bg-[#808080] md:text-sm text-[10px] w-full' />
-                            <CiLocationOn className='absolute top-4 md:right-5 right-3 text-xl' />
+                                onClick={() => setShowPopup(false)}
+                            />
                         </div>
-                        <label className='text-sm text-white  '>
-                            Size
-                        </label>
-                        <div className='flex mt-3 mb-5 items-center justify-between md:w-[70%]'>
-                            <div className='flex items-center gap-2 '>
-                                <input type="radio" className='w-4 h-4' />
-                                <h1 className='md:text-sm text-xs text-white '>Half Court</h1>
-                            </div>
-                            <div className='flex items-center gap-2 '>
-                                <input type="radio" className='w-4 h-4' />
-                                <h1 className='md:text-sm text-xs text-white '>Full Court</h1>
-                            </div>
-                        </div>
-                        <label className='text-sm text-white '>
-                            Availability
-                        </label>
-                        <br />
-                        <input type='text' placeholder='Monday to Friday, 9:00 AM - 9:00 PM' className='rounded-md mb-5 md:text-sm text-xs w-full mt-1 md:p-4 p-3 shadow-xl bg-[#808080] text-white' /><label className='text-sm text-white '>
-                            Price
-                        </label>
-                        <br />
-                        <input type='text' placeholder='$ 40/hr' className='rounded-md mb-5 text-sm w-full mt-1 md:p-4 p-3 shadow-xl bg-[#808080] text-white' />
+                        <form onSubmit={handleSubmit} >
+                            <div className='w-[80%] mx-auto'>
+                                {loader ? <Loader /> : null}
+                                <label className='text-sm text-white '>
+                                    Court Name
+                                </label>
+                                <br />
+                                <input type='text' name="name" required value={formData.name} onChange={handleChange}  placeholder='Main Court' className='rounded-md mb-5 text-sm w-full mt-1 md:p-4 p-3 shadow-xl bg-[#808080] text-white' />
+                                <label className='text-sm text-white  '>
+                                    Location
+                                </label>
+                                <br />
+                                <div className='w-full mb-5 relative  mt-1 md:p-4 p-3 shadow-xl bg-[#808080] rounded-md text-white'>
+                                    <input type='text' name="location" required value={formData.location} onChange={handleChange} placeholder='123 Main Street, Anytown, USA' className='rounded-md bg-[#808080] md:text-sm text-[10px] w-full' />
+                                    <CiLocationOn className='absolute top-4 md:right-5 right-3 text-xl' />
+                                </div>
+                                <label className='text-sm text-white  '>
+                                    Size
+                                </label>
+                                <div className='flex mt-3 mb-5 items-center justify-between md:w-[70%]'>
+                                    <div className='flex items-center gap-2 '>
+                                        <input type="radio" name="size" required value="Half Court" checked={formData.size === 'Half Court'} onChange={handleChange} className='w-4 h-4'
+                                        />
+                                        <h1 className='md:text-sm text-xs text-white '>Half Court</h1>
+                                    </div>
+                                    <div className='flex items-center gap-2 '>
+                                        <input type="radio" name="size" required value="Full Court" checked={formData.size === 'Full Court'} onChange={handleChange} className='w-4 h-4' />
+                                        <h1 className='md:text-sm text-xs text-white '>Full Court</h1>
+                                    </div>
+                                </div>
+                                <label className='text-sm text-white '>
+                                    Availability
+                                </label>
+                                <br />
+                                <input type='text' name="availability" required value={formData.availability} onChange={handleChange} placeholder='Monday to Friday, 9:00 AM - 9:00 PM' className='rounded-md mb-5 md:text-sm text-xs w-full mt-1 md:p-4 p-3 shadow-xl bg-[#808080] text-white' /><label className='text-sm text-white '>
+                                    Price
+                                </label>
+                                <br />
+                                <input type='number' name="cost" required value={formData.cost} onChange={handleChange} placeholder='$ 40/hr' className='rounded-md mb-5 text-sm w-full mt-1 md:p-4 p-3 shadow-xl bg-[#808080] text-white' />
 
-                        <label className='text-sm text-white  '>
-                            Type
-                        </label>
-                        <div className='grid grid-cols-2 mt-3 mb-5 items-center md:gap-7 gap-5 justify-between md:w-[70%]'>
-                            <div className='flex items-center gap-2 '>
-                                <input type="radio" className='w-4 h-4' />
-                                <h1 className='text-sm text-white '>Indoor</h1>
+                                <label className='text-sm text-white  '>
+                                    Type
+                                </label>
+                                <div className='grid grid-cols-2 mt-3 mb-5 items-center md:gap-7 gap-5 justify-between md:w-[70%]'>
+                                    <div className='flex items-center gap-2'>
+                                        <input
+                                            type="radio"
+                                            required
+                                            name="type"
+                                            value="indoor"
+                                            checked={formData.type === 'indoor'}
+                                            onChange={handleChange}
+                                            className='w-4 h-4'
+                                        />
+                                        <label className='text-sm text-white'>Indoor</label>
+                                    </div>
+                                    <div className='flex items-center gap-2'>
+                                        <input
+                                            type="radio"
+                                            required
+                                            name="type"
+                                            value="outdoor"
+                                            checked={formData.type === 'outdoor'}
+                                            onChange={handleChange}
+                                            className='w-4 h-4'
+                                        />
+                                        <label className='text-sm text-white'>Outdoor</label>
+                                    </div>
+                                    <div className='flex items-center gap-2'>
+                                        <input
+                                            type="radio"
+                                            required
+                                            name="type"
+                                            value="sheltered"
+                                            checked={formData.type === 'sheltered'}
+                                            onChange={handleChange}
+                                            className='w-4 h-4'
+                                        />
+                                        <label className='text-sm text-white'>Sheltered</label>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div className='flex items-center gap-2 '>
-                                <input type="radio" className='w-4 h-4' />
-                                <h1 className='text-sm text-white '>OutDoor</h1>
+                            <div className='w-[80%]  border-2 border-white rounded-xl py-2  mx-auto'>
+
+                                {/* seting image */}
+                                <div>
+                                    <FileUpload fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" />
+
+
+                                    <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                                        {previewUrls.map((preview, index) => (
+                                            <div key={index} style={{ textAlign: 'center' }}>
+                                                <Image
+                                                    src={preview || '/placeholder.png'} // Default placeholder image if no image is selected
+                                                    alt={`Preview ${index + 1}`}
+                                                    style={{ width: '100px', height: '100px', objectFit: 'cover', border: '1px solid #ccc' }}
+                                                    unoptimized
+                                                    width={500} 
+                                                    height={500} 
+                                                />
+                                                <p>Image {index + 1}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                {/* end setting mage */}
+
+
+
+                                <p className='md:text-sm text-xs text-center mt-7 text-white'>Drop your images here too</p>
+                                <a href='#' className='md:text-sm text-xs text-center md:mb-5 mb-3 underline text-[#FFA500] flex justify-center'>Click here to Browser</a>
                             </div>
-                            <div className='flex items-center gap-2 '>
-                                <input type="radio" className='w-4 h-4' />
-                                <h1 className='text-sm text-white '>Sheltered</h1>
-                            </div>
-                        </div>
+                            <button type="submit" className='text-black bg-[#FFA500] md:p-4 p-3 md:text-xl text-md text-center flex justify-center w-[80%] mx-auto font-semibold my-10 md:rounded-xl rounded-lg'>Submit</button>
+
+                        </form>
                     </div>
-                    <div className='w-[80%]  border-2 border-white rounded-xl py-2  mx-auto'>
-                        <Carousel status={"popup"} />
-                        <p className='md:text-sm text-xs text-center mt-7 text-white'>Drop your images here too</p>
-                        <a href='#' className='md:text-sm text-xs text-center md:mb-5 mb-3 underline text-[#FFA500] flex justify-center'>Click here to Browser</a>
-                    </div>
-                    <button className='text-black bg-[#FFA500] md:p-4 p-3 md:text-xl text-md text-center flex justify-center w-[80%] mx-auto font-semibold my-10 md:rounded-xl rounded-lg'>Submit</button>
-                    {/* Add content for the popup form or additional elements here */}
                 </div>
-            </div>
+
             )}
 
             <Footer />
