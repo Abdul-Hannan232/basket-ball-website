@@ -29,7 +29,6 @@ export default function UserProfile ()  {
 
     return (
         <div>
-            <Navbar />
 
             <div className='w-[80%] mx-auto mt-20'>
                 <div className="flex ">
@@ -167,7 +166,6 @@ export default function UserProfile ()  {
                     </div>}
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

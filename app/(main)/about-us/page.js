@@ -4,7 +4,6 @@ import Footer from '../../component/FooterComponent.js'
 export default function About  () {
     return (
         <div>
-            <Navbar />
             <div className='banner w-[100vh] md:h-[90vh] h-[600px] md:pl-20 pl-5'>
                 <h1 className='text-5xl pt-32 font-bold'>Invest in a Better Court Experience</h1>
                 <p className='font-light lg:w-[900px] text-xl my-5'>Your contribution can make a significant difference in maintaining and enhancing our basketball courts. By donating, you are investing in a better experience for the entire community. Help us keep the courts in top shape and ensure that everyone can enjoy a high-quality playing environment.</p>
@@ -35,7 +34,6 @@ export default function About  () {
             <div className='mx-auto w-64'>
                 <button className='backColor text-black text-center p-4 w-64 my-10 rounded-full font-bold'>Donate Now</button>
             </div>
-            <Footer />
         </div>
     )
 }

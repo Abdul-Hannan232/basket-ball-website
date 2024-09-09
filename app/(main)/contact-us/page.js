@@ -8,7 +8,6 @@ import { AiTwotoneMessage } from "react-icons/ai";
 export default function Contact()  {
     return (
         <div>
-            <Navbar />
             <div className='md:my-40 my-28  md:mx-20 mx-5  rounded-2xl shadow md:p-20 md:p-8 p-3 '>
                 <h1 className='2xl:text-7xl md:text-6xl text-xl font-bold text-center'>Contact Us</h1>
                 <hr className='2xl:my-20 md:my-14 my-5  2xl:mx-40 md:mx-20 ' />
@@ -46,7 +45,6 @@ export default function Contact()  {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }
