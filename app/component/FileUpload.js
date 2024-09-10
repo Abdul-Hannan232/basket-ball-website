@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function FileUpload({ fileControl, previewControl, type }) {
-const [typeError,setTypeError]=useState(false)
+    const [typeError, setTypeError] = useState(false)
     const validateFileType = (file) => {
         setTypeError(false)
         const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
@@ -16,7 +16,7 @@ const [typeError,setTypeError]=useState(false)
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-         if (file && validateFileType(file)) {
+        if (file && validateFileType(file)) {
             fileControl(file);
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -24,7 +24,7 @@ const [typeError,setTypeError]=useState(false)
                 previewControl(url);
             };
             reader.readAsDataURL(file);
-        }else{
+        } else {
             event.target.value = '';
         }
     };
@@ -51,7 +51,7 @@ const [typeError,setTypeError]=useState(false)
 
     return (
         <div>
-             {/* <ToastContainer /> */}
+            {/* <ToastContainer /> */}
             {type && type === "multiple" ? (
                 <input
                     required
@@ -68,8 +68,8 @@ const [typeError,setTypeError]=useState(false)
                     onChange={handleFileChange}
                 />
             )}
-            {typeError?( <p>"Only JPG, PNG, and JPEG files are allowed."</p>):""}
-           
+            {typeError ? (<p>&quot;Only JPG, PNG, and JPEG files are allowed.&quot;</p>) : ""}
+
         </div>
     );
 }
