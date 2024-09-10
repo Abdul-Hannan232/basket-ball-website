@@ -1,10 +1,10 @@
 
 "use client"
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { CiFilter } from "react-icons/ci";
 import Navbar from '../../component/NavBarComponent';
 import CourtsSlider from "../../component/CourtsSlider";
-import Footer from '../../component/FooterComponent';
+import { useRouter } from 'next/navigation'
 import { RxCrossCircled } from "react-icons/rx";
 import { CiLocationOn } from "react-icons/ci";
 import Carousel from '../../component/CourtCarousel.js';
@@ -20,6 +20,29 @@ const MAX_FILES = 5;
 
 export default function Courts() {
     const { token, decodedToken } = useAuthToken();
+
+    const router = useRouter("");
+    const [open, setOpen] = useState(false)
+    const [loggedInUser, setloggedInUser] = useState()
+    const toOpen = () => {
+        setOpen(true)
+    }
+    const toClose = () => {
+        setOpen(false)
+    }
+    const handleLogout = () => {
+        Cookies.remove('authToken');
+        router.push("/");
+        signOut()
+    };
+
+
+    useEffect(() => {
+        if (token) {
+            setloggedInUser(decodedToken)
+        }
+
+    }, [router, token])
     const [showPopup, setShowPopup] = useState(false);
     const [loader, setLoader] = useState(false)
     const [updateContent, setUpdateContent] = useState(false)
@@ -102,12 +125,18 @@ export default function Courts() {
                     <h1 className='md:text-3xl text-md'>Basketball Courts</h1>
                     <CiFilter className='text-[#FFA500] md:text-3xl text-xl' />
                 </div>
-                <button
-                    className='bg-[#FFA500] rounded-md md:text-xl text-sm text-black md:px-16 px-3 py-2 shadow'
-                    onClick={() => setShowPopup(true)}
-                >
-                    Add Court
-                </button>
+                
+            {loggedInUser ? (
+                   <button
+                   className='bg-[#FFA500] rounded-md md:text-xl text-sm text-black md:px-16 px-3 py-2 shadow'
+                   onClick={() => setShowPopup(true)}
+               >
+                   Add Court
+               </button>
+            ) : (
+               ""
+            )}
+             
             </div>
             <CourtsSlider slide={"box"} key={updateContent} />
             <div className='w-[80%] mx-auto mt-40 flex items-center gap-2'>
@@ -262,7 +291,7 @@ export default function Courts() {
 
                             {/* end setting mage */}
                             <p className='md:text-sm text-xs text-center mt-7 text-white'>Drop your images here too</p>
-                            <FileUpload fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" />
+                            <FileUpload color={"#FFA500"} text={"Click here to browse"}fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br/>
                         </div>
                         <button type="submit" className='text-black bg-[#FFA500] md:p-4 p-3 md:text-xl text-md text-center flex justify-center w-[80%] mx-auto font-semibold my-10 md:rounded-xl rounded-lg'>Submit</button>
 
