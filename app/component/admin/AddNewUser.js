@@ -100,15 +100,15 @@ const AddNewUser = () => {
                         <div className='border-2 border-[#CACACA] mx-auto mt-20 w-[80%] rounded-3xl'>
                             <div className='flex items-center justify-between gap-10 px-3'>
                                 <div className='flex items-center gap-10 p-5'>
-                                    <Image src={previewUrl} alt="image" width={140} height={140} />
+                                    <Image src={previewUrl} alt="image" width={140} height={140} className='w-40 h-40 rounded-full' />
                                     <div>
                                         <h1 className='text-xl text-black font-bold'>John Doe</h1>
                                         <p className='text-sm text-[#636161]'>example123@gmail.com</p>
                                     </div>
                                 </div>
 
-                                <div className='p-3 rounded-xl flex items-center gap-2 border border-[#CACACA]'>
-                                    <FileUpload fileControl={setFile} previewControl={setPreviewUrl} type="single" />
+                                <div className='p-4 rounded-xl flex items-center gap-6 border border-[#CACACA]'>
+                                    <FileUpload color={"#000000"}fileControl={setFile} text={"Edit profile picture"} previewControl={setPreviewUrl} type="single" />
                                     <Image src="/edit.png" alt="image" width={20} height={20} />
                                 </div>
                             </div>
@@ -176,7 +176,7 @@ const AddNewUser = () => {
                         </div>
                         <div className='flex justify-end mb-10 w-[75%] mx-auto'>
                             <div className='flex items-center gap-5 w-[370px]'>
-                                <Button label='Cancel' className='mt-10 text-white p-4 w-20 border-2 border-[#9A9A9A] text-[#9A9A9A] bg-white rounded-xl w-full' />
+                                <Button label='Cancel' className='mt-10 text-white p-4 w-20 border-2 border-[#9A9A9A] text-[#6A6868] bg-white rounded-xl w-full' />
                                 <Button label='Save' type="submit" className='mt-10 text-white p-4 w-20 border-none text-white bg-[#269C55] rounded-xl w-full' />
                             </div>
                         </div>

@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function FileUpload({ fileControl, previewControl, type }) {
+function FileUpload({ fileControl, previewControl, type, text,color }) {
     const [typeError, setTypeError] = useState(false);
     const fileInputRef = useRef(null); // Reference to the hidden file input
 
@@ -61,8 +61,8 @@ function FileUpload({ fileControl, previewControl, type }) {
     return (
         <div>
             {/* Text to click for uploading a file */}
-            <p onClick={triggerFileUpload} className='cursor-pointer md:text-sm text-xs text-center md:mb-5 mb-3 underline text-[#FFA500] flex justify-center'>
-            Click here to Browser
+            <p onClick={triggerFileUpload} className={`cursor-pointer md:text-sm text-xs text-center  text-${color} flex justify-center`}>
+                {text}
             </p>
 
             {/* Hidden file input */}
