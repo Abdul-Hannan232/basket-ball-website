@@ -1,14 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 function FileUpload({ fileControl, previewControl, type }) {
-    const [typeError, setTypeError] = useState(false)
+    const [typeError, setTypeError] = useState(false);
+    const fileInputRef = useRef(null); // Reference to the hidden file input
+
     const validateFileType = (file) => {
-        setTypeError(false)
+        setTypeError(false);
         const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
         if (!allowedTypes.includes(file.type)) {
-            setTypeError(true)
+            setTypeError(true);
             return false;
         }
         return true;
@@ -29,7 +32,6 @@ function FileUpload({ fileControl, previewControl, type }) {
         }
     };
 
-    // Handle multiple file uploads with validation
     const handleMultiFile = (event) => {
         const files = Array.from(event.target.files);
         const newPreviews = [...previewControl.previewUrls];
@@ -49,11 +51,25 @@ function FileUpload({ fileControl, previewControl, type }) {
         previewControl.setPreviewUrls(newPreviews);
     };
 
+    // Function to trigger the file input click
+    const triggerFileUpload = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
     return (
         <div>
-            {/* <ToastContainer /> */}
+            {/* Text to click for uploading a file */}
+            <p onClick={triggerFileUpload} className='cursor-pointer md:text-sm text-xs text-center md:mb-5 mb-3 underline text-[#FFA500] flex justify-center'>
+            Click here to Browser
+            </p>
+
+            {/* Hidden file input */}
             {type && type === "multiple" ? (
                 <input
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
                     required
                     type="file"
                     accept="image/*"
@@ -62,14 +78,16 @@ function FileUpload({ fileControl, previewControl, type }) {
                 />
             ) : (
                 <input
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
                     required
                     type="file"
                     accept="image/*"
                     onChange={handleFileChange}
                 />
             )}
-            {typeError ? (<p>&quot;Only JPG, PNG, and JPEG files are allowed.&quot;</p>) : ""}
 
+            {typeError ? (<p>Only JPG, PNG, and JPEG files are allowed.</p>) : ""}
         </div>
     );
 }
