@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import roleBased from "../../utils/roleBased"
 import Cookies from 'js-cookie';
 import { signIn, useSession } from 'next-auth/react';
+import { FiEye, FiEyeOff } from 'react-icons/fi'; // These are icons from react-icons package, you can use any icon library
 
 
 const Login = () => {
@@ -21,6 +22,13 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const { data: session, status } = useSession();
     let token = session?.authToken || Cookies.get('authToken')
+    const [passwords, setPasswords] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     // login functionality
     // useEffect(() => {
     //     if (!token) {
@@ -60,7 +68,7 @@ const Login = () => {
             <title>HoopSquad - Login </title>
             <div className='flex  justify-between md:mx-0 mx-5 items-center h-screen'>
                 <form className=' md:w-[450px] w-full mx-auto space-y-4' onSubmit={handleSubmit}>
-                    <h1 className='text-center font-bold text-2xl text-white'>
+                    <h1 className='text-center font-bold text-3xl text-white'>
                         Login
                     </h1>
                     <div className='flex flex-col'>
@@ -69,8 +77,22 @@ const Login = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             className='mt-1  cursor-pointer shadow-xl outline-none border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-2' />
                         <label className='text-sm md:mt-5 mt-3'>Password</label>
-                        <input type='password' placeholder='Enter your Password ' required onChange={(e) => setPassword(e.target.value)} value={password} className='mt-1 cursor-pointer shadow-xl ouline-none border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-2' />
-                    </div>
+                        <div className='relative'>
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder='Enter your Password'
+                                required
+                                onChange={(e) => setPasswords(e.target.value)}
+                                value={passwords}
+                                className='mt-1 cursor-pointer shadow-xl outline-none border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-2 w-full'
+                            />
+                            <div
+                                className='absolute inset-y-0 right-3 flex items-center cursor-pointer'
+                                onClick={togglePasswordVisibility}
+                            >
+                                {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                            </div>
+                        </div>                    </div>
                     <div className='text-sm flex items-center justify-between '>
                         <div className='flex items-center gap-2'>
                             <input type='checkbox' className='md:w-5 md:h-5 w-4 h-4 cursor-pointer bg-[#808080]' checked={rememberMe}

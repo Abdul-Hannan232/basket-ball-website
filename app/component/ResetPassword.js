@@ -3,10 +3,11 @@ import React from 'react'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {  useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { ResetPasswordApi } from '../services/authServices';
 import Loader from "./LoadingBall"
 import { useRouter } from 'next/navigation';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 const ResetPassword = () => {
     const searchParams = useSearchParams();
     const user_id = searchParams.get('user_id')
@@ -14,6 +15,18 @@ const ResetPassword = () => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [loader, setLoader] = useState(false)
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
+    const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
+    const [isConfirmNewPasswordVisible, setIsConfirmNewPasswordVisible] = useState(false);
+
+    const toggleNewPasswordVisibility = () => {
+        setIsNewPasswordVisible(!isNewPasswordVisible);
+    };
+
+    const toggleConfirmNewPasswordVisibility = () => {
+        setIsConfirmNewPasswordVisible(!isConfirmNewPasswordVisible);
+    };
     const router = useRouter("")
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -38,6 +51,7 @@ const ResetPassword = () => {
             setLoader(false)
         }
     }
+
     return (
         <>
             <ToastContainer />
@@ -48,22 +62,53 @@ const ResetPassword = () => {
                     </h1>
                     <div className='flex flex-col'>
                         <label className='text-sm'>New Password</label>
-                        <input type='password' placeholder='Enter new Password ' value={password} onChange={((e) => setPassword(e.target.value))} className='mt-1  cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-3' />
-                        <br /> <label className='text-sm'>Confirm Password</label>
-                        <input type='password' placeholder=' Confirm new Password ' value={confirmPassword} onChange={((e) => setConfirmPassword(e.target.value))} className='mt-1 cursor-pointer shadow border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-3' />
+                        <div className='relative'>
+                            <input
+                                type={isNewPasswordVisible ? 'text' : 'password'}
+                                placeholder='Enter new Password'
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                className='mt-1 cursor-pointer outline-none shadow border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-3 w-full'
+                            />
+                            <div
+                                className='absolute inset-y-0 right-3 flex items-center cursor-pointer'
+                                onClick={toggleNewPasswordVisibility}
+                            >
+                                {isNewPasswordVisible ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <label className='text-sm'>Confirm Password</label>
+                        <div className='relative'>
+                            <input
+                                type={isConfirmNewPasswordVisible ? 'text' : 'password'}
+                                placeholder='Confirm new Password'
+                                value={confirmNewPassword}
+                                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                                className='mt-1 cursor-pointer outline-none shadow border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-3 w-full'
+                            />
+                            <div
+                                className='absolute inset-y-0 right-3 flex items-center cursor-pointer'
+                                onClick={toggleConfirmNewPasswordVisibility}
+                            >
+                                {isConfirmNewPasswordVisible ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                            </div>
+                        </div>
                     </div>
-                    <br/>
+                    <br />
                     {/* <Link href="/Login"> */}
                     <button type='submit' className='border-[#FFA500]  w-full md:text-xl text-lg border text-white rounded-lg bg-[#FFA500] md:p-4 p-3 shadow cursor-pointer'>Change</button>
                     {/* </Link> */}
                 </form>
 
             </div>
-            {loader?<Loader/>:null}
+            {loader ? <Loader /> : null}
             <div className='p-2 md:text-xl text-sm text-center md:hidden block flex justify-center items-center gap-1 text-black bg-[#FFA500] fixed bottom-0 w-full'>
-    <p>Developed By</p>
-    <a href="#" className='font-bold'>Mayonity</a>
-</div>
+                <p>Developed By</p>
+                <a href="#" className='font-bold'>Mayonity</a>
+            </div>
 
         </>
     )
