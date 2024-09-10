@@ -22,11 +22,11 @@ const Login = () => {
     const { data: session, status } = useSession();
     let token = session?.authToken || Cookies.get('authToken')
     // login functionality
-    useEffect(() => {
-        if (!token) {
-            toast.warn("Login to Proceed")
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!token) {
+    //         toast.warn("Login to Proceed")
+    //     }
+    // }, [])
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);
@@ -44,7 +44,8 @@ const Login = () => {
                 toast.success("Login Successfully")
                 roleBased(token, router);
             } else {
-                toast.error(response.data.message);
+                toast.error("Email/Password is incorrect");
+                // toast.error(response.data.message);
             }
         } catch (error) {
             toast.error("Network Error");
@@ -77,7 +78,7 @@ const Login = () => {
                             <a href="#" className='text-xs md:text-sm' >Remember me</a>
                         </div>
 
-                        <Link href="/forget-password" className='text-[#FFA500] text-xs md:text-sm underline undeline-offset-2'>forgot password?</Link>
+                        <Link href="/forget-password" className='text-[#FFA500] text-xs md:text-sm underline undeline-offset-2'>Forgot Password?</Link>
                     </div>
                     <button type='submit' className='border-[#FFA500] w-full md:text-xl text-md border text-white rounded-lg bg-[#FFA500] md:p-4 p-2 shadow-xl cursor-pointer'>Login</button>
                     <Link href="/signup">
