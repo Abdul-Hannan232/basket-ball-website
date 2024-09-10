@@ -1,13 +1,17 @@
 "use client"
+import { useRouter } from 'next/navigation';
 import { useState } from 'react'
 import React from 'react'
 import { ForgetPasswordUser } from '../../services/authServices'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../LoadingBall"
+
 const ForgetPass = () => {
+    const router = useRouter();
     const [email, setEmail] = useState(" ")
     const [loader, setLoader] = useState(false)
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoader(true)
@@ -18,9 +22,11 @@ const ForgetPass = () => {
             const responce = await ForgetPasswordUser(body)
             if (responce.status === 200) {
                 toast.success(responce.data.message)
-                console.log(responce, "hgduijh")
+                router.push("/signin")
             } else {
-                toast.error(responce.data.message)
+                // toast.error(responce.data.message)
+                toast.error("Email/Password is incorrect");
+                // router.push('/second-page');
             }
         }
         catch (error) {
