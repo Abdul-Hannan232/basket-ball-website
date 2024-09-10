@@ -5,7 +5,6 @@ import Footer from '../../component/FooterComponent'
 export default function Donate  () {
     return (
         <div>
-            <Navbar />
             <h1 className="md:mb-10 mb-5 md:mt-40 mt-24 md:text-5xl text-xl font-bold text-center ">Donate Now</h1>
             <div className='2xl:w-[30%] md:w-[50%] w-[90%] shadow mx-auto md:p-14 p-8 mb-40'>
                 <p className='md:text-xl text-lg'>Your Donation    </p>
@@ -18,8 +17,6 @@ export default function Donate  () {
                 <div className='bg-[#FFA500] w-full p-4 md:h-20 h-14 mt-5'>
                     <Image src="/paypal.png" alt="paypal" width={179.64} height={52} className='mx-auto' />
                 </div>
-            </div>
-            <Footer />
-        </div>
+            </div>        </div>
     )
 }

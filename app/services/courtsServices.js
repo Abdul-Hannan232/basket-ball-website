@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
-export const allCourts = async () =>{
+export const allCourts = async () =>{ 
     try {
         const token = Cookies.get('authToken')
         const response = await axios.get(
@@ -20,3 +20,21 @@ export const allCourts = async () =>{
     }
     
 }
+
+export const addCourt = async (body,token) => {
+   
+    try {
+         const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/court/add`,
+            body,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,                },
+            }
+        );
+
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};

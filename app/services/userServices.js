@@ -63,3 +63,25 @@ export const updateUser = async (body) => {
     }
 
 }
+
+export const deleteUser = async (body) => {
+    try {
+
+        const token = Cookies.get('authToken');
+ 
+        const response = await axios.delete(
+            `${process.env.NEXT_PUBLIC_API_URL}/user/${body.id}}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        return response;
+    }
+    catch (error) {
+        return error.response || { message: "An error occurred", error };
+    }
+
+}

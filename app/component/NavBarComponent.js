@@ -7,13 +7,11 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
-import { signOut, useSession } from 'next-auth/react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { signOut } from 'next-auth/react';
+import { useAuthToken } from '../customHook/useAuthToken';
 const NavBarComponent = () => {
+    const { token, decodedToken } = useAuthToken();
     const router = useRouter("");
-    const { data: session, status } = useSession();
     const [open, setOpen] = useState(false)
     const [loggedInUser, setloggedInUser] = useState()
     const toOpen = () => {
@@ -30,20 +28,17 @@ const NavBarComponent = () => {
 
 
     useEffect(() => {
-        const token = session?.authToken || Cookies.get('authToken');
         if (token) {
-            const decodedToken = jwtDecode(token);
             setloggedInUser(decodedToken)
         }
 
-    }, [router, session])
+    }, [router, token])
 
 
 
     return (
         <div className='bg-[#FFA500] sticky top-0 left-0 right-0 p-4 flex z-40 items-center justify-between'>
-            <ToastContainer />
-            <div className='flex items-center gap-1'>
+             <div className='flex items-center gap-1'>
                 <IoIosMenu className='text-black text-xl cursor-pointer md:hidden block' onClick={toOpen} />
                 <Image src="/LOGO.png" width={60} height={60} alt='image' />
             </div>
@@ -85,35 +80,35 @@ const NavBarComponent = () => {
                 </div>
             )}
 
-{open && (
-    <>
-        <div className='absolute top-0 bg-gray-600 w-full h-screen left-0 right-0 '>
-            <div className='flex justify-between bg-[#FFA500] items-center p-5'>
-                <h1 className=''>Logo</h1>
-                <div className='flex items-center gap-3'>
-                    <IoCartOutline className=' text-2xl text-black font-light ' />
-                    <RxCross2 className=' text-2xl text-black font-light cursor-pointer ' onClick={toClose} />
-                </div>
-            </div>
-            <ul className='space-y-3 text-sm mt-10 p-3 font-bold'>
-                <li><Link href="/home" className='focus:text-[#FFA500]' onClick={toClose}>Home</Link></li>
-                <li><Link href="/courts" className='focus:text-[#FFA500]' onClick={toClose}>Court</Link></li>
-                <li><Link href="/" className='focus:text-[#FFA500]' onClick={toClose}>Shop</Link></li>
-                <li><Link href="/donate" className='focus:text-[#FFA500]' onClick={toClose}>Donate</Link></li>
-                {loggedInUser ? (
-                    <>
-                        <li onClick={handleLogout}><Link href="/signup" className='focus:text-[#FFA500]' onClick={toClose}>Logout</Link></li>
-                    </>
-                ) : (
-                    <>
-                        <li><Link href="/signin" className='focus:text-[#FFA500]' onClick={toClose}>Login</Link></li>
-                        <li><Link href="/signup" className='focus:text-[#FFA500]' onClick={toClose}>Signup</Link></li>
-                    </>
-                )}
-            </ul>
-        </div>
-    </>
-)}
+            {open && (
+                <>
+                    <div className='absolute top-0 bg-gray-600 w-full h-screen left-0 right-0 '>
+                        <div className='flex justify-between bg-[#FFA500] items-center p-5'>
+                            <h1 className=''>Logo</h1>
+                            <div className='flex items-center gap-3'>
+                                <IoCartOutline className=' text-2xl text-black font-light ' />
+                                <RxCross2 className=' text-2xl text-black font-light cursor-pointer ' onClick={toClose} />
+                            </div>
+                        </div>
+                        <ul className='space-y-3 text-sm mt-10 p-3 font-bold'>
+                            <li><Link href="/home" className='focus:text-[#FFA500]' onClick={toClose}>Home</Link></li>
+                            <li><Link href="/courts" className='focus:text-[#FFA500]' onClick={toClose}>Court</Link></li>
+                            <li><Link href="/" className='focus:text-[#FFA500]' onClick={toClose}>Shop</Link></li>
+                            <li><Link href="/donate" className='focus:text-[#FFA500]' onClick={toClose}>Donate</Link></li>
+                            {loggedInUser ? (
+                                <>
+                                    <li onClick={handleLogout}><Link href="/signup" className='focus:text-[#FFA500]' onClick={toClose}>Logout</Link></li>
+                                </>
+                            ) : (
+                                <>
+                                    <li><Link href="/signin" className='focus:text-[#FFA500]' onClick={toClose}>Login</Link></li>
+                                    <li><Link href="/signup" className='focus:text-[#FFA500]' onClick={toClose}>Signup</Link></li>
+                                </>
+                            )}
+                        </ul>
+                    </div>
+                </>
+            )}
 
         </div>
 

@@ -12,7 +12,7 @@ const AddNewUser = () => {
     const [loader, setLoader] = useState(false);
     const [previewUrl, setPreviewUrl] = useState("/edit.png");
     const [file, setFile] = useState(null);
-
+    
     const [formData, setFormData] = useState({
         name: '',
         first_name: '',
@@ -45,7 +45,6 @@ const AddNewUser = () => {
 
         // Create a FormData instance
         const updatedFormData = new FormData();
-
         // Append form fields to FormData
         for (const key in formData) {
             if (formData[key]) {
@@ -55,10 +54,29 @@ const AddNewUser = () => {
         if (file) {
             updatedFormData.append('image', file);
         }
-        try {
+         try {
             const response = await addNewUser(updatedFormData);
             console.log("response",response)
-            if (response.status === 201) {
+             if (response.status === 201) {
+                setFormData({
+                    name: '',
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    height: '',
+                    weight: '',
+                    joined_since: '',
+                    phone_number: '',
+                    country: '',
+                    role: '',
+                    team: '',
+                    jersey_number: '',
+                    position: '',
+                    password: '12345678',
+                    image: ''
+                })
+                setFile(null)
+                setPreviewUrl("/edit.png")
                 toast.success(response.data.message);
             } else {
                 toast.error(response.data.message);
@@ -90,7 +108,7 @@ const AddNewUser = () => {
                                 </div>
 
                                 <div className='p-3 rounded-xl flex items-center gap-2 border border-[#CACACA]'>
-                                    <FileUpload setFile={setFile} setPreviewUrl={setPreviewUrl} />
+                                    <FileUpload fileControl={setFile} previewControl={setPreviewUrl} type="single" />
                                     <Image src="/edit.png" alt="image" width={20} height={20} />
                                 </div>
                             </div>
