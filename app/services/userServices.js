@@ -70,7 +70,7 @@ export const deleteUser = async (body) => {
         const token = Cookies.get('authToken');
  
         const response = await axios.delete(
-            `${process.env.NEXT_PUBLIC_API_URL}/user/${body.id}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/user/${body.id}}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,

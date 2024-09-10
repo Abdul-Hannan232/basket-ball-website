@@ -6,7 +6,7 @@ import { Button } from 'primereact/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import { allUsers as fetchAllUsers, updateUser,deleteUser as removeUser } from "../../services/userServices" 
+import { allUsers as fetchAllUsers, updateUser, deleteUser as removeUser } from "../../services/userServices"
 import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,9 +17,13 @@ import BlockUserPopup from "../../component/admin/BlockUser"
 export default function Users() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
-  const [users, setUsers] = useState([])
-  useEffect(() => {
+  const [users, setUsers] = useState([]) //search filtration
+  const [deleteUserPopupVisible, setDeleteUserPopupVisible] = useState(false); // help in open/close delete popup
+  const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false); // help in open/close block popup
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [remarks, setRemarks] = useState(''); //comment for blocking user
 
+  useEffect(() => {
     setSpinner(true);
     const getUsers = async () => {
       try {
@@ -51,37 +55,32 @@ export default function Users() {
 
 
 
-  const [deletekUserPopupVisible, setDeleteUserPopupVisible] = useState(false);
-  const [deleteUsers, setDeleteUsers] = useState(false)
+  // Delete User
   const openDeleteUserPopup = (user) => {
     setSelectedUser(user);
     setDeleteUserPopupVisible(true)
   }
   const closeDeleteUserPopup = () => {
     setDeleteUserPopupVisible(false);
-   };
+  };
   const deleteUser = async (data) => {
-      try {
+    try {
       const response = await removeUser(data);
       if (response.status === 200) {
-        // Toggle the specific user's isactive status
-        const updatedUsers = allUsers.filter(user => user.id !== data.id);
+         const updatedUsers = allUsers.filter(user => user.id !== data.id);
         closeDeleteUserPopup()
-        toast.success(`${data.name } deleted successfully`)
+        toast.success(`${data.name} deleted successfully`)
         setAllUsers(updatedUsers);
       }
 
     } catch (error) {
       console.error('Error updating user:', error);
       toast.error("Network Error");
-    } 
+    }
   };
-  
 
-  const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [remarks, setRemarks] = useState('');
 
+  // Block User
   const openBlockUserPopup = (user) => {
     setSelectedUser(user);
     setBlockUserPopupVisible(true);
@@ -92,15 +91,15 @@ export default function Users() {
   };
 
   const blockUser = async (rowData) => {
-      const message = rowData.isactive ? `${rowData.name} blocked successfully` : `${rowData.name} unblocked successfully`;
-     const data = { id: rowData.id, isactive: !rowData.isactive, remarks: remarks }
+    const message = rowData.isactive ? `${rowData.name} blocked successfully` : `${rowData.name} unblocked successfully`;
+    const data = { id: rowData.id, isactive: !rowData.isactive, remarks: remarks }
     try {
       const response = await updateUser(data);
       if (response.status === 200) {
-         const updatedUsers = allUsers.map(user =>
+        const updatedUsers = allUsers.map(user =>
           user.id === rowData.id
             ? { ...user, isactive: !user.isactive, remarks: remarks }
-            : user 
+            : user
         );
         closeBlockUserPopup()
         toast.success(message)
@@ -112,6 +111,8 @@ export default function Users() {
       toast.error("Network Error");
     }
   };
+
+
   return (
     <>
       <ToastContainer />
@@ -134,7 +135,7 @@ export default function Users() {
               />
             </div>
             <button className='bg-[#FFA500] text-white rounded-xl p-3 text-xl w-60 text-center'>
-              <Link href="/admin/usersDetail">              Add User
+              <Link href="/admin/user-detail"> Add User
               </Link>            </button>
           </div>
 
@@ -215,7 +216,7 @@ export default function Users() {
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   body={(rowData) => (
                     <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-xl" onClick={() => openDeleteUserPopup (rowData)} />
+                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-xl" onClick={() => openDeleteUserPopup(rowData)} />
                     </div>
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
@@ -228,12 +229,12 @@ export default function Users() {
 
         </div>
       </div>
-      {deletekUserPopupVisible && (
-        <DeleteUserPopup  
-        user={selectedUser}
-        onDeleteUser={deleteUser}
-        onClose={closeDeleteUserPopup}
-          />
+      {deleteUserPopupVisible && (
+        <DeleteUserPopup
+          user={selectedUser}
+          onDeleteUser={deleteUser}
+          onClose={closeDeleteUserPopup}
+        />
       )}
       {blockUserPopupVisible && (
         <BlockUserPopup
