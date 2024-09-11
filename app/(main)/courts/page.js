@@ -16,26 +16,18 @@ import { useAuthToken } from '../../customHook/useAuthToken';
 import FileUpload from '../../component/FileUpload'
 import Image from 'next/image';
 
-const MAX_FILES = 5;
+const MAX_FILES = 6;
 
 export default function Courts() {
     const { token, decodedToken } = useAuthToken();
 
     const router = useRouter("");
-    const [open, setOpen] = useState(false)
     const [loggedInUser, setloggedInUser] = useState()
-    const toOpen = () => {
-        setOpen(true)
-    }
-    const toClose = () => {
-        setOpen(false)
-    }
-    const handleLogout = () => {
-        Cookies.remove('authToken');
-        router.push("/");
-        signOut()
-    };
-
+    const [showPopup, setShowPopup] = useState(false);
+    const [loader, setLoader] = useState(false)
+    const [updateContent, setUpdateContent] = useState(false)
+    const [previewUrls, setPreviewUrls] = useState(Array(MAX_FILES).fill(null));
+    const [files, setFiles] = useState(Array(MAX_FILES).fill(null));
 
     useEffect(() => {
         if (token) {
@@ -43,11 +35,6 @@ export default function Courts() {
         }
 
     }, [router, token])
-    const [showPopup, setShowPopup] = useState(false);
-    const [loader, setLoader] = useState(false)
-    const [updateContent, setUpdateContent] = useState(false)
-    const [previewUrls, setPreviewUrls] = useState(Array(MAX_FILES).fill(null));
-    const [files, setFiles] = useState(Array(MAX_FILES).fill(null));
 
     const [formData, setFormData] = useState({
         user_id: decodedToken?.id,
@@ -260,7 +247,7 @@ export default function Courts() {
                                         {previewUrls.length > 0 && (
                                             <div key={0} style={{ textAlign: 'center' }} className='w-[95%] mx-auto rounded-md'>
                                                 <Image
-                                                    src={previewUrls[0] || '/placeholder.png'} // Default placeholder image if no image is selected
+                                                    src={previewUrls[0] || '/courts_placeholder.jpg'} // Default placeholder image if no image is selected
                                                     alt={`Preview 1`}
                                                     style={{ width: '100%', borderRadius:"7px",height: '200px', objectFit: 'cover' }}
                                                     unoptimized
@@ -273,10 +260,10 @@ export default function Courts() {
 
                                     {/* Second row with up to four images */}
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
-                                        {previewUrls.slice(1, 5).map((preview, index) => (
+                                        {previewUrls.slice(1, 6).map((preview, index) => (
                                             <div key={index + 1} style={{ textAlign: 'center' }} className='w-[80%] rounded-md mx-auto '>
                                                 <Image
-                                                    src={preview || '/placeholder.png'} // Default placeholder image if no image is selected
+                                                    src={preview || '/courts_placeholder.jpg'} // Default placeholder image if no image is selected
                                                     alt={`Preview ${index + 2}`}
                                                     style={{ width: '100px',borderRadius:"7px", height: '70px', objectFit: 'cover' }}
                                                     unoptimized

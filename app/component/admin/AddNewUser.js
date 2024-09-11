@@ -10,7 +10,7 @@ import FileUpload from "../FileUpload";
 
 const AddNewUser = () => {
     const [loader, setLoader] = useState(false);
-    const [previewUrl, setPreviewUrl] = useState("/edit.png");
+    const [previewUrl, setPreviewUrl] = useState("/user_placeholder.jpeg");
     const [file, setFile] = useState(null);
     
     const [formData, setFormData] = useState({
