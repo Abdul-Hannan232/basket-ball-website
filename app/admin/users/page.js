@@ -67,7 +67,7 @@ export default function Users() {
     try {
       const response = await removeUser(data);
       if (response.status === 200) {
-         const updatedUsers = allUsers.filter(user => user.id !== data.id);
+        const updatedUsers = allUsers.filter(user => user.id !== data.id);
         closeDeleteUserPopup()
         toast.success(`${data.name} deleted successfully`)
         setAllUsers(updatedUsers);
@@ -135,7 +135,7 @@ export default function Users() {
               />
             </div>
             <button className='bg-[#FFA500] text-white rounded-xl p-3 text-xl w-60 text-center'>
-              <Link href="/admin/user-detail"> Add User
+              <Link href="/admin/add-User"> Add User
               </Link>            </button>
           </div>
 
@@ -166,13 +166,24 @@ export default function Users() {
                   header="Display Name"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                  body={(rowData) => (
+                    <Link href={`/admin/user-detail`}>
+                     {rowData.name}
+                    </Link>
+                  )}
                 />
+
                 <Column
                   field="email"
                   header="Email"
                   headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px' }}
                   style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-                />
+                  body={(rowData) => (
+                    <Link href={`/admin/user-detail`}>
+                     {rowData.email}
+                    </Link>
+                  )}
+               />
                 <Column
                   field="phone_number"
                   header="Phone number"
