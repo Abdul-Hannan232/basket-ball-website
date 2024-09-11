@@ -166,13 +166,24 @@ export default function Users() {
                   header="Display Name"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                  body={(rowData) => (
+                    <Link href={`/admin/user-detail`}>
+                     {rowData.name}
+                    </Link>
+                  )}
                 />
+
                 <Column
                   field="email"
                   header="Email"
                   headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px' }}
                   style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-                />
+                  body={(rowData) => (
+                    <Link href={`/admin/user-detail`}>
+                     {rowData.email}
+                    </Link>
+                  )}
+               />
                 <Column
                   field="phone_number"
                   header="Phone number"
