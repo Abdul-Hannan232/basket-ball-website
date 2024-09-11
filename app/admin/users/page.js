@@ -67,7 +67,7 @@ export default function Users() {
     try {
       const response = await removeUser(data);
       if (response.status === 200) {
-         const updatedUsers = allUsers.filter(user => user.id !== data.id);
+        const updatedUsers = allUsers.filter(user => user.id !== data.id);
         closeDeleteUserPopup()
         toast.success(`${data.name} deleted successfully`)
         setAllUsers(updatedUsers);
@@ -135,7 +135,7 @@ export default function Users() {
               />
             </div>
             <button className='bg-[#FFA500] text-white rounded-xl p-3 text-xl w-60 text-center'>
-              <Link href="/admin/user-detail"> Add User
+              <Link href="/admin/add-User"> Add User
               </Link>            </button>
           </div>
 

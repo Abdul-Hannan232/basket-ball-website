@@ -1,6 +1,6 @@
 import React from 'react';
 import AddNewUser from '../../component/admin/AddNewUser'
-
+import Sidebar from '../../component/adminsidebar';
 export default function UserDetail() {
 
     return (
