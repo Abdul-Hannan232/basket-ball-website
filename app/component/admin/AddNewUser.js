@@ -176,8 +176,8 @@ const AddNewUser = () => {
                         </div>
                         <div className='flex justify-end mb-10 w-[75%] mx-auto'>
                             <div className='flex items-center gap-5 w-[370px]'>
-                                <Button label='Cancel' className='mt-10 text-white p-4 w-20 border-2 border-[#9A9A9A] text-[#6A6868] bg-white rounded-xl w-full' />
-                                <Button label='Save' type="submit" className='mt-10 text-white p-4 w-20 border-none text-white bg-[#269C55] rounded-xl w-full' />
+                                <Button label='Cancel' className='mt-10 text-[#6A6868] text-xl  p-4 w-20 border-2 border-[#9A9A9A] text-[#6A6868] bg-white rounded-xl w-full' />
+                                <Button label='Save' type="submit" className='mt-10  text-xl text-white p-4 w-20 border-none text-white bg-[#269C55] rounded-xl w-full' />
                             </div>
                         </div>
                     </div>

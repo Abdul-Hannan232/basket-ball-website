@@ -12,7 +12,10 @@
   font-weight: 700;
   font-style: normal;
 }
+.hover-design{
+  background: linear-gradient(90deg, #FFA500 0%, rgba(255, 165, 0, 0.09) 85.85%);
 
+}
 /* Styling for individual page numbers */
 .custom-paginator .p-paginator .p-paginator-page {
   @apply bg-white text-black rounded-md w-10 h-10 inline items-center text-center justify-center mx-1;
