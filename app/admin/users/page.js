@@ -185,9 +185,15 @@ export default function Users() {
                   headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px' }}
                   style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => (
-                    <Link href={`/admin/user-detail`}>
-                      {rowData.email}
-                    </Link>
+                    <Link
+                    href={{
+                      pathname: '/admin/user-detail',
+                      query: { id: rowData.id }, // Serialize the object
+                    }}
+                  >
+
+                    {rowData.email}
+                  </Link>
                   )}
                 />
                 <Column
