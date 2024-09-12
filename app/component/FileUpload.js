@@ -61,7 +61,7 @@ function FileUpload({ fileControl, previewControl, type, text,color }) {
     return (
         <div>
             {/* Text to click for uploading a file */}
-            <p onClick={triggerFileUpload} className={`cursor-pointer md:text-sm text-xs text-center  text-${color} flex justify-center`}>
+            <p onClick={triggerFileUpload} className={`cursor-pointer md:text-sm text-xs text-center  text-[${color}] flex justify-center`}>
                 {text}
             </p>
 

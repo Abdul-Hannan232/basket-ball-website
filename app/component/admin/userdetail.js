@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import UserForm from './UserForm'
+import { useRouter } from 'next/navigation';
 import Loader from "../LoadingBall";
 import { updateUser, getUser } from "../../services/userServices";
 import { ToastContainer, toast } from 'react-toastify';
 import { useAuthToken } from "../../customHook/useAuthToken"
 export default function UserDetail() {
+    const router = useRouter();
     const [file, setFile] = useState(null);
     const { token } = useAuthToken();
     const [previewUrl, setPreviewUrl] = useState("");
@@ -72,6 +74,8 @@ export default function UserDetail() {
         try {
             const response = await updateUser(updatedFormData, token);
             if (response.status === 200) {
+                router.push("/admin/users")
+
                 // setFile(null)
                 // setPreviewUrl("/user_placeholder.png")
                 toast.success(response.data.message);
