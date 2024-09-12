@@ -62,9 +62,13 @@ export default function UserDetail() {
             }
         }
         if (file) {
-            updatedFormData.append('oldImage', formData.image.split('/').pop());
+            if(formData.image){
+                updatedFormData.append('oldImage', formData.image.split('/').pop());
+
+            }
             updatedFormData.append('image', file);
         }
+
 
         try {
             const response = await updateUser(updatedFormData, token);
