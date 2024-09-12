@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, {Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import UserForm from '../../component/admin/UserForm'
 import Loader from "../../component/LoadingBall";
@@ -81,7 +81,8 @@ export default function UserDetail() {
         }
     };
     return (
-        <>
+        <Suspense fallback={<div>Loading User Details...</div>}>
+
             <div className='flex'>
                 <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex items-center text-white'>
                     <h1 className='text-3xl font-bold'>Basketball</h1>
@@ -98,6 +99,6 @@ export default function UserDetail() {
 
             </div>
             {loader ? <Loader /> : null}
-        </>
+        </Suspense>
     );
 }
