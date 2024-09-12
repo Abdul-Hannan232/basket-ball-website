@@ -1,9 +1,9 @@
-"use client"
-import React, {Suspense, useState, useEffect } from 'react';
+"use client";
+import React, { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import UserForm from '../../component/admin/UserForm'
 import Loader from "../../component/LoadingBall";
-import { updateUser ,getUser} from "../../services/userServices";
+import { updateUser, getUser } from "../../services/userServices";
 import { ToastContainer, toast } from 'react-toastify';
 import { useAuthToken } from "../../customHook/useAuthToken"
 export default function UserDetail() {
@@ -29,30 +29,31 @@ export default function UserDetail() {
         image: ''
     });
 
-    const searchParams = useSearchParams();
-    const id = searchParams.get('id'); // Get the serialized data
-   
+    // const searchParams = useSearchParams();
+    // const id = searchParams.get('id'); // Get the serialized data
+    const id = 42
+
     useEffect(() => {
         const fetchUser = async () => {
-          if (id) {
-            try {
-              const response = await getUser(id, token);
-              console.log("res",response)
-                setFormData(response.data)
-            } catch (error) {
-                console.log("useEffet error",error.message)
-              toast.error(error.message);
+            if (id) {
+                try {
+                    const response = await getUser(id, token);
+                    console.log("res", response)
+                    setFormData(response.data)
+                } catch (error) {
+                    console.log("useEffet error", error.message)
+                    toast.error(error.message);
+                }
             }
-          }
         };
-    
+
         fetchUser();
-      }, [id, token]); 
- 
+    }, [id, token]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);
-         // Create a FormData instance
+        // Create a FormData instance
         const updatedFormData = new FormData();
         // Append form fields to FormData
         for (const key in formData) {
@@ -60,14 +61,14 @@ export default function UserDetail() {
                 updatedFormData.append(key, formData[key]);
             }
         }
-         if (file) {
-             updatedFormData.append('oldImage', formData.image.split('/').pop());
-             updatedFormData.append('image', file);
+        if (file) {
+            updatedFormData.append('oldImage', formData.image.split('/').pop());
+            updatedFormData.append('image', file);
         }
 
         try {
-             const response = await updateUser(updatedFormData,token);
-             if (response.status === 200) {
+            const response = await updateUser(updatedFormData, token);
+            if (response.status === 200) {
                 // setFile(null)
                 // setPreviewUrl("/user_placeholder.png")
                 toast.success(response.data.message);
@@ -75,7 +76,7 @@ export default function UserDetail() {
                 toast.error(response.data.message);
             }
         } catch (error) {
-             toast.error("Network error: ");
+            toast.error("Network error: ");
         } finally {
             setLoader(false);
         }
