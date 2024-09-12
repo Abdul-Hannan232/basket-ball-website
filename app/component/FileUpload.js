@@ -80,7 +80,6 @@ function FileUpload({ fileControl, previewControl, type, text,color }) {
                 <input
                     ref={fileInputRef}
                     style={{ display: "none" }}
-                    required
                     type="file"
                     accept="image/*"
                     onChange={handleFileChange}

@@ -167,8 +167,14 @@ export default function Users() {
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => (
-                    <Link href={`/admin/user-detail`}>
-                     {rowData.name}
+                    <Link
+                      href={{
+                        pathname: '/admin/user-detail',
+                        query: { id: rowData.id }, // Serialize the object
+                      }}
+                    >
+
+                      {rowData.name}
                     </Link>
                   )}
                 />
@@ -180,10 +186,10 @@ export default function Users() {
                   style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => (
                     <Link href={`/admin/user-detail`}>
-                     {rowData.email}
+                      {rowData.email}
                     </Link>
                   )}
-               />
+                />
                 <Column
                   field="phone_number"
                   header="Phone number"

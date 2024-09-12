@@ -2,35 +2,10 @@
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import Image from 'next/image';
-import Loader from "../LoadingBall";
-import { addUser as addNewUser } from "../../services/userServices";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import FileUpload from "../FileUpload";
 
-const AddNewUser = () => {
-    const [loader, setLoader] = useState(false);
-    const [previewUrl, setPreviewUrl] = useState("/user_placeholder.jpeg");
-    const [file, setFile] = useState(null);
-    
-    const [formData, setFormData] = useState({
-        name: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        height: '',
-        weight: '',
-        joined_since: '',
-        phone_number: '',
-        country: '',
-        role: '',
-        team: '',
-        jersey_number: '',
-        position: '',
-        password: '12345678',
-        image: ''
-    });
-
+const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl }) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -39,58 +14,10 @@ const AddNewUser = () => {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoader(true);
 
-        // Create a FormData instance
-        const updatedFormData = new FormData();
-        // Append form fields to FormData
-        for (const key in formData) {
-            if (formData[key]) {
-                updatedFormData.append(key, formData[key]);
-            }
-        }
-        if (file) {
-            updatedFormData.append('image', file);
-        }
-         try {
-            const response = await addNewUser(updatedFormData);
-            console.log("response",response)
-             if (response.status === 201) {
-                setFormData({
-                    name: '',
-                    first_name: '',
-                    last_name: '',
-                    email: '',
-                    height: '',
-                    weight: '',
-                    joined_since: '',
-                    phone_number: '',
-                    country: '',
-                    role: '',
-                    team: '',
-                    jersey_number: '',
-                    position: '',
-                    password: '12345678',
-                    image: ''
-                })
-                setFile(null)
-                setPreviewUrl("/edit.png")
-                toast.success(response.data.message);
-            } else {
-                toast.error(response.data.message);
-            }
-        } catch (error) {
-            toast.error("Network error: ");
-        } finally {
-            setLoader(false);
-        }
-    };
 
     return (
         <>
-            <ToastContainer />
             <div className='w-screen'>
                 <form onSubmit={handleSubmit}>
                     <div className='border border-[#CACACA] m-5 rounded-xl m-5'>
@@ -100,15 +27,21 @@ const AddNewUser = () => {
                         <div className='border-2 border-[#CACACA] mx-auto mt-20 w-[80%] rounded-3xl'>
                             <div className='flex items-center justify-between gap-10 px-3'>
                                 <div className='flex items-center gap-10 p-5'>
-                                    <Image src={previewUrl} alt="image" width={140} height={140} className='w-40 h-40 rounded-full' />
+                                    <Image
+                                        src={previewUrl ? previewUrl : formData?.image ? `${formData.image}` : '/user_placeholder.jpeg'}
+                                        alt="user Image"
+                                        width={140}
+                                        height={140}
+                                        className='w-40 h-40 rounded-full'
+                                    />
                                     <div>
-                                        <h1 className='text-xl text-black font-bold'>John Doe</h1>
-                                        <p className='text-sm text-[#636161]'>example123@gmail.com</p>
+                                        <h1 className='text-xl text-black font-bold'>{formData.name}</h1>
+                                        <p className='text-sm text-[#636161]'>{formData.email}</p>
                                     </div>
                                 </div>
 
                                 <div className='p-4 rounded-xl flex items-center gap-6 border border-[#CACACA]'>
-                                    <FileUpload color={"#000000"}fileControl={setFile} text={"Edit profile picture"} previewControl={setPreviewUrl} type="single" />
+                                    <FileUpload color={"#000000"} fileControl={setFile} text={"Edit profile picture"} previewControl={setPreviewUrl} type="single" />
                                     <Image src="/edit.png" alt="image" width={20} height={20} />
                                 </div>
                             </div>
@@ -183,9 +116,9 @@ const AddNewUser = () => {
                     </div>
                 </form>
             </div>
-            {loader ? <Loader /> : null}
+
         </>
     );
 };
 
-export default AddNewUser;
+export default UserForm;
