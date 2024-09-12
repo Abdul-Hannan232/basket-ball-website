@@ -40,7 +40,7 @@ function FileUpload({ fileControl, previewControl, type, text,color }) {
         let previewIndex = previewControl.previewUrls.findIndex(preview => preview === null);
 
         files.forEach((file) => {
-            if (validateFileType(file) && previewIndex !== -1 && previewIndex < 5) {
+            if (validateFileType(file) && previewIndex !== -1 && previewIndex < 6) {
                 newPreviews[previewIndex] = URL.createObjectURL(file);
                 newFiles[previewIndex] = file;
                 previewIndex++;
@@ -80,7 +80,6 @@ function FileUpload({ fileControl, previewControl, type, text,color }) {
                 <input
                     ref={fileInputRef}
                     style={{ display: "none" }}
-                    required
                     type="file"
                     accept="image/*"
                     onChange={handleFileChange}
