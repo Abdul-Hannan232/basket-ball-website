@@ -173,7 +173,6 @@ export default function Users() {
                         query: { id: rowData.id }, // Serialize the object
                       }}
                     >
-
                       {rowData.name}
                     </Link>
                   )}
