@@ -31,7 +31,7 @@ export default function UserDetail() {
 
     // const searchParams = useSearchParams();
     // const id = searchParams.get('id'); // Get the serialized data
-    const id = 42
+    const id = 25
 
     useEffect(() => {
         const fetchUser = async () => {
