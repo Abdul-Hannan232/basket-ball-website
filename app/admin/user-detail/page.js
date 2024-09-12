@@ -81,7 +81,7 @@ export default function UserDetail() {
         }
     };
     return (
-        <Suspense fallback={<div>Loading User Details...</div>}>
+        <Suspense fallback={<div> <Loader /> </div>}>
 
             <div className='flex'>
                 <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex items-center text-white'>
