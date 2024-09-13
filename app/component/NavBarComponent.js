@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie';
 import { signOut } from 'next-auth/react';
 import { useAuthToken } from '../customHook/useAuthToken';
-const NavBarComponent = () => {
+ const NavBarComponent = () => {
     const { token, decodedToken } = useAuthToken();
     const router = useRouter("");
     const [open, setOpen] = useState(false)
@@ -27,8 +27,9 @@ const NavBarComponent = () => {
     };
 
 
-    useEffect(() => {
+    useEffect( () => {
         if (token) {
+            console.log("decode",decodedToken)
             setloggedInUser(decodedToken)
         }
 
@@ -38,7 +39,7 @@ const NavBarComponent = () => {
 
     return (
         <div className='bg-[#FFA500] sticky top-0 left-0 right-0 p-4 flex z-40 items-center justify-between'>
-             <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1'>
                 <IoIosMenu className='text-black text-xl cursor-pointer md:hidden block' onClick={toOpen} />
                 <Image src="/LOGO.png" width={60} height={60} alt='image' />
             </div>
@@ -54,15 +55,21 @@ const NavBarComponent = () => {
 
 
             {loggedInUser ? (
-                <div className='flex gap-2 items-center'>
-                    {/* <CgProfile className='text-2xl text-black font-medium' /> */}
-                    <h3 className="text-2xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 shadow-lg hover:text-blue-500 transition duration-300">
-                        {loggedInUser.name}
-                    </h3>
-                    <button className='md:block hidden py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm rounded-md' onClick={handleLogout}>
-                        Logout
-                    </button>
-                </div>
+                    <div className='flex gap-2 items-center'>
+                          <Image
+                    src={loggedInUser.image?loggedInUser.image:'/user_placeholder.jpeg'} // Make sure this URL is correct
+                    alt="user profile"
+                    width={50}
+                    height={50}
+                />
+                        {/* <CgProfile className='text-2xl text-black font-medium' /> */}
+                        <h3 className="text-2xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 shadow-lg hover:text-blue-500 transition duration-300">
+                            {loggedInUser.name}
+                        </h3>
+                        <button className='md:block hidden py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm rounded-md' onClick={handleLogout}>
+                            Logout
+                        </button>
+                    </div>
             ) : (
                 <div className='flex gap-2 items-center'>
                     {/* <CgProfile className='text-2xl text-black font-medium' /> */}
@@ -112,7 +119,7 @@ const NavBarComponent = () => {
 
         </div>
 
-    )
+    ) 
 }
 
 export default NavBarComponent
