@@ -16,7 +16,7 @@ export async function middleware(req) {
 
   // Define protected routes for admin and user roles
   const adminRoutes = ['/admin'];
-  const protectedRoutes = ['/admin'];// routes where user can not go without login
+  const protectedRoutes = ['/admin','/user-profile'];// routes where user can not go without login
   const authenticatedRoutes = ['/signin', '/signup', '/reset-password', '/forget-password']
 
   if (!token) {

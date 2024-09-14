@@ -1,12 +1,21 @@
 "use client";
 import React, { useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'; 
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 const AdminSidebar = () => {
   const [activeLink, setActiveLink] = useState('');
+  const router = useRouter("")
+
 
   const handleClick = (link) => {
     setActiveLink(link);
+  };
+
+  const handleLogout = () => {
+    Cookies.remove('authToken');
+    router.push("/signin");
   };
 
   return (
@@ -87,7 +96,7 @@ const AdminSidebar = () => {
       </div>
 
       <div className='absolute bottom-0 left-2'>
-        <button className='bg-[#FFA500] text-white rounded-md p-3 text-xl w-60 text-center'>Log Out</button>
+        <button className='bg-[#FFA500] text-white rounded-md p-3 text-xl w-60 text-center'onClick={handleLogout} >Log Out</button>
         <p className='text-black mt-2 text-sm text-center'>Developed by <a href='#' className='text-black font-bold'>Mayonity</a></p>
       </div>
     </div>

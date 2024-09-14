@@ -30,34 +30,37 @@ export default function UserDetail() {
         password: '12345678',
         image: ''
     });
-
+    const emailDisable=true
     const searchParams = useSearchParams();
     const id = searchParams.get('id'); // Get the serialized data
     // const id = 25
 
     useEffect(() => {
-        const fetchUser = async () => {
-            if (id) {
-                try {
-                    const response = await getUser(id, token);
-                    console.log("res", response)
-                    setFormData(response.data)
-                } catch (error) {
-                    console.log("useEffet error", error.message)
-                    toast.error(error.message);
-                }
+        const fetchUser = async (id,token) => {
+            try {
+                const response = await getUser(id, token);
+                setFormData(response.data)
+            } catch (error) {
+                console.log("useEffet error", error.message)
+                toast.error(error.message);
             }
         };
+        if (id) {
+            fetchUser(id,token);
+        }
 
-        fetchUser();
     }, [id, token]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);
-        // Create a FormData instance
+        if(formData.image)
+        {
+            formData.image="/"+formData.image.split('/').pop()
+        }
+       
         const updatedFormData = new FormData();
-        // Append form fields to FormData
+      
         for (const key in formData) {
             if (formData[key]) {
                 updatedFormData.append(key, formData[key]);
@@ -74,11 +77,13 @@ export default function UserDetail() {
         try {
             const response = await updateUser(updatedFormData, token);
             if (response.status === 200) {
-                router.push("/admin/users")
-
-                // setFile(null)
-                // setPreviewUrl("/user_placeholder.png")
+               
                 toast.success(response.data.message);
+                setFile(null)
+                setPreviewUrl("/user_placeholder.png")
+                router.push("/admin/users")
+            
+               
             } else {
                 toast.error(response.data.message);
             }
@@ -102,7 +107,7 @@ export default function UserDetail() {
             <div className='flex bg-white mt-16 w-[81.5%]  float-right text-black'>
                 <ToastContainer />
                 <UserForm
-                    {...{ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl }}
+                    {...{ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl, emailDisable }}
                 />
 
             </div>

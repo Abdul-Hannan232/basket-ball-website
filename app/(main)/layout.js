@@ -10,14 +10,13 @@ export default function RootLayout({ children }) {
     const pathname = usePathname();  // Get the current path
 
     return (
-        <html lang="en">
-            <body className={inter.className}>
+      
+            <div className={inter.className}>
                 {/* Conditionally show Sidebar if pathname is not "/admin" */}
                 <Navbar />
                 {children}
                 <Footer />
 
-            </body>
-        </html>
+            </div>
     );
 }
