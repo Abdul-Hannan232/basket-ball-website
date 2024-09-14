@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { useAuthToken } from '../../customHook/useAuthToken';
 import { getUser, updateUser } from "../../services/userServices"
+import { changePassword } from "../../services/authServices"
 import { ToastContainer, toast } from 'react-toastify';
 import FileUpload from "../../component/FileUpload";
 import Loader from "../../component/LoadingBall";
@@ -39,30 +40,30 @@ export default function UserProfile() {
         password: '12345678',
         image: ''
     });
-
+    const [passwordFormData, setPasswordFormData] = useState({
+        id: decodedToken?.id,
+        old_password: '',
+        password: '',
+        confirm_password: ''
+    })
 
 
     useEffect(() => {
         const fetchUser = async (id, token) => {
             try {
                 const response = await getUser(id, token);
-                if (response.status === 200) {
-                    return response.data;
-                }
+                setFormData(response.data);
             } catch (error) {
-                 toast.error(error.message);
+                console.log('Error fetching user:', error.message);
+                toast.error(error.message);
             }
         };
 
-        const getUserData = async () => {
-            if (token) {
-                const userData = await fetchUser(decodedToken.id, token);
-                setFormData(userData || {});
-            }
-        };
+        if (decodedToken?.id) {
+            fetchUser(decodedToken.id, token);
+        }
+    }, [decodedToken?.id, token]);
 
-        getUserData();
-    }, [token]);
 
 
     const handleChange = (e) => {
@@ -73,12 +74,14 @@ export default function UserProfile() {
         }));
     };
 
-
     const handleSubmit = async (e) => {
 
         e.preventDefault();
         setLoader(true);
-         const updatedFormData = new FormData();
+        if (formData.image) {
+            formData.image = "/" + formData.image.split('/').pop()
+        }
+        const updatedFormData = new FormData();
         for (const key in formData) {
             if (formData[key]) {
                 updatedFormData.append(key, formData[key]);
@@ -86,19 +89,16 @@ export default function UserProfile() {
         }
         if (file) {
             if (formData.image) {
-                 console.log("before split",formData.image)
-                 const test=formData.image.split('/').pop()
-                 console.log("after split",test)
                 updatedFormData.append('oldImage', formData.image.split('/').pop());
             }
             updatedFormData.append('image', file);
         }
 
-        console.log("upde",updatedFormData.entries.image,updatedFormData.oldImage)
         try {
-        
-            const response = await updateUser(formData, token);
-             if (response.status === 200) {
+
+            const response = await updateUser(updatedFormData, token);
+            if (response.status === 200) {
+                setFormData(response.data.user)
                 setFile(null)
                 setPreviewUrl(null)
                 toast.success(response.data.message);
@@ -106,27 +106,33 @@ export default function UserProfile() {
                 toast.error(response.data.message);
             }
         } catch (error) {
-             toast.error("Network error: ");
+            toast.error("Network error: ");
         } finally {
             setLoader(false);
         }
     };
 
-    const ResetPassword = async (e) => {
+
+
+
+    const handleChangePassword = (e) => {
+        const { name, value } = e.target;
+        setPasswordFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    const handleUpdatePassword = async (e) => {
+        setLoader(true)
         e.preventDefault()
-        const body = {
-            user_id: user_id,
-            token: token,
-            password: password,
-            confirm_password: confirmPassword
-        }
         try {
-            const responce = await ResetPasswordApi(body)
-            if (responce.status === 200) {
-                toast.success(responce.data.message)
-                router.replace('/');
+            const response = await changePassword(passwordFormData, token)
+            if (response.status === 200) {
+                toast.success(response.data.message)
+                setPasswordFormData({ id: '', old_password: '', password: '', confirm_password: '' })
             } else {
-                toast.error(responce.data.message)
+                toast.error(response.data.message)
             }
         }
         catch (error) {
@@ -233,57 +239,69 @@ export default function UserProfile() {
                         </form>
                     </div>}
                     {activeTab === 'tab3' && <div>
+
                         <div className='w-[40%]  mx-auto space-y-10 my-10'>
-                            <div>
-                                <label className='text-white text-md'>Old Password*</label><br />
-                                <div className='shadow-xl w-96 mt-3 relative rounded-xl'>
-                                    <input
-                                        type={oldPassword ? 'text' : 'password'}
-                                        placeholder='**********'
-                                        className='text-black p-3 border-2 bg-[#808080] border-[#808080] outline-none w-96 rounded-xl'
-                                    />
-                                    <div
-                                        onClick={togglePasswordVisibility1}
-                                        className='absolute top-4 right-5 text-xl cursor-pointer'
-                                    >
-                                        {oldPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                            <form onSubmit={handleUpdatePassword} >
+                                <div>
+                                    <label className='text-white text-md'>Old Password*</label><br />
+                                    <div className='shadow-xl w-96 mt-3 relative rounded-xl'>
+                                        <input
+                                            type={oldPassword ? 'text' : 'password'}
+                                            placeholder='**********'
+                                            name='old_password'
+                                            required
+                                            value={passwordFormData.old_password} onChange={handleChangePassword}
+                                            className='text-black p-3 border-2 bg-[#808080] border-[#808080] outline-none w-96 rounded-xl'
+                                        />
+                                        <div
+                                            onClick={togglePasswordVisibility1}
+                                            className='absolute top-4 right-5 text-xl cursor-pointer'
+                                        >
+                                            {oldPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <label className='text-white text-md'>New Password*</label><br />
-                                <div className='shadow-xl w-96 mt-3 relative rounded-xl'>
-                                    <input
-                                        type={newPassword ? 'text' : 'password'}
-                                        placeholder='**********'
-                                        className='text-black p-3 border-2 bg-[#808080] border-[#808080] outline-none w-96 rounded-xl'
-                                    />
-                                    <div
-                                        onClick={togglePasswordVisibility2}
-                                        className='absolute top-4 right-5 text-xl cursor-pointer'
-                                    >
-                                        {newPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                <div>
+                                    <label className='text-white text-md'>New Password*</label><br />
+                                    <div className='shadow-xl w-96 mt-3 relative rounded-xl'>
+                                        <input
+                                            type={newPassword ? 'text' : 'password'}
+                                            placeholder='**********'
+                                            name='password'
+                                            required
+                                            value={passwordFormData.password} onChange={handleChangePassword}
+                                            className='text-black p-3 border-2 bg-[#808080] border-[#808080] outline-none w-96 rounded-xl'
+                                        />
+                                        <div
+                                            onClick={togglePasswordVisibility2}
+                                            className='absolute top-4 right-5 text-xl cursor-pointer'
+                                        >
+                                            {newPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <label className='text-white text-md'>Confirm new Password*</label><br />
-                                <div className='shadow-xl w-96 mt-3 relative rounded-xl'>
-                                    <input
-                                        type={confirmPassword ? 'text' : 'password'}
-                                        placeholder='**********'
-                                        className='text-black p-3 border-2 bg-[#808080] border-[#808080] outline-none w-96 rounded-xl'
-                                    />
-                                    <div
-                                        onClick={togglePasswordVisibility3}
-                                        className='absolute top-4 right-5 text-xl cursor-pointer'
-                                    >
-                                        {confirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                <div>
+                                    <label className='text-white text-md'>Confirm new Password*</label><br />
+                                    <div className='shadow-xl w-96 mt-3 relative rounded-xl'>
+                                        <input
+                                            type={confirmPassword ? 'text' : 'password'}
+                                            placeholder='**********'
+                                            name='confirm_password'
+                                            required
+                                            value={passwordFormData.confirm_password} onChange={handleChangePassword}
+                                            className='text-black p-3 border-2 bg-[#808080] border-[#808080] outline-none w-96 rounded-xl'
+                                        />
+                                        <div
+                                            onClick={togglePasswordVisibility3}
+                                            className='absolute top-4 right-5 text-xl cursor-pointer'
+                                        >
+                                            {confirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit" className='bg-[#FFA500] p-3 w-60 flex justify-center rounded-md  font-bold shadow-xl mx-auto text-black '>Change Password</button>
-                        </div>
+                                <button type="submit" className='bg-[#FFA500] p-3 w-60 flex justify-center rounded-md  font-bold shadow-xl mx-auto text-black '>Change Password</button>
+                            </form> </div>
+
                     </div>}
                 </div>
             </div>

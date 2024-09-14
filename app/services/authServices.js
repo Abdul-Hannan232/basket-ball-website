@@ -1,7 +1,5 @@
 import axios from "axios";
-import Cookies from 'js-cookie';
-import { useSession } from 'next-auth/react';
-export const loginUser = async (body) => {
+  export const loginUser = async (body) => {
     try {
         const response = await axios.post(
             `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
@@ -38,6 +36,7 @@ export const ForgetPasswordUser = async (body) => {
         return error.response
     }
 }
+
 export const ResetPasswordApi = async (body) => {
     try {
         const responce = await axios.post(
@@ -76,7 +75,6 @@ export const validateToken = async (token) => {
     
 }
 
-
 export const socialMediaLogin = async (body) => {
     try {
         const response = await axios.post(
@@ -90,3 +88,21 @@ export const socialMediaLogin = async (body) => {
         return error.response
     }
 };
+
+export const changePassword = async (body,token) => {
+    try {
+        const responce = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/change-password`, 
+            body,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+        return responce
+    }
+    catch (error) {
+        return error.response
+    }
+}

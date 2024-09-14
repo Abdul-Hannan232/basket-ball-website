@@ -4,8 +4,9 @@ import { Button } from 'primereact/button';
 import Image from 'next/image';
 import 'react-toastify/dist/ReactToastify.css';
 import FileUpload from "../FileUpload";
+import {DateFormat} from "../../utils/formatData"
 
-const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl }) => {
+const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl,emailDisable=false }) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -57,7 +58,7 @@ const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, se
                             </div>
                             <div >
                                 <label className='text-black font-bold text-md'>Email  *</label><br />
-                                <input type='text' name="email" required value={formData.email} onChange={handleChange} placeholder='info@centralparknyc.com' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
+                                <input type='text' name="email" disabled={emailDisable} required value={formData.email} onChange={handleChange} placeholder='info@centralparknyc.com' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                             </div>
                             <div >
                                 <label className='text-black font-bold text-md'>Last Name</label><br />
@@ -77,7 +78,7 @@ const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, se
                             </div>
                             <div >
                                 <label className='text-black font-bold text-md'>Joined Since</label><br />
-                                <input type='date' name="joined_since" required value={formData.joined_since} onChange={handleChange} placeholder='01/02/17' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
+                                <input type='date' name="joined_since" required value={DateFormat(formData.joined_since)} onChange={handleChange} placeholder='01/02/17' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                             </div>
                             <div >
                                 <label className='text-black font-bold text-md'>Country</label><br />

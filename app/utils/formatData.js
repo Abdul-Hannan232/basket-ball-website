@@ -15,3 +15,8 @@ const  formatDate=(createdAt)=> {
   }
 
   export default formatDate
+
+  export function DateFormat  (isoDate) {
+    if (!isoDate) return '';
+    return new Date(isoDate).toISOString().split('T')[0]; // Get 'YYYY-MM-DD'
+  };
