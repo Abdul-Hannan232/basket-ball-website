@@ -45,7 +45,7 @@ const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, se
                                     <FileUpload color={"#000000"} fileControl={setFile} text={"Edit profile picture"} previewControl={setPreviewUrl} type="single" />
                                     <Image src="/edit.png" alt="image" width={20} height={20} />
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <div className='w-[80%] mx-auto grid grid-cols-2 gap-5 my-20'>
                             <div >

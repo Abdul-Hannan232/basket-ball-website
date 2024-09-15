@@ -3,9 +3,16 @@ import React, { useState, useEffect } from 'react';
 import FileUpload from '../../component/FileUpload'
 import Image from 'next/image';
 const MAX_FILES = 6;
-const CourtForm = () => {
-    const [files, setFiles] = useState(Array(MAX_FILES).fill(null));
-    const [previewUrls, setPreviewUrls] = useState(Array(MAX_FILES).fill(null));
+const CourtForm = ({handleSubmit, formData, setFormData, setFiles, previewUrls, setPreviewUrls}) => {
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
 
     return (
         <div>
@@ -13,30 +20,30 @@ const CourtForm = () => {
 
             <div className='flex bg-white pt-40 w-[81.5%]  float-right text-[#4B4B4B] '>
                 <div className='w-screen'>
-                    <form >
+                  
                         <div className='border border-[#CACACA] m-5 rounded-xl m-5'>
                             <div className='pl-10 text-2xl rounded-t-xl flex items-center gap-10 border-2 h-24  bg-[#F4F4F4] text-black font-bold border-[#CACACA] gap-10 flex items-center'>
                                 <h1 className='text-[#4B4B4B]'>Court Details</h1>
                                 <h1 className='text-[#4B4B4B]'>Submitted by</h1>
 
                             </div>
-
+                            <form onSubmit={handleSubmit}>
                             <div className='w-[80%] mx-auto grid grid-cols-2 gap-5 mt-20'>
                                 <div >
                                     <label className='text-black font-bold text-md'>Court Name</label><br />
-                                    <input type='text' name="name" placeholder='Skyline Hoops' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
+                                    <input type='text' name="name" required value={formData.name} onChange={handleChange} placeholder='Skyline Hoops' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                                 </div>
                                 <div >
                                     <label className='text-black font-bold text-md'>Location </label><br />
-                                    <input type='text' name="first_name" placeholder='Downtown Gym' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
+                                    <input type='text' name="location" required value={formData.location} onChange={handleChange} placeholder='Downtown Gym' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                                 </div>
                                 <div >
                                     <label className='text-black font-bold text-md'>Description</label><br />
-                                    <textarea type='text' name="email" placeholder='Outdoor courts surrounded by greenery, ideal for casual games.' className='text-black p-3 border-2 border-[#CACAC] text-xs w-96 h-40 mt-3 rounded-xl' />
+                                    <textarea type='text' name="description" required value={formData.description} onChange={handleChange}  placeholder='Outdoor courts surrounded by greenery, ideal for casual games.' className='text-black p-3 border-2 border-[#CACAC] text-xs w-96 h-40 mt-3 rounded-xl' />
                                 </div>
                                 <div >
                                     <label className='text-black font-bold text-md'>Pricing</label><br />
-                                    <input type='text' name="last_name" placeholder='$30/h' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
+                                    <input type='text' name="cost" required value={formData.cost} placeholder='$30/h'onChange={handleChange} className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                                 </div>
                                 <label className='text-black font-bold text-lg'>Image</label><br />
 
@@ -82,11 +89,11 @@ const CourtForm = () => {
 
                                     {/* end setting mage */}
                                     <p className='md:text-sm text-xs text-center mt-7 text-black'>Drop your images here too</p>
-                                    <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br />
+                                    {/* <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{  setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br /> */}
                                 </div>
                                 <div className='mt-[-140px]'>
                                     <label className='text-black font-bold text-md'>Availability</label><br />
-                                    <input type='text' name="weight" placeholder='9:00 H - 12:00' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
+                                    <input type='text' name="operating_hours" required value={formData.operating_hours} onChange={handleChange} placeholder='9:00 H - 12:00' className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                                 </div>
                             </div>
                             <div className='flex justify-end w-[80%] mt-[-50px] mx-auto mb-20 items-center gap-5'>
@@ -95,16 +102,18 @@ const CourtForm = () => {
                                 >
                                     Reject
                                 </button>
-                                <button
+                                <button type='submit'
                                     className='bg-green-700 rounded-md md:text-xl text-sm text-white md:px-16 px-3 py-2 shadow'
                                 >
                                     Accept
                                 </button>
                             </div>
+
+                            </form>
                         </div>
 
 
-                    </form>
+                  
                 </div>
 
             </div>

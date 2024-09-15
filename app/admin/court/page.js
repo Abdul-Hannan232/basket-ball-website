@@ -4,51 +4,50 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock, faTrash,faEye } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import { allUsers as fetchAllUsers, updateUser, deleteUser as removeUser } from "../../services/userServices"
+import { allCourts as fetchAllCourts } from "../../services/courtsServices"
 import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image';
 const Court = () => {
-    const [allUsers, setAllUsers] = useState([]);
-    const [spinner, setSpinner] = useState(false)
-    const [users, setUsers] = useState([]) //search filtration
-    const [deleteUserPopupVisible, setDeleteUserPopupVisible] = useState(false); // help in open/close delete popup
-    const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false); // help in open/close block popup
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [remarks, setRemarks] = useState(''); //comment for blocking user
-  
-    useEffect(() => {
-      setSpinner(true);
-      const getUsers = async () => {
-        try {
-          const response = await fetchAllUsers();
-          setUsers(response.data.users);
-          setAllUsers(response.data.users);
-        } catch (error) {
-          console.error("Failed to fetch users data:", error);
-          toast.error("Network Error")
-        } finally {
-          setSpinner(false);
-        }
-      };
-  
-      getUsers();
-    }, []);
-    const handleFilter = useCallback((event) => {
-        const searchQuery = event.target.value.toLowerCase();
-        setAllUsers(
-          searchQuery !== ""
-            ? users.filter(user =>
-              user.name.toLowerCase().includes(searchQuery) ||
-              user.email.toLowerCase().includes(searchQuery)
-            )
-            : users
-        );
-      }, [users]);
-    
+  const [allCourts, setAllCourts] = useState([]);
+  const [spinner, setSpinner] = useState(false)
+  const [courts, setCourts] = useState([]) //search filtration
+  const [deleteUserPopupVisible, setDeleteUserPopupVisible] = useState(false); // help in open/close delete popup
+  const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false); // help in open/close block popup
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [remarks, setRemarks] = useState(''); //comment for blocking user
+
+  useEffect(() => {
+    setSpinner(true);
+    const getCourts = async () => {
+      try {
+        const response = await fetchAllCourts();
+        console.log("courts", response)
+        setCourts(response.data.courts);
+        setAllCourts(response.data.courts);
+      } catch (error) {
+        console.error("Failed to fetch courts data:", error);
+        toast.error("Network Error")
+      } finally {
+        setSpinner(false);
+      }
+    };
+
+    getCourts();
+  }, []);
+  const handleFilter = useCallback((event) => {
+    const searchQuery = event.target.value.toLowerCase();
+    setAllCourts(
+      searchQuery !== ""
+        ? courts.filter(user =>
+          user.name.toLowerCase().includes(searchQuery))
+        : courts
+    );
+  }, [courts]);
+
   return (
     <div>
       <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex items-center z-40 text-white'>
@@ -70,7 +69,7 @@ const Court = () => {
                 onChange={handleFilter}
                 className='border border-[#CACACA] rounded-xl p-4 bg-[#FFF8B3] relative w-full'
               />
-              <Image src="/filter-search.png" alt="filter" width="25" height="25" className="absolute top-4 right-5"/>
+              <Image src="/filter-search.png" alt="filter" width="25" height="25" className="absolute top-4 right-5" />
             </div>
             <button className='bg-[#FFA500] text-white rounded-xl p-3 text-xl w-60 text-center'>
               <Link href="/admin/add-court"> Add Court
@@ -84,7 +83,7 @@ const Court = () => {
               </div>) : (
 
               <DataTable
-                value={allUsers}
+                value={allCourts}
                 tableStyle={{ width: '95%', margin: 'auto', marginTop: '20px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
                 className="custom-data-table custom-paginator"
                 paginator
@@ -121,20 +120,10 @@ const Court = () => {
                   header="LOCATION"
                   headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px' }}
                   style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-                  body={(rowData) => (
-                    <Link
-                    href={{
-                      pathname: '/admin/user-detail',
-                      query: { id: rowData.id }, // Serialize the object
-                    }}
-                  >
 
-                    {rowData.email}
-                  </Link>
-                  )}
                 />
                 <Column
-                  field="court-type"
+                  field="type"
                   header="COURT TYPE"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
@@ -144,22 +133,28 @@ const Court = () => {
                   header="AVAILABILITY"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-                  body={(rowData) => formatDate(rowData.created_at)}
+                  body={(rowData) => formatDate(rowData.availability)}
                 />
                 <Column
-                  field="price/hr"
+                  field="cost"
                   header="PRICE/ hr"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
                 <Column
-                  field="satus"
+                  field="isactive"
                   header="STATUS"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '6%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                  body={(rowData) => (
+                    <span className={rowData.isactive ? 'text-green-600' : 'text-red-600'}>
+                      {rowData.isactive ? 'Active' : 'Block'}
+                    </span>
+                  )}
                 />
 
-<Column
+
+                <Column
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   body={(rowData) => (
                     rowData.isactive ?

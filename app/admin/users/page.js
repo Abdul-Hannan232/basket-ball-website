@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DeleteUserPopup from "../../component/admin/DeleteUser"
 import BlockUserPopup from "../../component/admin/BlockUser"
+import { useAuthToken } from '../../customHook/useAuthToken'; 
 
 // import AdminLayout from "../../component/AdminLayout"
 export default function Users() {
@@ -22,6 +23,7 @@ export default function Users() {
   const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false); // help in open/close block popup
   const [selectedUser, setSelectedUser] = useState(null);
   const [remarks, setRemarks] = useState(''); //comment for blocking user
+  const { token } = useAuthToken();
 
   useEffect(() => {
     setSpinner(true);
@@ -63,9 +65,9 @@ export default function Users() {
   const closeDeleteUserPopup = () => {
     setDeleteUserPopupVisible(false);
   };
-  const deleteUser = async (data) => {
+  const deleteUser = async (data,) => {
     try {
-      const response = await removeUser(data);
+      const response = await removeUser(data,token);
       if (response.status === 200) {
         const updatedUsers = allUsers.filter(user => user.id !== data.id);
         closeDeleteUserPopup()
@@ -94,7 +96,7 @@ export default function Users() {
     const message = rowData.isactive ? `${rowData.name} blocked successfully` : `${rowData.name} unblocked successfully`;
     const data = { id: rowData.id, isactive: !rowData.isactive, remarks: remarks }
     try {
-      const response = await updateUser(data);
+      const response = await updateUser(data,token);
       if (response.status === 200) {
         const updatedUsers = allUsers.map(user =>
           user.id === rowData.id

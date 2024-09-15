@@ -36,8 +36,7 @@ const Signup = () => {
         try {
             const responce = await SignupUser(body)
             if (responce.status === 201) {
-                console.log("response", responce)
-                toast.success("Account Created")
+                 toast.success("Account created successful, please proceed to login")
                 router.replace('/signin')
             } else {
                 toast.error(responce.data.message)
@@ -62,7 +61,7 @@ const Signup = () => {
 
                     <div className='flex flex-col'>
                         <label className='text-sm'>Name</label>
-                        <input type='text' placeholder='Enter your Name ' value={name} onChange={(e) => setName(e.target.value)}
+                        <input type='text' placeholder='Enter your name ' value={name} onChange={(e) => setName(e.target.value)}
                             className='mt-1 cursor-pointershadow border-[#808080] outline-none border text-white rounded-lg bg-[#808080] md:p-3 p-2' />
 
                         <label className='text-sm md:mt-5 mt-4'>Email</label>
@@ -71,7 +70,7 @@ const Signup = () => {
                         <div className='relative'>
                             <input
                                 type={isPasswordVisible ? 'text' : 'password'}
-                                placeholder='Enter your Password'
+                                placeholder='Enter your password'
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className='mt-1 cursor-pointer shadow border-[#808080] outline-none border text-white rounded-lg bg-[#808080] md:p-3 p-2 w-full'

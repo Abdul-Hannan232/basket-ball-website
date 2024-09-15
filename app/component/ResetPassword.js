@@ -65,7 +65,7 @@ const ResetPassword = () => {
                         <div className='relative'>
                             <input
                                 type={isNewPasswordVisible ? 'text' : 'password'}
-                                placeholder='Enter new Password'
+                                placeholder='Enter new password'
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 className='mt-1 cursor-pointer outline-none shadow border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-3 w-full'
@@ -84,7 +84,7 @@ const ResetPassword = () => {
                         <div className='relative'>
                             <input
                                 type={isConfirmNewPasswordVisible ? 'text' : 'password'}
-                                placeholder='Confirm new Password'
+                                placeholder='Confirm new password'
                                 value={confirmNewPassword}
                                 onChange={(e) => setConfirmNewPassword(e.target.value)}
                                 className='mt-1 cursor-pointer outline-none shadow border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-3 w-full'

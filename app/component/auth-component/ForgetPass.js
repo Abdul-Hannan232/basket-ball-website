@@ -25,7 +25,7 @@ const ForgetPass = () => {
                 router.push("/signin")
             } else {
                 // toast.error(responce.data.message)
-                toast.error("Email/Password is incorrect");
+                toast.error("Account not found");
                 // router.push('/second-page');
             }
         }

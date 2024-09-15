@@ -1,8 +1,8 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
-export const allCourts = async () =>{ 
+export const allCourts = async (token) =>{ 
     try {
-        const token = Cookies.get('authToken')
+      
         const response = await axios.get(
             `${process.env.NEXT_PUBLIC_API_URL}/court/all`,
             {
