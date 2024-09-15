@@ -9,7 +9,9 @@ import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie';
 import { signOut } from 'next-auth/react';
 import { useAuthToken } from '../customHook/useAuthToken';
- const NavBarComponent = () => {
+import { FiLogOut } from "react-icons/fi";
+
+const NavBarComponent = () => {
     const { token, decodedToken } = useAuthToken();
     const router = useRouter("");
     const [open, setOpen] = useState(false)
@@ -27,9 +29,9 @@ import { useAuthToken } from '../customHook/useAuthToken';
     };
 
 
-    useEffect( () => {
+    useEffect(() => {
         if (token) {
-            console.log("decode",decodedToken)
+            console.log("decode", decodedToken)
             setloggedInUser(decodedToken)
         }
 
@@ -55,24 +57,32 @@ import { useAuthToken } from '../customHook/useAuthToken';
 
 
             {loggedInUser ? (
-                    <div className='flex gap-2 items-center'>
-                          <Image
-                    src={loggedInUser.image?loggedInUser.image:'/user_placeholder.jpeg'} // Make sure this URL is correct
-                    alt="user profile"
-                    width={50}
-                    height={50}
-                />
-                        {/* <CgProfile className='text-2xl text-black font-medium' /> */}
-                        <h3 className="text-2xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 shadow-lg hover:text-blue-500 transition duration-300">
+                <div className='flex gap-2 items-center'>
+                    <Image src="/Vector.png" alt="image" width={30} height={30} />
+                    <Link href="/user-profile">
+
+                    <Image
+                        src={loggedInUser.image ? loggedInUser.image : '/user_placeholder.jpeg'} // Make sure this URL is correct
+                        alt="user profile"
+                        width={40}
+                        height={40}
+                        className="rounded-full"
+                    />
+                    </Link>
+                    <Link href="/user-profile">
+                        <h3 className="text-xl font-bold text-gray-800 ">
                             {loggedInUser.name}
                         </h3>
-                        <button className='md:block hidden py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm rounded-md' onClick={handleLogout}>
-                            Logout
-                        </button>
-                    </div>
+                    </Link>
+                    <FiLogOut className="text-black text-2xl cursor-pointer" onClick={handleLogout}/>
+
+                    {/* <button className='md:block hidden py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm rounded-md' >
+                        Logout
+                    </button> */}
+                </div>
             ) : (
                 <div className='flex gap-2 items-center'>
-                    {/* <CgProfile className='text-2xl text-black font-medium' /> */}
+                    <Image src="/Vector.png" alt="image" width={30} height={30} />
                     <Link href="/signup">
                         <button className='md:block hidden py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm rounded-md'>
                             Sign Up
@@ -119,7 +129,7 @@ import { useAuthToken } from '../customHook/useAuthToken';
 
         </div>
 
-    ) 
+    )
 }
 
 export default NavBarComponent

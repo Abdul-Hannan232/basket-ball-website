@@ -19,7 +19,8 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div className='bg-[#FFF8B3] 2xl:w-80 w-64 flex flex-col fixed left-0 right-0 top-[68px] pt-5 h-[89vh]'>
+   <div className='lg:block hidden'>
+     <div className='bg-[#FFF8B3] 2xl:w-80 w-64 flex flex-col fixed left-0 right-0 top-[68px] pt-5 h-[89vh]'>
       <div className='text-black text-sm font-semibold'>
         
         <div className="h1-hover-effect">
@@ -100,6 +101,7 @@ const AdminSidebar = () => {
         <p className='text-black mt-2 text-sm text-center'>Developed by <a href='#' className='text-black font-bold'>Mayonity</a></p>
       </div>
     </div>
+   </div>
   );
 }
 

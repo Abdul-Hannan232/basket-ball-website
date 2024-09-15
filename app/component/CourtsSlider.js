@@ -74,7 +74,7 @@ const CourtsSlider = ({ slide }) => {
     return (
         <div >
             {slide === 'carousel' ? (
-                <div className="  2xl:ml-32 md:ml-20 md:pt-10 pt-10 z-10 2xl:mb-40 md:mb-20" id="Testimonials" style={{ position: 'relative' }}>
+                <div className="  2xl:ml-32 md:ml-14 md:pt-10 pt-10 w-[90%] mx-auto z-10 2xl:mb-40 md:mb-20" id="Testimonials" style={{ position: 'relative' }}>
                     <div className='2xl:text-6xl md:text-4xl text-xl font-bold md:mb-20 mb-10 flex justify-center items-center gap-2 '>
                         <h1 className='text-[#FFA500]'>Best Rated </h1>
                         <h1>Basketball Court</h1>
@@ -84,12 +84,11 @@ const CourtsSlider = ({ slide }) => {
                     </div>
 
 
-
                     <Slider ref={sliderRef} {...settings}>
 
                         {allCourts.map((item, index) => (
-                            <div key={index} className=''>
-                                <div className='relative shadow cursor-pointer text-black rounded-md 2xl:w-[450px] md:w-[330px] w-[250px] group'>
+                            <div key={index} className=' '>
+                                <div className='relative shadow cursor-pointer text-black rounded-md 2xl:w-[450px] md:w-[300px] w-[250px] group'>
                                     <div className='absolute inset-0 bg-black opacity-0 z-20 group-hover:opacity-70 transition-opacity'></div>
 
                                     <div className='bg-[#D9D9D9] relative rounded-md overflow-hidden'>
@@ -97,7 +96,7 @@ const CourtsSlider = ({ slide }) => {
 
                                         <Image src={item.images?.[0]
                                             ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${item.images[0]}`
-                                            : '/basketBALL.png'} alt="image" width={343} height={228} className='rounded-t-xl 2xl:w-[450px]' />
+                                            : '/basketBALL.png'} alt="image" width={343} height={228} className='rounded-t-xl 2xl:h-72 h-60 2xl:w-[400px]' />
 
                                         <div className='flex items-center justify-center float-right -mt-5 shadow z-10 absolute right-0 p-3 w-32 gap-2 rounded-l-xl bg-white text-black'>
 
@@ -137,13 +136,14 @@ const CourtsSlider = ({ slide }) => {
                                 <RiArrowLeftSLine />
                             </div>
                         </div>
-                        <div className='slick- slick-arrow'>
+                      
+
+                        <div className='slick- slick-arrow md:-mr-14'>
                             <div className="bg-[#000000A6] text-white text-7xl md:p-[10px] flex items-center justify-center cursor-pointer md:w-14 md:h-14 w-10 h-10 text-center font-bold  rounded-full" onClick={goToNext}>
                                 <MdOutlineKeyboardArrowRight />
                             </div>
-                        </div>
-
-                    </div>
+                        </div>  
+                    </div> 
                 </div>
             ) : (
                 <>

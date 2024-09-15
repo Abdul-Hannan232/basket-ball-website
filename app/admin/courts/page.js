@@ -10,6 +10,7 @@ import { allCourts as fetchAllCourts } from "../../services/courtsServices"
 import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Adminnavbar from '../../component/admin/adminnavbar';
 import Image from 'next/image';
 const Court = () => {
   const [allCourts, setAllCourts] = useState([]);
@@ -50,33 +51,27 @@ const Court = () => {
 
   return (
     <div>
-      <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex items-center z-40 text-white'>
-        <h1 className='text-3xl font-bold'>Basketball</h1>
-        <div className='border-2 border-y-transparent border-r-transparent mx-20 pl-5 border-white'>
-          <h1 className='text-lg'>Courts (10/17)</h1>
-
-        </div>
-      </div>
 
 
-      <div className='flex bg-white mt-20 w-[81.5%] h-screen float-right text-black'>
+      <Adminnavbar />
+      <div className='flex bg-white lg:mt-16 mt-14 lg:w-[81.5%] h-screen float-right text-black'>
         <div className='w-screen'>
-          <div className='p-5 m-5 rounded-xl border-2 h-24 border-[#CACACA] gap-10 flex items-center'>
+          <div className='lg:p-5 p-2 m-5 lg:rounded-xl rounded-md border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center'>
             <div className='w-full relative'>
               <input
                 type='text'
                 placeholder='Search Courts'
                 onChange={handleFilter}
-                className='border border-[#CACACA] rounded-xl p-4 bg-[#FFF8B3] relative w-full'
+                className='border border-[#CACACA] lg:text-lg text-sm lg:rounded-xl rounded-md lg:p-4 p-2 bg-[#FFF8B3] relative w-full'
               />
-              <Image src="/filter-search.png" alt="filter" width="25" height="25" className="absolute top-4 right-5" />
+              <Image src="/filter-search.png" alt="filter" width="5" height="5" className="absolute lg:w-[25px] lg:h-[25px] w-4 h-4 lg:top-4 top-3 right-3 lg:right-5" />
             </div>
-            <button className='bg-[#FFA500] text-white rounded-xl p-3 text-xl w-60 text-center'>
+            <button className='bg-[#FFA500] text-white lg:rounded-xl rounded-md p-4 lg:text-xl text-[10px] lg:w-60 w-28  text-center'>
               <Link href="/admin/add-court"> Add Court
               </Link>            </button>
           </div>
 
-          <div className="card">
+          <div className="card mx-5">
             {spinner ? (
               <div className="flex justify-center bg-red-[#FFA500]">
                 <span className="loader"></span>
@@ -84,7 +79,7 @@ const Court = () => {
 
               <DataTable
                 value={allCourts}
-                tableStyle={{ width: '95%', margin: 'auto', marginTop: '20px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
+                tableStyle={{ width: '99%', margin: 'auto', marginTop: '20px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
                 className="custom-data-table custom-paginator"
                 paginator
                 rows={4}
@@ -93,7 +88,7 @@ const Court = () => {
                 paginatorClassName="custom-paginator"
               >
                 <Column
-                  
+
                   header="ID"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '5%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
@@ -160,10 +155,10 @@ const Court = () => {
                   body={(rowData) => (
                     rowData.isactive ?
                       <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faEye} />} className="p-button-rounded p-button-info text-lg" onClick={() => openBlockUserPopup(rowData)} />
+                        <Button icon={<FontAwesomeIcon icon={faEye} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => openBlockUserPopup(rowData)} />
                       </div>
                       : <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faEye} />} className="p-button-rounded p-button-info text-lg" onClick={() => blockUser(rowData)} />
+                        <Button icon={<FontAwesomeIcon icon={faEye} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => blockUser(rowData)} />
                       </div>
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
@@ -173,10 +168,10 @@ const Court = () => {
                   body={(rowData) => (
                     rowData.isactive ?
                       <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-lg" onClick={() => openBlockUserPopup(rowData)} />
+                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => openBlockUserPopup(rowData)} />
                       </div>
                       : <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-lg" onClick={() => blockUser(rowData)} />
+                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => blockUser(rowData)} />
                       </div>
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
@@ -185,7 +180,7 @@ const Court = () => {
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   body={(rowData) => (
                     <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-lg" onClick={() => openDeleteUserPopup(rowData)} />
+                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => openDeleteUserPopup(rowData)} />
                     </div>
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}

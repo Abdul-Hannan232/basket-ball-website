@@ -4,6 +4,7 @@ import UserForm from '../../component/admin/UserForm'
 import Loader from "../../component/LoadingBall";
 import { addUser as addNewUser } from "../../services/userServices";
 import { ToastContainer, toast } from 'react-toastify';
+import Adminnavbar from '../../component/admin/adminnavbar';
 export default function UserDetail() {
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("/user_placeholder.jpeg");
@@ -76,15 +77,8 @@ export default function UserDetail() {
     };
     return (
         <>
-            <div className='flex'>
-                <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex items-center text-white'>
-                    <h1 className='text-3xl font-bold'>Basketball</h1>
-                    <div className='border-2 border-y-transparent border-r-transparent mx-20 pl-5 border-white'>
-                        <h1 className='text-lg font-bold'>Add User</h1>
-                    </div>
-                </div>
-            </div>
-            <div className='flex bg-white mt-20 w-[81.5%]  float-right text-black'>
+         <Adminnavbar/>
+            <div className='flex bg-white lg:mt-16 mt-12 lg:w-[81.5%]  float-right text-black'>
                 <ToastContainer />
                 <UserForm
                     {...{ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl }}

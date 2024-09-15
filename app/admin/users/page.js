@@ -12,9 +12,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DeleteUserPopup from "../../component/admin/DeleteUser"
 import BlockUserPopup from "../../component/admin/BlockUser"
-import { useAuthToken } from '../../customHook/useAuthToken'; 
-
-// import AdminLayout from "../../component/AdminLayout"
+import { useAuthToken } from '../../customHook/useAuthToken';
+import Image from 'next/image';
+import AdminNavbar from "../../component/admin/adminnavbar"
 export default function Users() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
@@ -67,7 +67,7 @@ export default function Users() {
   };
   const deleteUser = async (data,) => {
     try {
-      const response = await removeUser(data,token);
+      const response = await removeUser(data, token);
       if (response.status === 200) {
         const updatedUsers = allUsers.filter(user => user.id !== data.id);
         closeDeleteUserPopup()
@@ -96,7 +96,7 @@ export default function Users() {
     const message = rowData.isactive ? `${rowData.name} blocked successfully` : `${rowData.name} unblocked successfully`;
     const data = { id: rowData.id, isactive: !rowData.isactive, remarks: remarks }
     try {
-      const response = await updateUser(data,token);
+      const response = await updateUser(data, token);
       if (response.status === 200) {
         const updatedUsers = allUsers.map(user =>
           user.id === rowData.id
@@ -118,30 +118,25 @@ export default function Users() {
   return (
     <>
       <ToastContainer />
-      <div className='bg-[#FFA500] p-4 pl-7 fixed top-0 right-0 left-0 flex items-center text-white'>
-        <h1 className='text-3xl font-bold'>Basketball</h1>
-        <div className='border-2 border-y-transparent border-r-transparent mx-20 pl-5 border-white'>
-          <h1 className='text-lg'> User {allUsers.length}</h1>
-
-        </div>
-      </div>
-      <div className='flex bg-white mt-16 w-[81.5%] h-screen float-right text-black'>
+      <AdminNavbar />
+      <div className='flex bg-white lg:mt-16 mt-14 lg:w-[81.5%] h-screen float-right text-black'>
         <div className='w-screen'>
-          <div className='p-5 m-5 rounded-xl border-2 h-24 border-[#CACACA] gap-10 flex items-center'>
+          <div className='lg:p-5 p-2 m-5 rounded-xl border-2 lg:h-24  border-[#CACACA] lg:gap-10 gap-3 flex items-center'>
             <div className='w-full'>
               <input
                 type='text'
                 placeholder='Search Users'
                 onChange={handleFilter}
-                className='border border-[#CACACA] rounded-xl p-4 bg-[#FFF8B3] w-full'
+                className='border border-[#CACACA] lg:rounded-xl rounded-md lg:text-lg text-xs lg:p-4 p-2 bg-[#FFF8B3] w-full'
               />
             </div>
-            <button className='bg-[#FFA500] text-white rounded-xl p-3 text-xl w-60 text-center'>
+            <button className='bg-[#FFA500] text-white lg:rounded-xl rounded-md lg:p-4 p-2 lg:text-xl text-[10px] lg:w-60 w-28 text-center'>
               <Link href="/admin/add-User"> Add User
-              </Link>            </button>
+              </Link>
+            </button>
           </div>
 
-          <div className="card">
+          <div className="card mx-5 ">
             {spinner ? (
               <div className="flex justify-center bg-red-[#FFA500]">
                 <span className="loader"></span>
@@ -149,7 +144,7 @@ export default function Users() {
 
               <DataTable
                 value={allUsers}
-                tableStyle={{ width: '95%', margin: 'auto', marginTop: '20px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
+                tableStyle={{ width: '99%', margin: 'auto', marginTop: '10px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
                 className="custom-data-table custom-paginator"
                 paginator
                 rows={4}
@@ -166,7 +161,7 @@ export default function Users() {
                 />
                 <Column
                   field="name"
-                  header="Display Name"
+                  header="DISPLAY NAME"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => (
@@ -183,43 +178,43 @@ export default function Users() {
 
                 <Column
                   field="email"
-                  header="Email"
+                  header="EMAIL"
                   headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px' }}
                   style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => (
                     <Link
-                    href={{
-                      pathname: '/admin/user-detail',
-                      query: { id: rowData.id }, // Serialize the object
-                    }}
-                  >
+                      href={{
+                        pathname: '/admin/user-detail',
+                        query: { id: rowData.id }, // Serialize the object
+                      }}
+                    >
 
-                    {rowData.email}
-                  </Link>
+                      {rowData.email}
+                    </Link>
                   )}
                 />
                 <Column
                   field="phone_number"
-                  header="Phone number"
+                  header="PHONE NUMBER"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
                 <Column
                   field="created_at"
-                  header="Created on"
+                  header="CREATED ON"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => formatDate(rowData.created_at)}
                 />
                 <Column
                   field="remarks"
-                  header="Remarks"
+                  header="REMARKS"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
                 <Column
                   field="role"
-                  header="Role"
+                  header="ROLE"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '6%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
@@ -229,10 +224,10 @@ export default function Users() {
                   body={(rowData) => (
                     rowData.isactive ?
                       <div style={{ display: 'flex', color: "#D60000", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => openBlockUserPopup(rowData)} />
+                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info lg:text-xl text-md" onClick={() => openBlockUserPopup(rowData)} />
                       </div>
                       : <div style={{ display: 'flex', color: "#0f6e28", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-xl" onClick={() => blockUser(rowData)} />
+                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info lg:text-xl text-md" onClick={() => blockUser(rowData)} />
                       </div>
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
@@ -241,7 +236,7 @@ export default function Users() {
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   body={(rowData) => (
                     <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-xl" onClick={() => openDeleteUserPopup(rowData)} />
+                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info lg:text-xl text-md" onClick={() => openDeleteUserPopup(rowData)} />
                     </div>
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
