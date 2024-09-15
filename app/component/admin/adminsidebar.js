@@ -45,7 +45,7 @@ const AdminSidebar = () => {
             className={`pl-10 p-3 flex items-center gap-1 ${activeLink === 'courts' ? 'border-4 border-l-black border-y-transparent border-r-transparent hover-design' : ''}`}
           >
             <Image src="/home.png" alt="courts" width="20" height="20" />
-            <a href='#' onClick={() => handleClick('courts')}>Courts</a>
+            <a href='/admin/courts' >Courts</a>
           </h1>
         </div>
 

@@ -31,8 +31,8 @@ const AddCourt = () => {
     operating_hours: '',
     description: '',
     phone_number: '',
-    facilities: '',
-    images: []
+    facilities: "",
+    images: ""
   });
   const [loader, setLoader] = useState(false);
 
@@ -41,48 +41,48 @@ const AddCourt = () => {
     setLoader(true);
 console.log('dfghjk',formData)
 
-    // // Create a FormData instance
-    // const updatedFormData = new FormData();
-    // for (const key in formData) {
-    //   if (formData.hasOwnProperty(key)) {
+    // Create a FormData instance
+    const updatedFormData = new FormData();
+    for (const key in formData) {
+      if (formData.hasOwnProperty(key)) {
 
-    //     updatedFormData.append(key, formData[key]);
+        updatedFormData.append(key, formData[key]);
 
-    //   }
-    // }
-    // if (files && files.length > 0) {
-    //   Array.from(files).forEach(files => updatedFormData.append('image', files));
-    // }
+      }
+    }
+    if (files && files.length > 0) {
+      Array.from(files).forEach(files => updatedFormData.append('image', files));
+    }
 
-    // try {
-    //   const response = await addNewCourt(updatedFormData, token);
-    //   console.log("response", response)
-    //   if (response.status === 201) {
-    //     toast.success(response.data.message);
-    //     setFormData({
-    //       user_id: decodedToken?.id,
-    //       name: '',
-    //       location: '',
-    //       cost: '',
-    //       operating_hours: '',
-    //       description: '',
-    //       phone_number: '',
-    //       facilities: '',
-    //       images: []
-    //     })
-    //     setFiles(Array(MAX_FILES).fill(null))
-    //     setPreviewUrls(Array(MAX_FILES).fill(null))
-    //     setShowPopup(false)
-    //   } else {
-    //     toast.error(response.data.message);
-    //   }
-    // } catch (error) {
-    //   console.log(error.message)
-    //   toast.error("Network error: ");
-    // } finally {
-    //   setLoader(false);
-    //   setUpdateContent(prev => !prev)
-    // }
+    try {
+      const response = await addNewCourt(formData, token);
+      console.log("response", response)
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        setFormData({
+          user_id: decodedToken?.id,
+          name: '',
+          location: '',
+          cost: '',
+          operating_hours: '',
+          description: '',
+          phone_number: '',
+          facilities: [],
+          images: []
+        })
+        setFiles(Array(MAX_FILES).fill(null))
+        setPreviewUrls(Array(MAX_FILES).fill(null))
+        setShowPopup(false)
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error.message)
+      toast.error("Network error: ");
+    } finally {
+      setLoader(false);
+      setUpdateContent(prev => !prev)
+    }
 
   }
 

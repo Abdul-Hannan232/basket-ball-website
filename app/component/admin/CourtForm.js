@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import FileUpload from '../../component/FileUpload'
 import Image from 'next/image';
 const MAX_FILES = 6;
-const CourtForm = ({handleSubmit, formData, setFormData, setFiles, previewUrls, setPreviewUrls}) => {
+const CourtForm = ({ handleSubmit, formData, setFormData, setFiles, previewUrls, setPreviewUrls }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -13,21 +13,40 @@ const CourtForm = ({handleSubmit, formData, setFormData, setFiles, previewUrls, 
         }));
     };
 
+    const handleCheckboxChange = (e) => {
+        const { value, checked } = e.target;
+
+        // Update facilities array
+        if (checked) {
+            // Add checked option
+            setFormData((prevData) => ({
+                ...prevData,
+                facilities: [...prevData.facilities, value],
+            }));
+        } else {
+            // Remove unchecked option
+            setFormData((prevData) => ({
+                ...prevData,
+                facilities: prevData.facilities.filter((option) => option !== value),
+            }));
+        }
+    };
+    const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; // Available options for checkboxes
 
     return (
         <div>
-           
+
 
             <div className='flex bg-white pt-40 w-[81.5%]  float-right text-[#4B4B4B] '>
                 <div className='w-screen'>
-                  
-                        <div className='border border-[#CACACA] m-5 rounded-xl m-5'>
-                            <div className='pl-10 text-2xl rounded-t-xl flex items-center gap-10 border-2 h-24  bg-[#F4F4F4] text-black font-bold border-[#CACACA] gap-10 flex items-center'>
-                                <h1 className='text-[#4B4B4B]'>Court Details</h1>
-                                <h1 className='text-[#4B4B4B]'>Submitted by</h1>
 
-                            </div>
-                            <form onSubmit={handleSubmit}>
+                    <div className='border border-[#CACACA] m-5 rounded-xl m-5'>
+                        <div className='pl-10 text-2xl rounded-t-xl flex items-center gap-10 border-2 h-24  bg-[#F4F4F4] text-black font-bold border-[#CACACA] gap-10 flex items-center'>
+                            <h1 className='text-[#4B4B4B]'>Court Details</h1>
+                            <h1 className='text-[#4B4B4B]'>Submitted by</h1>
+
+                        </div>
+                        <form onSubmit={handleSubmit}>
                             <div className='w-[80%] mx-auto grid grid-cols-2 gap-5 mt-20'>
                                 <div >
                                     <label className='text-black font-bold text-md'>Court Name</label><br />
@@ -39,11 +58,11 @@ const CourtForm = ({handleSubmit, formData, setFormData, setFiles, previewUrls, 
                                 </div>
                                 <div >
                                     <label className='text-black font-bold text-md'>Description</label><br />
-                                    <textarea type='text' name="description" required value={formData.description} onChange={handleChange}  placeholder='Outdoor courts surrounded by greenery, ideal for casual games.' className='text-black p-3 border-2 border-[#CACAC] text-xs w-96 h-40 mt-3 rounded-xl' />
+                                    <textarea type='text' name="description" required value={formData.description} onChange={handleChange} placeholder='Outdoor courts surrounded by greenery, ideal for casual games.' className='text-black p-3 border-2 border-[#CACAC] text-xs w-96 h-40 mt-3 rounded-xl' />
                                 </div>
                                 <div >
                                     <label className='text-black font-bold text-md'>Pricing</label><br />
-                                    <input type='text' name="cost" required value={formData.cost} placeholder='$30/h'onChange={handleChange} className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
+                                    <input type='text' name="cost" required value={formData.cost} placeholder='$30/h' onChange={handleChange} className='text-black p-3 border-2 border-[#CACAC] w-96 mt-3 rounded-xl' />
                                 </div>
                                 <label className='text-black font-bold text-lg'>Image</label><br />
 
@@ -87,6 +106,22 @@ const CourtForm = ({handleSubmit, formData, setFormData, setFiles, previewUrls, 
                                         </div>
                                     </div>
 
+
+                                    {/* facilites */}
+
+                                    {options.map((option) => (
+                                        <div key={option}>
+                                            <input
+                                                type="checkbox"
+                                                value={option}
+                                                onChange={handleCheckboxChange}
+                                                checked={formData.facilities.includes(option)} // Keep checkbox checked state
+                                            />
+                                            <label>{option}</label>
+                                        </div>
+                                    ))}
+                                    {/* facilites */}
+
                                     {/* end setting mage */}
                                     <p className='md:text-sm text-xs text-center mt-7 text-black'>Drop your images here too</p>
                                     {/* <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{  setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br /> */}
@@ -109,11 +144,11 @@ const CourtForm = ({handleSubmit, formData, setFormData, setFiles, previewUrls, 
                                 </button>
                             </div>
 
-                            </form>
-                        </div>
+                        </form>
+                    </div>
 
 
-                  
+
                 </div>
 
             </div>
