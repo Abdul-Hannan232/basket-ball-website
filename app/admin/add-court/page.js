@@ -39,8 +39,7 @@ const AddCourt = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
-console.log('dfghjk',formData)
-
+ 
     // Create a FormData instance
     const updatedFormData = new FormData();
     for (const key in formData) {
@@ -72,7 +71,6 @@ console.log('dfghjk',formData)
         })
         setFiles(Array(MAX_FILES).fill(null))
         setPreviewUrls(Array(MAX_FILES).fill(null))
-        setShowPopup(false)
       } else {
         toast.error(response.data.message);
       }
@@ -81,8 +79,7 @@ console.log('dfghjk',formData)
       toast.error("Network error: ");
     } finally {
       setLoader(false);
-      setUpdateContent(prev => !prev)
-    }
+     }
 
   }
 

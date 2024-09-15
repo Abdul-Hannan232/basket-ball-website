@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import FileUpload from '../../component/FileUpload'
 import Image from 'next/image';
 const MAX_FILES = 6;
-const CourtForm = ({ handleSubmit, formData, setFormData, setFiles, previewUrls, setPreviewUrls }) => {
+const CourtForm = ({ handleSubmit, formData, setFormData,files, setFiles, previewUrls, setPreviewUrls }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -124,7 +124,7 @@ const CourtForm = ({ handleSubmit, formData, setFormData, setFiles, previewUrls,
 
                                     {/* end setting mage */}
                                     <p className='md:text-sm text-xs text-center mt-7 text-black'>Drop your images here too</p>
-                                    {/* <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{  setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br /> */}
+                                    <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br />
                                 </div>
                                 <div className='mt-[-140px]'>
                                     <label className='text-black font-bold text-md'>Availability</label><br />

@@ -158,10 +158,11 @@ export default function Users() {
                 paginatorClassName="custom-paginator"
               >
                 <Column
-                  field="id"
+
                   header="ID"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '5%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                  body={(rowData, { rowIndex }) => rowIndex + 1}
                 />
                 <Column
                   field="name"
