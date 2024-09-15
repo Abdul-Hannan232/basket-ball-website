@@ -80,7 +80,7 @@ const Login = () => {
                         <div className='relative'>
                             <input
                                 type={showPassword ? 'text' : 'password'}
-                                placeholder='Enter your Password'
+                                placeholder='Enter your password'
                                 required
                                 onChange={(e) => setPasswords(e.target.value)}
                                 value={passwords}

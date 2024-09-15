@@ -2,7 +2,7 @@
 import React from 'react'
 import { usePathname } from 'next/navigation';
 import { Inter } from "next/font/google";
-import Sidebar from "../component/adminsidebar"
+import Sidebar from "../component/admin/adminsidebar"
 
 const inter = Inter({ subsets: ["latin"] });
 

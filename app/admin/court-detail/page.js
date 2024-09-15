@@ -1,5 +1,6 @@
+
 import React from 'react'
-import CourtForm from "../../component/admin/CourtForm"
+// import CourtForm from "../../component/admin/CourtForm"
 const CourtDetail = () => {
   return (
     <div>
@@ -11,7 +12,8 @@ const CourtDetail = () => {
 
                 </div>
             </div>
-      <CourtForm/>
+            <h1>under development</h1>
+      {/* <CourtForm/> */}
     </div>
   )
 }

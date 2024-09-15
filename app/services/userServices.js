@@ -57,13 +57,11 @@ export const updateUser = async (body,token) => {
         console.log("user service error",error.message)
         return error.response || { message: "An error occurred", error };
     }
-
+ 
 }
 
-export const deleteUser = async (body) => {
+export const deleteUser = async (body,token) => {
     try {
-
-        const token = Cookies.get('authToken');
  
         const response = await axios.delete(
             `${process.env.NEXT_PUBLIC_API_URL}/user/${body.id}}`,
