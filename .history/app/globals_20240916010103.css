@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Styling for the pagination container */
+.custom-paginator .p-paginator {
+  @apply rounded-lg p-4 mt-2 flex flex-row gap-10 fixed right-0 h-[80vh];
+}
+
+/* Styling for individual page numbers */
+.custom-paginator .p-paginator .p-paginator-page {
+  @apply bg-white text-black rounded-md w-10 h-10 inline items-center text-center justify-center mx-1;
+}
+
+/* Highlighted page number styling */
+.custom-paginator .p-paginator .p-paginator-page.p-highlight {
+  @apply bg-[#FFA500] text-white inline text-center flex-row;
+}
+
+/* Styling for previous and next buttons */
+.custom-paginator .p-paginator .p-paginator-prev,
+.custom-paginator .p-paginator .p-paginator-next {
+  @apply bg-[#CACACA] p-1 text-black flex flex-row rounded-md;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 640px) {
+  .custom-paginator .p-paginator {
+    @apply  flex items-center gap-2 fixed bottom-0 h-screen left-0 right-0 p-2;
+  }
+
+  .custom-paginator .p-paginator .p-paginator-page {
+    @apply w-6 h-6 mx-0.5;
+  }
+
+  .custom-paginator .p-paginator .p-paginator-prev,
+  .custom-paginator .p-paginator .p-paginator-next {
+    @apply p-2   }
+}
+
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.hover-design{
+  background: linear-gradient(90deg, #FFA500 0%, rgba(255, 165, 0, 0.09) 85.85%);
+
+}
+body {
+  background-color: rgba(51, 51, 51, 1);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.shadow {
+  box-shadow: 8px 8px 24px 0px #00000040;
+
+}
+.banner {
+  background-image: url('/banner.png');
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+.backColor{
+  background: linear-gradient(90.35deg, #FFA500 0.24%, #FF7D05 99.7%);
+
+}
+.mobilebanner {
+  background-image: url('/mobildbanner.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media only screen and (max-width:320px) {
+  .slick-slide {
+    margin-left:5px; /* Adjust the value as needed */
+  }
+}
+.slick-slide {
+  margin-left:5px; /* Adjust the value as needed */
+}
+.bounceball {
+  position: relative;
+  display: inline-block;
+  height: 20px;
+  width: 15px;
+  /* Adjust the width as needed */
+}
+
+.bounceball:before {
+  position: absolute;
+  content: '';
+  display: block;
+  top: 0;
+  width: 25px;
+  /* Adjust the width as needed */
+  height: 20px;
+  border-radius: 50%;
+  background-color: #FFA500;
+  transform-origin: 50%;
+  animation: bounce 500ms alternate infinite ease;
+}
+
+@layer
+{
+  .wrap {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  }
+}
+@keyframes bounce {
+  0% {
+    top: 70px;
+    height: 5px;
+    border-radius: 60px 60px 20px 20px;
+    transform: scaleX(2);
+  }
+
+  35% {
+    height: 15px;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+
+.animate-bounce {
+  animation: bounce 500ms alternate infinite ease;
+}
+
+/* Api loading */ 
+.loader {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  position: relative;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #FFA500;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: animloader 2s linear infinite;
+}
+.loader::after {
+  animation-delay: 1s;
+}
+
+@keyframes animloader {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
