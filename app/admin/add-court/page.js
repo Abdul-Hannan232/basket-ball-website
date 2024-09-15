@@ -20,7 +20,6 @@ const AddCourt = () => {
     if (token) {
       setloggedInUser(decodedToken)
     }
-
   }, [router, token])
 
   const [formData, setFormData] = useState({
@@ -55,7 +54,6 @@ const AddCourt = () => {
 
     try {
       const response = await addNewCourt(formData, token);
-      console.log("response", response)
       if (response.status === 201) {
         toast.success(response.data.message);
         setFormData({
