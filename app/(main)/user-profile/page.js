@@ -145,8 +145,8 @@ export default function UserProfile() {
     return (
         <div>
             <ToastContainer />
-            <div className='w-[80%] mx-auto mt-20'>
-            {/* <h1 className='text-5xl font-bold mt-14 text-center'>Welcome, {formData.name}</h1> */}
+            <div className='w-[76%] mx-auto mt-20'>
+                {/* <h1 className='text-5xl font-bold mt-14 text-center'>Welcome, {formData.name}</h1> */}
 
                 <div className="flex mt-32 gap-10">
                     <button
@@ -180,37 +180,45 @@ export default function UserProfile() {
                                         width={180}
                                         height={140}
                                         className='mx-auto rounded-full shadow-xl'
-                                        style={{ width: "auto", height: "180px",width:"180px" }}
+                                        style={{ width: "auto", height: "180px", width: "180px" }}
                                     />
                                     <FileUpload color={"#000000"} fileControl={setFile} text={"Edit profile picture"} previewControl={setPreviewUrl} type="single" />
                                     <Image src="/edit.png" alt="image" width={20} height={20} />
-                                    <div className='w-[100%] mx-auto grid grid-cols-2 gap-5 my-10'>
+                                    <div className='w-full mx-auto flex items-center     gap-20 my-10'>
+                                        <div className='space-y-5 w-full'>
+                                            <div >
+                                                <label className='text-white font-bold text-md'> Name</label><br />
+                                                <input type='text' placeholder='Fred Khan' name="name" required value={formData.name} onChange={handleChange} className='text-black p-3 order-2  shadow-xl bg-[#808080] border-[#808080] outline-none  w-full mt-3 rounded-md' />
+                                            </div>
+                                            <div >
+                                                <label className='text-white font-bold text-md'>Contact</label><br />
+                                                <input type='text' placeholder='12345678' name="phone_number" value={formData.phone_number} onChange={handleChange} className='text-black p-4 border-2 shadow-xl  bg-[#808080] border-[#808080] outline-none  w-full mt-3 rounded-md' />
+                                            </div>
+                                            <div >
+                                                <label className='text-white font-bold text-md'>Weight</label><br />
+                                                <input type='text' placeholder='180 lbs' name="weight" required value={formData.weight} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none  w-full mt-3 rounded-md' />
+                                            </div>
+                                        </div>
+                                        <div className='space-y-5 w-full'>
                                         <div >
-                                            <label className='text-white font-bold text-md'> Name</label><br />
-                                            <input type='text' placeholder='Fred Khan' name="name" required value={formData.name} onChange={handleChange} className='text-black p-3 4order-2  shadow-xl bg-[#808080] border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
+                                            <label className='text-white font-bold text-md '>Email<label className='ml-2 text-[#FFA500]'>*</label></label><br />
+                                            <input type='text' placeholder='info@centralparknyc.com' disabled value={formData.email} className='text-black bg4[#808080] shadow-xl  p-3 border-2 border-[#808080] outline-none  w-full mt-3 rounded-md' />
                                         </div>
 
                                         <div >
-                                            <label className='text-white font-bold text-md '>Email<label className='ml-2 text-[#FFA500]'>*</label></label><br />
-                                            <input type='text' placeholder='info@centralparknyc.com' disabled value={formData.email} className='text-black bg4[#808080] shadow-xl  p-3 border-2 border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
-                                        </div>
-                                        <div >
-                                            <label className='text-white font-bold text-md'>Contact</label><br />
-                                            <input type='text' placeholder='12345678' name="phone_number" value={formData.phone_number} onChange={handleChange} className='text-black p-4 border-2 shadow-xl  bg-[#808080] border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
-                                        </div>
-                                        <div >
                                             <label className='text-white font-bold text-md'>Height</label><br />
-                                            <input type='text' placeholder='6 feet' name="height" required value={formData.height} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
+                                            <input type='text' placeholder='6 feet' name="height" required value={formData.height} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none  w-full mt-3 rounded-md' />
                                         </div>
-                                        <div >
-                                            <label className='text-white font-bold text-md'>Weight</label><br />
-                                            <input type='text' placeholder='180 lbs' name="weight" required value={formData.weight} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
-                                        </div>
+
 
                                         <div >
                                             <label className='text-white font-bold text-md'>Address</label><br />
-                                            <input type='text' placeholder='123 street anytown' name="address" required value={formData.address} onChange={handleChange} className='text-black p-4  shadow-xl  bg-[#808080] border-2 border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
+                                            <input type='text' placeholder='123 street anytown' name="address" required value={formData.address} onChange={handleChange} className='text-black p-4  shadow-xl  bg-[#808080] border-2 border-[#808080] outline-none  w-full mt-3 rounded-md' />
                                         </div>
+                                        </div>
+
+
+                                        
 
 
                                     </div>
@@ -222,16 +230,16 @@ export default function UserProfile() {
                         <form onSubmit={handleSubmit}>
                             <div className='w-[60%] mx-auto space-y-5 my-10'>
                                 <div >
-                                    <label className='text-white  text-md'> Team*</label><br />
+                                    <label className='text-white  text-md'> Team</label><br />
                                     <input type='text' placeholder='City Hawks' name="team" value={formData.team} onChange={handleChange} className='shadow-xl text-black p-4 border-2  bg-[#808080] border-[#808080] outline-none w-full mt-3 rounded-md' />
                                 </div>
 
                                 <div >
-                                    <label className='text-white  text-md'>Jersey Number  *</label><br />
+                                    <label className='text-white  text-md'>Jersey Number </label><br />
                                     <input type='text' placeholder='23' name="jersey_number" value={formData.jersey_number} onChange={handleChange} className='text-black shadow-xl bg-[#808080]  p-4 border-2 border-[#808080] outline-none w-full mt-3 rounded-md' />
                                 </div>
                                 <div >
-                                    <label className='text-white  text-md'>Position*</label><br />
+                                    <label className='text-white  text-md'>Position</label><br />
                                     <input type='text' placeholder='Point Guard' name="position" value={formData.position} onChange={handleChange} className='text-black shadow-xl p-4 border-2  bg-[#808080] border-[#808080] outline-none w-full mt-3 rounded-md' />
                                 </div>
                                 <button type="submit" className='bg-[#FFA500] p-4 w-full rounded-md  font-bold shadow-xl mx-auto text-black '>Save Changes</button>
@@ -244,7 +252,7 @@ export default function UserProfile() {
                         <div className='w-[60%]  mx-auto space-y-10 my-10'>
                             <form onSubmit={handleUpdatePassword} className='space-y-7' >
                                 <div>
-                                    <label className='text-white text-md'>Old Password*</label><br />
+                                    <label className='text-white text-md'>Old Password</label><br />
                                     <div className='shadow-xl w-full mt-3 relative rounded-md'>
                                         <input
                                             type={oldPassword ? 'text' : 'password'}
@@ -263,7 +271,7 @@ export default function UserProfile() {
                                     </div>
                                 </div>
                                 <div>
-                                    <label className='text-white text-md'>New Password*</label><br />
+                                    <label className='text-white text-md'>New Password</label><br />
                                     <div className='shadow-xl w-full mt-3 relative rounded-md'>
                                         <input
                                             type={newPassword ? 'text' : 'password'}
@@ -282,7 +290,7 @@ export default function UserProfile() {
                                     </div>
                                 </div>
                                 <div>
-                                    <label className='text-white text-md'>Confirm new Password*</label><br />
+                                    <label className='text-white text-md'>Confirm new Password</label><br />
                                     <div className='shadow-xl w-full mt-3 relative rounded-md'>
                                         <input
                                             type={confirmPassword ? 'text' : 'password'}

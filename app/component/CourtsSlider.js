@@ -150,7 +150,7 @@ const CourtsSlider = ({ slide }) => {
                     <div className="flex justify-center mt-[30px]">
                         {spinner ? <span className="loader"></span> : null}
                     </div>
-                    <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-20 w-[80%] md:mt-20 mt-5 md:mx-auto mx-5'>
+                    <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-20 justify-center place-items-center lg:w-[80%] md:mt-20 mt-5 md:mx-auto mx-5'>
 
                         {allCourts.map((item, index) => (
                             <div key={index} className='relative  shadow text-black rounded-md 2xl:w-[300px] xl:w-[250px] md:w-[250px] w-[280px] group'>
@@ -167,7 +167,7 @@ const CourtsSlider = ({ slide }) => {
 
                                     <Image src={item.images?.[0]
                                         ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${item.images[0]}`
-                                        : '/basketBALL.png'} alt="image" width={343} height={228} className='rounded-t-xl 2xl:w-[450px]' />
+                                        : '/basketBALL.png'} alt="image" width={343} height={228} className='rounded-t-xl 2xl:h-72 h-60 2xl:w-[450px]' />
 
                                     <div className='flex items-center justify-center float-right -mt-5 shadow  absolute right-0 p-3 w-32 gap-2 rounded-l-xl bg-white text-black'>
 
