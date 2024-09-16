@@ -41,10 +41,12 @@ const NavBarComponent = () => {
 
     return (
         <div className='bg-[#FFA500] sticky top-0 left-0 right-0 p-4 flex z-40 items-center justify-between'>
+ 
             <div className='flex items-center gap-1'>
                 <IoIosMenu className='text-black text-xl cursor-pointer md:hidden block' onClick={toOpen} />
-                <Image src="/LOGO.png" width={60} height={60} alt='image' />
+                <Image src="/LOGO.png" width={60} height={60} alt='image' className="lg:w-[60px] lg:h-[60px] w-[30px] h-[30px]" />
             </div>
+      
             <div className='md:block hidden '>
                 <ul className='flex  items-center   space-x-10'>
                     <li><Link className='font-medium text-lg  cursor-pointer hover:border-2 hover:border-b-black border-x-transparent border-t-transparent   text-black' href='/home'>Home </Link></li>
@@ -54,28 +56,24 @@ const NavBarComponent = () => {
                 </ul>
             </div>
 
-
-
             {loggedInUser ? (
                 <div className='flex gap-2 items-center'>
-                    <Image src="/Vector.png" alt="image" width={30} height={30} />
+                    <Image src="/Vector.png" alt="image" width={30} height={30} className="lg:w-[30px] lg:h-[30px] w-[20px] h-[20px]" />
                     <Link href="/user-profile">
-
                     <Image
                         src={loggedInUser.image ? loggedInUser.image : '/user_placeholder.jpeg'} // Make sure this URL is correct
                         alt="user profile"
                         width={40}
                         height={40}
-                        className="rounded-full"
+                        className="rounded-full lg:w-[40px] lg:h-[40px] w-[20px] h-[20px]"
                     />
                     </Link>
                     <Link href="/user-profile">
-                        <h3 className="text-xl font-bold text-gray-800 ">
+                        <h3 className="lg:text-xl lg:block hidden text-xs font-bold text-gray-800 ">
                             {loggedInUser.name}
                         </h3>
                     </Link>
-                    <FiLogOut className="text-black text-2xl cursor-pointer" onClick={handleLogout}/>
-
+                    <FiLogOut className="text-black lg:text-2xl text-lg cursor-pointer" onClick={handleLogout}/>
                     {/* <button className='md:block hidden py-2 px-5 border-[#011344] bg-[#011344] border ml-4 text-sm rounded-md' >
                         Logout
                     </button> */}

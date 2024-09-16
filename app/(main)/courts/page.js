@@ -15,6 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuthToken } from '../../customHook/useAuthToken';
 import FileUpload from '../../component/FileUpload'
 import Image from 'next/image';
+import { LiaAngleLeftSolid } from "react-icons/lia";
+import { LiaAngleRightSolid } from "react-icons/lia";
 
 const MAX_FILES = 6;
 
@@ -101,9 +103,7 @@ export default function Courts() {
             setLoader(false);
             setUpdateContent(prev => !prev)
         }
-
     }
-
 
     return (
         <div className='relative'>
@@ -126,6 +126,20 @@ export default function Courts() {
 
             </div>
             <CourtsSlider slide={"box"} key={updateContent} />
+            <div className="flex items-center lg:justify-end justify-center lg:w-[80%] lg:mx-auto mx-5 mt-20 gap-1">
+                <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-[#808080]"><LiaAngleLeftSolid />
+                </h1>
+                <div className="border border-[#959595] bg-white rounded-lg flex items-center">
+                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 paginationShadow text-black">1</h1>
+                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">2</h1>
+                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">3</h1>
+                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">4</h1>
+                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">......</h1>
+                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">10</h1>
+                </div>
+                <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-black"><LiaAngleRightSolid />
+                </h1>
+            </div>
             <div className='w-[80%] mx-auto mt-40 flex items-center gap-2'>
                 <h1 className='text-[#FFA500] text-2xl font-bold'>Map</h1>
                 <h1 className='text-white text-2xl font-bold'>View</h1>
@@ -174,16 +188,22 @@ export default function Courts() {
                                     Size
                                 </label>
                                 <div className='flex mt-3 mb-5 items-center justify-between md:w-[70%]'>
-                                    <div className='flex items-center gap-2 '>
-                                        <input type="radio" name="size" required value="Half Court" checked={formData.size === 'Half Court'} onChange={handleChange} className='w-4 h-4'
-                                        />
-                                        <h1 className='md:text-sm text-xs text-white '>Half Court</h1>
+                                    <div className='flex items-center gap-2'>
+                                        <input type="radio" name="size" required value="Half Court"
+                                            checked={formData.size === 'Half Court'}
+                                            onChange={handleChange}
+                                            className='radio-custom w-4 h-4' />
+                                        <h1 className='md:text-sm text-xs text-white'>Half Court</h1>
                                     </div>
-                                    <div className='flex items-center gap-2 '>
-                                        <input type="radio" name="size" required value="Full Court" checked={formData.size === 'Full Court'} onChange={handleChange} className='w-4 h-4' />
-                                        <h1 className='md:text-sm text-xs text-white '>Full Court</h1>
+                                    <div className='flex items-center gap-2'>
+                                        <input type="radio" name="size" required value="Full Court"
+                                            checked={formData.size === 'Full Court'}
+                                            onChange={handleChange}
+                                            className='radio-custom w-4 h-4' />
+                                        <h1 className='md:text-sm text-xs text-white'>Full Court</h1>
                                     </div>
                                 </div>
+
                                 <label className='text-sm text-white '>
                                     Availability
                                 </label>
@@ -206,7 +226,7 @@ export default function Courts() {
                                             value="indoor"
                                             checked={formData.type === 'indoor'}
                                             onChange={handleChange}
-                                            className='w-4 h-4'
+                                            className='radio-custom w-4 h-4' /* Apply custom class */
                                         />
                                         <label className='text-sm text-white'>Indoor</label>
                                     </div>
@@ -218,7 +238,7 @@ export default function Courts() {
                                             value="outdoor"
                                             checked={formData.type === 'outdoor'}
                                             onChange={handleChange}
-                                            className='w-4 h-4'
+                                            className='radio-custom w-4 h-4' /* Apply custom class */
                                         />
                                         <label className='text-sm text-white'>Outdoor</label>
                                     </div>
@@ -230,57 +250,62 @@ export default function Courts() {
                                             value="sheltered"
                                             checked={formData.type === 'sheltered'}
                                             onChange={handleChange}
-                                            className='w-4 h-4'
+                                            className='radio-custom w-4 h-4' /* Apply custom class */
                                         />
                                         <label className='text-sm text-white'>Sheltered</label>
                                     </div>
                                 </div>
 
+
                             </div>
-                            <div className='w-[80%]  border-2 border-white rounded-xl   mx-auto'>
+                            <div className='w-[80%] mt-5 mx-auto'>
+                                <label className='text-sm text-white  '>
+                                    Image
+                                </label>
+                                <div className='w-[100%] mt-3  border-2 border-white rounded-xl   mx-auto'>
+                                    {/* seting image */}
+                                    <div>
+                                        <div style={{ display: 'grid', gap: '10px', marginTop: '10px' }}>
+                                            {/* First row with one image */}
+                                            <div style={{ display: 'flex', justifyContent: 'center', marginLeft: "-1px" }}>
+                                                {previewUrls.length > 0 && (
+                                                    <div key={0} style={{ textAlign: 'center' }} className='w-[95%] mx-auto rounded-md'>
+                                                        <Image
+                                                            src={previewUrls[0] || '/courts_placeholder.jpg'} // Default placeholder image if no image is selected
+                                                            alt={`Preview 1`}
+                                                            style={{ width: '100%', borderRadius: "7px", height: '200px', objectFit: 'cover' }}
+                                                            unoptimized
+                                                            width={500}
+                                                            height={500}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
 
-                                {/* seting image */}
-                                <div>
-                                    <div style={{ display: 'grid', gap: '10px', marginTop: '10px' }}>
-                                        {/* First row with one image */}
-                                        <div style={{ display: 'flex', justifyContent: 'center', marginLeft: "-1px" }}>
-                                            {previewUrls.length > 0 && (
-                                                <div key={0} style={{ textAlign: 'center' }} className='w-[95%] mx-auto rounded-md'>
-                                                    <Image
-                                                        src={previewUrls[0] || '/courts_placeholder.jpg'} // Default placeholder image if no image is selected
-                                                        alt={`Preview 1`}
-                                                        style={{ width: '100%', borderRadius: "7px", height: '200px', objectFit: 'cover' }}
-                                                        unoptimized
-                                                        width={500}
-                                                        height={500}
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        {/* Second row with up to four images */}
-                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
-                                            {previewUrls.slice(1, 6).map((preview, index) => (
-                                                <div key={index + 1} style={{ textAlign: 'center' }} className='w-[80%] rounded-md mx-auto '>
-                                                    <Image
-                                                        src={preview || '/courts_placeholder.jpg'} // Default placeholder image if no image is selected
-                                                        alt={`Preview ${index + 2}`}
-                                                        style={{ width: '100px', borderRadius: "7px", height: '70px', objectFit: 'cover' }}
-                                                        unoptimized
-                                                        width={500}
-                                                        height={500}
-                                                    />
-                                                </div>
-                                            ))}
+                                            {/* Second row with up to four images */}
+                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+                                                {previewUrls.slice(1, 6).map((preview, index) => (
+                                                    <div key={index + 1} style={{ textAlign: 'center' }} className='w-[80%] rounded-md mx-auto '>
+                                                        <Image
+                                                            src={preview || '/courts_placeholder.jpg'} // Default placeholder image if no image is selected
+                                                            alt={`Preview ${index + 2}`}
+                                                            style={{ width: '100px', borderRadius: "7px", height: '70px', objectFit: 'cover' }}
+                                                            unoptimized
+                                                            width={500}
+                                                            height={500}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* end setting mage */}
-                                <p className='md:text-sm text-xs text-center mt-7 text-white'>Drop your images here too</p>
-                                <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br />
+                                    {/* end setting mage */}
+                                    <p className='md:text-sm text-xs text-center mt-7 text-white'>Drop your images here too</p>
+                                    <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br />
+                                </div>
                             </div>
-                            <button type="submit" className='text-black bg-[#FFA500] md:p-4 p-3 md:text-xl text-md text-center flex justify-center w-[80%] mx-auto font-semibold my-10 md:rounded-xl rounded-lg'>Submit</button>
+                            <button type="submit" className='text-black bg-[#FFA500] md:p-4 p-3 md:text-xl text-md text-center flex justify-center w-[80%] mx-auto font-semibold my-10  rounded-md'>Submit</button>
 
                         </form>
                     </div>
