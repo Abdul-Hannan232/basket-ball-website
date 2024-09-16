@@ -119,7 +119,7 @@ export default function Users() {
     <>
       <ToastContainer />
       <AdminNavbar />
-      <div className='flex bg-white lg:mt-16 mt-14 lg:w-[81.5%] h-screen float-right text-black'>
+      <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[86%] lg:w-[81.5%] h-screen float-right text-black'>
         <div className='w-screen'>
           <div className='lg:p-5 p-2 m-5 rounded-xl border-2 lg:h-24  border-[#CACACA] lg:gap-10 gap-3 flex items-center'>
             <div className='w-full'>
@@ -144,21 +144,30 @@ export default function Users() {
 
               <DataTable
                 value={allUsers}
-                tableStyle={{ width: '99%', margin: 'auto', marginTop: '10px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
+                tableStyle={{
+                  backgroundColor: "white",
+                  width: '99%',
+                  margin: 'auto',
+                  marginTop: '10px',
+                  borderRadius: '20px',
+                  fontSize: "12px"
+                }}
                 className="custom-data-table custom-paginator"
                 paginator
-                rows={4}
+                rows={10}
+                scrollable
+                scrollHeight="350px"  // Limit the table height and enable scrolling
                 showGridlines
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 paginatorClassName="custom-paginator"
               >
                 <Column
-
                   header="ID"
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', border: '1px solid #CACACA', borderRight: 'transparent' }}
                   style={{ width: '5%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData, { rowIndex }) => rowIndex + 1}
                 />
+
                 <Column
                   field="name"
                   header="DISPLAY NAME"
@@ -188,17 +197,18 @@ export default function Users() {
                         query: { id: rowData.id }, // Serialize the object
                       }}
                     >
-
                       {rowData.email}
                     </Link>
                   )}
                 />
+
                 <Column
                   field="phone_number"
                   header="PHONE NUMBER"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
+
                 <Column
                   field="created_at"
                   header="CREATED ON"
@@ -206,12 +216,14 @@ export default function Users() {
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => formatDate(rowData.created_at)}
                 />
+
                 <Column
                   field="remarks"
                   header="REMARKS"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
+
                 <Column
                   field="role"
                   header="ROLE"
@@ -222,26 +234,40 @@ export default function Users() {
                 <Column
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   body={(rowData) => (
-                    rowData.isactive ?
+                    rowData.isactive ? (
                       <div style={{ display: 'flex', color: "#D60000", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info lg:text-xl text-md" onClick={() => openBlockUserPopup(rowData)} />
+                        <Button
+                          icon={<FontAwesomeIcon icon={faLock} />}
+                          className="p-button-rounded p-button-info lg:text-xl text-md"
+                          onClick={() => openBlockUserPopup(rowData)}
+                        />
                       </div>
-                      : <div style={{ display: 'flex', color: "#0f6e28", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info lg:text-xl text-md" onClick={() => blockUser(rowData)} />
+                    ) : (
+                      <div style={{ display: 'flex', color: "#0f6e28", justifyContent: 'space-around' }}>
+                        <Button
+                          icon={<FontAwesomeIcon icon={faLock} />}
+                          className="p-button-rounded p-button-info lg:text-xl text-md"
+                          onClick={() => blockUser(rowData)}
+                        />
                       </div>
-                  )}
-                  style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-                />
-                <Column
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                  body={(rowData) => (
-                    <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info lg:text-xl text-md" onClick={() => openDeleteUserPopup(rowData)} />
-                    </div>
+                    )
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
 
+                <Column
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  body={(rowData) => (
+                    <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                      <Button
+                        icon={<FontAwesomeIcon icon={faTrash} />}
+                        className="p-button-rounded p-button-info lg:text-xl text-md"
+                        onClick={() => openDeleteUserPopup(rowData)}
+                      />
+                    </div>
+                  )}
+                  style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
               </DataTable>
             )}
 

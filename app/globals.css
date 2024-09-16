@@ -5,7 +5,7 @@
 @tailwind utilities;
 /* Styling for the pagination container */
 .custom-paginator .p-paginator {
-  @apply rounded-lg p-4 mt-2 flex flex-row gap-10 fixed right-0 ;
+  @apply rounded-lg p-4  flex flex-row gap-10 fixed right-0 ;
 }
 
 /* Styling for individual page numbers */

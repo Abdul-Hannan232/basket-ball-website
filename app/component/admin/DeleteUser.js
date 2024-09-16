@@ -7,15 +7,15 @@ const DeleteUser = ({user,onDeleteUser,onClose}) => {
     return (
         <div>
             <div className='flex flex-col justify-center bg-gray-700 bg-opacity-40 items-center h-screen absolute top-0 left-0 right-0 '>
-                <div className='bg-white text-center w-[500px] rounded-xl p-5 shadow-xl '>
-                    <div onClick={onClose} className='cursor-pointer bg-white rounded-full w-10 h-10 flex flex-col float-right justify-center items-center text-center shadow-xl'><RxCross2 className='text-[#F60606] text-xl' />
+                <div className='bg-white text-center lg:w-[500px] rounded-xl lg:p-5 p-3 w-[90%] shadow-xl '>
+                    <div onClick={onClose} className='cursor-pointer bg-white rounded-full lg:w-10 lg:h-10 w-8 h-8 flex flex-col float-right justify-center items-center text-center shadow-xl'><RxCross2 className='text-[#F60606] lg:text-xl text-md' />
                     </div>
-                    <Image src="/trash.png" alt="dustbin" width="30" height="50" className='mx-auto mt-14 my-3' />
-                    <h1 className='text-[#313131] font-bold text-xl'>Are you want to delete this user? </h1>
-                    <p className='text-[#787878] text-xs my-3 mx-10'>Do you really want to delete this user? Deleting them will limit their access.</p>
-                    <div className='flex items-center mt-8 justify-center gap-10 mb-10'>
-                        <button className='bg-[#F4F5F7] p-2 w-32 text-sm text-black rounded-md h-12 ' onClick={onClose}>No, Keep it</button>
-                        <button className='bg-[#F60606] p-2 w-32 text-sm rounded-md h-12' onClick={()=>{onDeleteUser(user)} }>Yes, Delete it</button>
+                    <Image src="/trash.png" alt="dustbin" width="30" height="50" className='lg:mx-auto mx-28 lg:mt-14 mt-5 my-3 ' />
+                    <h1 className='text-[#313131] font-bold lg:text-xl text-sm'>Are you want to delete this user? </h1>
+                    <p className='text-[#787878] lg::text-xs text-[10px] my-3 mx-10'>Do you really want to delete this user? Deleting them will limit their access.</p>
+                    <div className='flex items-center mt-8 justify-center lg:gap-10 gap-5 mb-10'>
+                        <button className='bg-[#F4F5F7] p-2 lg:w-32 w-20 lg:text-sm text-[10px] text-black rounded-md lg:h-12 h-8 ' onClick={onClose}>No, Keep it</button>
+                        <button className='bg-[#F60606] p-2 lg:w-32 w-20 lg:text-sm text-[10px] rounded-md lg:h-12 h-8' onClick={()=>{onDeleteUser(user)} }>Yes, Delete it</button>
                     </div>
                 </div>
             </div>

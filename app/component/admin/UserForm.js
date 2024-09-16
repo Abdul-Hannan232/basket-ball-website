@@ -47,46 +47,55 @@ const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, se
                                 </div>
                             </div>
                         </div>
-                        <div className='lg:w-[80%] w-[90%] mx-auto grid lg:grid-cols-2 grid-cols-1  gap-5 my-20'>
-                            <div >
-                                <label className='text-black font-bold text-md'>Display Name*</label><br />
-                                <input type='text' name="name" required value={formData.name} onChange={handleChange} placeholder='John Doe' className='text-black p-3 border-2 w-full border-[#CACAC] lg:w-96 mt-3 rounded-xl' />
+                        <div className='lg:w-[80%] w-[90%] flex items-center gap-20 mx-auto grid lg:grid-cols-2 grid-cols-1  gap-5 my-20'>
+                            <div className='space-y-5'>
+                                <div >
+                                    <label className='text-black font-bold text-md'>Display Name*</label><br />
+                                    <input type='text' name="name" required value={formData.name} onChange={handleChange} placeholder='John Doe' className='text-black p-3 border-2 w-full border-[#CACAC] lg:w-96 mt-3 rounded-xl' />
+                                </div>
+                                <div >
+                                    <label className='text-black font-bold text-md'>Email  *</label><br />
+                                    <input type='text' name="email" disabled={emailDisable} required value={formData.email} onChange={handleChange} placeholder='info@centralparknyc.com' className='text-black w-full p-3 border-2 border-[#CACAC] lg:w-96 mt-3 rounded-xl' />
+                                </div>
+                                <div >
+                                    <label className='text-black font-bold text-md'>Height</label><br />
+                                    <input type='text' name="height" required value={formData.height} onChange={handleChange} placeholder='190 cm' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
+                                </div>
+                                <div >
+                                    <label className='text-black font-bold text-md'>Phone (optional)</label><br />
+                                    <input type='text' name="phone_number" value={formData.phone_number} onChange={handleChange} placeholder='555-123-4567' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
+                                </div>
+                                <div >
+                                    <label className='text-black font-bold text-md'>Country</label><br />
+                                    <input type='text' name="country" required value={formData.country} onChange={handleChange} placeholder='USA' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
+                                </div>
                             </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>First Name </label><br />
-                                <input type='text' name="first_name" required value={formData.first_name} onChange={(e) => handleChange(e)} placeholder='John' className='text-black p-3 w-full border-2 border-[#CACAC] lg:w-96 mt-3 rounded-xl' />
-                            </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>Email  *</label><br />
-                                <input type='text' name="email" disabled={emailDisable} required value={formData.email} onChange={handleChange} placeholder='info@centralparknyc.com' className='text-black w-full p-3 border-2 border-[#CACAC] lg:w-96 mt-3 rounded-xl' />
-                            </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>Last Name</label><br />
-                                <input type='text' name="last_name" required value={formData.last_name} onChange={handleChange} placeholder='Doe' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
-                            </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>Height</label><br />
-                                <input type='text' name="height" required value={formData.height} onChange={handleChange} placeholder='190 cm' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
-                            </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>Weight</label><br />
-                                <input type='text' name="weight" required value={formData.weight} onChange={handleChange} placeholder='110 KG' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
-                            </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>Phone (optional)</label><br />
-                                <input type='text' name="phone_number" value={formData.phone_number} onChange={handleChange} placeholder='555-123-4567' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
-                            </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>Joined Since</label><br />
-                                <input type='date' name="joined_since" required value={DateFormat(formData.joined_since)} onChange={handleChange} placeholder='01/02/17' className='text-black p-3 border-2 w-full border-[#CACAC] lg:w-96 w-full mt-3 rounded-xl' />
-                            </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>Country</label><br />
-                                <input type='text' name="country" required value={formData.country} onChange={handleChange} placeholder='USA' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
-                            </div>
-                            <div >
-                                <label className='text-black font-bold text-md'>Role</label><br />
-                                <input type='text' name="role" required value={formData.role} onChange={handleChange} placeholder='Admin' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
+                            <div className='space-y-5'>
+
+                                <div >
+                                    <label className='text-black font-bold text-md'>First Name </label><br />
+                                    <input type='text' name="first_name" required value={formData.first_name} onChange={(e) => handleChange(e)} placeholder='John' className='text-black p-3 w-full border-2 border-[#CACAC] lg:w-[410px] mt-3 rounded-xl' />
+                                </div>
+
+                                <div >
+                                    <label className='text-black font-bold text-md'>Last Name</label><br />
+                                    <input type='text' name="last_name" required value={formData.last_name} onChange={handleChange} placeholder='Doe' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-[410px] mt-3 rounded-xl' />
+                                </div>
+
+                                <div >
+                                    <label className='text-black font-bold text-md'>Weight</label><br />
+                                    <input type='text' name="weight" required value={formData.weight} onChange={handleChange} placeholder='110 KG' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-[410px] mt-3 rounded-xl' />
+                                </div>
+
+                                <div >
+                                    <label className='text-black font-bold text-md'>Joined Since</label><br />
+                                    <input type='date' name="joined_since" required value={DateFormat(formData.joined_since)} onChange={handleChange} placeholder='01/02/17' className='text-black p-3 border-2 w-full border-[#CACAC] lg:w-[410px] w-full mt-3 rounded-xl' />
+                                </div>
+
+                                <div >
+                                    <label className='text-black font-bold text-md'>Role</label><br />
+                                    <input type='text' name="role" required value={formData.role} onChange={handleChange} placeholder='Admin' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-[410px] mt-3 rounded-xl' />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -101,7 +110,7 @@ const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, se
                             </div>
                             <div >
                                 <label className='text-black font-bold text-md'>Jersey Number</label><br />
-                                <input type='text' name="jersey_number" value={formData.jersey_number} onChange={handleChange} placeholder='23' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-96 mt-3 rounded-xl' />
+                                <input type='text' name="jersey_number" value={formData.jersey_number} onChange={handleChange} placeholder='23' className='text-black p-3 border-2 border-[#CACAC] w-full lg:w-[410px] mt-3 rounded-xl' />
                             </div>
                             <div >
                                 <label className='text-black font-bold text-md'>Position</label><br />

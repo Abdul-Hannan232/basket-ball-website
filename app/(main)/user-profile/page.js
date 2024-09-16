@@ -187,29 +187,29 @@ export default function UserProfile() {
                                     <div className='w-[100%] mx-auto grid grid-cols-2 gap-5 my-10'>
                                         <div >
                                             <label className='text-white font-bold text-md'> Name</label><br />
-                                            <input type='text' placeholder='Fred Khan' name="name" required value={formData.name} onChange={handleChange} className='text-black p-3 4order-2  shadow-xl bg-[#808080] border-[#808080] outline-none w-[100%] mt-3 rounded-md' />
+                                            <input type='text' placeholder='Fred Khan' name="name" required value={formData.name} onChange={handleChange} className='text-black p-3 4order-2  shadow-xl bg-[#808080] border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
                                         </div>
 
                                         <div >
-                                            <label className='text-white font-bold text-md'>Email<label className='text-[#FFA500]'>*</label></label><br />
-                                            <input type='text' placeholder='info@centralparknyc.com' disabled value={formData.email} className='text-black bg4[#808080] shadow-xl  p-3 border-2 border-[#808080] outline-none w-full mt-3 rounded-md' />
+                                            <label className='text-white font-bold text-md '>Email<label className='ml-2 text-[#FFA500]'>*</label></label><br />
+                                            <input type='text' placeholder='info@centralparknyc.com' disabled value={formData.email} className='text-black bg4[#808080] shadow-xl  p-3 border-2 border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
                                         </div>
                                         <div >
                                             <label className='text-white font-bold text-md'>Contact</label><br />
-                                            <input type='text' placeholder='12345678' name="phone_number" value={formData.phone_number} onChange={handleChange} className='text-black p-4 border-2 shadow-xl  bg-[#808080] border-[#808080] outline-none w-full mt-3 rounded-md' />
+                                            <input type='text' placeholder='12345678' name="phone_number" value={formData.phone_number} onChange={handleChange} className='text-black p-4 border-2 shadow-xl  bg-[#808080] border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
                                         </div>
                                         <div >
                                             <label className='text-white font-bold text-md'>Height</label><br />
-                                            <input type='text' placeholder='6 feet' name="height" required value={formData.height} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none w-full mt-3 rounded-md' />
+                                            <input type='text' placeholder='6 feet' name="height" required value={formData.height} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
                                         </div>
                                         <div >
                                             <label className='text-white font-bold text-md'>Weight</label><br />
-                                            <input type='text' placeholder='180 lbs' name="weight" required value={formData.weight} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none w-full mt-3 rounded-md' />
+                                            <input type='text' placeholder='180 lbs' name="weight" required value={formData.weight} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
                                         </div>
 
                                         <div >
                                             <label className='text-white font-bold text-md'>Address</label><br />
-                                            <input type='text' placeholder='123 street anytown' name="address" required value={formData.address} onChange={handleChange} className='text-black p-4  shadow-xl  bg-[#808080] border-2 border-[#808080] outline-none w-full mt-3 rounded-md' />
+                                            <input type='text' placeholder='123 street anytown' name="address" required value={formData.address} onChange={handleChange} className='text-black p-4  shadow-xl  bg-[#808080] border-2 border-[#808080] outline-none md:w-[95%] w-full mt-3 rounded-md' />
                                         </div>
 
 
@@ -245,14 +245,14 @@ export default function UserProfile() {
                             <form onSubmit={handleUpdatePassword} className='space-y-7' >
                                 <div>
                                     <label className='text-white text-md'>Old Password*</label><br />
-                                    <div className='shadow-xl w-full mt-3 relative rounded-xl'>
+                                    <div className='shadow-xl w-full mt-3 relative rounded-md'>
                                         <input
                                             type={oldPassword ? 'text' : 'password'}
                                             placeholder='**********'
                                             name='old_password'
                                             required
                                             value={passwordFormData.old_password} onChange={handleChangePassword}
-                                            className='text-black p-4 border-2 bg-[#808080] border-[#808080] outline-none w-full rounded-xl'
+                                            className='text-black p-4 border-2 bg-[#808080] border-[#808080] outline-none w-full rounded-md'
                                         />
                                         <div
                                             onClick={togglePasswordVisibility1}
@@ -264,14 +264,14 @@ export default function UserProfile() {
                                 </div>
                                 <div>
                                     <label className='text-white text-md'>New Password*</label><br />
-                                    <div className='shadow-xl w-full mt-3 relative rounded-xl'>
+                                    <div className='shadow-xl w-full mt-3 relative rounded-md'>
                                         <input
                                             type={newPassword ? 'text' : 'password'}
                                             placeholder='**********'
                                             name='password'
                                             required
                                             value={passwordFormData.password} onChange={handleChangePassword}
-                                            className='text-black p-4 border-2 bg-[#808080] border-[#808080] outline-none w-full rounded-xl'
+                                            className='text-black p-4 border-2 bg-[#808080] border-[#808080] outline-none w-full rounded-md'
                                         />
                                         <div
                                             onClick={togglePasswordVisibility2}
@@ -283,14 +283,14 @@ export default function UserProfile() {
                                 </div>
                                 <div>
                                     <label className='text-white text-md'>Confirm new Password*</label><br />
-                                    <div className='shadow-xl w-full mt-3 relative rounded-xl'>
+                                    <div className='shadow-xl w-full mt-3 relative rounded-md'>
                                         <input
                                             type={confirmPassword ? 'text' : 'password'}
                                             placeholder='**********'
                                             name='confirm_password'
                                             required
                                             value={passwordFormData.confirm_password} onChange={handleChangePassword}
-                                            className='text-black p-4 border-2 bg-[#808080] border-[#808080] outline-none w-full rounded-xl'
+                                            className='text-black p-4 border-2 bg-[#808080] border-[#808080] outline-none w-full rounded-md'
                                         />
                                         <div
                                             onClick={togglePasswordVisibility3}

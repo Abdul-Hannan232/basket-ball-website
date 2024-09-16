@@ -86,7 +86,7 @@ function FileUpload({ fileControl, previewControl, type, text,color }) {
                 />
             )}
 
-            {typeError ? (<p>Only JPG, PNG, and JPEG files are allowed.</p>) : ""}
+            {typeError ? (<p className="text-center text-sm  mt-10 font-semibold text-red-500">Only JPG, PNG, and JPEG files are allowed.</p>) : ""}
         </div>
     );
 }
