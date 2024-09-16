@@ -54,7 +54,7 @@ const Court = () => {
 
 
       <Adminnavbar />
-      <div className='flex bg-white lg:mt-16 mt-14 lg:w-[81.5%] h-screen float-right text-black'>
+      <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[85%] lg:w-[81.5%]  h-screen float-right text-black'>
         <div className='w-screen'>
           <div className='lg:p-5 p-2 m-5 lg:rounded-xl rounded-md border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center'>
             <div className='w-full relative'>
@@ -79,31 +79,40 @@ const Court = () => {
 
               <DataTable
                 value={allCourts}
-                tableStyle={{ width: '99%', margin: 'auto', marginTop: '20px', border: '1px solid #CACACA', borderRadius: '20px', fontSize: "12px" }}
+                tableStyle={{
+                  width: '99%',
+                  margin: 'auto',
+                  marginTop: '20px',
+                  border: '1px solid #CACACA',
+                  borderRadius: '20px',
+                  fontSize: "12px",
+                }}
                 className="custom-data-table custom-paginator"
                 paginator
-                rows={4}
+                rows={10}
+                scrollable
+                scrollHeight=" 350px" // Table height limit to enable scrolling
                 showGridlines
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 paginatorClassName="custom-paginator"
               >
                 <Column
-
                   header="ID"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '5%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData, { rowIndex }) => rowIndex + 1}
                 />
+
                 <Column
                   field="name"
-                  header=" NAME"
+                  header="NAME"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => (
                     <Link
                       href={{
                         pathname: '/admin/court-detail',
-                        query: { id: rowData.id }, // Serialize the object
+                        query: { id: rowData.id },
                       }}
                     >
                       {rowData.name}
@@ -116,14 +125,15 @@ const Court = () => {
                   header="LOCATION"
                   headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px' }}
                   style={{ width: '15%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-
                 />
+
                 <Column
                   field="type"
                   header="COURT TYPE"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
+
                 <Column
                   field="availibilty"
                   header="AVAILABILITY"
@@ -131,12 +141,14 @@ const Court = () => {
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                   body={(rowData) => formatDate(rowData.availability)}
                 />
+
                 <Column
                   field="cost"
                   header="PRICE/ hr"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   style={{ width: '10%', textAlign: 'left', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
+
                 <Column
                   field="isactive"
                   header="STATUS"
@@ -149,43 +161,67 @@ const Court = () => {
                   )}
                 />
 
+                <Column
+                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
+                  body={(rowData) => (
+                    rowData.isactive ? (
+                      <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                        <Button
+                          icon={<FontAwesomeIcon icon={faEye} />}
+                          className="p-button-rounded p-button-info text-md lg:text-lg"
+                          onClick={() => openBlockUserPopup(rowData)}
+                        />
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                        <Button
+                          icon={<FontAwesomeIcon icon={faEye} />}
+                          className="p-button-rounded p-button-info text-md lg:text-lg"
+                          onClick={() => blockUser(rowData)}
+                        />
+                      </div>
+                    )
+                  )}
+                  style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
+                />
 
                 <Column
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   body={(rowData) => (
-                    rowData.isactive ?
+                    rowData.isactive ? (
                       <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faEye} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => openBlockUserPopup(rowData)} />
+                        <Button
+                          icon={<FontAwesomeIcon icon={faLock} />}
+                          className="p-button-rounded p-button-info text-md lg:text-lg"
+                          onClick={() => openBlockUserPopup(rowData)}
+                        />
                       </div>
-                      : <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faEye} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => blockUser(rowData)} />
+                    ) : (
+                      <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                        <Button
+                          icon={<FontAwesomeIcon icon={faLock} />}
+                          className="p-button-rounded p-button-info text-md lg:text-lg"
+                          onClick={() => blockUser(rowData)}
+                        />
                       </div>
+                    )
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
-                <Column
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
-                  body={(rowData) => (
-                    rowData.isactive ?
-                      <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => openBlockUserPopup(rowData)} />
-                      </div>
-                      : <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                        <Button icon={<FontAwesomeIcon icon={faLock} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => blockUser(rowData)} />
-                      </div>
-                  )}
-                  style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
-                />
+
                 <Column
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}
                   body={(rowData) => (
                     <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
-                      <Button icon={<FontAwesomeIcon icon={faTrash} />} className="p-button-rounded p-button-info text-md lg:text-lg" onClick={() => openDeleteUserPopup(rowData)} />
+                      <Button
+                        icon={<FontAwesomeIcon icon={faTrash} />}
+                        className="p-button-rounded p-button-info text-md lg:text-lg"
+                        onClick={() => openDeleteUserPopup(rowData)}
+                      />
                     </div>
                   )}
                   style={{ width: '3%', textAlign: 'center', border: '1px solid #CACACA', borderLeft: 'transparent', borderRight: 'transparent', padding: '14px' }}
                 />
-
               </DataTable>
             )}
 
