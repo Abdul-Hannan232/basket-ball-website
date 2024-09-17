@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect ,Suspense} from 'react'
 import Image from 'next/image'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { useAuthToken } from '../../customHook/useAuthToken';
@@ -49,6 +49,7 @@ export default function UserProfile() {
 
 
     useEffect(() => {
+        setLoader(true)
         const fetchUser = async (id, token) => {
             try {
                 const response = await getUser(id, token);
@@ -56,6 +57,8 @@ export default function UserProfile() {
             } catch (error) {
                 console.log('Error fetching user:', error.message);
                 toast.error(error.message);
+            }finally{
+                setLoader(false)
             }
         };
 

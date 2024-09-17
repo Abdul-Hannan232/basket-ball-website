@@ -4,8 +4,7 @@ import UserForm from '../../component/admin/UserForm'
 import Loader from "../../component/LoadingBall";
 import { addUser as addNewUser } from "../../services/userServices";
 import { ToastContainer, toast } from 'react-toastify';
-import Adminnavbar from '../../component/admin/adminnavbar';
-export default function UserDetail() {
+ export default function UserDetail() {
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("/user_placeholder.jpeg");
     const [formData, setFormData] = useState({
@@ -77,8 +76,7 @@ export default function UserDetail() {
     };
     return (
         <>
-         <Adminnavbar/>
-            <div className='flex bg-white lg:mt-16 mt-12 lg:w-[81.5%]  float-right text-black'>
+             <div className='flex bg-white lg:mt-16 mt-12 lg:w-[81.5%]  float-right text-black'>
                 <ToastContainer />
                 <UserForm
                     {...{ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl }}

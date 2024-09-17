@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
@@ -8,18 +8,19 @@ import { faLock, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { allCourts as fetchAllCourts } from "../../services/courtsServices"
 import formatDate from '../../utils/formatData';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Adminnavbar from '../../component/admin/adminnavbar';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
+import { NavbarContext } from '../../context/admin/NavbarContext';
 import Image from 'next/image';
 const Court = () => {
   const [allCourts, setAllCourts] = useState([]);
   const [spinner, setSpinner] = useState(false)
   const [courts, setCourts] = useState([]) //search filtration
-  const [deleteUserPopupVisible, setDeleteUserPopupVisible] = useState(false); // help in open/close delete popup
-  const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false); // help in open/close block popup
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [remarks, setRemarks] = useState(''); //comment for blocking user
+  // const [deleteUserPopupVisible, setDeleteUserPopupVisible] = useState(false); // help in open/close delete popup
+  // const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false); // help in open/close block popup
+  // const [selectedUser, setSelectedUser] = useState(null);
+  // const [remarks, setRemarks] = useState(''); //comment for blocking user
+  const { setCount } = useContext(NavbarContext);
 
   useEffect(() => {
     setSpinner(true);
@@ -29,6 +30,7 @@ const Court = () => {
         console.log("courts", response)
         setCourts(response.data.courts);
         setAllCourts(response.data.courts);
+        setCount(response.data.courts.length);
       } catch (error) {
         console.error("Failed to fetch courts data:", error);
         toast.error("Network Error")
@@ -53,7 +55,7 @@ const Court = () => {
     <div>
 
 
-      <Adminnavbar />
+     
       <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[85%] lg:w-[81.5%]  h-screen float-right text-black'>
         <div className='w-screen'>
           <div className='lg:p-5 p-2 m-5 lg:rounded-xl rounded-md border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center'>

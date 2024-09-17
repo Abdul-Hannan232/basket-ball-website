@@ -6,7 +6,6 @@ const  formatDate=(createdAt)=> {
     return date.toLocaleString('en-US', {
       hour: 'numeric',
       minute: 'numeric',
-      second: 'numeric',
       year: 'numeric',
       month: 'numeric',
       day: 'numeric',

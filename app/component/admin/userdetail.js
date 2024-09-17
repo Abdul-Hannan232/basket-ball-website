@@ -7,8 +7,7 @@ import Loader from "../LoadingBall";
 import { updateUser, getUser } from "../../services/userServices";
 import { ToastContainer, toast } from 'react-toastify';
 import { useAuthToken } from "../../customHook/useAuthToken"
-import Adminnavbar from './adminnavbar';
-export default function UserDetail() {
+ export default function UserDetail() {
     const router = useRouter();
     const [file, setFile] = useState(null);
     const { token } = useAuthToken();
@@ -97,7 +96,6 @@ export default function UserDetail() {
     return (
         // <Suspense fallback={<div> <Loader /> </div>}>
         <>
-           <Adminnavbar/>
             <div className='flex bg-white lg:mt-16 mt-10 lg:w-[81.5%]  float-right text-black'>
                 <ToastContainer />
                 <UserForm

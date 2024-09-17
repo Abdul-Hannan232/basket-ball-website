@@ -8,7 +8,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import renderStars from "../utils/rating"
-import { allCourts as fetchAllCourts } from "../services/courtsServices"; // Rename the imported function
+import { allCourts as fetchAllCourts } from "../services/courtsServices";
+import { LiaAngleLeftSolid } from "react-icons/lia";
+import { LiaAngleRightSolid } from "react-icons/lia";
+
 const settings = {
     infinite: true,
     speed: 500,
@@ -136,14 +139,14 @@ const CourtsSlider = ({ slide }) => {
                                 <RiArrowLeftSLine />
                             </div>
                         </div>
-                      
+
 
                         <div className='slick- slick-arrow md:-mr-14'>
                             <div className="bg-[#000000A6] text-white text-7xl md:p-[10px] flex items-center justify-center cursor-pointer md:w-14 md:h-14 w-10 h-10 text-center font-bold  rounded-full" onClick={goToNext}>
                                 <MdOutlineKeyboardArrowRight />
                             </div>
-                        </div>  
-                    </div> 
+                        </div>
+                    </div>
                 </div>
             ) : (
                 <>
@@ -185,9 +188,11 @@ const CourtsSlider = ({ slide }) => {
                                         <p className='text-[10px] mt-1 font-bold'>{item.rating.length} reviews</p>
                                         <h1 className='text-lg font-bold mb-2'>{item.name}</h1>
                                         <p className='w-32 text-xs font-medium '>{item.location}</p>
-                                        <button className='bg-[#FFA500] p-2 mb-3 mt-3 rounded-md text-black font-bold text-sm w-full shadow'>
-                                            View Court
-                                        </button>
+                                        <Link href={`/court-detail?id=${item.id}`}  >
+                                            <button className='bg-[#FFA500] p-2 mb-5 mt-10 text-black font-bold text-sm w-full shadow'>
+                                                View Court
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -195,6 +200,27 @@ const CourtsSlider = ({ slide }) => {
 
                         ))}
                     </div>
+
+
+                    {!spinner && <>
+                        <div className="flex items-center lg:justify-end justify-center lg:w-[80%] lg:mx-auto mx-5 mt-20 gap-1">
+                            <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-[#808080]"><LiaAngleLeftSolid />
+                            </h1>
+                            <div className="border border-[#959595] bg-white rounded-lg flex items-center">
+                                <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 paginationShadow text-black">1</h1>
+                                <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">2</h1>
+                                <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">3</h1>
+                                <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">4</h1>
+                                <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">......</h1>
+                                <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">10</h1>
+                            </div>
+                            <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-black"><LiaAngleRightSolid />
+                            </h1>
+                        </div>
+
+                    </>}
+
+
                 </>
             )}
 

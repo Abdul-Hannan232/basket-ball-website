@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
@@ -13,8 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import DeleteUserPopup from "../../component/admin/DeleteUser"
 import BlockUserPopup from "../../component/admin/BlockUser"
 import { useAuthToken } from '../../customHook/useAuthToken';
-import Image from 'next/image';
-import AdminNavbar from "../../component/admin/adminnavbar"
+import { NavbarContext } from '../../context/admin/NavbarContext';
+
 export default function Users() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
@@ -24,6 +24,7 @@ export default function Users() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [remarks, setRemarks] = useState(''); //comment for blocking user
   const { token } = useAuthToken();
+  const { setCount } = useContext(NavbarContext);
 
   useEffect(() => {
     setSpinner(true);
@@ -32,6 +33,7 @@ export default function Users() {
         const response = await fetchAllUsers();
         setUsers(response.data.users);
         setAllUsers(response.data.users);
+        setCount(response.data.users.length)
       } catch (error) {
         console.error("Failed to fetch users data:", error);
         toast.error("Network Error")
@@ -118,7 +120,7 @@ export default function Users() {
   return (
     <>
       <ToastContainer />
-      <AdminNavbar />
+
       <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[86%] lg:w-[81.5%] h-screen float-right text-black'>
         <div className='w-screen'>
           <div className='lg:p-5 p-2 m-5 rounded-xl border-2 lg:h-24  border-[#CACACA] lg:gap-10 gap-3 flex items-center'>
@@ -131,7 +133,7 @@ export default function Users() {
               />
             </div>
             <button className='bg-[#FFA500] text-white lg:rounded-xl rounded-md lg:p-4 p-2 lg:text-xl text-[10px] lg:w-60 w-28 text-center'>
-              <Link href="/admin/add-User"> Add User
+              <Link href="/admin/add-user"> Add User
               </Link>
             </button>
           </div>
@@ -156,7 +158,7 @@ export default function Users() {
                 paginator
                 rows={10}
                 scrollable
-                scrollHeight="350px"  // Limit the table height and enable scrolling
+                scrollHeight="65vh"  // Limit the table height and enable scrolling
                 showGridlines
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 paginatorClassName="custom-paginator"
@@ -168,7 +170,7 @@ export default function Users() {
                   body={(rowData, { rowIndex }) => rowIndex + 1}
                 />
 
-                <Column
+                <Column 
                   field="name"
                   header="DISPLAY NAME"
                   headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px' }}

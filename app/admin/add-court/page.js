@@ -6,8 +6,7 @@ import { addCourt as addNewCourt } from "../../services/courtsServices";
 import { ToastContainer, toast } from 'react-toastify';
 import { useAuthToken } from '../../customHook/useAuthToken';
 import { useRouter } from 'next/navigation'
-import Adminnavbar from '../../component/admin/adminnavbar';
-const MAX_FILES = 6;
+ const MAX_FILES = 6;
 const AddCourt = () => {
   const [previewUrls, setPreviewUrls] = useState(Array(MAX_FILES).fill(null));
   const [files, setFiles] = useState(Array(MAX_FILES).fill(null));
@@ -84,7 +83,6 @@ const AddCourt = () => {
 
   return (
     <div>
-    <Adminnavbar/>
       <CourtForm {...{ handleSubmit, formData, setFormData, files, setFiles, previewUrls, setPreviewUrls }} />
       <ToastContainer />
       {loader ? <Loader /> : null}

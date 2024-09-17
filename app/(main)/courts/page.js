@@ -2,12 +2,12 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { CiFilter } from "react-icons/ci";
-import Navbar from '../../component/NavBarComponent';
+// import Navbar from '../../component/NavBarComponent';
 import CourtsSlider from "../../component/CourtsSlider";
 import { useRouter } from 'next/navigation'
 import { RxCrossCircled } from "react-icons/rx";
 import { CiLocationOn } from "react-icons/ci";
-import Carousel from '../../component/CourtCarousel.js';
+// import Carousel from '../../component/CourtCarousel.js';
 import { addCourt } from '../../services/courtsServices';
 import Loader from "../../component/LoadingBall";
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,9 +15,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuthToken } from '../../customHook/useAuthToken';
 import FileUpload from '../../component/FileUpload'
 import Image from 'next/image';
-import { LiaAngleLeftSolid } from "react-icons/lia";
-import { LiaAngleRightSolid } from "react-icons/lia";
-
 const MAX_FILES = 6;
 
 export default function Courts() {
@@ -112,7 +109,7 @@ export default function Courts() {
                     <h1 className='md:text-3xl text-md'>Basketball Courts</h1>
                     <CiFilter className='text-[#FFA500] md:text-3xl text-xl' />
                 </div>
-
+ 
                 {loggedInUser ? (
                     <button
                         className='bg-[#FFA500] rounded-md md:text-xl text-sm text-black md:px-16 px-3 py-2 shadow'
@@ -122,24 +119,10 @@ export default function Courts() {
                     </button>
                 ) : (
                     ""
-                )}
+                )} 
 
             </div>
             <CourtsSlider slide={"box"} key={updateContent} />
-            <div className="flex items-center lg:justify-end justify-center lg:w-[80%] lg:mx-auto mx-5 mt-20 gap-1">
-                <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-[#808080]"><LiaAngleLeftSolid />
-                </h1>
-                <div className="border border-[#959595] bg-white rounded-lg flex items-center">
-                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 paginationShadow text-black">1</h1>
-                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">2</h1>
-                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">3</h1>
-                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">4</h1>
-                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">......</h1>
-                    <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">10</h1>
-                </div>
-                <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-black"><LiaAngleRightSolid />
-                </h1>
-            </div>
             <div className='w-[80%] mx-auto mt-40 flex items-center gap-2'>
                 <h1 className='text-[#FFA500] text-2xl font-bold'>Map</h1>
                 <h1 className='text-white text-2xl font-bold'>View</h1>
