@@ -2,8 +2,8 @@
 import React, { useState, useRef } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-function FileUpload({ fileControl, previewControl, type, text,color }) {
+import Image from "next/image"
+function FileUpload({ page, fileControl, previewControl, type, text, color }) {
     const [typeError, setTypeError] = useState(false);
     const fileInputRef = useRef(null); // Reference to the hidden file input
 
@@ -61,9 +61,21 @@ function FileUpload({ fileControl, previewControl, type, text,color }) {
     return (
         <div>
             {/* Text to click for uploading a file */}
-            <p onClick={triggerFileUpload} className={`cursor-pointer md:text-sm text-xs text-center  text-[${color}] flex justify-center`}>
-                {text}
-            </p>
+            {page === "user-profile" ? (
+                <div className="relative w-32   -mt-10 mx-auto flex justify-end ">
+                    <Image src="/Vector (1).png" alt="image" width={45} height={45} className="bg-[#333333]    shadow-xl pt-[13px]  px-2 pb-[8px] rounded-full"  onClick={triggerFileUpload} />
+                </div>
+            ) : (
+                <p
+                    onClick={triggerFileUpload}
+                    className={`cursor-pointer md:text-sm text-xs text-center flex justify-center`}
+                    style={{ color: color }}  /* Dynamic color styling */
+                >
+                    {text}
+                </p>
+            )}
+
+
 
             {/* Hidden file input */}
             {type && type === "multiple" ? (

@@ -285,7 +285,7 @@ export default function Courts() {
 
                                     {/* end setting mage */}
                                     <p className='md:text-sm text-xs text-center mt-7 text-white'>Drop your images here too</p>
-                                    <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br />
+                                    <FileUpload page={"courts"} color={"#FFA500"} text={"Click here to browse"} fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br />
                                 </div>
                             </div>
                             <button type="submit" className='text-black bg-[#FFA500] md:p-4 p-3 md:text-xl text-md text-center flex justify-center w-[80%] mx-auto font-semibold my-10  rounded-md'>Submit</button>

@@ -96,7 +96,7 @@ import { useAuthToken } from "../../customHook/useAuthToken"
     return (
         // <Suspense fallback={<div> <Loader /> </div>}>
         <>
-            <div className='flex bg-white lg:mt-16 mt-10 lg:w-[81.5%]  float-right text-black'>
+            <div className='flex bg-white lg:mt-16 mt-10  2xl:w-[88.5%] lg:w-[81.5%]  float-right text-black'>
                 <ToastContainer />
                 <UserForm
                     {...{ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl, emailDisable }}

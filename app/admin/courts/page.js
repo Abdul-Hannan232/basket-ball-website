@@ -56,8 +56,8 @@ const Court = () => {
 
 
      
-      <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[85%] lg:w-[81.5%]  h-screen float-right text-black'>
-        <div className='w-screen'>
+      <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[88.5%] lg:w-[81.5%]  h-screen float-right text-black'>
+        <div className='w-screen lg:mx-10 lg:mt-2'>
           <div className='lg:p-5 p-2 m-5 lg:rounded-xl rounded-md border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center'>
             <div className='w-full relative'>
               <input
@@ -70,7 +70,8 @@ const Court = () => {
             </div>
             <button className='bg-[#FFA500] text-white lg:rounded-xl rounded-md p-4 lg:text-xl text-[10px] lg:w-60 w-28  text-center'>
               <Link href="/admin/add-court"> Add Court
-              </Link>            </button>
+              </Link>   
+                       </button>
           </div>
 
           <div className="card mx-5">
