@@ -9,15 +9,13 @@ import { DateFormat } from "../../utils/formatData"
 const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl, emailDisable = false }) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
+     setFormData((prevData) => ({
             ...prevData,
             [name]: value
         }));
-    };
+   };
 
-
-
-    return (
+   return (
         <>
             <div className='w-screen lg:mt-5 lg:mx-10  mt-10'>
                 <form onSubmit={handleSubmit}>
@@ -96,11 +94,15 @@ const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, se
                                     <label className='text-black font-bold text-md'>Role</label><br />
                                     <div className="relative w-full mt-3">
                                         <select
-                                            className='text-black cursor-pointer p-4 border-2 border-[#CACACA] w-full rounded-xl appearance-none text-lg'
+                                            className="text-black cursor-pointer p-4 border-2 border-[#CACACA] w-full rounded-xl appearance-none text-lg"
                                             onChange={handleChange}
+                                            name="role"
+                                            value={formData.role}  // Controlled value
                                         >
-                                            <option className='text-black'>Admin</option>
-                                            <option className='text-black'>User</option>
+                                            {/* Placeholder option */}
+                                            <option value="" disabled>Select Role</option>
+                                            <option value="admin" className="text-black">Admin</option>
+                                            <option value="user" className="text-black">User</option>
                                         </select>
 
                                         {/* Custom dropdown icon */}
