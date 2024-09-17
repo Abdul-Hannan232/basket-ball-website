@@ -185,8 +185,8 @@ export default function UserProfile() {
                                         className='mx-auto rounded-full shadow-xl'
                                         style={{ width: "auto", height: "180px", width: "180px" }}
                                     />
-                                    <FileUpload color={"#000000"} fileControl={setFile} text={"Edit profile picture"} previewControl={setPreviewUrl} type="single" />
-                                    <Image src="/edit.png" alt="image" width={20} height={20} />
+
+                                    <FileUpload color={"#000000"} page={"user-profile"} fileControl={setFile} text={"Edit profile picture"} previewControl={setPreviewUrl} type="single" />
                                     <div className='w-full mx-auto flex items-center     gap-20 my-10'>
                                         <div className='space-y-5 w-full'>
                                             <div >

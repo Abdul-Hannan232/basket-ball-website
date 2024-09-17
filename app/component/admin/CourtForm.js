@@ -117,7 +117,7 @@ const CourtForm = ({ handleSubmit, formData, setFormData, files, setFiles, previ
                                                 </div>
                                             </div>
                                             <p className='md:text-sm text-xs text-center mt-7 text-black'>Drop your images here too</p>
-                                            <FileUpload color={"#FFA500"} text={"Click here to browse"} fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br />
+                                            <FileUpload page={"court-form"} color={"#FFA500"} text={"Click here to browse"} fileControl={{ files, setFiles }} previewControl={{ previewUrls, setPreviewUrls }} type="multiple" /><br />
                                         </div>
                                     </div>
                                 </div>
