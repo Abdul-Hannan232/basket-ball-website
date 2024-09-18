@@ -1,27 +1,28 @@
 import { NextResponse } from 'next/server';
-import { jwtDecode } from 'jwt-decode';
-import { getToken } from "next-auth/jwt"
+import {jwtDecode} from 'jwt-decode';
+import { getToken } from "next-auth/jwt";
 
 export async function middleware(req) {
   const secret = process.env.NEXTAUTH_SECRET;
   let token = req.cookies.get('authToken') || await getToken({ req, secret });
 
   if (token) {
-    token = token.value || token.authToken
+    token = token.value || token.authToken;
   }
-  const url = req.nextUrl.clone();
 
-  // Get the pathname of the requested URL
+  const url = req.nextUrl.clone();
   const pathname = url.pathname;
 
-  // Define protected routes for admin and user roles
+  // Define routes for role-based access control
   const adminRoutes = ['/admin'];
-  const protectedRoutes = ['/admin','/user-profile'];// routes where user can not go without login
-  const authenticatedRoutes = ['/signin', '/signup', '/reset-password', '/forget-password']
+  const userRestrictedRoutes = ['/', '/home', '/courts', '/user-profile'];
+  const protectedRoutes = ['/admin', '/user-profile', '/some-other-page']; // Add more restricted routes for unauthenticated users
+  const openRoutes = ['/signin', '/signup', '/reset-password', '/forget-password'];
 
+  // If no token (unauthenticated user)
   if (!token) {
-    // Redirect to login if there is no token and the route is protected
-    if (adminRoutes.some(route => pathname.startsWith(route)) || protectedRoutes.some(route => pathname.startsWith(route))) {
+    // Redirect to signin if trying to access protected routes
+    if (protectedRoutes.some(route => pathname.startsWith(route))) {
       url.pathname = '/signin';
       return NextResponse.redirect(url);
     }
@@ -32,43 +33,40 @@ export async function middleware(req) {
     const decodedToken = jwtDecode(token);
     const userRole = decodedToken.role;
 
-    if (authenticatedRoutes.some(route => pathname.startsWith(route))) {
+    // Prevent authenticated users from accessing open routes (e.g., signin/signup)
+    if (openRoutes.some(route => pathname.startsWith(route))) {
       url.pathname = '/home';
       return NextResponse.redirect(url);
     }
 
-    // Check if the current pathname is an admin route
-    const isAdminRoute = adminRoutes.some(route => pathname.startsWith(route));
-
     // Admin-specific route handling
     if (userRole === 'admin') {
-      if (isAdminRoute) {
-        return NextResponse.next(); // Allow admin access to admin routes
-      } else {
-        url.pathname = '/admin'; // Redirect admin to the admin home/dashboard
+      if (adminRoutes.some(route => pathname.startsWith(route))) {
+        return NextResponse.next(); // Allow access to admin routes
+      } else if (userRestrictedRoutes.some(route => pathname.startsWith(route))) {
+        url.pathname = '/admin'; // Redirect admin away from non-admin routes
         return NextResponse.redirect(url);
       }
     }
 
     // User-specific route handling
     if (userRole === 'user') {
-      if (isAdminRoute) {
-        url.pathname = '/home'; // Redirect user away from admin routes to user home
+      if (adminRoutes.some(route => pathname.startsWith(route))) {
+        url.pathname = '/home'; // Redirect user away from admin routes
         return NextResponse.redirect(url);
       } else {
-        return NextResponse.next(); // Allow user access to non-admin routes
+        return NextResponse.next(); // Allow user to access non-admin routes
       }
     }
 
   } catch (error) {
-    console.error('Error handling middleware:', error);
+    console.error('Error decoding token:', error);
     req.cookies.delete('authToken');
-    url.pathname = '/home';
+    url.pathname = '/signin';
     return NextResponse.redirect(url);
   }
 }
 
-
 export const config = {
-  matcher: ['/admin/:path*', '/home', '/courts', '/signin', '/signup', '/reset-password', '/forget-password']
+  matcher: ['/admin/:path*', '/home', '/courts', '/user-profile', '/signin', '/signup', '/reset-password', '/forget-password'],
 };

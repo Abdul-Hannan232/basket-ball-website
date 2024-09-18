@@ -22,7 +22,6 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const { data: session, status } = useSession();
     let token = session?.authToken || Cookies.get('authToken')
-    const [passwords, setPasswords] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -82,8 +81,8 @@ const Login = () => {
                                 type={showPassword ? 'text' : 'password'}
                                 placeholder='Enter your password'
                                 required
-                                onChange={(e) => setPasswords(e.target.value)}
-                                value={passwords}
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
                                 className='mt-1 cursor-pointer shadow-xl outline-none border-[#808080] border text-white rounded-lg bg-[#808080] md:p-4 p-2 w-full'
                             />
                             <div

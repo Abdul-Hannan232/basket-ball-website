@@ -1,12 +1,14 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'primereact/button';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 import FileUpload from "../FileUpload";
 import { DateFormat } from "../../utils/formatData"
 
 const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, setPreviewUrl, emailDisable = false }) => {
+    const router = useRouter();
     const handleChange = (e) => {
         const { name, value } = e.target;
      setFormData((prevData) => ({
@@ -149,7 +151,7 @@ const UserForm = ({ handleSubmit, formData, setFormData, setFile, previewUrl, se
                         <div className='flex justify-end mb-10 w-[85%] mx-auto'>
                             <div className='flex items-center gap-3 w-[340px] '>
                                 <Button label='Cancel' className='mt-10 text-[#6A6868] lg:text-xl text-sm   p-3 w-20 border border-[#9A9A9A] text-[#6A6868] bg-white rounded-md w-full' />
-                                <Button label='Save' type="submit" className='mt-10  lg:text-xl text-sm text-white  p-3 w-20 border-none text-white bg-[#269C55] rounded-md w-full' />
+                                <Button label='Save' onClick={()=>router.push("/admin/users")} type="submit" className='mt-10  lg:text-xl text-sm text-white  p-3 w-20 border-none text-white bg-[#269C55] rounded-md w-full' />
                             </div>
                         </div>
                     </div>

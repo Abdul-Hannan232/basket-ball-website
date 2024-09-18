@@ -8,6 +8,8 @@ import { changePassword } from "../../services/authServices"
 import { ToastContainer, toast } from 'react-toastify';
 import FileUpload from "../../component/FileUpload";
 import Loader from "../../component/LoadingBall";
+import Cookies from 'js-cookie';
+import { signOut } from 'next-auth/react';
 
 export default function UserProfile() {
     const [activeTab, setActiveTab] = useState('tab1');
@@ -46,6 +48,11 @@ export default function UserProfile() {
         password: '',
         confirm_password: ''
     })
+
+    const handleLogout = () => {
+        Cookies.remove('authToken');
+        signOut()
+    };
 
 
     useEffect(() => {
@@ -129,11 +136,12 @@ export default function UserProfile() {
     const handleUpdatePassword = async (e) => {
         setLoader(true)
         e.preventDefault()
-        try {
+        try { 
             const response = await changePassword(passwordFormData, token)
             if (response.status === 200) {
                 toast.success(response.data.message)
                 setPasswordFormData({ id: '', old_password: '', password: '', confirm_password: '' })
+                handleLogout()
             } else {
                 toast.error(response.data.message)
             }

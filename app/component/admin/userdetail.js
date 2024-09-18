@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams,useRouter } from 'next/navigation';
 import UserForm from './UserForm'
-import { useRouter } from 'next/navigation';
 import Loader from "../LoadingBall";
 import { updateUser, getUser } from "../../services/userServices";
 import { ToastContainer, toast } from 'react-toastify';
@@ -50,6 +49,7 @@ import { useAuthToken } from "../../customHook/useAuthToken"
         }
 
     }, [id, token]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

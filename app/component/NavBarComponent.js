@@ -31,7 +31,6 @@ const NavBarComponent = () => {
 
     useEffect(() => {
         if (token) {
-            console.log("decode", decodedToken)
             setloggedInUser(decodedToken)
         }
 
