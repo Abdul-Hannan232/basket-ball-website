@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect ,Suspense} from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { useAuthToken } from '../../customHook/useAuthToken';
@@ -64,7 +64,7 @@ export default function UserProfile() {
             } catch (error) {
                 console.log('Error fetching user:', error.message);
                 toast.error(error.message);
-            }finally{
+            } finally {
                 setLoader(false)
             }
         };
@@ -136,7 +136,7 @@ export default function UserProfile() {
     const handleUpdatePassword = async (e) => {
         setLoader(true)
         e.preventDefault()
-        try { 
+        try {
             const response = await changePassword(passwordFormData, token)
             if (response.status === 200) {
                 toast.success(response.data.message)
@@ -211,25 +211,25 @@ export default function UserProfile() {
                                             </div>
                                         </div>
                                         <div className='space-y-5 w-full'>
-                                        <div >
-                                            <label className='text-white font-bold text-md '>Email<label className='ml-2 text-[#FFA500]'>*</label></label><br />
-                                            <input type='text' placeholder='info@centralparknyc.com' disabled value={formData.email} className='text-black bg4[#808080] shadow-xl  p-3 border-2 border-[#808080] outline-none  w-full mt-3 rounded-md' />
+                                            <div >
+                                                <label className='text-white font-bold text-md '>Email<label className='ml-2 text-[#FFA500]'>*</label></label><br />
+                                                <input type='text' placeholder='info@centralparknyc.com' disabled value={formData.email} className='text-black bg4[#808080] shadow-xl  p-3 border-2 border-[#808080] outline-none  w-full mt-3 rounded-md' />
+                                            </div>
+
+                                            <div >
+                                                <label className='text-white font-bold text-md'>Height</label><br />
+                                                <input type='text' placeholder='6 feet' name="height" required value={formData.height} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none  w-full mt-3 rounded-md' />
+                                            </div>
+
+
+                                            <div >
+                                                <label className='text-white font-bold text-md'>Address</label><br />
+                                                <input type='text' placeholder='123 street anytown' name="address" required value={formData.address} onChange={handleChange} className='text-black p-4  shadow-xl  bg-[#808080] border-2 border-[#808080] outline-none  w-full mt-3 rounded-md' />
+                                            </div>
                                         </div>
 
-                                        <div >
-                                            <label className='text-white font-bold text-md'>Height</label><br />
-                                            <input type='text' placeholder='6 feet' name="height" required value={formData.height} onChange={handleChange} className='text-black p-4 border-2 shadow-xl bg-[#808080]  border-[#808080] outline-none  w-full mt-3 rounded-md' />
-                                        </div>
 
 
-                                        <div >
-                                            <label className='text-white font-bold text-md'>Address</label><br />
-                                            <input type='text' placeholder='123 street anytown' name="address" required value={formData.address} onChange={handleChange} className='text-black p-4  shadow-xl  bg-[#808080] border-2 border-[#808080] outline-none  w-full mt-3 rounded-md' />
-                                        </div>
-                                        </div>
-
-
-                                        
 
 
                                     </div>
@@ -277,7 +277,7 @@ export default function UserProfile() {
                                             onClick={togglePasswordVisibility1}
                                             className='absolute top-4 right-5 text-xl cursor-pointer'
                                         >
-                                            {oldPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                            {oldPassword ? <FaRegEye /> : <FaRegEyeSlash />}
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +296,7 @@ export default function UserProfile() {
                                             onClick={togglePasswordVisibility2}
                                             className='absolute top-4 right-5 text-xl cursor-pointer'
                                         >
-                                            {newPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                            {newPassword ? <FaRegEye /> : <FaRegEyeSlash />}
                                         </div>
                                     </div>
                                 </div>
@@ -315,13 +315,13 @@ export default function UserProfile() {
                                             onClick={togglePasswordVisibility3}
                                             className='absolute top-4 right-5 text-xl cursor-pointer'
                                         >
-                                            {confirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                            {confirmPassword ? <FaRegEye /> : <FaRegEyeSlash />}
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit" className='bg-[#FFA500] p-4 mt-12 w-96 flex justify-center rounded-md  font-bold shadow-xl mx-auto text-black '>Change Password</button>
-                            </form> </div>
-
+                            </form>
+                        </div>
                     </div>}
                 </div>
             </div>
