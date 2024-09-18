@@ -36,31 +36,34 @@ const CourtForm = ({ handleSubmit, formData, setFormData, files, setFiles, previ
 
     return (
         <div>
-            <div className='flex bg-white lg:pt-20 pt-14 lg:w-[81.5%] w-full 2xl:w-[85.5%]  float-right text-[#4B4B4B] '>
-                <div className='lg:w-screen w-full bg-white 2xl:h-screen h-[87vh]'>
-                    <div className='lg:p-5 p-2 m-5 lg:rounded-xl rounded-md border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center'>
-                        <div className='w-full relative'>
-                            <input
-                                type='text'
-                                placeholder='Search Courts'
-                                // onChange={handleFilter}
-                                className='border border-[#CACACA] lg:text-lg text-sm lg:rounded-xl rounded-md lg:p-4 p-2 bg-[#FFF8B3] relative w-full'
-                            />
-                            <Image src="/filter-search.png" alt="filter" width="5" height="5" className="absolute lg:w-[25px] lg:h-[25px] w-4 h-4 lg:top-2 top-4 right-3 lg:right-5" />
+            <div className='flex  lg:pt-16 pt-14 lg:w-[81.5%] bg-white w-full 2xl:w-[88.5%]  float-right text-[#4B4B4B] '>
+                <div className='   w-[100%] lg:px-10  bg-white mx-auto '>
+                    <div className='fixed  2xl:w-[85%] lg:w-[75.5%] w-full bg-white '>
+                        <div className='lg:p-5 p-2 m-5 lg:rounded-xl rounded-md bg-white border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center'>
+                            <div className='w-full relative'>
+                                <input
+                                    type='text'
+                                    placeholder='Search Courts'
+                                    // onChange={handleFilter}
+                                    className='border border-[#CACACA] lg:text-lg text-sm lg:rounded-xl rounded-md lg:p-4 p-2 bg-[#FFF8B3] relative w-full'
+                                />
+                                <Image src="/filter-search.png" alt="filter" width="5" height="5" className="absolute lg:w-[25px] lg:h-[25px] w-4 h-4 lg:top-4 top-4 right-3 lg:right-5" />
+                            </div>
+                            <button className='bg-[#269C55] text-white lg:rounded-xl rounded-md lg:p-4 p-2 lg:text-xl text-[10px] lg:w-60 w-28  text-center'>
+                                <Link href="/admin/courts"> Save Court
+                                </Link>
+                            </button>
                         </div>
-                        <button className='bg-[#269C55] text-white lg:rounded-xl rounded-md lg:p-4 p-2 lg:text-xl text-[10px] lg:w-60 w-28  text-center'>
-                            <Link href="/admin/courts"> Save Court
-                            </Link>
-                        </button>
                     </div>
-                    <div className='border border-[#CACACA] m-5 rounded-xl m-5 overflow-auto h-96'>
-                       <div className='fixed w-[78.5%]'>
-                       <div className='lg:pl-10 pl-5  lg:text-2xl text-lg rounded-t-xl flex items-center gap-10 border-2 lg:h-24 h-14  bg-[#F4F4F4] text-black font-bold border-[#CACACA] gap-10 flex items-center'>
-                            <h1 className='text-[#4B4B4B]'>Court Details</h1>
+                    {/* idhar  add karna hy */}
+                    <div className='border lg:mt-36 mt-28  border-[#CACACA] bg-white m-5  rounded-xl m-5'>
+                        <div className=''>
+                            <div className='lg:pl-10 pl-5  lg:text-2xl text-lg rounded-t-xl flex items-center gap-10 border-2 lg:h-24 h-14  bg-[#F4F4F4] text-black font-bold border-[#CACACA] gap-10 flex items-center'>
+                                <h1 className='text-[#4B4B4B]'>Court Details</h1>
+                            </div>
                         </div>
-                       </div>
                         <form onSubmit={handleSubmit}>
-                            <div className=' lg:w-[80%] w-[90%] mx-auto lg:flex   gap-20 lg:my-32 mt-10'>
+                            <div className=' lg:w-[80%] w-[90%] mx-auto lg:flex   gap-20 lg:my-12 mt-10'>
                                 <div className='space-y-5 w-full'>
                                     <div >
                                         <label className='text-black font-bold text-md'>Court Name</label><br />
