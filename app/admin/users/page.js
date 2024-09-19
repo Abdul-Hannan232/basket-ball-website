@@ -144,7 +144,7 @@ export default function Users() {
       `}</style>
       <ToastContainer />
 
-      <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[88.5%] lg:w-[81.5%] h-screen float-right text-black'>
+      <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[88.5%] lg:w-[82.5%] h-screen float-right text-black'>
         <div className='w-screen lg:mx-10 lg:mt-2'>
           <div className='lg:p-5 p-2 m-5 rounded-xl border-2 lg:h-24  border-[#CACACA] lg:gap-10 gap-3 flex items-center'>
             <div className='w-full'>

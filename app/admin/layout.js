@@ -9,14 +9,14 @@ import { NavbarProvider } from '../context/admin/NavbarContext';  // Import Navb
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname();  // Get the current path
-  const pageName = pathname.split("/").pop();
+  // const pathname = usePathname();  // Get the current path
+  // const pageName = pathname.split("/").pop();
   return (
     <html lang="en">
       <NavbarProvider>
       <body className={inter.className}>
         {/* Conditionally show Sidebar if pathname is not "/admin" */}
-        {pathname !== '/admin' && <><Sidebar />  <AdminNavbar /></>}
+        {<><Sidebar />  <AdminNavbar /></>}
         {children}
       </body>
       </NavbarProvider>
