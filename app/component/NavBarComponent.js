@@ -43,7 +43,7 @@ const NavBarComponent = () => {
  
             <div className='flex items-center gap-1'>
                 <IoIosMenu className='text-black text-xl cursor-pointer md:hidden block' onClick={toOpen} />
-                <Image src="/LOGO.png" width={60} height={60} alt='image' className="lg:w-[60px] lg:h-[60px] w-[30px] h-[30px]" />
+                <Image src="/LOGO (1).png" width={60} height={60} alt='image' className="lg:w-[70px] lg:h-[60px] w-[30px] h-[30px]" />
             </div>
       
             <div className='md:block hidden '>
