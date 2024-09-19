@@ -71,7 +71,7 @@ const CourtForm = ({ handleSubmit, formData, setFormData, files, setFiles, previ
                                     </div>
                                     <div >
                                         <label className='text-black font-bold text-md'>Contact</label><br />
-                                        <input type='text' name="name" required value={formData.name} onChange={handleChange} placeholder='444-666-777' className='text-black p-4 border-2 border-[#CACAC]  w-full mt-3 rounded-xl' />
+                                        <input type='text' name="name" required value={formData.phone_number} onChange={handleChange} placeholder='444-666-777' className='text-black p-4 border-2 border-[#CACAC]  w-full mt-3 rounded-xl' />
                                     </div>
                                     <div >
                                         <label className='text-black font-bold text-md'>Description</label><br />

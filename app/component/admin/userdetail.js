@@ -35,6 +35,7 @@ import { useAuthToken } from "../../customHook/useAuthToken"
     // const id = 25
 
     useEffect(() => {
+        setLoader(true)
         const fetchUser = async (id,token) => {
             try {
                 const response = await getUser(id, token);
@@ -42,6 +43,8 @@ import { useAuthToken } from "../../customHook/useAuthToken"
             } catch (error) {
                 console.log("useEffet error", error.message)
                 toast.error(error.message);
+            }finally{
+                setLoader(false)
             }
         };
         if (id) {
