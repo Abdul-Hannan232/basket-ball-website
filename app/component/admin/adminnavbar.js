@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { FiMenu } from "react-icons/fi";
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -9,7 +9,7 @@ const Adminnavbar = () => {
     const [dropDown, setDropDown] = useState(false)
     const pathname = usePathname();
     const [pageTitle, setPageTitle] = useState([]);
-    const { count } = useContext(NavbarContext); 
+    const { count } = useContext(NavbarContext);
     const dropdownOpen = () => {
         setDropDown(!dropDown)
     }
@@ -17,27 +17,39 @@ const Adminnavbar = () => {
         setActiveLink(link);
     };
 
+
     const pageName = pathname.split("/").pop();
     const pageTitles = {
         "users": "Users",
         "add-user": "Add User",
+        "add-User": "Add User",
         "user-detail": "User Detail",
         "courts": "Courts",
         "add-court": "Add Court",
         "court-detail": "Court Detail",
-      };
-      
-      useEffect(() => {
+    };
+
+    const countRoutes = ["users", "courts"];
+
+
+    useEffect(() => {
         setPageTitle(pageTitles[pageName] || "Dashboard");
-      }, [pageName]);
-      
+    }, [pageName]);
+
     return (
         <>
             <div className='z-40 bg-[#FFA500] flex items-center justify-between fixed top-0 right-0 left-0 pr-5  '>
                 <div className=' p-4 lg:pl-7 pl-3 flex items-center text-white'>
                     <h1 className='lg:text-3xl text-lg font-bold'>Basketball</h1>
                     <div className='border-2 border-y-transparent border-r-transparent lg:mx-20 mx-2 lg:pl-5 pl-2 border-white'>
-                        <h1 className='lg:text-lg text-xs'> {pageTitle?pageTitle:"Loading..."} {count?count:""}</h1>
+
+                        {countRoutes.includes(pageName) ? (
+                            <h1 className='lg:text-lg text-xs'> {pageTitle ? pageTitle : "Loading..."} {count ? count : ""}</h1>
+                        ) : (
+                            <h1 className='lg:text-lg text-xs'> {pageTitle ? pageTitle : "Loading..."}</h1>
+                        )}
+
+
                     </div>
                 </div>
                 <FiMenu className='text-black text-2xl lg:hidden block cursor-pointer ' onClick={dropdownOpen} />
