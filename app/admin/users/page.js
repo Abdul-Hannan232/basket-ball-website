@@ -156,7 +156,7 @@ export default function Users() {
               />
             </div>
             <button className='bg-[#FFA500] text-white lg:rounded-xl rounded-md lg:p-4 p-2 lg:text-xl text-[10px] lg:w-60 w-28 text-center'>
-              <Link href="/admin/add-user"> Add User
+              <Link href="/admin/add-User"> Add User
               </Link>
             </button>
           </div>
