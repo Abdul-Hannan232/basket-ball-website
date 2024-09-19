@@ -41,6 +41,10 @@ const Login = () => {
         const body = { email, password };
         try {
             const response = await loginUser(body);
+            if(response.status === 403){
+                toast.error(response.data.message);
+                return;
+            }
             if (response.status === 200) {
                 const token = response.data.data.token;
                 const options = { secure: true, sameSite: 'strict' };

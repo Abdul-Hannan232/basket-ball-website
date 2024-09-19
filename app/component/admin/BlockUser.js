@@ -6,7 +6,7 @@ const BlockUser = ({ onClose, onBlockUser, user, onSetRemarks,remarks }) => {
   return (
     <div>
        <div>
-          <div className='flex flex-col justify-center bg-gray-700 bg-opacity-40 items-center h-screen absolute top-0 left-0 right-0 '>
+          <div className='flex flex-col justify-center z-40 bg-gray-700 bg-opacity-40 items-center h-screen absolute top-0 left-0 right-0 '>
             <div className='bg-white lg:w-[450px] rounded-xl lg:p-5 p-3 w-[90%] shadow-xl '>
               <div className='cursor-pointer bg-white rounded-full lg:w-10 lg:h-10 w-8 h-8 flex flex-col float-right justify-center items-center text-center shadow-xl'onClick={onClose}><RxCross2 className='text-[#F60606] lg:text-xl text-lg' />
               </div>
@@ -14,7 +14,7 @@ const BlockUser = ({ onClose, onBlockUser, user, onSetRemarks,remarks }) => {
               <p className='text-[#787878] lg:text-xs text-[10px] lg:text-start text-center my-3 mx-5'>Blocking the user will restrict their access to the admin panel and associated functionalities.</p>
               <div className='flex my-5 gap-4 mx-5'>
                 <h1 className='lg:text-lg text-sm text-black'>Remarks</h1>
-                <textarea className='lg:w-80 lg:h-16 h-12 border border-[#B6B6B6] rounded-md text-black' 
+                <textarea className='lg:w-80  p-5 lg:h-16 h-12 border border-[#B6B6B6] rounded-md text-black' 
                 required 
                 onChange={(e) => onSetRemarks(e.target.value)}
                 value={remarks}
