@@ -29,7 +29,6 @@ const Court = () => {
     const getCourts = async () => {
       try {
         const response = await fetchAllCourts();
-        console.log("courts", response)
         setCourts(response.data.courts);
         setAllCourts(response.data.courts);
         setCount(response.data.courts.length);

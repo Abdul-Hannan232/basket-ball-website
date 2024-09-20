@@ -63,7 +63,8 @@ const CourtsSlider = ({ slide }) => {
         const getCourts = async () => {
             try {
                 const response = await fetchAllCourts(); // Use the renamed function
-                setAllCourts(response.data.courts); // Store the fetched data in state
+                const activeCourts = response.data.courts.filter(court => court.isactive === true);
+                setAllCourts(activeCourts); // Store the fetched data in state
             } catch (error) {
                 console.error("Failed to fetch courts data:", error);
                 // You can also add error handling for the UI here
