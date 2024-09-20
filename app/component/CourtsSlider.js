@@ -100,7 +100,7 @@ const CourtsSlider = ({ slide }) => {
 
                                         <Image src={item.images?.[0]
                                             ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${item.images[0]}`
-                                            : '/basketBALL.png'} alt="image" width={343} height={228} className='rounded-t-xl 2xl:h-72 h-60 2xl:w-[400px]' />
+                                            : '/basketBALL.png'} alt="image" width={343} height={228} className='rounded-t-md 2xl:h-72 h-60 2xl:w-[400px]' />
 
                                         <div className='flex items-center justify-center float-right -mt-5 shadow z-10 absolute right-0 p-3 w-32 gap-2 rounded-l-xl bg-white text-black'>
 
@@ -171,7 +171,7 @@ const CourtsSlider = ({ slide }) => {
 
                                     <Image src={item.images?.[0]
                                         ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${item.images[0]}`
-                                        : '/basketBALL.png'} alt="image" width={343} height={228} className='rounded-t-xl 2xl:h-72 h-60 2xl:w-[450px]' />
+                                        : '/basketBALL.png'} alt="image" width={343} height={228} className='rounded-t-md 2xl:h-72 h-52 2xl:w-[450px]' />
 
                                     <div className='flex items-center justify-center float-right -mt-5 shadow  absolute right-0 p-3 w-32 gap-2 rounded-l-xl bg-white text-black'>
 
