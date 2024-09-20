@@ -27,13 +27,31 @@ export default function Courts() {
     const [updateContent, setUpdateContent] = useState(false)
     const [previewUrls, setPreviewUrls] = useState(Array(MAX_FILES).fill(null));
     const [files, setFiles] = useState(Array(MAX_FILES).fill(null));
+    const [isOpen, setIsOpen] = useState(false);
 
+    // Function to open/close the popup
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    };
+
+    // Function to close the popup when clicking outside
+    const handleClickOutside = (event) => {
+        if (event.target.classList.contains('popup-overlay')) {
+            setIsOpen(false);
+        }
+    };
     useEffect(() => {
+        if (isOpen) {
+            window.addEventListener('click', handleClickOutside);
+        } else {
+            window.removeEventListener('click', handleClickOutside);
+        }
+        return () => window.removeEventListener('click', handleClickOutside);
         if (token) {
             setloggedInUser(decodedToken)
         }
 
-    }, [router, token])
+    }, [router, token, isOpen])
 
     const [formData, setFormData] = useState({
         user_id: decodedToken?.id,
@@ -107,9 +125,9 @@ export default function Courts() {
             <div className='md:w-[80%] md:mx-auto mx-5 mt-10 flex items-center justify-between'>
                 <div className='flex items-center md:gap-4 gap-1'>
                     <h1 className='md:text-3xl text-md'>Basketball Courts</h1>
-                    <CiFilter className='text-[#FFA500] md:text-3xl text-xl' />
+                    <CiFilter className='text-[#FFA500] md:text-3xl text-xl cursor-pointer' onClick={togglePopup} />
                 </div>
- 
+
                 {loggedInUser ? (
                     <button
                         className='bg-[#FFA500] rounded-md md:text-xl text-sm text-black md:px-16 px-3 py-2 shadow'
@@ -119,7 +137,7 @@ export default function Courts() {
                     </button>
                 ) : (
                     ""
-                )} 
+                )}
 
             </div>
             <CourtsSlider slide={"box"} key={updateContent} />
@@ -137,6 +155,53 @@ export default function Courts() {
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
+            </div>
+            {/*  filter popup   bg-gray-800 bg-opacity-75*/}
+
+            <div
+                className={`fixed inset-0 z-50 flex items-center justify-start  popup-overlay transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
+                    }`}
+            >
+                <div className="lg:w-[35%] w-[80%] relative rounded-lg bg-[#333333] shadow-xl transform">
+                    <div className="w-[80%] mx-auto py-10">
+                        <div className="flex items-center justify-between">
+                            <h1 className="text-xl font-bold text-white">Sort by:</h1>
+                            <Image src="/funnel.png" alt="image" width={22} height={22} />
+                        </div>
+                        <h1 className="text-xl font-bold text-white mt-5">Order:</h1>
+                        <hr className="border border-[#808080] w-[90%] mx-auto mt-3 mb-7" />
+                        <div className="flex items-center mt-3 gap-2">
+                            <input type="radio" name="size" value="Latest" className="radio-custom w-4 h-4" />
+                            <h1 className="lg:text-sm text-xs text-white">Latest</h1>
+                        </div>
+                        <div className="flex items-center mt-3 gap-2">
+                            <input type="radio" name="size" value="Popular" className="radio-custom w-4 h-4" />
+                            <h1 className="lg:text-sm text-xs text-white">Popular</h1>
+                        </div>
+                        <div className="flex items-center mt-3 gap-2">
+                            <input type="radio" name="size" value="Review" className="radio-custom w-4 h-4" />
+                            <h1 className="lg:text-sm text-xs text-white">Review</h1>
+                        </div>
+                        <div className="flex items-center mt-3 gap-2">
+                            <input type="radio" name="size" value="Near Me" className="radio-custom w-4 h-4" />
+                            <h1 className="lg:text-sm text-xs text-white">Near Me</h1>
+                        </div>
+                        <h1 className="text-xl font-bold text-white mt-10">Court Type:</h1>
+                        <hr className="border border-[#808080] w-[90%] mx-auto mt-3 mb-7" />
+                        <div className="flex items-center mt-3 gap-2">
+                            <input type="radio" name="size" value="Indoor" className="radio-custom w-4 h-4" />
+                            <h1 className="lg:text-lg text-xs text-white">Indoor</h1>
+                        </div>
+                        <div className="flex items-center mt-3 gap-2">
+                            <input type="radio" name="size" value="Outdoor" className="radio-custom w-4 h-4" />
+                            <h1 className="lg:text-lg text-xs text-white">Outdoor</h1>
+                        </div>
+                        <div className="flex items-center mt-3 gap-2">
+                            <input type="radio" name="size" value="Sheltered" className="radio-custom w-4 h-4" />
+                            <h1 className="lg:text-lg text-xs text-white">Sheltered</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Courts popup */}
