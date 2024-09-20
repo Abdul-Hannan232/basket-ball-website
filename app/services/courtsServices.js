@@ -38,3 +38,24 @@ export const addCourt = async (body,token) => {
         return error.response;
     }
 };
+ 
+
+export const deleteCourt = async (body,token) => {
+    try {
+ 
+        const response = await axios.delete(
+            `${process.env.NEXT_PUBLIC_API_URL}/court/${body.id}}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        return response;
+    }
+    catch (error) {
+        return error.response || { message: "An error occurred", error };
+    }
+
+}

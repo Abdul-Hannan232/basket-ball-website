@@ -10,11 +10,11 @@ import { allUsers as fetchAllUsers, updateUser, deleteUser as removeUser } from 
 import formatDate from '../../utils/formatData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DeleteUserPopup from "../../component/admin/DeleteUser"
+import DeletePopUp from "../../component/admin//DeletePopUp"
 import BlockUserPopup from "../../component/admin/BlockUser"
 import { useAuthToken } from '../../customHook/useAuthToken';
 import { NavbarContext } from '../../context/admin/NavbarContext';
-
+ 
 export default function Users() {
   const [allUsers, setAllUsers] = useState([]);
   const [spinner, setSpinner] = useState(false)
@@ -24,7 +24,7 @@ export default function Users() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [remarks, setRemarks] = useState(''); //comment for blocking user
   const { token } = useAuthToken();
-  const { setCount } = useContext(NavbarContext);
+  const { setCount,count } = useContext(NavbarContext);
 
   useEffect(() => {
     setSpinner(true);
@@ -57,7 +57,7 @@ export default function Users() {
     );
   }, [users]);
 
-
+ 
 
   // Delete User
   const openDeleteUserPopup = (user) => {
@@ -75,6 +75,7 @@ export default function Users() {
         closeDeleteUserPopup()
         toast.success(`${data.name} deleted successfully`)
         setAllUsers(updatedUsers);
+        setCount(count-1)
       }
 
     } catch (error) {
@@ -310,9 +311,11 @@ export default function Users() {
         </div>
       </div>
       {deleteUserPopupVisible && (
-        <DeleteUserPopup
-          user={selectedUser}
-          onDeleteUser={deleteUser}
+        <DeletePopUp
+          title="Are you want to delete this user?"
+          description="Do you really want to delete this user? Deleting them will limit their access."
+          record={selectedUser}
+          onDeleteRecord={deleteUser}
           onClose={closeDeleteUserPopup}
         />
       )}
