@@ -6,7 +6,7 @@ const DeletePopUp = ({title,description,record,onDeleteRecord,onClose}) => {
    
     return (
         <div>
-            <div className='flex flex-col justify-center bg-gray-700 bg-opacity-40 items-center h-screen absolute top-0 left-0 right-0 '>
+            <div className='flex flex-col justify-center bg-gray-700 z-40 bg-opacity-40 items-center h-screen absolute top-0 left-0 right-0 '>
                 <div className='bg-white text-center lg:w-[500px] rounded-xl lg:p-5 p-3 w-[90%] shadow-xl '>
                     <div onClick={onClose} className='cursor-pointer bg-white rounded-full lg:w-10 lg:h-10 w-8 h-8 flex flex-col float-right justify-center items-center text-center shadow-xl'><RxCross2 className='text-[#F60606] lg:text-xl text-md' />
                     </div>
