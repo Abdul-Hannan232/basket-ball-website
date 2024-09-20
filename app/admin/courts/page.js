@@ -6,23 +6,49 @@ import { Button } from 'primereact/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import { allCourts as fetchAllCourts } from "../../services/courtsServices"
+import { allCourts as fetchAllCourts , deleteCourt as removeCourt} from "../../services/courtsServices"
 import formatDate from '../../utils/formatData';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { NavbarContext } from '../../context/admin/NavbarContext';
 import Image from 'next/image';
+import DeletePopUp from "../../component/admin//DeletePopUp"
+import { useAuthToken } from '../../customHook/useAuthToken';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Court = () => {
   const [allCourts, setAllCourts] = useState([]);
   const [spinner, setSpinner] = useState(false)
   const [courts, setCourts] = useState([]) //search filtration
-  // const [deleteUserPopupVisible, setDeleteUserPopupVisible] = useState(false); // help in open/close delete popup
-  // const [blockUserPopupVisible, setBlockUserPopupVisible] = useState(false); // help in open/close block popup
-  // const [selectedUser, setSelectedUser] = useState(null);
-  // const [remarks, setRemarks] = useState(''); //comment for blocking user
-  const { setCount } = useContext(NavbarContext);
+  const [deleteCoutPopupVisible, setDeleteCourtPopupVisible] = useState(false); // help in open/close delete popup
+  const [selectedCourt, setSelectedCourt] = useState(null);
+  const { setCount,count } = useContext(NavbarContext);
+  const { token } = useAuthToken();
+  // Delete User
+  const openDeleteCourtPopup = (court) => {
+    setSelectedCourt(court);
+    setDeleteCourtPopupVisible(true)
+  }
+  const closeDeleteCourtPopup = () => {
+    setDeleteCourtPopupVisible(false);
+  };
+  const deleteCourt = async (data,) => {
+    try {
+      const response = await removeCourt(data, token);
+      if (response.status === 200) {
+        const updatedCourts = allCourts.filter(court => court.id !== data.id);
+        closeDeleteCourtPopup()
+        toast.success(`${data.name} deleted successfully`)
+        setAllCourts(updatedCourts);
+        setCount(count-1)
+      }
+
+    } catch (error) {
+      toast.error("Network Error");
+    }
+  };
+
+
 
   useEffect(() => {
     setSpinner(true);
@@ -42,12 +68,13 @@ const Court = () => {
 
     getCourts();
   }, []);
+
   const handleFilter = useCallback((event) => {
     const searchQuery = event.target.value.toLowerCase();
     setAllCourts(
       searchQuery !== ""
-        ? courts.filter(user =>
-          user.name.toLowerCase().includes(searchQuery))
+        ? courts.filter(court =>
+          court.name.toLowerCase().includes(searchQuery))
         : courts
     );
   }, [courts]);
@@ -76,9 +103,9 @@ const Court = () => {
           .column-name {
             width: 100%;
           }
-        }
+        } 
       `}</style>
-
+      <ToastContainer />
 
       <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[88.5%] lg:w-[81.5%]  h-screen float-right text-black'>
         <div className='w-screen lg:mx-10 lg:mt-2'>
@@ -225,7 +252,7 @@ const Court = () => {
                       <Button
                         icon={<FontAwesomeIcon icon={faTrash} />}
                         className="p-button-rounded p-button-info"
-                        onClick={() => openDeleteUserPopup(rowData)}
+                        onClick={() => openDeleteCourtPopup(rowData)}
                       />
                     </div>
                   )}
@@ -239,6 +266,16 @@ const Court = () => {
 
         </div>
       </div>
+
+      {deleteCoutPopupVisible && (
+        <DeletePopUp
+          title="Are you want to delete this court?"
+          description="Do you really want to delete this court? Deleting them will limit their access."
+          record={selectedCourt}
+          onDeleteRecord={deleteCourt}
+          onClose={closeDeleteCourtPopup}
+        />
+      )}
     </div>
   )
 }
