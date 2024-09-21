@@ -22,7 +22,7 @@ const AddCourt = () => {
     }
   }, [router, token])
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ 
     user_id: decodedToken?.id,
     name: '',
     location: '',
@@ -53,7 +53,7 @@ const AddCourt = () => {
     }
 
     try {
-      const response = await addNewCourt(formData, token);
+      const response = await addNewCourt(updatedFormData, token);
       if (response.status === 201) {
         toast.success(response.data.message);
         setFormData({
@@ -69,6 +69,7 @@ const AddCourt = () => {
         })
         setFiles(Array(MAX_FILES).fill(null))
         setPreviewUrls(Array(MAX_FILES).fill(null))
+        router.push("/admin/courts")
       } else {
         toast.error(response.data.message);
       }

@@ -4,6 +4,7 @@ import UserForm from '../../component/admin/UserForm'
 import Loader from "../../component/LoadingBall";
 import { addUser as addNewUser } from "../../services/userServices";
 import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
  export default function UserDetail() {
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("/user_placeholder.jpeg");
@@ -25,7 +26,7 @@ import { ToastContainer, toast } from 'react-toastify';
         image: ''
     });
     const [loader, setLoader] = useState(false);
-
+    const router = useRouter();
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);
@@ -64,6 +65,8 @@ import { ToastContainer, toast } from 'react-toastify';
                 setFile(null)
                 setPreviewUrl("/user_placeholder.png")
                 toast.success(response.data.message);
+                router.push("/admin/users")
+
             } else {
                 toast.error(response.data.message);
             }
