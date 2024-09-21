@@ -36,10 +36,10 @@ const CourtForm = ({ handleSubmit, formData, setFormData, files, setFiles, previ
 
     return (
         <div>
-            <div className='flex  lg:pt-16 pt-14 lg:w-[81.5%] bg-white w-full 2xl:w-[88.5%]  float-right text-[#4B4B4B] '>
+            <div className='flex  2xl:h-screen lg:w-[81.5%] bg-white w-full 2xl:w-[91.5%]  float-right text-[#4B4B4B] '>
                 <div className='   w-[100%] lg:px-10  bg-white mx-auto '>
                     <form onSubmit={handleSubmit}>
-                        <div className='fixed  2xl:w-[85%] lg:w-[75.5%] w-full bg-white '>
+                        <div className='fixed top-5 mt-12 2xl:w-[85%] lg:w-[75.5%] w-full bg-white '>
                             <div className='lg:p-5 p-2 m-5 lg:rounded-xl rounded-md bg-white border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center'>
                                 <div className='w-full relative'>
                                     <input
@@ -55,7 +55,7 @@ const CourtForm = ({ handleSubmit, formData, setFormData, files, setFiles, previ
                             </div>
                         </div>
                         {/* idhar  add karna hy */}
-                        <div className='border lg:mt-36 mt-28  border-[#CACACA] bg-white m-5  rounded-xl m-5'>
+                        <div className='border lg:mt-60 mt-44   border-[#CACACA] bg-white m-5  rounded-xl m-5'>
                             <div className=''>
                                 <div className='lg:pl-10 pl-5  lg:text-2xl text-lg rounded-t-xl flex items-center gap-10 border-2 lg:h-24 h-14  bg-[#F4F4F4] text-black font-bold border-[#CACACA] gap-10 flex items-center'>
                                     <h1 className='text-[#4B4B4B]'>Court Details</h1>

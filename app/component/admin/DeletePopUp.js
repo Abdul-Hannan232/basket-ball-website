@@ -2,8 +2,8 @@ import React from 'react'
 import { RxCross2 } from "react-icons/rx";
 import Image from 'next/image';
 
-const DeletePopUp = ({title,description,record,onDeleteRecord,onClose}) => {
-   
+const DeletePopUp = ({ title, description, record, onDeleteRecord, onClose }) => {
+
     return (
         <div>
             <div className='flex flex-col justify-center bg-gray-700 z-40 bg-opacity-40 items-center h-screen absolute top-0 left-0 right-0 '>
@@ -15,7 +15,7 @@ const DeletePopUp = ({title,description,record,onDeleteRecord,onClose}) => {
                     <p className='text-[#787878] lg::text-xs text-[10px] my-3 mx-10'>{description}</p>
                     <div className='flex items-center mt-8 justify-center lg:gap-10 gap-5 mb-10'>
                         <button className='bg-[#F4F5F7] p-2 lg:w-32 w-20 lg:text-sm text-[10px] text-black rounded-md lg:h-12 h-8 ' onClick={onClose}>No, Keep it</button>
-                        <button className='bg-[#F60606] p-2 lg:w-32 w-20 lg:text-sm text-[10px] rounded-md lg:h-12 h-8' onClick={()=>{onDeleteRecord(record)} }>Yes, Delete it</button>
+                        <button className='bg-[#F60606] p-2 lg:w-32 w-20 lg:text-sm text-[10px] rounded-md lg:h-12 h-8' onClick={() => { onDeleteRecord(record) }}>Yes, Delete it</button>
                     </div>
                 </div>
             </div>
