@@ -20,8 +20,8 @@ const AdminSidebar = () => {
 
   return (
    <div className='lg:block hidden'>
-     <div className='bg-[#FFF8B3]  w-64 flex flex-col fixed left-0 right-0 top-[68px] pt-5 2xl:h-[93.5vh] h-[93.5vh]' >
-      <div className='text-black text-sm font-semibold'>
+     <div className='bg-[#FFF8B3]  w-64 flex flex-col fixed left-0 right-0 top-[68px] pt-5 2xl:h-[93.5vh] h-[89.5vh]' >
+      <div className='text-black mt-5 text-sm font-semibold'>
         
         <div className="h1-hover-effect">
           <h1
