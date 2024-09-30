@@ -12,6 +12,11 @@
   box-shadow: 5.11px 10.86px 24.28px 0px #00000040;
 
 }
+.reviewShadow{
+  box-shadow: 0px 0px 0px 0px #00000005;
+  
+
+}
 /* Styling for individual page numbers */
 .custom-paginator .p-paginator .p-paginator-page {
   @apply bg-white text-black rounded-md w-10 h-10 inline items-center text-center justify-center mx-1;
