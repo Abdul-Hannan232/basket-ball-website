@@ -1,54 +1,53 @@
-"use client"
-import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
-import { allCourts as fetchAllCourts , deleteCourt as removeCourt} from "../../services/courtsServices"
-import formatDate from '../../utils/formatData';
-import { NavbarContext } from '../../context/admin/NavbarContext';
-import Image from 'next/image';
-import DeletePopUp from "../../component/admin//DeletePopUp"
-import { useAuthToken } from '../../customHook/useAuthToken';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+"use client";
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from "primereact/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import {
+  allCourts as fetchAllCourts,
+  deleteCourt as removeCourt,
+} from "../../services/courtsServices";
+import formatDate from "../../utils/formatData";
+import { NavbarContext } from "../../context/admin/NavbarContext";
+import Image from "next/image";
+import DeletePopUp from "../../component/admin//DeletePopUp";
+import { useAuthToken } from "../../customHook/useAuthToken";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Court = () => {
   const [allCourts, setAllCourts] = useState([]);
-  const [spinner, setSpinner] = useState(false)
-  const [courts, setCourts] = useState([]) //search filtration
+  const [spinner, setSpinner] = useState(false);
+  const [courts, setCourts] = useState([]); //search filtration
   const [deleteCoutPopupVisible, setDeleteCourtPopupVisible] = useState(false); // help in open/close delete popup
   const [selectedCourt, setSelectedCourt] = useState(null);
-  const { setCount,count } = useContext(NavbarContext);
+  const { setCount, count } = useContext(NavbarContext);
   const { token } = useAuthToken();
   // Delete User
   const openDeleteCourtPopup = (court) => {
     setSelectedCourt(court);
-    setDeleteCourtPopupVisible(true)
-  }
+    setDeleteCourtPopupVisible(true);
+  };
   const closeDeleteCourtPopup = () => {
     setDeleteCourtPopupVisible(false);
   };
-  const deleteCourt = async (data,) => {
+  const deleteCourt = async (data) => {
     try {
       const response = await removeCourt(data, token);
       if (response.status === 200) {
-        const updatedCourts = allCourts.filter(court => court.id !== data.id);
-        closeDeleteCourtPopup()
-        toast.success(`${data.name} deleted successfully`)
+        const updatedCourts = allCourts.filter((court) => court.id !== data.id);
+        closeDeleteCourtPopup();
+        toast.success(`${data.name} deleted successfully`);
         setAllCourts(updatedCourts);
-        setCount(count-1)
+        setCount(count - 1);
       }
-
     } catch (error) {
       toast.error("Network Error");
     }
   };
-
-
 
   useEffect(() => {
     setSpinner(true);
@@ -60,7 +59,7 @@ const Court = () => {
         setCount(response.data.courts.length);
       } catch (error) {
         console.error("Failed to fetch courts data:", error);
-        toast.error("Network Error")
+        toast.error("Network Error");
       } finally {
         setSpinner(false);
       }
@@ -69,28 +68,35 @@ const Court = () => {
     getCourts();
   }, []);
 
-  const handleFilter = useCallback((event) => {
-    const searchQuery = event.target.value.toLowerCase();
-    setAllCourts(
-      searchQuery !== ""
-        ? courts.filter(court =>
-          court.name.toLowerCase().includes(searchQuery))
-        : courts
-    );
-  }, [courts]);
+  const handleFilter = useCallback(
+    (event) => {
+      const searchQuery = event.target.value.toLowerCase();
+      setAllCourts(
+        searchQuery !== ""
+          ? courts.filter((court) =>
+              court.name.toLowerCase().includes(searchQuery)
+            )
+          : courts
+      );
+    },
+    [courts]
+  );
 
   return (
     <div>
-
       <style jsx>{`
         @media (max-width: 1200px) {
-          .column-id, .column-type, .column-created, .column-availability {
+          .column-id,
+          .column-type,
+          .column-created,
+          .column-availability {
             display: none;
           }
         }
 
         @media (max-width: 768px) {
-          .column-location, .column-price {
+          .column-location,
+          .column-price {
             display: none;
           }
         }
@@ -103,25 +109,30 @@ const Court = () => {
           .column-name {
             width: 100%;
           }
-        } 
+        }
       `}</style>
       <ToastContainer />
 
-      <div className='flex bg-white lg:mt-16 mt-14 2xl:w-[88.5%] lg:w-[81.5%]  h-screen float-right text-black'>
-        <div className='w-screen lg:mx-10 lg:mt-2'>
-          <div className='lg:p-5 p-2 m-5 lg:rounded-xl rounded-md border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center'>
-            <div className='w-full relative'>
+      <div className="flex bg-white lg:mt-16 mt-14 2xl:w-[88.5%] lg:w-[81.5%]  h-screen float-right text-black">
+        <div className="w-screen lg:mx-10 lg:mt-2">
+          <div className="lg:p-5 p-2 m-5 lg:rounded-xl rounded-md border-2 lg:h-24 border-[#CACACA] lg:gap-10 gap-2 flex items-center">
+            <div className="w-full relative">
               <input
-                type='text'
-                placeholder='Search Courts'
+                type="text"
+                placeholder="Search Courts"
                 onChange={handleFilter}
-                className='border border-[#CACACA] lg:text-lg text-sm lg:rounded-xl rounded-md lg:p-4 p-2 bg-[#FFF8B3] relative w-full'
+                className="border border-[#CACACA] lg:text-lg text-sm lg:rounded-xl rounded-md lg:p-4 p-2 bg-[#FFF8B3] relative w-full"
               />
-              <Image src="/filter-search.png" alt="filter" width="5" height="5" className="absolute lg:w-[25px] lg:h-[25px] w-4 h-4 lg:top-4 top-3 right-3 lg:right-5" />
+              <Image
+                src="/filter-search.png"
+                alt="filter"
+                width="5"
+                height="5"
+                className="absolute lg:w-[25px] lg:h-[25px] w-4 h-4 lg:top-4 top-3 right-3 lg:right-5"
+              />
             </div>
-            <button className='bg-[#FFA500] text-white lg:rounded-xl rounded-md p-4 lg:text-xl text-[10px] lg:w-60 w-28  text-center'>
-              <Link href="/admin/add-court"> Add Court
-              </Link>
+            <button className="bg-[#FFA500] text-white lg:rounded-xl rounded-md p-4 lg:text-xl text-[10px] lg:w-60 w-28  text-center">
+              <Link href="/admin/add-court"> Add Court</Link>
             </button>
           </div>
 
@@ -129,16 +140,17 @@ const Court = () => {
             {spinner ? (
               <div className="flex justify-center bg-red-[#FFA500]">
                 <span className="loader"></span>
-              </div>) : (
+              </div>
+            ) : (
               <DataTable
                 value={allCourts}
                 tableStyle={{
-                  backgroundColor: 'white',
-                  width: '99%',
-                  margin: 'auto',
-                  marginTop: '10px',
-                  borderRadius: '20px',
-                  fontSize: '12px'
+                  backgroundColor: "white",
+                  width: "99%",
+                  margin: "auto",
+                  marginTop: "10px",
+                  borderRadius: "20px",
+                  fontSize: "12px",
                 }}
                 className="custom-data-table custom-paginator"
                 paginator
@@ -151,8 +163,18 @@ const Court = () => {
               >
                 <Column
                   header="ID"
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent" }}
-                  style={{ width: '5%', textAlign: 'left', padding: '14px', borderBottom: "1px solid #CACACA" }}
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                  }}
+                  style={{
+                    width: "5%",
+                    textAlign: "left",
+                    padding: "14px",
+                    borderBottom: "1px solid #CACACA",
+                  }}
                   className="column-id"
                   body={(rowData, { rowIndex }) => rowIndex + 1}
                 />
@@ -160,13 +182,26 @@ const Court = () => {
                 <Column
                   field="name"
                   header="NAME"
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
-                  style={{ width: '10%', textAlign: 'left', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
+                  style={{
+                    width: "10%",
+                    textAlign: "left",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
                   className="column-name"
                   body={(rowData) => (
                     <Link
                       href={{
-                        pathname: '/admin/court-detail',
+                        pathname: "/admin/court-detail",
                         query: { id: rowData.id },
                       }}
                     >
@@ -178,24 +213,64 @@ const Court = () => {
                 <Column
                   field="location"
                   header="LOCATION"
-                  headerStyle={{ backgroundColor: '#FFF8B3', textAlign: "center", padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
-                  style={{ width: '15%', textAlign: 'left', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    textAlign: "center",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
+                  style={{
+                    width: "15%",
+                    textAlign: "left",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
                   className="column-location"
                 />
 
                 <Column
                   field="type"
                   header="COURT TYPE"
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
-                  style={{ width: '10%', textAlign: 'left', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
+                  style={{
+                    width: "10%",
+                    textAlign: "left",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
                   className="column-type"
                 />
 
                 <Column
                   field="availibility"
                   header="AVAILABILITY"
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
-                  style={{ width: '10%', textAlign: 'left', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
+                  style={{
+                    width: "10%",
+                    textAlign: "left",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
                   className="column-availability"
                   body={(rowData) => formatDate(rowData.availibility)}
                 />
@@ -203,28 +278,70 @@ const Court = () => {
                 <Column
                   field="cost"
                   header="PRICE/ hr"
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
-                  style={{ width: '10%', textAlign: 'left', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
+                  style={{
+                    width: "10%",
+                    textAlign: "left",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
                   className="column-price"
                 />
 
                 <Column
                   field="isactive"
                   header="STATUS"
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
-                  style={{ width: '6%', textAlign: 'left', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
+                  style={{
+                    width: "6%",
+                    textAlign: "left",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
                   body={(rowData) => (
-                    <span className={rowData.isactive ? 'text-green-600' : 'text-red-600'}>
-                      {rowData.isactive ? 'Active' : 'Block'}
+                    <span
+                      className={
+                        rowData.isactive ? "text-green-600" : "text-red-600"
+                      }
+                    >
+                      {rowData.isactive ? "Active" : "Block"}
                     </span>
                   )}
                 />
 
                 <Column
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
-                  body={(rowData) => (
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
+                  body={(rowData) =>
                     rowData.isactive ? (
-                      <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          color: "#818181",
+                          justifyContent: "space-around",
+                        }}
+                      >
                         <Button
                           icon={<FontAwesomeIcon icon={faEye} />}
                           className="p-button-rounded p-button-info"
@@ -232,7 +349,13 @@ const Court = () => {
                         />
                       </div>
                     ) : (
-                      <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          color: "#818181",
+                          justifyContent: "space-around",
+                        }}
+                      >
                         <Button
                           icon={<FontAwesomeIcon icon={faEye} />}
                           className="p-button-rounded p-button-info"
@@ -240,15 +363,33 @@ const Court = () => {
                         />
                       </div>
                     )
-                  )}
-                  style={{ width: '3%', textAlign: 'center', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
+                  }
+                  style={{
+                    width: "3%",
+                    textAlign: "center",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
                   className="column-actions"
                 />
 
                 <Column
-                  headerStyle={{ backgroundColor: '#FFF8B3', padding: '14px', borderRight: '1px solid #CACACA', borderLeft: "transparent" }}
+                  headerStyle={{
+                    backgroundColor: "#FFF8B3",
+                    padding: "14px",
+                    borderRight: "1px solid #CACACA",
+                    borderLeft: "transparent",
+                  }}
                   body={(rowData) => (
-                    <div style={{ display: 'flex', color: "#818181", justifyContent: 'space-around' }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        color: "#818181",
+                        justifyContent: "space-around",
+                      }}
+                    >
                       <Button
                         icon={<FontAwesomeIcon icon={faTrash} />}
                         className="p-button-rounded p-button-info"
@@ -256,14 +397,19 @@ const Court = () => {
                       />
                     </div>
                   )}
-                  style={{ width: '3%', textAlign: 'center', padding: '14px', border: '1px solid #CACACA', borderRight: "transparent", borderLeft: "transparent" }}
+                  style={{
+                    width: "3%",
+                    textAlign: "center",
+                    padding: "14px",
+                    border: "1px solid #CACACA",
+                    borderRight: "transparent",
+                    borderLeft: "transparent",
+                  }}
                   className="column-actions"
                 />
               </DataTable>
             )}
-
           </div>
-
         </div>
       </div>
 
@@ -277,7 +423,7 @@ const Court = () => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Court
+export default Court;
