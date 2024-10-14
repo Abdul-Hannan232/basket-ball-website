@@ -44,9 +44,9 @@ const settings = {
   prevArrow: <></>, // Hides the previous arrow
   nextArrow: <></>,
 };
-const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
-  // console.log(searchResults);
-
+const CourtsSlider = ({ slide, searchResults }) => {
+    // console.log(searchResults); 
+    
   const sliderRef = useRef(null);
   const [spinner, setSpinner] = useState(false);
 
@@ -60,37 +60,29 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
 
   const [allCourts, setAllCourts] = useState([]); // Initialize with an empty array
 
-  const getCourts = async () => {
-    try {
-      const response = await fetchAllCourts(); // Use the renamed function
-      const activeCourts = response.data.courts.filter(
-        (court) => court.isactive === true
-      );
-      setAllCourts(activeCourts); // Store the fetched data in state
-    } catch (error) {
-      console.error("Failed to fetch courts data:", error);
-      // You can also add error handling for the UI here
-    } finally {
-      setSpinner(false);
-    }
-  };
-
   useEffect(() => {
     setSpinner(true);
-    getCourts();
-  }, []);
-
-  useEffect(() => {
-    if (searchResults) {
+    const getCourts = async () => {
+      try {
+        const response = await fetchAllCourts(); // Use the renamed function
+        const activeCourts = response.data.courts.filter(
+          (court) => court.isactive === true
+        );
+        setAllCourts(activeCourts); // Store the fetched data in state
+      } catch (error) {
+        console.error("Failed to fetch courts data:", error);
+        // You can also add error handling for the UI here
+      } finally {
+        setSpinner(false);
+      }
+    };
+    if (Array.isArray(searchResults) && searchResults.length > 0) {
       setAllCourts(searchResults);
-    } else if (filteredCourts) {
-      setAllCourts(filteredCourts);
+      setSpinner(false);
     } else {
-      setSpinner(true);
       getCourts();
     }
-  }, [searchResults, filteredCourts]);
-
+  }, [slide, searchResults]);
   return (
     <div>
       {slide === "carousel" ? (
@@ -108,7 +100,7 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
           </div>
 
           <Slider ref={sliderRef} {...settings}>
-            {allCourts?.map((item, index) => (
+            {allCourts.map((item, index) => (
               <div key={index} className=" ">
                 <div className="relative shadow cursor-pointer text-black rounded-md 2xl:w-[450px] md:w-[300px] w-[250px] group">
                   <div className="absolute inset-0 bg-black opacity-0 z-20 group-hover:opacity-70 transition-opacity"></div>
@@ -251,7 +243,7 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
                       {renderStars(item.ratings)}
                     </div>
                     <p className="text-[10px] mt-1 font-bold">
-                      {item.rating.length} reviews
+                      {item?.rating?.length} reviews
                     </p>
                     <h1 className="text-lg font-bold mb-2">{item.name}</h1>
                     <p className="w-32 text-xs font-medium ">{item.location}</p>
