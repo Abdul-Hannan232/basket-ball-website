@@ -1,9 +1,10 @@
 
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { CiFilter } from "react-icons/ci";
 // import Navbar from '../../component/NavBarComponent';
-import CourtsSlider from "../../component/CourtsSlider";
+// import CourtsSlider from "../../component/CourtsSlider";
+const CourtsSlider = lazy(() => import("../../component/CourtsSlider")); 
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import { RxCrossCircled } from "react-icons/rx";
@@ -155,6 +156,7 @@ export default function Courts() {
     }
 
     return (
+       
         <div className='relative'>
             <ToastContainer/>
             <div className='md:w-[80%] md:mx-auto mx-5 mt-10 flex items-center justify-between'>
@@ -175,7 +177,10 @@ export default function Courts() {
                 )}
 
             </div>
-            <CourtsSlider slide={"box"} key={updateContent}   searchResults={searchResults} />
+            <Suspense fallback={<div>Loading...</div>}>
+                <CourtsSlider slide={"box"} key={updateContent} searchResults={searchResults} />
+            </Suspense>
+            {/* <CourtsSlider slide={"box"} key={updateContent}   searchResults={searchResults} /> */}
             <div className='w-[80%] mx-auto mt-40 flex items-center gap-2'>
                 <h1 className='text-[#FFA500] text-2xl font-bold'>Map</h1>
                 <h1 className='text-white text-2xl font-bold'>View</h1>

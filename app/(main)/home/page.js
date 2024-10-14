@@ -1,5 +1,5 @@
 "use client";
-import React, {  useState } from "react";
+import React, {  Suspense, useState } from "react";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
 import BasketBall from "../../component/CourtsSlider";
@@ -12,7 +12,7 @@ export default function Home() {
   const [query, setQuery] = useState(""); 
  
   const handleSearch = async (e) => {
-    console.log("hello");
+    // console.log("hello");
     if (e.key === "Enter") {
       e.preventDefault();
 
@@ -80,5 +80,6 @@ export default function Home() {
       </div>
       <BasketBall slide={"carousel"} />
     </div>
+
   );
 }
