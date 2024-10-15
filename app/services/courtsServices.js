@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 export const allCourts = async (token) =>{ 
     try {
       
@@ -70,6 +70,27 @@ export const searchCourt = async (query) => {
       return response;
     } catch (error) {
       return error.response || { message: "An error occurred", error };
+    }
+  };
+  
+
+
+  export const filterCourts = async (order, courtType) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:2023/api/court/filter/query",
+        {
+          params: {
+            order,
+            courtType,
+          },
+        }
+      );
+  
+      return response.data.courts;
+    } catch (error) {
+      console.error("Error fetching filtered courts:", error);
+      throw error;
     }
   };
   
