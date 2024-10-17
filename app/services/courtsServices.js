@@ -78,8 +78,7 @@ export const searchCourt = async (query) => {
   export const filterCourts = async (order, courtType) => {
     try {
       const response = await axios.get(
-        "http://localhost:2023/api/court/filter/query",
-        {
+         `${process.env.NEXT_PUBLIC_API_URL}/court/filter/query`,        {
           params: {
             order,
             courtType,
@@ -94,3 +93,16 @@ export const searchCourt = async (query) => {
     }
   };
   
+
+
+  ///////////////////////////
+
+  export const getCourtById = async (id) => {
+    try {
+      
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/court/${id}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error fetching court data');
+    }
+  };

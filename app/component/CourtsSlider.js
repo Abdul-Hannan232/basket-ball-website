@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, Suspense } from "react";
 import Slider from "react-slick";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -110,7 +110,7 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
           </div>
 
           <Slider ref={sliderRef} {...settings}>
-            {allCourts.map((item, index) => (
+            {allCourts?.map((item, index) => (
               <div key={index} className=" ">
                 <div className="relative shadow cursor-pointer text-black rounded-md 2xl:w-[450px] md:w-[300px] w-[250px] group">
                   <div className="absolute inset-0 bg-black opacity-0 z-20 group-hover:opacity-70 transition-opacity"></div>
@@ -204,7 +204,7 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
             {spinner ? <span className="loader"></span> : null}
           </div>
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-20 justify-center place-items-center lg:w-[80%] md:mt-20 mt-5 md:mx-auto mx-5">
-            {allCourts.map((item, index) => (
+            {allCourts?.map((item, index) => (
               <div
                 key={index}
                 className="relative  shadow text-black rounded-md 2xl:w-[300px] xl:w-[250px] md:w-[250px] w-[280px] group"
