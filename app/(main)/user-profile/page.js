@@ -47,7 +47,7 @@ export default function UserProfile() {
         old_password: '',
         password: '',
         confirm_password: ''
-    })
+    }) 
 
     const handleLogout = () => {
         Cookies.remove('authToken');

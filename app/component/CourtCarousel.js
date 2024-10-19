@@ -44,7 +44,7 @@ const CourtCarousel = ({ status , images}) => {
                         </button>
                         <div className='md:w-[680px] lg:mx-0 mx-5 w-full mx-auto '>
                             <img
-                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${images[selectedImageIndex]}`}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${images[selectedImageIndex]}` || ""}
                                 // src={images[selectedImageIndex]}
                                 alt="Selected"
                                 className={`mb-4 w-full rounded-xl  md:h-56 h-28 ${transitioning ? 'zoom-out' : 'zoom-in'}`}
@@ -60,7 +60,7 @@ const CourtCarousel = ({ status , images}) => {
                                 <img
                                     key={index}
                                     // src={image}
-                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${image}`}
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${image}` || ""}
                                     alt={`Image ${index}`}
                                     className={`lg:w-40  md:w-16 w-10   md:h-12 h-8 ml-2  rounded-md object-cover cursor-pointer ${index === selectedImageIndex ? 'border-2 border-blue-500' : ''}`}
                                     onClick={() => setSelectedImageIndex(index)}
@@ -80,7 +80,7 @@ const CourtCarousel = ({ status , images}) => {
                             <div className='md:w-[680px] lg:mx-0 mx-5 w-full mx-auto '>
                                 <img
                                     // src={images[selectedImageIndex]}
-                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${images[selectedImageIndex]}`}
+                                    src={images ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${images[selectedImageIndex]}` : ""}
                                     alt="Selected"
                                     className={`mb-4 w-full rounded-xl md:h-96 h-48 ${transitioning ? 'zoom-out' : 'zoom-in'}`}
                                 />
@@ -94,7 +94,7 @@ const CourtCarousel = ({ status , images}) => {
                                 {images?.map((image, index) => (
                                     <img
                                         key={index}
-                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${image}`}
+                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${image}` || ""}
                                         alt={`Image ${index}`}
                                         className={`lg:w-24 w-12 ml-2 lg:h-20 h-14 rounded-md object-cover cursor-pointer ${index === selectedImageIndex ? 'border-2 border-blue-500' : ''}`}
                                         onClick={() => setSelectedImageIndex(index)}

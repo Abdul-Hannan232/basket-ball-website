@@ -1,29 +1,60 @@
 "use client";
-
+import React, { useState, useEffect } from 'react';
+import checkInService from '../services/checkInServices';
 import Carousel from "./CourtCarousel.js";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import Loader from "../component/LoadingBall.js";
 import { getCourtById } from "../services/courtsServices.js";
-import Image from "next/image";
-import { IoMdStar } from "react-icons/io";
-import { FaLocationDot } from "react-icons/fa6";
-import { PiMedalFill } from "react-icons/pi";
-import { IoIosCall } from "react-icons/io";
-import { RxExternalLink } from "react-icons/rx";
-import CarDetail from "../../app/data/carDetail.json";
-import Reviews from "./StarReviews.js";
-import renderStars from "./../utils/rating.js";
-import Link from "next/link";
+// import Image from "next/image";
+// import { IoMdStar } from "react-icons/io";
+// import { FaLocationDot } from "react-icons/fa6";
+// import { PiMedalFill } from "react-icons/pi";
+// import { IoIosCall } from "react-icons/io";
+// import { RxExternalLink } from "react-icons/rx";
+// import CarDetail from "../../app/data/carDetail.json";
+// import Reviews from "./StarReviews.js";
+// import renderStars from "./../utils/rating.js";
+// import Link from "next/link";
 import { LuExternalLink } from "react-icons/lu";
 import ReviewsCompponent from "../component/Review.js";
 import Checkin from "../component/Checkin.js";
+import { useAuthToken } from '../customHook/useAuthToken';
 
-export default function CourtDetail() {
+export default function CourtDetail() { 
   const searchParams = useSearchParams();
   const courtId = searchParams.get("id");
+  const { token, decodedToken } = useAuthToken();
+  const [hasRecentCheckIn, setHasRecentCheckIn] = useState(false);
+const userId = decodedToken?.id;
+  ////////////////////////////  Check Ckeckin Status //////////////////////////
 
-  // SWR using the service
+
+useEffect(() => {
+
+  const fetchCheckInStatus = async () => {
+    try {
+      if (userId && courtId) {
+        const data = await checkInService.getCheckInStatus(userId, courtId, token);
+        setHasRecentCheckIn(data?.hasRecentCheckIn);
+      }
+      // console.log("isCheckInAllowed : ", data);
+
+    } catch (error) {
+      console.error("Error fetching check-in status", error);
+    }
+  };
+
+  
+  if (userId && courtId) {
+    fetchCheckInStatus();
+  }
+}, [userId,courtId]);
+
+
+
+
+  /////////// Fetch Court Detail
   const { data, error, isLoading } = useSWR(
     courtId ? [`/api/court/${courtId}`, courtId] : null,
     () => getCourtById(courtId)
@@ -33,8 +64,6 @@ export default function CourtDetail() {
   if (error) console.log(error);
 
   if (error) return <div>Failed to load court details.</div>;
-
-// console.log(data.images);
 
 
   const style = [
@@ -148,7 +177,7 @@ export default function CourtDetail() {
         </div>
       </div>
       <ReviewsCompponent />
-      <Checkin />
+      <Checkin  hasRecentCheckIn={hasRecentCheckIn} userId={userId} courtId={courtId} token={token} />
     </>
   );
 }

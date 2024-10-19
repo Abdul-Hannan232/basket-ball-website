@@ -58,7 +58,6 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
 
   const [allCourts, setAllCourts] = useState([]); // Initialize with an empty array
 
-
   const getCourts = async () => {
     try {
       const response = await fetchAllCourts(); // Use the renamed function
@@ -66,6 +65,7 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
         (court) => court.isactive === true
       );
       setAllCourts(activeCourts); // Store the fetched data in state
+      console.log("allCourts : ", allCourts);
     } catch (error) {
       console.error("Failed to fetch courts data:", error);
       // You can also add error handling for the UI here
@@ -74,21 +74,42 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
     }
   };
 
-  useEffect(() => {
-    setSpinner(true);
-    getCourts();
-  }, []);
+  // useEffect(() => {
+  //   setSpinner(true);
+  //   getCourts();
+  // }, []);
 
+  // useEffect(() => {
+  //   if (searchResults &&  searchResults.length > 0) {
+  //     console.log("searchResults : ", searchResults);
+
+  //     setAllCourts(searchResults);
+  //     setSpinner(false);
+  //   }else{
+  //     setSpinner(true);
+  //     getCourts();
+  //   }
+  // }, [searchResults]);
 
   ///////////////////// Searching / Filtering
 
   useEffect(() => {
-    if (searchResults &&  searchResults.length > 0) {
+    setSpinner(true);
+    if (searchResults && searchResults.length > 0) {
+      // console.log("searchResults : ", searchResults);
+
       setAllCourts(searchResults);
-    } else if (filteredCourts &&  filteredCourts.length > 0) {
+      setSpinner(false);
+    } else if (filteredCourts && filteredCourts.length > 0) {
       setAllCourts(filteredCourts);
-    } else {
-      setSpinner(true);
+      setSpinner(false);
+    }
+
+    if (
+      (!searchResults || searchResults.length === 0) &&
+      (!filteredCourts || filteredCourts.length === 0)
+    ) {
+      // setSpinner(true);
       getCourts();
     }
   }, [searchResults, filteredCourts]);

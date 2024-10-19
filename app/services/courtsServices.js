@@ -58,40 +58,54 @@ export const deleteCourt = async (body,token) => {
         return error.response || { message: "An error occurred", error };
     }
 
-}
+} 
 
 
 /////////////////////
 
 export const searchCourt = async (query) => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/court/search/${query}`);
-      return response;
-    } catch (error) {
-      return error.response || { message: "An error occurred", error };
-    }
-  };
-  
-
-
-  export const filterCourts = async (order, courtType) => {
-    try {
-      const response = await axios.get(
-         `${process.env.NEXT_PUBLIC_API_URL}/court/filter/query`,        {
-          params: {
-            order,
-            courtType,
-          },
-        }
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/court/search`,
+        query
       );
+    return response.data;
+  } catch (error) {
+    return error.response || { message: "An error occurred", error };
+  }
+};
+
+
+
+// export const searchCourt = async (query) => {
+//     try {
+//       const response = await axios.get(
+//         `${process.env.NEXT_PUBLIC_API_URL}/court/search/${query}`);
+//       return response;
+//     } catch (error) {
+//       return error.response || { message: "An error occurred", error };
+//     }
+//   };
   
-      return response.data.courts;
-    } catch (error) {
-      console.error("Error fetching filtered courts:", error);
-      throw error;
-    }
-  };
+
+
+  // export const filterCourts = async (order, courtType) => {
+  //   try {
+  //     const response = await axios.get(
+  //        `${process.env.NEXT_PUBLIC_API_URL}/court/filter/query`,        {
+  //         params: {
+  //           order,
+  //           courtType,
+  //         },
+  //       }
+  //     );
+  
+  //     return response.data.courts;
+  //   } catch (error) {
+  //     console.error("Error fetching filtered courts:", error);
+  //     throw error;
+  //   }
+  // };
   
 
 
