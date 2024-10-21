@@ -161,6 +161,7 @@ const Checkin = ({ hasRecentCheckIn, userId, courtId, token }) => {
 
           <div className="border border-[#959595] bg-white rounded-lg flex items-center">
             {Array.from({ length: totalPages }, (_, index) => (
+              <>
               <h1
                 onClick={() => setCurrentPage(index + 1)}
                 className={` flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black     ${
@@ -168,7 +169,7 @@ const Checkin = ({ hasRecentCheckIn, userId, courtId, token }) => {
                 } cursor-pointer`}
               >
                 {index + 1}
-              </h1>
+              </h1></>
             ))}
           </div>
           <h1
@@ -185,7 +186,7 @@ const Checkin = ({ hasRecentCheckIn, userId, courtId, token }) => {
       )}
 
 
-      
+
     </div>
   );
 };
