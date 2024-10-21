@@ -43,10 +43,10 @@ const checkInService = {
   },
 
 
-  async getCheckinByCourt (id) {
+  async getCheckinByCourt (id , currentPage, limit) {
     try {
       
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/checkin/checkins/${id}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/checkin/checkins/${id}?page=${currentPage}&limit=${limit}`);
       return response.data;
     } catch (error) {
       throw new Error('Error fetching court data');

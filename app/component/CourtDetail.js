@@ -27,6 +27,18 @@ export default function CourtDetail() {
   const { token, decodedToken } = useAuthToken();
   const [hasRecentCheckIn, setHasRecentCheckIn] = useState(false);
 const userId = decodedToken?.id;
+
+const [isPopupOpen, setIsPopupOpen] = useState(false); // Modal open/close state
+
+const triggerOpenPopup = () => {
+  setIsPopupOpen(true); // Modal ko open karega
+};
+
+const triggerClosePopup = () => {
+  setIsPopupOpen(false); // Modal ko close karega
+};
+
+
   ////////////////////////////  Check Ckeckin Status //////////////////////////
 
 
@@ -170,13 +182,15 @@ useEffect(() => {
             <button className="bg-[#F61818] lg:mt-10 rounded-md  shadow-xl cursor-pointer h-9 lg:w-32 w-24 p-2 text-xs gap-1 items-center text-white">
               Report
             </button>
-            <button className="bg-[#FFA500] lg:hidden block rounded-md shadow-xl cursor-pointer lg:w-52 w-24 lg:h-14 h-9 font-bold  p-2 lg:text-xl text-xs gap-1 items-center text-black">
+            <button  onClick={triggerOpenPopup} className="bg-[#FFA500] lg:hidden block rounded-md shadow-xl cursor-pointer lg:w-52 w-24 lg:h-14 h-9 font-bold  p-2 lg:text-xl text-xs gap-1 items-center text-black">
               Add Review
             </button>
           </div>
         </div>
       </div>
-      <ReviewsCompponent />
+      <ReviewsCompponent userId={userId} courtId={courtId}  token={token} isPopupOpen={isPopupOpen} 
+        triggerOpenPopup={triggerOpenPopup} 
+        triggerClosePopup={triggerClosePopup}  />
       <Checkin  hasRecentCheckIn={hasRecentCheckIn} userId={userId} courtId={courtId} token={token} />
     </>
   );

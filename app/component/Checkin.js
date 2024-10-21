@@ -9,43 +9,55 @@ import checkInService from "../services/checkInServices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-const Checkin = ({ hasRecentCheckIn, userId , courtId, token}) => {
+const Checkin = ({ hasRecentCheckIn, userId, courtId, token }) => {
   // console.log(">>>>>>>>>>>>>>>> isCheckInAllowed : ", hasRecentCheckIn);
   const [isCheckInSuccessful, setIsCheckInSuccessful] = useState(false);
   const [pastCheckIns, setPastCheckIns] = useState();
 
-const handleCheckIn = async () => {
-  try {
-    if (userId && courtId) {
-      const data = await checkInService.createCheckIn(userId, courtId, token);
-      if(data.success){
-        toast.success(data.message);
-        setIsCheckInSuccessful(true);
+  const handleCheckIn = async () => {
+    try {
+      if (userId && courtId) {
+        const data = await checkInService.createCheckIn(userId, courtId, token);
+        if (data.success) {
+          toast.success(data.message);
+          setIsCheckInSuccessful(true);
+        }
       }
+    } catch (error) {
+      console.error("Error fetching check-in status", error);
     }
+  };
 
-  } catch (error) {
-    console.error("Error fetching check-in status", error);
-  }
-}
-
-
-const fetchCheckIns = async ()=>{
-  try {
-    if (courtId) {
-      const data = await checkInService.getCheckinByCourt(courtId);
-      setPastCheckIns(data.checkIns)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const limit = 3;
+  const fetchCheckIns = async (currentPage) => {
+    try {
+      if (courtId) {
+        const data = await checkInService.getCheckinByCourt(
+          courtId,
+          currentPage,
+          limit
+        );
+        if (data.success) {
+          setPastCheckIns(data);
+          setTotalPages(data?.totalPages);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching check-ins", error);
     }
-  } catch (error) {
-    console.error("Error fetching check-ins", error);
-  }
-}
+  };
 
+  useEffect(() => {
+    fetchCheckIns(currentPage);
+  }, [courtId, isCheckInSuccessful, , currentPage]);
 
-useEffect(()=>{
-  fetchCheckIns()
-},[courtId, isCheckInSuccessful])
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
   return (
     <div className="mb-40">
       <ToastContainer />
@@ -91,69 +103,89 @@ useEffect(()=>{
         </div>
       </div>
       <hr className="border w-[78%] mx-auto border-[#4C4A4A] w-full my-5" />
-{/* 
+      {/* 
       {CourtData
         ? CourtData.map((item) => ( */}
 
-      {pastCheckIns
-        ? pastCheckIns.map((checkIn) => (
-            <>
-              <div className="w-[78%] mx-auto p-5 mt-5 bg-[#333333] shadow-xl">
-                <div className=" w-[95%]  gap-5   grid grid-cols-6 ">
-                  <Image
-                    src="/review-icon.png"
-                    alt="image"
-                    width={54}
-                    height={54}
-                  />
+      {pastCheckIns?.checkIns ? (
+        pastCheckIns?.checkIns.map((checkIn) => (
+          <>
+            <div className="w-[78%] mx-auto p-5 mt-5 bg-[#333333] shadow-xl">
+              <div className=" w-[95%]  gap-5   grid grid-cols-6 ">
+                <Image
+                  src="/review-icon.png"
+                  alt="image"
+                  width={54}
+                  height={54}
+                />
 
-                  <div className=" ml-[-40px]">
-                    <h1 className="text-2xl font-bold text-white">
-                      {checkIn?.user?.name}
-                    </h1>
-                    <p className="text-xs text-white">{checkIn?.user?.joiningDate}</p>
-                  </div>
-                  <p className="text-lg w-32  text-white text-center">
-                  {checkIn?.user?.team || "-"}
-                  </p>
-                  <h1 className="text-lg text-center text-white">{checkIn?.user?.height || "-"}</h1>
-                  <h1 className="text-lg text-center text-white">{checkIn?.user?.weight || "-"}</h1>
-                  <h1 className="text-lg text-center text-white w-28">
-                  {checkIn?.checkInTime}
+                <div className=" ml-[-40px]">
+                  <h1 className="text-2xl font-bold text-white">
+                    {checkIn?.user?.name}
                   </h1>
+                  <p className="text-xs text-white">
+                    {checkIn?.user?.joiningDate}
+                  </p>
                 </div>
+                <p className="text-lg w-32  text-white text-center">
+                  {checkIn?.user?.team || "-"}
+                </p>
+                <h1 className="text-lg text-center text-white">
+                  {checkIn?.user?.height || "-"}
+                </h1>
+                <h1 className="text-lg text-center text-white">
+                  {checkIn?.user?.weight || "-"}
+                </h1>
+                <h1 className="text-lg text-center text-white w-28">
+                  {checkIn?.checkInTime}
+                </h1>
               </div>
-            </>
-          ))
-        : "no check ins"}
-      <div className="flex items-center lg:justify-end justify-center lg:w-[80%] lg:mx-auto mx-5 mt-20 gap-1">
-        <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-[#808080]">
-          <LiaAngleLeftSolid />
-        </h1>
-        <div className="border border-[#959595] bg-white rounded-lg flex items-center">
-          <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 paginationShadow text-black">
-            1
+            </div>
+          </>
+        ))
+      ) : (
+        <div className="text-center py-6">No past checkins!</div>
+      )}
+
+{/* Pagination */}
+      {pastCheckIns?.totalChekinsCount && (
+        <div className="flex items-center lg:justify-end justify-center lg:w-[80%] lg:mx-auto mx-5 mt-20 gap-1">
+          <h1
+            onClick={() => handlePageChange(currentPage - 1)}
+            className={`bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8  ${
+              currentPage === 1 ? "text-[#808080]" : "text-black cursor-pointer"
+            }  `}
+          >
+            <LiaAngleLeftSolid />
           </h1>
-          <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">
-            2
-          </h1>
-          <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">
-            3
-          </h1>
-          <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">
-            4
-          </h1>
-          <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">
-            ......
-          </h1>
-          <h1 className=" flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black">
-            10
+
+          <div className="border border-[#959595] bg-white rounded-lg flex items-center">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <h1
+                onClick={() => setCurrentPage(index + 1)}
+                className={` flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black     ${
+                  currentPage === index + 1 ? "paginationShadow" : ""
+                } cursor-pointer`}
+              >
+                {index + 1}
+              </h1>
+            ))}
+          </div>
+          <h1
+            onClick={() => handlePageChange(currentPage + 1)}
+            className={`bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8  ${
+              currentPage === totalPages
+                ? "text-[#808080]"
+                : "text-black cursor-pointer"
+            } `}
+          >
+            <LiaAngleRightSolid />
           </h1>
         </div>
-        <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-black">
-          <LiaAngleRightSolid />
-        </h1>
-      </div>
+      )}
+
+
+      
     </div>
   );
 };
