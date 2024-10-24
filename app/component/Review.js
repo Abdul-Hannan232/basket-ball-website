@@ -1,14 +1,13 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import ReviewData from "../data/carDetalReviews.json";
-import { LiaAngleLeftSolid } from "react-icons/lia";
-import { LiaAngleRightSolid } from "react-icons/lia";
 import { RxCross2 } from "react-icons/rx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import reviewService from "../services/reviewServices";
+import Pagination from "./Pagination";
+import Rating from "../component/ratings/Rating"
+import OverallRating from "../component/ratings/OverallRating"
 
 const Review = ({
   userId,
@@ -18,15 +17,6 @@ const Review = ({
   triggerOpenPopup,
   triggerClosePopup,
 }) => {
-  // console.log("userId , courtId, token : ", userId);
-
-  // const [reviewPopup, setReviewPopup] = useState(false);
-  // const PopupOpen = () => {
-  //   setReviewPopup(true);
-  // };
-  // const PopupClose = () => {
-  //   setReviewPopup(false);
-  // };
 
   /////////////// Add Reviews And Ratings   /////////////////
   const [isSuccess, setIsSuccess] = useState(false);
@@ -85,8 +75,8 @@ const Review = ({
 
   const [reviews, setReview] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const limit = 3;
+  const [totalPages, setTotalPages] = useState(0); 
+  const limit = 3 ;
   const fetchReviews = async (currentPage) => {
     try {
       if (courtId) {
@@ -127,10 +117,8 @@ const Review = ({
           </h1>
         </div>
         <button
-          // onClick={PopupOpen}
           onClick={triggerOpenPopup}
           className="cursor-pointer bg-[#FFA500] lg:block hidden rounded-md shadow-xl cursor-pointer lg:w-52 w-24 lg:h-14 h-9 font-bold  p-2 lg:text-xl text-xs gap-1 items-center text-black"
-          // className="cursor-pointer bg-[#FFA500] block  rounded-md shadow-xl cursor-pointer lg:w-52 w-24 lg:h-14 h-9 font-bold  p-2 lg:text-xl text-xs gap-1 items-center text-black"
         >
           Add Review
         </button>
@@ -144,8 +132,8 @@ const Review = ({
       </div>
       <hr className="border w-[78%] mx-auto border-[#4C4A4A] w-full my-5" />
 
-      {/* {ReviewData
-        ? ReviewData.map((item) => ( */}
+      {/* {ReviewData */}
+
       {reviews ? (
         reviews?.reviews?.map((item) => (
           <>
@@ -196,41 +184,13 @@ const Review = ({
 
      {/* Pagination */}
      {reviews?.totalReviewsCount && (
-        <div className="flex items-center lg:justify-end justify-center lg:w-[80%] lg:mx-auto mx-5 mt-20 gap-1">
-          <h1
-            onClick={() => handlePageChange(currentPage - 1)}
-            className={`bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8  ${
-              currentPage === 1 ? "text-[#808080]" : "text-black cursor-pointer"
-            }  `}
-          >
-            <LiaAngleLeftSolid />
-          </h1>
-
-          <div className="border border-[#959595] bg-white rounded-lg flex items-center">
-            {Array.from({ length: totalPages }, (_, index) => (
-             <>
-              <h1
-                onClick={() => setCurrentPage(index + 1)}
-                className={` flex flex-col justify-center rounded-lg items-center lg:w-10 lg:h-10 w-8 h-8 text-black     ${
-                  currentPage === index + 1 ? "paginationShadow" : ""
-                } cursor-pointer`}
-              >
-                {index + 1}
-              </h1>
-             </>
-            ))}
-          </div>
-          <h1
-            onClick={() => handlePageChange(currentPage + 1)}
-            className={`bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8  ${
-              currentPage === totalPages
-                ? "text-[#808080]"
-                : "text-black cursor-pointer"
-            } `}
-          >
-            <LiaAngleRightSolid />
-          </h1>
-        </div>
+        <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePageChange={handlePageChange}
+        setCurrentPage={setCurrentPage}
+      />
+     
       )}
 
       {/* popup detail */}
@@ -238,7 +198,6 @@ const Review = ({
         <div className="fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-75 transition-all duration-300 ease-in-out">
           <div className="bg-[#333333] w-[45%] z-40 mx-auto absolute shadow-xl p-10 top-10 right-0 left-0">
             <div
-              // onClick={PopupClose}
               onClick={triggerClosePopup}
               className="cursor-pointer w-5 h-5 p-1 border border-white rounded-full float-right flex flex-col items-center justify-center "
             >
@@ -309,59 +268,3 @@ const Review = ({
 
 export default Review;
 
-const Rating = ({ rating, onRate, starState }) => {
-  const stars = [1, 2, 3, 4, 5];
-
-  return (
-    <>
-      {" "}
-      {stars.map((star, index) => (
-        <>
-          {starState === "viewonly" ? (
-            <FaStar
-              key={index}
-              className={`text-sm  ${
-                star <= rating ? "text-[#FFD700]" : "text-white"
-              }`}
-            />
-          ) : (
-            <FaStar
-              key={index}
-              className={`text-sm cursor-pointer ${
-                star <= rating ? "text-[#FFD700]" : "text-white"
-              }`}
-              onClick={() => onRate(star)}
-            />
-          )}
-        </>
-      ))}
-    </>
-  );
-};
-
-const OverallRating = ({ overallRating }) => {
-  const ratingRef = useRef(null);
-
-  useEffect(() => {
-    if (ratingRef.current) {
-      const widthPercentage = (overallRating / 5) * 100; // calculate percentage based on rating
-      ratingRef.current.style.width = `${widthPercentage}%`;
-    }
-  }, [overallRating]);
-
-  return (
-    <div className="relative inline-block text-4xl">
-      {/* Background (unfilled stars) */}
-      <div className="text-white text-2xl">★★★★★</div>
-
-      {/* Foreground (filled stars) */}
-      <div
-        ref={ratingRef}
-        className="absolute top-0 left-0 overflow-hidden text-[#FFD700] whitespace-nowrap text-2xl"
-        style={{ width: "0%" }} // initially empty
-      >
-        ★★★★★
-      </div>
-    </div>
-  );
-};

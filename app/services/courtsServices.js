@@ -1,10 +1,10 @@
 import axios from "axios";
 // import Cookies from 'js-cookie';
-export const allCourts = async (token) =>{ 
+export const allCourts = async (token, page, limit) =>{ 
     try {
       
         const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}/court/all`,
+            `${process.env.NEXT_PUBLIC_API_URL}/court/all?page=${page}&limit=${limit}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,

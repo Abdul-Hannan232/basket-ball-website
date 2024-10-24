@@ -15,6 +15,7 @@ import FileUpload from "../component/FileUpload";
 import Image from "next/image";
 const MAX_FILES = 6;
 import { searchCourt } from "../services/courtsServices";
+import Map from './Map'
 
 export default function Courts() {
   const { token, decodedToken } = useAuthToken();
@@ -144,7 +145,7 @@ export default function Courts() {
 
     try {
       const response = await addCourt(updatedFormData, token);
-      // console.log("response", response);
+
       if (response.status === 201) {
         toast.success(response.data.message);
         setFormData({
@@ -195,20 +196,11 @@ export default function Courts() {
           ""
         )}
       </div>
-      {/* <Suspense fallback={<div>Loading...</div>}>
-        <CourtsSlider
-          slide={"box"}
-          key={updateContent}
-          searchResults={searchResults}
-          filteredCourts={filteredCourts} 
-        />
-      </Suspense> */}
-
+    
       <CourtsSlider
         slide={"box"}
         key={updateContent}
         searchResults={searchResults}
-        // filteredCourts={filteredCourts}
       />
 
       <div className="w-[80%] mx-auto mt-40 flex items-center gap-2">
@@ -216,15 +208,14 @@ export default function Courts() {
         <h1 className="text-white text-2xl font-bold">View</h1>
       </div>
       <div className="mt-10 mb-40">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d57939.403949465006!2d67.15371090000001!3d24.8223971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1723305059891!5m2!1sen!2s"
-          width="100%"
+        {/* <Map/> */}
+     <iframe src="https://www.google.com/maps/d/embed?mid=1gbN75MV2tTuZi4FDSv9WYZLbuPlTpH8&ehbc=2E312F"  width="100%"
           height="350"
           style={{ border: 0 }}
           allowFullScreen=""
           loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+          referrerPolicy="no-referrer-when-downgrade"></iframe> 
+       
       </div>
       {/*  filter popup   bg-gray-800 bg-opacity-75*/}
 

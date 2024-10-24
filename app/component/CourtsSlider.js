@@ -11,6 +11,8 @@ import renderStars from "../utils/rating";
 import { allCourts as fetchAllCourts } from "../services/courtsServices";
 import { LiaAngleLeftSolid } from "react-icons/lia";
 import { LiaAngleRightSolid } from "react-icons/lia";
+import OverallRating from "./ratings/OverallRating";
+import Pagination from "./Pagination";
 
 const settings = {
   infinite: true,
@@ -57,14 +59,18 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
   };
 
   const [allCourts, setAllCourts] = useState([]); // Initialize with an empty array
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const limit = 8;
 
   const getCourts = async () => {
     try {
-      const response = await fetchAllCourts(); // Use the renamed function
+      const response = await fetchAllCourts(currentPage, limit); // Use the renamed function
       const activeCourts = response.data.courts.filter(
         (court) => court.isactive === true
       );
       setAllCourts(activeCourts); // Store the fetched data in state
+      setTotalPages(Math.ceil(activeCourts.length / limit));
       console.log("allCourts : ", allCourts);
     } catch (error) {
       console.error("Failed to fetch courts data:", error);
@@ -99,11 +105,14 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
       // console.log("searchResults : ", searchResults);
 
       setAllCourts(searchResults);
-      setSpinner(false);
-    } else if (filteredCourts && filteredCourts.length > 0) {
-      setAllCourts(filteredCourts);
+      setTotalPages(Math.ceil(searchResults.length / limit));
+
       setSpinner(false);
     }
+    //  else if (filteredCourts && filteredCourts.length > 0) {
+    // setAllCourts(filteredCourts);
+    // setSpinner(false);
+    // }
 
     if (
       (!searchResults || searchResults.length === 0) &&
@@ -113,6 +122,20 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
       getCourts();
     }
   }, [searchResults, filteredCourts]);
+
+  // Get current courts to display on the page
+  const getPaginatedData = () => {
+    const startIndex = (currentPage - 1) * limit;
+    const endIndex = startIndex + limit;
+    return allCourts.slice(startIndex, endIndex);
+  };
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <div>
@@ -167,7 +190,11 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
                     <div className="m-5">
                       {/* <Image src="/star.png" alt="image" width={112} height={20} /> */}
                       <div className="flex items-center">
-                        {renderStars(item.ratings)}
+                        {/* {renderStars(item.ratings)} */}
+                        <OverallRating
+                          overallRating={item?.totalAverageRating}
+                          classname="text-xl"
+                        />
                       </div>
                       <p className="text-[10px] mt-1 font-bold">
                         {item?.rating?.length} reviews
@@ -225,7 +252,8 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
             {spinner ? <span className="loader"></span> : null}
           </div>
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-20 justify-center place-items-center lg:w-[80%] md:mt-20 mt-5 md:mx-auto mx-5">
-            {allCourts?.map((item, index) => (
+            {/* {allCourts?.map((item, index) => ( */}
+            {getPaginatedData()?.map((item, index) => (
               <div
                 key={index}
                 className="relative  shadow text-black rounded-md 2xl:w-[300px] xl:w-[250px] md:w-[250px] w-[280px] group"
@@ -271,7 +299,12 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
                     {/* <Image src="/star.png" alt="image" width={60} height={20} />
                      */}
                     <div className="flex items-center">
-                      {renderStars(item.ratings)}
+                      <OverallRating
+                        overallRating={item?.totalAverageRating}
+                        classname="text-xl"
+                      />
+
+                      {/* {renderStars(item.ratings)} */}
                     </div>
                     <p className="text-[10px] mt-1 font-bold">
                       {item?.rating?.length} reviews
@@ -291,7 +324,13 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
 
           {!spinner && (
             <>
-              <div className="flex items-center lg:justify-end justify-center lg:w-[80%] lg:mx-auto mx-5 mt-20 gap-1">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                handlePageChange={handlePageChange}
+                setCurrentPage={setCurrentPage}
+              />
+              {/* <div className="flex items-center lg:justify-end justify-center lg:w-[80%] lg:mx-auto mx-5 mt-20 gap-1">
                 <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-[#808080]">
                   <LiaAngleLeftSolid />
                 </h1>
@@ -318,7 +357,7 @@ const CourtsSlider = ({ slide, searchResults, filteredCourts }) => {
                 <h1 className="bg-white text-center flex justify-center items-center fex-col rounded-md border border-[#959595] lg:w-10 lg:h-10 w-8 h-8 text-black">
                   <LiaAngleRightSolid />
                 </h1>
-              </div>
+              </div> */}
             </>
           )}
         </>
